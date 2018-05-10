@@ -49,5 +49,5 @@ def data_registry():
 
     return render_template(
         'registry.html',
-        data=get_data_by_prefix(raw_data)
+        data=get_data_by_prefix(raw_data) if raw_data else None
     )
