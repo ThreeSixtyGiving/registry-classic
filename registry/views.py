@@ -1,5 +1,6 @@
 from flask import Flask, render_template
 import requests
+from collections import OrderedDict
 
 app = Flask(
     __name__,
@@ -40,7 +41,7 @@ def get_data_by_prefix(raw_data):
 
         data_by_prefix[prefix]['grant'].append(get_grant_data(data))
 
-    return data_by_prefix
+    return OrderedDict(sorted(data_by_prefix.items(), key=lambda x: x[1]))
 
 
 @app.route('/data/data-registry')

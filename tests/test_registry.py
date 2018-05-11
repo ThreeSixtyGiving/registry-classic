@@ -22,7 +22,7 @@ def test_data_correct_format():
     }]
 
 
-def test_data_is_sorted_alphabetically_by_org_prefix():
+def test_data_is_sorted_alphabetically_by_org_name():
     keys = get_data_by_prefix(RAW_DATA).keys()
 
     assert keys[0] == '360g-cin'
