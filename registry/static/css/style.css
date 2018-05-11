@@ -4,7 +4,19 @@ a {
 
 body {
   font-family: "Source Sans Pro", sans-serif !important;
+  font-size: 18px;
+  line-height: 28px;
 }
+
+.page-header ol {
+  padding: 0 0;
+  background-color: #fff;
+}
+
+.breadcrumb > li + li:before {
+    content: "> " !important;
+}
+
 
 .page-header h1 {
   font-size: 41px;
