@@ -1,7 +1,3 @@
-a {
-  color: #602f8f !important;
-}
-
 body {
   font-family: "Source Sans Pro", sans-serif !important;
   font-size: 18px;
@@ -29,6 +25,10 @@ body {
   background-color: #fff;
 }
 
+body div.container div.navbar-header .nav-second-row a {
+  color: #3b3b3c;
+}
+
 .breadcrumb > li + li:before {
     content: "> " !important;
 }
@@ -42,8 +42,24 @@ body {
   margin: 0 0 20px;
 }
 
+body div.container.body-main a {
+  color: #602f8f;
+}
+
 .footer {
-  background-color: #000000;
+  background-color: #3b3b3c;;
   color: #FFFFFF;
+}
+
+.footer a {
+  color: #FFFFFF;
+}
+
+.footer .footer-third-row {
+  color: #737373;
+}
+
+.footer .footer-third-row a {
+  color: #737373;
 }
 
