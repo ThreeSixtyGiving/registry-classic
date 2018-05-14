@@ -32,6 +32,27 @@ def get_grant_data(data):
 
 
 def get_data_by_prefix(raw_data):
+    """
+    Given a json value where publishers can have more than one entry,
+    this function creates a new dictionary keyed by publisher prefix.
+    Sample output:
+    {
+        'prefix': {
+            'publisher': {
+                'name': string,
+                'logo': url of the logo,
+            },
+            'license': {
+                'url': url of the license,
+                'name': string,
+            },
+            'grant': [{
+                'url': url of the grant,
+                'name': string,
+            }]
+        }
+    }
+    """
     data_by_prefix = {}
 
     for data in raw_data:
