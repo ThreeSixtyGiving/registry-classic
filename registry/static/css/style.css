@@ -8,6 +8,22 @@ body {
   line-height: 28px;
 }
 
+.container ul li.newsletter-signup a {
+    text-decoration: none;
+    font-size: 17px;
+    color: #f48320;
+    font-family: "Ostrich Sans Black", sans-serif;
+    letter-spacing: 0.5px;
+}
+
+.dropdown:hover > .dropdown-menu {
+    display: block;
+}
+
+.caret {
+    display: none;
+}
+
 .page-header ol {
   padding: 0 0;
   background-color: #fff;
@@ -17,7 +33,6 @@ body {
     content: "> " !important;
 }
 
-
 .page-header h1 {
   font-size: 41px;
   line-height: 40px;
@@ -26,3 +41,4 @@ body {
   font-family: "Ostrich Sans Black", sans-serif;
   margin: 0 0 20px;
 }
+
