@@ -1,7 +1,16 @@
+@font-face {
+    font-family: Ostrich Sans Black;
+    src: url('../fonts/OstrichSans-Black.otf');
+}
+
 body {
   font-family: "Source Sans Pro", sans-serif !important;
   font-size: 18px;
   line-height: 28px;
+}
+
+.navbar-header.logo {
+  padding: 20px 0;
 }
 
 .page-header h1 {
@@ -11,26 +20,57 @@ body {
   letter-spacing: 0.5px;
   font-family: "Ostrich Sans Black", sans-serif;
   margin: 0 0 20px;
+  padding-top: 20px;
 }
 
 body div.container.body-main a {
   color: #602f8f;
 }
 
+body .devs-info{
+  display: block;
+  padding: 9.5px;
+  margin: 0 0 10px;
+  font-size: 13px;
+  line-height: 1.42857143;
+  color: #333;
+  word-break: break-all;
+  word-wrap: break-word;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: Courier;
+}
+
 .footer {
   background-color: #3b3b3c;;
   color: #FFFFFF;
+  padding: 20px 0;
+}
+
+.footer ul{
+  list-style-type: none;
 }
 
 .footer a {
   color: #FFFFFF;
 }
 
-.footer .footer-third-row {
-  color: #737373;
+.footer a:hover {
+  color: #FFFFFF;
 }
 
-.footer .footer-third-row a {
-  color: #737373;
+.footer .footer-info-col {
+  font-weight: 700;
+}
+
+.footer hr {
+  height: 1px;
+  color: #585a59;
+  background-color: #585a59;
+}
+
+.footer .sub-footer a {
+  text-decoration: underline;
 }
 
