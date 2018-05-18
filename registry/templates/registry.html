@@ -75,7 +75,7 @@
 
         <tbody>
           {% if data %}
-            {% for org_prefix, org_data in data.iteritems() %}
+            {% for org_prefix, org_data in data.items() %}
               <tr>
                 <td>
                   {% if org_data['publisher']['logo'] %}

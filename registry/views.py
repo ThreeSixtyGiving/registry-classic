@@ -63,7 +63,7 @@ def get_data_by_prefix(raw_data):
 
         data_by_prefix[prefix]['grant'].append(get_grant_data(data))
 
-    return OrderedDict(sorted(data_by_prefix.items(), key=lambda x: x[1]))
+    return OrderedDict(sorted(data_by_prefix.items(), key=lambda x: x[1]['publisher']['name']))
 
 
 @app.route('/data/data-registry')
