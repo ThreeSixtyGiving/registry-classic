@@ -1,2 +1,9 @@
 .pytest_cache/
 .ve/
+.idea/
+
+get-pip.py
+
+registry/__pycache__/
+tests/__pycache__/
+tests/samples/__pycache__/
