@@ -5,7 +5,7 @@ Install dependencies:
 ```
 $ python3 -m venv .ve
 $ source .ve/bin/activate
-$ pip install -r requirements.txt
+$ pip install -r requirements_dev.txt
 ```
 
 Run:
