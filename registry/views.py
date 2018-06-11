@@ -66,7 +66,7 @@ def get_data_by_prefix(raw_data):
     return OrderedDict(sorted(data_by_prefix.items(), key=lambda x: x[1]['publisher']['name']))
 
 
-@app.route('/data/data-registry')
+@app.route('/')
 def data_registry():
     raw_data = requests.get('http://data.threesixtygiving.org/data.json').json()
 
