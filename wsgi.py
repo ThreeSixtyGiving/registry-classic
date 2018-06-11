@@ -1,2 +1,1 @@
-from registry.views import app as application
-
+from registry.views import app as application  # noqa: F401
