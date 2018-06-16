@@ -5,7 +5,6 @@ import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.action_chains import ActionChains
-from selenium.webdriver.common.keys import Keys
 
 from registry.views import get_data_by_prefix
 from tests.samples.registry_raw_data import RAW_DATA
