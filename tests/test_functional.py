@@ -1,14 +1,12 @@
 import os
 
-from flask import url_for
 import pytest
+from flask import url_for
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.action_chains import ActionChains
 
-from registry.views import get_data_by_prefix
-from tests.samples.registry_raw_data import RAW_DATA
-
+os.environ['FLASK_ENV'] = 'development'
 BROWSER = os.environ.get('BROWSER', 'ChromeHeadless')
 
 
@@ -25,13 +23,8 @@ def browser(request):
     return browser
 
 
-@pytest.fixture(scope="module")
-def dataload():
-    get_data_by_prefix(RAW_DATA)
-
-
 @pytest.mark.usefixtures('live_server')
-def hover_over_the_menu(dataload, browser):
+def hover_over_the_menu(browser):
     browser.get(url_for('data_registry', _external=True))
     element = browser.find_element_by_id('menu')
     hover = ActionChains(browser).move_to_element(element)
@@ -39,7 +32,7 @@ def hover_over_the_menu(dataload, browser):
 
 
 @pytest.mark.usefixtures('live_server')
-def test_nav_menu(dataload, browser):
+def test_nav_menu(browser):
     browser.get(url_for('data_registry', _external=True))
 
     text_body = browser.find_element_by_tag_name('body').text
@@ -51,8 +44,8 @@ def test_nav_menu(dataload, browser):
 
 
 @pytest.mark.usefixtures('live_server')
-def test_nav_menu_hover(dataload, browser):
-    hover_over_the_menu(dataload, browser)
+def test_nav_menu_hover(browser):
+    hover_over_the_menu(browser)
 
     text_body = browser.find_element_by_tag_name('body').text
 
@@ -63,8 +56,8 @@ def test_nav_menu_hover(dataload, browser):
 
 
 @pytest.mark.usefixtures('live_server')
-def test_nav_menu_home_link(dataload, browser):
-    hover_over_the_menu(dataload, browser)
+def test_nav_menu_home_link(browser):
+    hover_over_the_menu(browser)
 
     browser.find_element_by_link_text('Home').click()
 
@@ -72,8 +65,8 @@ def test_nav_menu_home_link(dataload, browser):
 
 
 @pytest.mark.usefixtures('live_server')
-def test_nav_menu_standard_link(dataload, browser):
-    hover_over_the_menu(dataload, browser)
+def test_nav_menu_standard_link(browser):
+    hover_over_the_menu(browser)
 
     browser.find_element_by_link_text('The 360Giving Standard').click()
 
@@ -81,8 +74,8 @@ def test_nav_menu_standard_link(dataload, browser):
 
 
 @pytest.mark.usefixtures('live_server')
-def test_nav_menu_forum_link(dataload, browser):
-    hover_over_the_menu(dataload, browser)
+def test_nav_menu_forum_link(browser):
+    hover_over_the_menu(browser)
 
     browser.find_element_by_link_text('Discussion Forum').click()
 
@@ -90,7 +83,7 @@ def test_nav_menu_forum_link(dataload, browser):
 
 
 @pytest.mark.usefixtures('live_server')
-def test_body_h1(dataload, browser):
+def test_body_h1(browser):
     browser.get(url_for('data_registry', _external=True))
 
     assert 'DATA REGISTRY' in browser.find_element_by_tag_name('body').text
@@ -103,13 +96,13 @@ def test_body_h1(dataload, browser):
     'registering your data',
     'contact us',
     ])
-def test_body_links(dataload, browser, link_text):
+def test_body_links(browser, link_text):
     browser.get(url_for('data_registry', _external=True))
     browser.find_element_by_link_text(link_text)
 
 
 @pytest.mark.usefixtures('live_server')
-def test_body_tools_and_projects_link(dataload, browser):
+def test_body_tools_and_projects_link(browser):
     browser.get(url_for('data_registry', _external=True))
 
     browser.find_element_by_link_text('Tools & Projects').click()
@@ -119,7 +112,7 @@ def test_body_tools_and_projects_link(dataload, browser):
 
 
 @pytest.mark.usefixtures('live_server')
-def test_body_tools_and_projects_link(dataload, browser):
+def test_body_tools_and_projects_link(browser):
     browser.get(url_for('data_registry', _external=True))
 
     browser.find_element_by_link_text('http://standard.threesixtygiving.org/en/latest/getdata/').click()
@@ -129,7 +122,7 @@ def test_body_tools_and_projects_link(dataload, browser):
 
 
 @pytest.mark.usefixtures('live_server')
-def test_body_tools_and_projects_link(dataload, browser):
+def test_body_tools_and_projects_link(browser):
     browser.get(url_for('data_registry', _external=True))
 
     browser.find_element_by_link_text('registering your data').click()
@@ -139,7 +132,7 @@ def test_body_tools_and_projects_link(dataload, browser):
 
 
 @pytest.mark.usefixtures('live_server')
-def test_body_tools_and_projects_link(dataload, browser):
+def test_body_tools_and_projects_link(browser):
     browser.get(url_for('data_registry', _external=True))
 
     browser.find_element_by_link_text('contact us').click()
@@ -155,7 +148,7 @@ def test_body_tools_and_projects_link(dataload, browser):
     'Data',
     'License',
     ])
-def test_table_heading(dataload, browser, table_heading_text):
+def test_table_heading(browser, table_heading_text):
     browser.get(url_for('data_registry', _external=True))
 
     table_headings_text = []
@@ -165,15 +158,48 @@ def test_table_heading(dataload, browser, table_heading_text):
     assert table_heading_text in table_headings_text
 
 
-# @pytest.mark.usefixtures('live_server')
-# def test_table_data(dataload, browser):
-#     browser.get(url_for('data_registry', _external=True))
-#
-#     table_data_text = []
-#     for table_data in browser.find_elements_by_tag_name('td'):
-#         table_data_text.append(table_data.text)
-#
-#     assert 'jlskjdf' in table_data_text
+@pytest.mark.usefixtures('live_server')
+def test_table_data(browser):
+    browser.get(url_for('data_registry', _external=True))
+
+    table_data_text = []
+    for table_data in browser.find_elements_by_tag_name('td'):
+        table_data_text.append(table_data.text)
+
+    assert len(table_data_text) == 12
+    assert table_data_text[0:4] == [
+        '',
+        'BBC Children in Need',
+        'BBC Children in Need grants',
+        'Creative Commons Attribution 4.0'
+    ]
+    assert table_data_text[4:8] == [
+        '',
+        'Big Lottery Fund',
+        'Big Lottery Fund - grants data 2015 to 2017\nBig Lottery Fund - grants data 2017-18 year-to-date',
+        'Open Government Licence 3.0 (United Kingdom)'
+    ]
+    assert table_data_text[8:13] == [
+        '',
+        'The Corra Foundation, previously called Lloyds TSB Foundation for Scotland',
+        'Grants awarded since 2015, as at 31 December 2017',
+        'Creative Commons Attribution 4.0 International (CC BY 4.0)'
+    ]
+
+
+@pytest.mark.usefixtures('live_server')
+def test_table_logos(browser):
+    browser.get(url_for('data_registry', _external=True))
+
+    table_data_logos = []
+    for table_logo in browser.find_elements_by_css_selector('img.tlogo'):
+        table_data_logos.append(table_logo.get_attribute("src"))
+
+    assert len(table_data_logos) == 2
+    assert table_data_logos == [
+        'http://www.threesixtygiving.org/wp-content/uploads/BBCCiN_CoreLogo.png',
+        'http://www.threesixtygiving.org/wp-content/uploads/big-lottery-fund.png'
+    ]
 
 
 @pytest.mark.usefixtures('live_server')
@@ -184,14 +210,14 @@ def test_table_heading(dataload, browser, table_heading_text):
     'Take Down Policy',
     'License',
     ])
-def test_footer_links(dataload, browser, link_text):
+def test_footer_links(browser, link_text):
     browser.get(url_for('data_registry', _external=True))
     browser.find_element_by_link_text(link_text)
 
 
 @pytest.mark.usefixtures('live_server')
-def test_footer_privacy_link(dataload, browser):
-    hover_over_the_menu(dataload, browser)
+def test_footer_privacy_link(browser):
+    hover_over_the_menu(browser)
 
     browser.find_element_by_link_text('Privacy').click()
 
@@ -199,8 +225,8 @@ def test_footer_privacy_link(dataload, browser):
 
 
 @pytest.mark.usefixtures('live_server')
-def test_footer_terms_and_conditions_link(dataload, browser):
-    hover_over_the_menu(dataload, browser)
+def test_footer_terms_and_conditions_link(browser):
+    hover_over_the_menu(browser)
 
     browser.find_element_by_link_text('Terms & Conditions').click()
 
@@ -208,8 +234,8 @@ def test_footer_terms_and_conditions_link(dataload, browser):
 
 
 @pytest.mark.usefixtures('live_server')
-def test_footer_cookie_policy_link(dataload, browser):
-    hover_over_the_menu(dataload, browser)
+def test_footer_cookie_policy_link(browser):
+    hover_over_the_menu(browser)
 
     browser.find_element_by_link_text('Cookie Policy').click()
 
@@ -217,8 +243,8 @@ def test_footer_cookie_policy_link(dataload, browser):
 
 
 @pytest.mark.usefixtures('live_server')
-def test_footer_take_down_policy_link(dataload, browser):
-    hover_over_the_menu(dataload, browser)
+def test_footer_take_down_policy_link(browser):
+    hover_over_the_menu(browser)
 
     browser.find_element_by_link_text('Take Down Policy').click()
 
@@ -226,8 +252,8 @@ def test_footer_take_down_policy_link(dataload, browser):
 
 
 @pytest.mark.usefixtures('live_server')
-def test_footer_license_link(dataload, browser):
-    hover_over_the_menu(dataload, browser)
+def test_footer_license_link(browser):
+    hover_over_the_menu(browser)
 
     browser.find_element_by_link_text('License').click()
 
@@ -239,6 +265,6 @@ def test_footer_license_link(dataload, browser):
     '020 3752 5775',
     'info@threesixtygiving.org',
     ])
-def test_footer_contact(dataload, browser, contact_text):
+def test_footer_contact(browser, contact_text):
     browser.get(url_for('data_registry', _external=True))
     browser.find_element_by_link_text(contact_text)
