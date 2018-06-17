@@ -1,6 +1,10 @@
-from flask import Flask, render_template
-import requests
+import os
 from collections import OrderedDict
+
+import requests
+from flask import Flask, render_template
+
+from tests.samples.registry_raw_data import RAW_DATA
 
 app = Flask(
     __name__,
@@ -66,9 +70,16 @@ def get_data_by_prefix(raw_data):
     return OrderedDict(sorted(data_by_prefix.items(), key=lambda x: x[1]['publisher']['name']))
 
 
+def get_raw_data():
+    if os.environ.get('FLASK_ENV') == 'development':
+        return RAW_DATA
+
+    return requests.get('http://data.threesixtygiving.org/data.json').json()
+
+
 @app.route('/')
 def data_registry():
-    raw_data = requests.get('http://data.threesixtygiving.org/data.json').json()
+    raw_data = get_raw_data()
 
     return render_template(
         'registry.html',
