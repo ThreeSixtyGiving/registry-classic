@@ -89,7 +89,7 @@ def data_registry():
     )
 
 
-@app.route('/terms')
+@app.route('/terms-conditions')
 def terms_and_conditions():
     return render_template('terms.html')
 

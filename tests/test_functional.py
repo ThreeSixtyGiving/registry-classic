@@ -239,12 +239,13 @@ def test_footer_privacy_link(browser):
 
 
 @pytest.mark.usefixtures('live_server')
-def test_footer_terms_and_conditions_link(browser):
+def test_footer_terms_and_conditions_link(browser, live_server):
     hover_over_the_menu(browser)
 
     browser.find_element_by_link_text('Terms & Conditions').click()
 
-    assert browser.current_url == 'http://www.threesixtygiving.org/terms-conditions/'
+    assert browser.current_url == live_server.url() + '/terms-conditions'
+    assert 'Terms and conditions' in browser.find_element_by_tag_name('h1').text
 
 
 @pytest.mark.usefixtures('live_server')
