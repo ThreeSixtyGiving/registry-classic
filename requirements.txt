@@ -1,6 +1,8 @@
 Flask==1.0.2
-requests==2.19.0
+raven==6.9.0
+requests==2.19.1
 ## The following requirements were added by pip freeze:
+blinker==1.4
 certifi==2018.4.16
 chardet==3.0.4
 click==6.7

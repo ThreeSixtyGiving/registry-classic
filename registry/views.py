@@ -3,6 +3,7 @@ from collections import OrderedDict
 
 import requests
 from flask import Flask, render_template
+from raven.contrib.flask import Sentry
 
 from tests.samples.registry_raw_data import RAW_DATA
 
@@ -12,6 +13,7 @@ app = Flask(
     static_folder='./static',
     template_folder='./templates',
 )
+sentry = Sentry(app)
 
 
 def get_prefix_data(data):

@@ -1,5 +1,6 @@
 Flask==1.0.2
-requests==2.19.0
+raven==6.9.0
+requests==2.19.1
 pytest==3.6.1
 pytest-flask==0.10.0
 selenium==3.12.0
@@ -7,6 +8,7 @@ flake8==3.5.0
 ## The following requirements were added by pip freeze:
 atomicwrites==1.1.5
 attrs==18.1.0
+blinker==1.4
 certifi==2018.4.16
 chardet==3.0.4
 click==6.7
