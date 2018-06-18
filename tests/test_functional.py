@@ -218,7 +218,6 @@ def test_table_logos(browser):
 
 @pytest.mark.usefixtures('live_server')
 @pytest.mark.parametrize('link_text', [
-    'Privacy',
     'Terms & Conditions',
     'Cookie Policy',
     'Take Down Policy',
@@ -227,15 +226,6 @@ def test_table_logos(browser):
 def test_footer_links(browser, link_text):
     browser.get(url_for('data_registry', _external=True))
     browser.find_element_by_link_text(link_text)
-
-
-@pytest.mark.usefixtures('live_server')
-def test_footer_privacy_link(browser):
-    hover_over_the_menu(browser)
-
-    browser.find_element_by_link_text('Privacy').click()
-
-    assert browser.current_url == 'http://www.threesixtygiving.org/privacy/'
 
 
 @pytest.mark.usefixtures('live_server')
