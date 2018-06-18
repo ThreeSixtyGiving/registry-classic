@@ -112,7 +112,7 @@ def test_body_tools_and_projects_link(browser):
 
 
 @pytest.mark.usefixtures('live_server')
-def test_body_tools_and_projects_link(browser):
+def test_body_get_data_link(browser):
     browser.get(url_for('data_registry', _external=True))
 
     browser.find_element_by_link_text('http://standard.threesixtygiving.org/en/latest/getdata/').click()
@@ -122,7 +122,7 @@ def test_body_tools_and_projects_link(browser):
 
 
 @pytest.mark.usefixtures('live_server')
-def test_body_tools_and_projects_link(browser):
+def test_body_registering_data_link(browser):
     browser.get(url_for('data_registry', _external=True))
 
     browser.find_element_by_link_text('registering your data').click()
@@ -132,7 +132,7 @@ def test_body_tools_and_projects_link(browser):
 
 
 @pytest.mark.usefixtures('live_server')
-def test_body_tools_and_projects_link(browser):
+def test_body_contact_us_link(browser):
     browser.get(url_for('data_registry', _external=True))
 
     browser.find_element_by_link_text('contact us').click()
