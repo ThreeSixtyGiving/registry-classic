@@ -87,3 +87,11 @@ def data_registry():
         'registry.html',
         data=get_data_by_prefix(raw_data) if raw_data else None
     )
+
+
+@app.route('/500')
+def test_500_error():
+    """
+    Function to test a 500 error.
+    """
+    raise Exception
