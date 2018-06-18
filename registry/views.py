@@ -89,6 +89,11 @@ def data_registry():
     )
 
 
+@app.route('/terms')
+def terms_and_conditions():
+    return render_template('terms.html')
+
+
 @app.route('/500')
 def test_500_error():
     """
