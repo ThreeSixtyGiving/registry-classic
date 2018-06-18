@@ -112,6 +112,9 @@ def test_body_tools_and_projects_link(browser):
 
     assert browser.current_url == 'http://www.threesixtygiving.org/data/find-data/'
 
+    browser.close()
+    browser.switch_to.window(browser.window_handles[0])
+
 
 @pytest.mark.usefixtures('live_server')
 def test_body_get_data_link(browser):
@@ -122,6 +125,9 @@ def test_body_get_data_link(browser):
 
     assert browser.current_url == 'http://standard.threesixtygiving.org/en/latest/getdata/'
 
+    browser.close()
+    browser.switch_to.window(browser.window_handles[0])
+
 
 @pytest.mark.usefixtures('live_server')
 def test_body_registering_data_link(browser):
@@ -130,7 +136,10 @@ def test_body_registering_data_link(browser):
     browser.find_element_by_link_text('registering your data').click()
     browser.switch_to.window(browser.window_handles[1])
 
-    assert browser.current_url == 'http://data.threesixtygiving.org/standard/register'
+    assert browser.current_url == 'http://www.threesixtygiving.org/support/standard/register/'
+
+    browser.close()
+    browser.switch_to.window(browser.window_handles[0])
 
 
 @pytest.mark.usefixtures('live_server')
@@ -141,6 +150,9 @@ def test_body_contact_us_link(browser):
     browser.switch_to.window(browser.window_handles[1])
 
     assert browser.current_url == 'http://www.threesixtygiving.org/contact/'
+
+    browser.close()
+    browser.switch_to.window(browser.window_handles[0])
 
 
 @pytest.mark.usefixtures('live_server')
