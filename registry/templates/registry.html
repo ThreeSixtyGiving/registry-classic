@@ -1,170 +1,65 @@
-<!doctype html>
-<html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+{% extends 'base.html' %}
+{% block main_content %}
 
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Data Registry | 360Giving</title>
-    <meta property="og:title" content="Data Registry | 360Giving">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<div class = "page-header">
+  <h1>DATA REGISTRY</h1>
+</div>
 
-    <!-- CSS -->
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous"
+<div>
+  <p><strong>More than 70 organisations are publishing grants data to the 360Giving open data standard.</strong></p>
+  <p>
+    This means they are sharing information about their grantmaking in a way which allows others to
+    use it easily and for free. You can use the table below to download datasets from these organisations.
+    You will see that each dataset has its own license attached to it. These licenses specify how the data
+    can be shared and used. The data in these spreadsheets is used and displayed by a growing number of
+    tools and websites. If you are looking for examples of what can be created using this data,
+    please visit the <a href="http://www.threesixtygiving.org/data/find-data/" target="_blank">Tools &amp; Projects</a>
+    page.
+  </p>
+  <p class="devs-info">
+    <strong>Developers:</strong> For a JSON feed of published datasets visit
+    <a href="http://standard.threesixtygiving.org/en/latest/getdata/" target="_blank">
+      http://standard.threesixtygiving.org/en/latest/getdata/</a>
+  </p>
+  <p>
+    Using our templates you can publish data directly on your own website, keeping you in control.
+    By <a href="http://www.threesixtygiving.org/support/standard/register/" target="_blank">registering your data</a>
+    with 360Giving, it becomes easier for others to find, analyse and re-use. If you would like to find out
+    about the free support we can provide to help you publish your grants data, please
+    <a href="http://www.threesixtygiving.org/contact/" target="_blank">contact us</a>.
+  </p>
+</div>
 
-    <noscript>
-      <style>
-        .javascript-enabled {
-          display: none !important;
-        }
-      </style>
-    </noscript>
-  </head>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">Logo</th>
+      <th scope="col">Organisation</th>
+      <th scope="col">Data</th>
+      <th scope="col">License</th>
+    </tr>
+  </thead>
 
-  <body>
-    <nav class="navbar">
-        <div class="container">
-        <div class="navbar-header logo">
-          <a class="navbar-brand pull-right" href="http://www.threesixtygiving.org/">
-            <img src="http://www.threesixtygiving.org/wp-content/themes/360giving/assets/img/logo.png" alt="360Giving" width="175" height="125">
-          </a>
-        </div>
-
-         <ul class="nav justify-content-end">
-           <li class="nav-item dropdown nav-dropdown-menu-title">
-             <p class="dropdown-toggle" id="menu" data-toggle="dropdown">MENU</p>
-             <div class="dropdown-menu dropdown-menu-right">
-               <a class="dropdown-item" href="http://www.threesixtygiving.org/">Home</a>
-               <a class="dropdown-item" href="http://www.threesixtygiving.org/support/standard/">The 360Giving Standard</a>
-               <a class="dropdown-item" href="https://forum.threesixtygiving.org/">Discussion Forum</a>
-             </div>
-           </li>
-         </ul>
-      </div>
-    </nav>
-
-    <div class="container body-main">
-      <div class = "page-header">
-        <h1>DATA REGISTRY</h1>
-      </div>
-
-      <div>
-        <p><strong>More than 70 organisations are publishing grants data to the 360Giving open data standard.</strong></p>
-        <p>
-          This means they are sharing information about their grantmaking in a way which allows others to
-          use it easily and for free. You can use the table below to download datasets from these organisations.
-          You will see that each dataset has its own license attached to it. These licenses specify how the data
-          can be shared and used. The data in these spreadsheets is used and displayed by a growing number of
-          tools and websites. If you are looking for examples of what can be created using this data,
-          please visit the <a href="http://www.threesixtygiving.org/data/find-data/" target="_blank">Tools &amp; Projects</a>
-          page.
-        </p>
-        <p class="devs-info">
-          <strong>Developers:</strong> For a JSON feed of published datasets visit
-          <a href="http://standard.threesixtygiving.org/en/latest/getdata/" target="_blank">
-            http://standard.threesixtygiving.org/en/latest/getdata/</a>
-        </p>
-        <p>
-          Using our templates you can publish data directly on your own website, keeping you in control.
-          By <a href="http://www.threesixtygiving.org/support/standard/register/" target="_blank">registering your data</a>
-          with 360Giving, it becomes easier for others to find, analyse and re-use. If you would like to find out
-          about the free support we can provide to help you publish your grants data, please
-          <a href="http://www.threesixtygiving.org/contact/" target="_blank">contact us</a>.
-        </p>
-      </div>
-
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th scope="col">Logo</th>
-            <th scope="col">Organisation</th>
-            <th scope="col">Data</th>
-            <th scope="col">License</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {% if data %}
-            {% for org_prefix, org_data in data.items() %}
-              <tr>
-                <td>
-                  {% if org_data['publisher']['logo'] %}
-                    <img class="tlogo" src="{{ org_data['publisher']['logo'] }}" width="100">
-                  {% endif %}
-                </td>
-                <td>{{ org_data['publisher']['name'] }}</td>
-                <td>
-                  {% for grant in org_data['grant'] %}
-                    <div><a href="{{ grant['url'] }}">{{ grant['name'] }}</a></div>
-                  {% endfor %}
-                </td>
-                <td><a href="{{ org_data['license']['url'] }}">{{ org_data['license']['name'] }}</a></td>
-              </tr>
+  <tbody>
+    {% if data %}
+      {% for org_prefix, org_data in data.items() %}
+        <tr>
+          <td>
+            {% if org_data['publisher']['logo'] %}
+              <img class="tlogo" src="{{ org_data['publisher']['logo'] }}" width="100">
+            {% endif %}
+          </td>
+          <td>{{ org_data['publisher']['name'] }}</td>
+          <td>
+            {% for grant in org_data['grant'] %}
+              <div><a href="{{ grant['url'] }}">{{ grant['name'] }}</a></div>
             {% endfor %}
-          {% endif %}
-        </tbody>
-      </table>
-    </div>
+          </td>
+          <td><a href="{{ org_data['license']['url'] }}">{{ org_data['license']['name'] }}</a></td>
+        </tr>
+      {% endfor %}
+    {% endif %}
+  </tbody>
+</table>
 
-    <footer class="footer">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-6">
-            <div class="row align-items-start">
-              <a href="http://www.threesixtygiving.org/">
-                <img src="http://www.threesixtygiving.org/wp-content/themes/360giving/assets/img/logo-white.png" alt="360Giving" width="140" height="100">
-              </a>
-            </div>
-          </div>
-          <div class="col-sm-3">
-            <ul>
-              <li><a class="tel" href="tel:+442037525775">020 3752 5775</a></li>
-              <li><a class="email" href="mailto:info@threesixtygiving.org">info@threesixtygiving.org</a></li>
-            </ul>
-          </div>
-          <div class="col-sm-3">
-            <ul>
-              <li><a title="Privacy" href="http://www.threesixtygiving.org/privacy/">Privacy</a></li>
-              <li><a title="Terms &#038; Conditions" href="http://www.threesixtygiving.org/terms-conditions/">Terms &amp; Conditions</a></li>
-              <li><a title="Cookie Policy" href="http://www.threesixtygiving.org/cookie-policy/">Cookie Policy</a></li>
-              <li><a title="Take Down Policy" href="http://www.threesixtygiving.org/take-down-policy/">Take Down Policy</a></li>
-              <li><a title="License" href="https://creativecommons.org/licenses/by/4.0/">License</a></li>
-            </ul>
-          </div>
-
-        </div>
-      </div>
-      <hr/>
-      <div class="container">
-        <div class="row sub-footer">
-          <div class="col">
-            360Giving is a company limited by guarantee
-            <a href="https://beta.companieshouse.gov.uk/company/09668396" target="_blank">09668396</a>
-            and a registered charity
-            <a href="http://beta.charitycommission.gov.uk/charity-details/?regid=1164883&subid=0"  target="_blank">1164883</a>
-          </div>
-        </div>
-      </div>
-    </footer>
-
-    <!-- Matomo -->
-    <script type="text/javascript">
-      var _paq = _paq || [];
-      /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-      _paq.push(['trackPageView']);
-      _paq.push(['enableLinkTracking']);
-      (function() {
-        var u="//mon.opendataservices.coop/piwik/";
-        _paq.push(['setTrackerUrl', u+'piwik.php']);
-        _paq.push(['setSiteId', '21']);
-        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
-      })();
-    </script>
-    <!-- End Matomo Code -->
-  </body>
-</html>
+{% endblock %}
