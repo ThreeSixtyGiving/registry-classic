@@ -45,6 +45,10 @@ body nav.navbar div.container .nav-dropdown-menu-title div.dropdown-menu .dropdo
   padding-top: 20px;
 }
 
+body div h3 {
+  font-family: "Ostrich Sans Black", sans-serif;
+}
+
 body div.container.body-main a {
   color: #602f8f;
 }
