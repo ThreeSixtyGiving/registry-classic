@@ -219,7 +219,6 @@ def test_table_logos(browser):
 @pytest.mark.usefixtures('live_server')
 @pytest.mark.parametrize('link_text', [
     'Terms & Conditions',
-    'Cookie Policy',
     'Take Down Policy',
     'License',
     ])
@@ -236,15 +235,6 @@ def test_footer_terms_and_conditions_link(browser, live_server):
 
     assert browser.current_url == live_server.url() + '/terms-conditions'
     assert 'Terms & Conditions' in browser.find_element_by_tag_name('h1').text
-
-
-@pytest.mark.usefixtures('live_server')
-def test_footer_cookie_policy_link(browser):
-    hover_over_the_menu(browser)
-
-    browser.find_element_by_link_text('Cookie Policy').click()
-
-    assert browser.current_url == 'http://www.threesixtygiving.org/cookie-policy/'
 
 
 @pytest.mark.usefixtures('live_server')
