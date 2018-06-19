@@ -1,0 +1,98 @@
+@font-face {
+    font-family: Ostrich Sans Black;
+    src: url('../fonts/OstrichSans-Black.otf');
+}
+
+body {
+  font-family: "Source Sans Pro", sans-serif !important;
+  font-size: 18px;
+  line-height: 28px;
+}
+
+.navbar-header.logo {
+  padding: 20px 0;
+}
+
+.dropdown:hover > .dropdown-menu {
+  display: block;
+}
+
+body nav.navbar div.container .nav-dropdown-menu-title {
+  display: block;
+  text-decoration: none;
+  padding: 10px 25px;
+  color: #3b3b3c;
+  font-family: "Ostrich Sans Black",sans-serif;
+  font-size: 21px;
+  line-height: 24px;
+  letter-spacing: 0.5px;
+}
+
+body nav.navbar div.container .nav-dropdown-menu-title div.dropdown-menu .dropdown-item {
+  font-family: "Source Sans Pro",sans-serif;
+  font-size: 18px;
+  line-height: 28px;
+  padding: 5px 15px;
+}
+
+.page-header h1 {
+  font-size: 41px;
+  line-height: 40px;
+  color: #9c2061;
+  letter-spacing: 0.5px;
+  font-family: "Ostrich Sans Black", sans-serif;
+  margin: 0 0 20px;
+  padding-top: 20px;
+}
+
+body div h3 {
+  font-family: "Ostrich Sans Black", sans-serif;
+}
+
+body div.container.body-main a {
+  color: #602f8f;
+}
+
+body .devs-info{
+  display: block;
+  padding: 9.5px;
+  margin: 0 0 10px;
+  font-size: 13px;
+  line-height: 1.42857143;
+  color: #333;
+  word-break: break-all;
+  word-wrap: break-word;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: Courier;
+}
+
+.footer {
+  background-color: #3b3b3c;;
+  color: #FFFFFF;
+  padding: 20px 0;
+}
+
+.footer ul{
+  list-style-type: none;
+}
+
+.footer a {
+  color: #FFFFFF;
+}
+
+.footer a:hover {
+  color: #FFFFFF;
+}
+
+.footer hr {
+  height: 1px;
+  color: #585a59;
+  background-color: #585a59;
+}
+
+.footer .sub-footer a {
+  text-decoration: underline;
+}
+

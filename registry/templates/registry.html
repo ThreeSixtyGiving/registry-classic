@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block main_content %}
+
+<div class = "page-header">
+  <h1>DATA REGISTRY</h1>
+</div>
+
+<div>
+  <p><strong>More than 80 organisations are publishing grants data to the 360Giving open data standard.</strong></p>
+  <p>
+    This means they are sharing information about their grantmaking in a way which allows others to
+    use it easily and for free. You can use the table below to download datasets from these organisations.
+    You will see that each dataset has its own license attached to it. These licenses specify how the data
+    can be shared and used. The data in these spreadsheets is used and displayed by a growing number of
+    tools and websites. If you are looking for examples of what can be created using this data,
+    please visit the <a href="http://www.threesixtygiving.org/data/find-data/" target="_blank">Tools &amp; Projects</a>
+    page.
+  </p>
+  <p class="devs-info">
+    <strong>Developers:</strong> For a JSON feed of published datasets visit
+    <a href="http://standard.threesixtygiving.org/en/latest/getdata/" target="_blank">
+      http://standard.threesixtygiving.org/en/latest/getdata/</a>
+  </p>
+  <p>
+    Using our templates you can publish data directly on your own website, keeping you in control.
+    By registering your data with 360Giving, it becomes easier for others to find, analyse and re-use.
+    If you would like to find out about the free support we can provide to help you publish your grants data,
+    please <a href="http://www.threesixtygiving.org/contact/" target="_blank">contact us</a>.
+  </p>
+</div>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">Logo</th>
+      <th scope="col">Organisation</th>
+      <th scope="col">Data</th>
+      <th scope="col">License</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {% if data %}
+      {% for org_prefix, org_data in data.items() %}
+        <tr>
+          <td>
+            {% if org_data['publisher']['logo'] %}
+              <img class="tlogo" src="{{ org_data['publisher']['logo'] }}" width="100">
+            {% endif %}
+          </td>
+          <td>{{ org_data['publisher']['name'] }}</td>
+          <td>
+            {% for grant in org_data['grant'] %}
+              <div><a href="{{ grant['url'] }}">{{ grant['name'] }}</a></div>
+            {% endfor %}
+          </td>
+          <td><a href="{{ org_data['license']['url'] }}">{{ org_data['license']['name'] }}</a></td>
+        </tr>
+      {% endfor %}
+    {% endif %}
+  </tbody>
+</table>
+
+{% endblock %}
