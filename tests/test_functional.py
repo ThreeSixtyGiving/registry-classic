@@ -95,7 +95,6 @@ def test_body_h1(browser):
 @pytest.mark.parametrize('link_text', [
     'Tools & Projects',
     'http://standard.threesixtygiving.org/en/latest/getdata/',
-    'registering your data',
     'contact us',
     ])
 def test_body_links(browser, link_text):
@@ -124,19 +123,6 @@ def test_body_get_data_link(browser):
     browser.switch_to.window(browser.window_handles[1])
 
     assert browser.current_url == 'http://standard.threesixtygiving.org/en/latest/getdata/'
-
-    browser.close()
-    browser.switch_to.window(browser.window_handles[0])
-
-
-@pytest.mark.usefixtures('live_server')
-def test_body_registering_data_link(browser):
-    browser.get(url_for('data_registry', _external=True))
-
-    browser.find_element_by_link_text('registering your data').click()
-    browser.switch_to.window(browser.window_handles[1])
-
-    assert browser.current_url == 'http://www.threesixtygiving.org/support/standard/register/'
 
     browser.close()
     browser.switch_to.window(browser.window_handles[0])
