@@ -166,24 +166,25 @@ def test_table_data(browser):
     for table_data in browser.find_elements_by_tag_name('td'):
         table_data_text.append(table_data.text)
 
-    assert len(table_data_text) == 12
+    assert len(table_data_text) == 13
     assert table_data_text[0:4] == [
         '',
         'BBC Children in Need',
-        'BBC Children in Need grants',
-        'Creative Commons Attribution 4.0'
+        'Creative Commons Attribution 4.0',
+        'BBC Children in Need grants'
     ]
-    assert table_data_text[4:8] == [
+    assert table_data_text[4:9] == [
         '',
         'Big Lottery Fund',
-        'Big Lottery Fund - grants data 2015 to 2017\nBig Lottery Fund - grants data 2017-18 year-to-date',
-        'Open Government Licence 3.0 (United Kingdom)'
+        'Open Government Licence 3.0 (United Kingdom)',
+        'Big Lottery Fund - grants data 2015 to 2017',
+        'Big Lottery Fund - grants data 2017-18 year-to-date'
     ]
-    assert table_data_text[8:13] == [
+    assert table_data_text[9:14] == [
         '',
         'The Corra Foundation, previously called Lloyds TSB Foundation for Scotland',
-        'Grants awarded since 2015, as at 31 December 2017',
-        'Creative Commons Attribution 4.0 International (CC BY 4.0)'
+        'Creative Commons Attribution 4.0 International (CC BY 4.0)',
+        'Grants awarded since 2015, as at 31 December 2017'
     ]
 
 

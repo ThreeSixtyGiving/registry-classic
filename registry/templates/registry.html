@@ -34,8 +34,8 @@
     <tr>
       <th scope="col">Logo</th>
       <th scope="col">Organisation</th>
-      <th scope="col">Data</th>
       <th scope="col">License</th>
+      <th scope="col">Data</th>
     </tr>
   </thead>
 
@@ -43,19 +43,32 @@
     {% if data %}
       {% for org_prefix, org_data in data.items() %}
         <tr>
-          <td>
+          <td scope="rowgroup" rowspan="{{ org_data['grant'] | length }}">
             {% if org_data['publisher']['logo'] %}
               <img class="tlogo" src="{{ org_data['publisher']['logo'] }}" width="100">
             {% endif %}
           </td>
-          <td>{{ org_data['publisher']['name'] }}</td>
-          <td>
-            {% for grant in org_data['grant'] %}
-              <div><a href="{{ grant['url'] }}">{{ grant['name'] }}</a></div>
-            {% endfor %}
+          <td scope="rowgroup" rowspan="{{ org_data['grant'] | length }}">
+            {{ org_data['publisher']['name'] }}
           </td>
-          <td><a href="{{ org_data['license']['url'] }}">{{ org_data['license']['name'] }}</a></td>
+          <td scope="rowgroup" rowspan="{{ org_data['grant'] | length }}">
+            <a href="{{ org_data['license']['url'] }}">{{ org_data['license']['name'] }}</a>
+          </td>
+          {% if org_data['grant'] %}
+            <td>
+              <a href="{{ org_data['grant'][0]['url'] }}">{{ org_data['grant'][0]['name'] }}</a>
+            </td>
+          {% endif %}
         </tr>
+        {% if org_data['grant'] | length > 1%}
+          {% for grant in org_data['grant'][1:] %}
+            <tr>
+              <td scope="row">
+                <a href="{{ grant['url'] }}">{{ grant['name'] }}</a>
+              </td>
+            </tr>
+          {% endfor %}
+        {% endif %}
       {% endfor %}
     {% endif %}
   </tbody>
