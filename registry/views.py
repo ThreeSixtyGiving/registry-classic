@@ -30,14 +30,39 @@ def get_prefix_data(data):
     }
 
 
+def get_total_amount_awarded(data_by_currency):
+    # TODO TEST
+    total_amount = []
+
+    if data_by_currency:
+        for currency, data in data_by_currency.items():
+            total_amount.append('{} {}'.format(
+                data['currency_symbol'], data['total_amount'])
+            )
+
+    return total_amount
+
+
 def get_grant_data(data):
+    # TODO TEST
+    data_aggregates = data.get('datagetter_aggregates')
+
     return {
         'url': data['distribution'][0]['downloadURL'],
-        'name': data['distribution'][0]['title']
+        'name': data['distribution'][0]['title'],
+        'num_founders': data_aggregates.get('distinct_funding_org_identifier_count') if data_aggregates else '',
+        'dates': {
+            'first_date': data_aggregates.get('min_award_date') if data_aggregates else '',
+            'last_date': data_aggregates.get('max_award_date') if data_aggregates else ''
+        },
+        'num_awards': data_aggregates.get('count') if data_aggregates else '',
+        'total_amount_awarded': get_total_amount_awarded(data_aggregates.get('currencies') if data_aggregates else None),
+        'num_recipients': data_aggregates.get('distinct_recipient_org_identifier_count') if data_aggregates else ''
     }
 
 
 def get_data_by_prefix(raw_data):
+    # TODO update docstring.
     """
     Given a json value where publishers can have more than one entry,
     this function creates a new dictionary keyed by publisher prefix.

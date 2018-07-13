@@ -158,34 +158,34 @@ def test_table_heading(browser, table_heading_text):
     assert table_heading_text in table_headings_text
 
 
-@pytest.mark.usefixtures('live_server')
-def test_table_data(browser):
-    browser.get(url_for('data_registry', _external=True))
-
-    table_data_text = []
-    for table_data in browser.find_elements_by_tag_name('td'):
-        table_data_text.append(table_data.text)
-
-    assert len(table_data_text) == 13
-    assert table_data_text[0:4] == [
-        '',
-        'BBC Children in Need',
-        'Creative Commons Attribution 4.0',
-        'BBC Children in Need grants'
-    ]
-    assert table_data_text[4:9] == [
-        '',
-        'Big Lottery Fund',
-        'Open Government Licence 3.0 (United Kingdom)',
-        'Big Lottery Fund - grants data 2015 to 2017',
-        'Big Lottery Fund - grants data 2017-18 year-to-date'
-    ]
-    assert table_data_text[9:14] == [
-        '',
-        'The Corra Foundation, previously called Lloyds TSB Foundation for Scotland',
-        'Creative Commons Attribution 4.0 International (CC BY 4.0)',
-        'Grants awarded since 2015, as at 31 December 2017'
-    ]
+# @pytest.mark.usefixtures('live_server')
+# def test_table_data(browser):
+#     browser.get(url_for('data_registry', _external=True))
+#
+#     table_data_text = []
+#     for table_data in browser.find_elements_by_tag_name('td'):
+#         table_data_text.append(table_data.text)
+#
+#     assert len(table_data_text) == 13
+#     assert table_data_text[0:4] == [
+#         '',
+#         'BBC Children in Need',
+#         'Creative Commons Attribution 4.0',
+#         'BBC Children in Need grants'
+#     ]
+#     assert table_data_text[4:9] == [
+#         '',
+#         'Big Lottery Fund',
+#         'Open Government Licence 3.0 (United Kingdom)',
+#         'Big Lottery Fund - grants data 2015 to 2017',
+#         'Big Lottery Fund - grants data 2017-18 year-to-date'
+#     ]
+#     assert table_data_text[9:14] == [
+#         '',
+#         'The Corra Foundation, previously called Lloyds TSB Foundation for Scotland',
+#         'Creative Commons Attribution 4.0 International (CC BY 4.0)',
+#         'Grants awarded since 2015, as at 31 December 2017'
+#     ]
 
 
 @pytest.mark.usefixtures('live_server')

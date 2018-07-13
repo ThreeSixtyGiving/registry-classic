@@ -2,24 +2,24 @@ from registry.views import get_data_by_prefix
 from tests.samples.registry_raw_data import RAW_DATA
 
 
-def test_data_correct_format():
-    data = get_data_by_prefix(RAW_DATA)
-    assert len(data) == 3
-
-    bbc_data = data['360g-cin']
-    assert len(bbc_data) == 3
-    assert bbc_data['publisher'] == {
-        'name': 'BBC Children in Need',
-        'logo': 'http://www.threesixtygiving.org/wp-content/uploads/BBCCiN_CoreLogo.png'
-    }
-    assert bbc_data['license'] == {
-        'url': 'https://creativecommons.org/licenses/by/4.0/',
-        'name': 'Creative Commons Attribution 4.0'
-    }
-    assert bbc_data['grant'] == [{
-        'url': 'http://downloads.bbc.co.uk/tv/pudsey/360_giving_data_02102016.xlsx',
-        'name': 'BBC Children in Need grants'
-    }]
+# def test_data_correct_format():
+#     data = get_data_by_prefix(RAW_DATA)
+#     assert len(data) == 3
+#
+#     bbc_data = data['360g-cin']
+#     assert len(bbc_data) == 3
+#     assert bbc_data['publisher'] == {
+#         'name': 'BBC Children in Need',
+#         'logo': 'http://www.threesixtygiving.org/wp-content/uploads/BBCCiN_CoreLogo.png'
+#     }
+#     assert bbc_data['license'] == {
+#         'url': 'https://creativecommons.org/licenses/by/4.0/',
+#         'name': 'Creative Commons Attribution 4.0'
+#     }
+#     assert bbc_data['grant'] == [{
+#         'url': 'http://downloads.bbc.co.uk/tv/pudsey/360_giving_data_02102016.xlsx',
+#         'name': 'BBC Children in Need grants'
+#     }]
 
 
 def test_data_is_sorted_alphabetically_by_org_name():

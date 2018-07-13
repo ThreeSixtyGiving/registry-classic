@@ -36,6 +36,11 @@
       <th scope="col">Organisation</th>
       <th scope="col">License</th>
       <th scope="col">Data</th>
+      <th scope="col">Num. founders</th>
+      <th scope="col">First-last awarded date</th>
+      <th scope="col">Num. awards</th>
+      <th scope="col">Total amount awarded</th>
+      <th scope="col">Num. recipients</th>
     </tr>
   </thead>
 
@@ -55,17 +60,37 @@
             <a href="{{ org_data['license']['url'] }}">{{ org_data['license']['name'] }}</a>
           </td>
           {% if org_data['grant'] %}
+            <td><a href="{{ org_data['grant'][0]['url'] }}">{{ org_data['grant'][0]['name'] }}</a></td>
+            <td>{{  org_data['grant'][0]['num_founders'] }}</td>
             <td>
-              <a href="{{ org_data['grant'][0]['url'] }}">{{ org_data['grant'][0]['name'] }}</a>
+              <div>{{  org_data['grant'][0]['dates']['first_date'] }}</div>
+              <div>{{  org_data['grant'][0]['dates']['last_date'] }}</div>
             </td>
+            <td>{{  org_data['grant'][0]['num_awards'] }}</td>
+            <td>
+              {% for amount in org_data['grant'][0]['total_amount_awarded'] %}
+                <div>{{ amount }}</div>
+              {% endfor %}
+            </td>
+            <td>{{  org_data['grant'][0]['num_recipients'] }}</td>
           {% endif %}
         </tr>
         {% if org_data['grant'] | length > 1%}
           {% for grant in org_data['grant'][1:] %}
             <tr>
+              <td scope="row"><a href="{{ grant['url'] }}">{{ grant['name'] }}</a></td>
+              <td scope="row">{{ grant['num_founders'] }}</td>
               <td scope="row">
-                <a href="{{ grant['url'] }}">{{ grant['name'] }}</a>
+                <div>{{ grant['dates']['first_date'] }}</div>
+                <div>{{ grant['dates']['last_date'] }}</div>
               </td>
+              <td scope="row">{{ grant['num_awards'] }}</td>
+              <td scope="row">
+                {% for amount in grant['total_amount_awarded']%}
+                  <div>{{ amount }}</div>
+                {% endfor %}
+              </td>
+              <td scope="row">{{ grant['num_recipients'] }}</td>
             </tr>
           {% endfor %}
         {% endif %}
