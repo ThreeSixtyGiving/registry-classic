@@ -76,7 +76,7 @@ def get_raw_data():
     if os.environ.get('FLASK_ENV') == 'development':
         return RAW_DATA
 
-    return requests.get('http://data.threesixtygiving.org/data.json').json()
+    return requests.get('https://storage.googleapis.com/datagetter-360giving-output/branch/master/status.json').json()
 
 
 @app.route('/')
