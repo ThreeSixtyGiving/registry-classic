@@ -30,6 +30,19 @@ def get_prefix_data(data):
     }
 
 
+def get_currency_symbol(currency, data):
+    if not data['currency_symbol']:
+        return currency
+    return data['currency_symbol']
+
+
+def format_value(value):
+    if type(value) == float:
+        value = float(format(value, '.2f'))
+
+    return "{:,}".format(value)
+
+
 def get_total_amount_awarded(data_by_currency):
     # TODO TEST
     total_amount = []
@@ -37,9 +50,9 @@ def get_total_amount_awarded(data_by_currency):
     if data_by_currency:
         for currency, data in data_by_currency.items():
             total_amount.append('{} {}'.format(
-                data['currency_symbol'], data['total_amount'])
-            )
-
+                get_currency_symbol(currency, data),
+                format_value(data['total_amount'])
+            ))
     return total_amount
 
 
