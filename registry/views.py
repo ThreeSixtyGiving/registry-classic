@@ -68,9 +68,9 @@ def get_grant_data(data):
             'first_date': data_aggregates.get('min_award_date') if data_aggregates else '',
             'last_date': data_aggregates.get('max_award_date') if data_aggregates else ''
         },
-        'num_awards': data_aggregates.get('count') if data_aggregates else '',
+        'num_awards': format_value(data_aggregates.get('count')) if data_aggregates else '',
         'total_amount_awarded': get_total_amount_awarded(data_aggregates.get('currencies') if data_aggregates else None),
-        'num_recipients': data_aggregates.get('distinct_recipient_org_identifier_count') if data_aggregates else ''
+        'num_recipients': format_value(data_aggregates.get('distinct_recipient_org_identifier_count')) if data_aggregates else ''
     }
 
 
