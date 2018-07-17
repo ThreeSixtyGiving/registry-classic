@@ -36,8 +36,15 @@
       <th scope="col">Organisation</th>
       <th scope="col">License</th>
       <th scope="col">Data</th>
-      <th scope="col">First-last awarded date</th>
-      <th scope="col">Num. founders</th>
+      <th scope="col">File type</th>
+      <th scope="col">Issued date</th>
+      <th scope="col">Modified date</th>
+      <th scope="col">Valid</th>
+      <th scope="col">Available</th>
+      <th scope="col">Acceptable License</th>
+      <th scope="col">First awarded date</th>
+      <th scope="col">Last awarded date</th>
+      <th scope="col">Num. funders</th>
       <th scope="col">Num. recipients</th>
       <th scope="col">Num. awards</th>
       <th scope="col">Total amount awarded</th>
@@ -61,13 +68,17 @@
           </td>
           {% if org_data['grant'] %}
             <td><a href="{{ org_data['grant'][0]['url'] }}">{{ org_data['grant'][0]['name'] }}</a></td>
-            <td>
-              <div>{{  org_data['grant'][0]['dates']['first_date'] }}</div>
-              <div>{{  org_data['grant'][0]['dates']['last_date'] }}</div>
-            </td>
-            <td>{{  org_data['grant'][0]['num_founders'] }}</td>
-            <td>{{  org_data['grant'][0]['num_recipients'] }}</td>
-            <td>{{  org_data['grant'][0]['num_awards'] }}</td>
+            <td>{{ org_data['grant'][0]['file_type'] }}</td>
+            <td>{{ org_data['grant'][0]['issued_date'] }}</td>
+            <td>{{ org_data['grant'][0]['modified_date'] }}</td>
+            <td>{{ org_data['grant'][0]['valid'] }}</td>
+            <td>{{ org_data['grant'][0]['available'] }}</td>
+            <td>{{ org_data['grant'][0]['acceptable_license'] }}</td>
+            <td>{{ org_data['grant'][0]['first_date'] }}</td>
+            <td>{{ org_data['grant'][0]['last_date'] }}</td>
+            <td>{{ org_data['grant'][0]['num_funders'] }}</td>
+            <td>{{ org_data['grant'][0]['num_recipients'] }}</td>
+            <td>{{ org_data['grant'][0]['num_awards'] }}</td>
             <td>
               {% for amount in org_data['grant'][0]['total_amount_awarded'] %}
                 <div>{{ amount | safe }}</div>
@@ -79,11 +90,15 @@
           {% for grant in org_data['grant'][1:] %}
             <tr>
               <td scope="row"><a href="{{ grant['url'] }}">{{ grant['name'] }}</a></td>
-              <td scope="row">
-                <div>{{ grant['dates']['first_date'] }}</div>
-                <div>{{ grant['dates']['last_date'] }}</div>
-              </td>
-              <td scope="row">{{ grant['num_founders'] }}</td>
+              <td scope="row">{{ grant['file_type'] }}</td>
+              <td scope="row">{{ grant['issued_date'] }}</td>
+              <td scope="row">{{ grant['modified_date'] }}</td>
+              <td scope="row">{{ grant['valid'] }}</td>
+              <td scope="row">{{ grant['available'] }}</td>
+              <td scope="row">{{ grant['acceptable_license'] }}</td>
+              <td scope="row">{{ grant['first_date'] }}</td>
+              <td scope="row">{{ grant['last_date'] }}</td>
+              <td scope="row">{{ grant['num_funders'] }}</td>
               <td scope="row">{{ grant['num_recipients'] }}</td>
               <td scope="row">{{ grant['num_awards'] }}</td>
               <td scope="row">

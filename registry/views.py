@@ -59,18 +59,23 @@ def get_total_amount_awarded(data_by_currency):
 def get_grant_data(data):
     # TODO TEST
     data_aggregates = data.get('datagetter_aggregates')
+    data_metadata = data.get('datagetter_metadata')
 
     return {
         'url': data['distribution'][0]['downloadURL'],
         'name': data['distribution'][0]['title'],
-        'num_founders': data_aggregates.get('distinct_funding_org_identifier_count') if data_aggregates else '',
-        'dates': {
-            'first_date': data_aggregates.get('min_award_date') if data_aggregates else '',
-            'last_date': data_aggregates.get('max_award_date') if data_aggregates else ''
-        },
+        'file_type': data_metadata['file_type'],
+        'num_funders': data_aggregates.get('distinct_funding_org_identifier_count') if data_aggregates else '',
+        'num_recipients': format_value(data_aggregates.get('distinct_recipient_org_identifier_count')) if data_aggregates else '',
         'num_awards': format_value(data_aggregates.get('count')) if data_aggregates else '',
         'total_amount_awarded': get_total_amount_awarded(data_aggregates.get('currencies') if data_aggregates else None),
-        'num_recipients': format_value(data_aggregates.get('distinct_recipient_org_identifier_count')) if data_aggregates else ''
+        'first_date': data_aggregates.get('min_award_date') if data_aggregates else '',
+        'last_date': data_aggregates.get('max_award_date') if data_aggregates else '',
+        'issued_date': data.get('issued'),
+        'modified_date': data.get('modified'),
+        'valid': data_metadata.get('valid'),
+        'available': data_metadata.get('downloads'),
+        'acceptable_license': data_metadata.get('acceptable_license')
     }
 
 
