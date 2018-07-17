@@ -56,6 +56,14 @@ def get_total_amount_awarded(data_by_currency):
     return total_amount
 
 
+def get_check_cross_symbol(boolean_data):
+    if boolean_data is True:
+        return '&#x2713;'
+    if boolean_data is False:
+        return '&#x2715;'
+    return ''
+
+
 def get_grant_data(data):
     # TODO TEST
     data_aggregates = data.get('datagetter_aggregates')
@@ -72,10 +80,10 @@ def get_grant_data(data):
         'first_date': data_aggregates.get('min_award_date') if data_aggregates else '',
         'last_date': data_aggregates.get('max_award_date') if data_aggregates else '',
         'issued_date': data.get('issued'),
-        'modified_date': data.get('modified'),
-        'valid': data_metadata.get('valid'),
-        'available': data_metadata.get('downloads'),
-        'acceptable_license': data_metadata.get('acceptable_license')
+        'modified_date': data.get('modified').split('T')[0],
+        'valid': get_check_cross_symbol(data_metadata.get('valid')),
+        'available': get_check_cross_symbol(data_metadata.get('downloads')),
+        'acceptable_license': get_check_cross_symbol(data_metadata.get('acceptable_license'))
     }
 
 

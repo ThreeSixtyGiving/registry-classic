@@ -71,9 +71,9 @@
             <td>{{ org_data['grant'][0]['file_type'] }}</td>
             <td>{{ org_data['grant'][0]['issued_date'] }}</td>
             <td>{{ org_data['grant'][0]['modified_date'] }}</td>
-            <td>{{ org_data['grant'][0]['valid'] }}</td>
-            <td>{{ org_data['grant'][0]['available'] }}</td>
-            <td>{{ org_data['grant'][0]['acceptable_license'] }}</td>
+            <td>{{ org_data['grant'][0]['valid'] | safe }}</td>
+            <td>{{ org_data['grant'][0]['available'] | safe }}</td>
+            <td>{{ org_data['grant'][0]['acceptable_license'] | safe }}</td>
             <td>{{ org_data['grant'][0]['first_date'] }}</td>
             <td>{{ org_data['grant'][0]['last_date'] }}</td>
             <td>{{ org_data['grant'][0]['num_funders'] }}</td>
@@ -93,9 +93,9 @@
               <td scope="row">{{ grant['file_type'] }}</td>
               <td scope="row">{{ grant['issued_date'] }}</td>
               <td scope="row">{{ grant['modified_date'] }}</td>
-              <td scope="row">{{ grant['valid'] }}</td>
-              <td scope="row">{{ grant['available'] }}</td>
-              <td scope="row">{{ grant['acceptable_license'] }}</td>
+              <td scope="row">{{ grant['valid'] | safe }}</td>
+              <td scope="row">{{ grant['available'] | safe }}</td>
+              <td scope="row">{{ grant['acceptable_license'] | safe }}</td>
               <td scope="row">{{ grant['first_date'] }}</td>
               <td scope="row">{{ grant['last_date'] }}</td>
               <td scope="row">{{ grant['num_funders'] }}</td>
