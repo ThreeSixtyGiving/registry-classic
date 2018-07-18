@@ -144,9 +144,9 @@ def test_body_contact_us_link(browser):
 @pytest.mark.usefixtures('live_server')
 @pytest.mark.parametrize('table_heading_text', [
     'Logo',
-    'Organisation',
-    'Data',
-    'License',
+    'Publisher',
+    'File name',
+    'Licence',
     ])
 def test_table_heading(browser, table_heading_text):
     browser.get(url_for('data_registry', _external=True))
