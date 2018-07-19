@@ -64,16 +64,23 @@ def get_check_cross_symbol(boolean_data):
     return ''
 
 
+def get_file_type(file_type):
+    if file_type not in ['csv', 'json', 'xlsx']:
+        return 'file'
+    return file_type
+
+
 def get_grant_data(data):
     # TODO TEST
     data_aggregates = data.get('datagetter_aggregates')
     data_metadata = data.get('datagetter_metadata')
 
     return {
-        'url': data['distribution'][0]['downloadURL'],
-        'name': data['distribution'][0]['title'],
-        'file_type': data_metadata['file_type'],
-        'num_funders': data_aggregates.get('distinct_funding_org_identifier_count') if data_aggregates else '',
+        'file': {
+            'url': data['distribution'][0]['downloadURL'],
+            'type': get_file_type(data_metadata['file_type']),
+            'available': data_metadata.get('downloads')
+        },
         'num_recipients': format_value(data_aggregates.get('distinct_recipient_org_identifier_count')) if data_aggregates else '',
         'num_awards': format_value(data_aggregates.get('count')) if data_aggregates else '',
         'total_amount_awarded': get_total_amount_awarded(data_aggregates.get('currencies') if data_aggregates else None),
@@ -82,7 +89,6 @@ def get_grant_data(data):
         'issued_date': data.get('issued'),
         'modified_date': data.get('modified').split('T')[0],
         'valid': get_check_cross_symbol(data_metadata.get('valid')),
-        'available': get_check_cross_symbol(data_metadata.get('downloads')),
         'acceptable_license': get_check_cross_symbol(data_metadata.get('acceptable_license'))
     }
 

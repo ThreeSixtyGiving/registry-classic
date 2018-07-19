@@ -34,12 +34,10 @@
     <tr>
       <th scope="col">Organisation</th>
       <th scope="col">Licence</th>
-      <th scope="col">File name</th>
-      <th scope="col">File type</th>
+      <th scope="col">File</th>
       <th scope="col">First published</th>
       <th scope="col">Last modified</th>
       <th scope="col">Valid?</th>
-      <th scope="col">Downloads?</th>
       <th scope="col">Reuse?</th>
       <th scope="col">First grant</th>
       <th scope="col">Latest grant</th>
@@ -65,12 +63,16 @@
             <a href="{{ org_data['license']['url'] }}">{{ org_data['license']['name'] }}</a>
           </td>
           {% if org_data['grant'] %}
-            <td><a href="{{ org_data['grant'][0]['url'] }}">{{ org_data['grant'][0]['name'] }}</a></td>
-            <td>{{ org_data['grant'][0]['file_type'] }}</td>
+            <td>
+              {% if org_data['grant'][0]['file']['available'] %}
+                <a href="{{ org_data['grant'][0]['file']['url'] }}">
+                  <img src="../images/files/{{ org_data['grant'][0]['file']['type'] }}.png" width="80" height="80">
+                </a>
+              {% endif %}
+            </td>
             <td>{{ org_data['grant'][0]['issued_date'] }}</td>
             <td>{{ org_data['grant'][0]['modified_date'] }}</td>
             <td>{{ org_data['grant'][0]['valid'] | safe }}</td>
-            <td>{{ org_data['grant'][0]['available'] | safe }}</td>
             <td>{{ org_data['grant'][0]['acceptable_license'] | safe }}</td>
             <td>{{ org_data['grant'][0]['first_date'] }}</td>
             <td>{{ org_data['grant'][0]['last_date'] }}</td>
@@ -86,12 +88,16 @@
         {% if org_data['grant'] | length > 1%}
           {% for grant in org_data['grant'][1:] %}
             <tr>
-              <td scope="row"><a href="{{ grant['url'] }}">{{ grant['name'] }}</a></td>
-              <td scope="row">{{ grant['file_type'] }}</td>
+              <td>
+                {% if org_data['grant'][0]['file']['available'] %}
+                  <a href="{{ grant['file']['url'] }}">
+                    <img src="../images/files/{{ grant['file']['type'] }}.png" width="80" height="80">
+                  </a>
+                {% endif %}
+              </td>
               <td scope="row">{{ grant['issued_date'] }}</td>
               <td scope="row">{{ grant['modified_date'] }}</td>
               <td scope="row">{{ grant['valid'] | safe }}</td>
-              <td scope="row">{{ grant['available'] | safe }}</td>
               <td scope="row">{{ grant['acceptable_license'] | safe }}</td>
               <td scope="row">{{ grant['first_date'] }}</td>
               <td scope="row">{{ grant['last_date'] }}</td>
