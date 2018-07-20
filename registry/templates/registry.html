@@ -34,8 +34,7 @@
     <tr>
       <th scope="col">Organisation</th>
       <th scope="col">File</th>
-      <th scope="col">First published</th>
-      <th scope="col">Last modified</th>
+      <th scope="col">Published</th>
       <th scope="col">Valid?</th>
       <th scope="col">First grant</th>
       <th scope="col">Latest grant</th>
@@ -67,7 +66,6 @@
               {% endif %}
             </td>
             <td style="white-space:nowrap;">{{ org_data['grant'][0]['issued_date'] }}</td>
-            <td style="white-space:nowrap;">{{ org_data['grant'][0]['modified_date'] }}</td>
             <td>{{ org_data['grant'][0]['valid'] | safe }}</td>
             <td style="white-space:nowrap;">{{ org_data['grant'][0]['first_date'] }}</td>
             <td style="white-space:nowrap;">{{ org_data['grant'][0]['last_date'] }}</td>
@@ -92,7 +90,6 @@
                 {% endif %}
               </td>
               <td scope="row" style="white-space:nowrap;">{{ grant['issued_date'] }}</td>
-              <td scope="row" style="white-space:nowrap;">{{ grant['modified_date'] }}</td>
               <td scope="row">{{ grant['valid'] | safe }}</td>
               <td scope="row" style="white-space:nowrap;">{{ grant['first_date'] }}</td>
               <td scope="row" style="white-space:nowrap;">{{ grant['last_date'] }}</td>
