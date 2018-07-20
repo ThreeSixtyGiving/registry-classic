@@ -1,5 +1,5 @@
-from registry.views import get_data_by_prefix
-from tests.samples.registry_raw_data import RAW_DATA
+# from registry.views import get_data_by_prefix
+# from tests.samples.registry_raw_data import RAW_DATA
 
 
 # def test_data_correct_format():
