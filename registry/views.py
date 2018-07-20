@@ -16,20 +16,6 @@ app = Flask(
 sentry = Sentry(app)
 
 
-def get_prefix_data(data):
-    return {
-        'publisher': {
-            'name': data['publisher']['name'],
-            'logo': data['publisher']['logo']
-        },
-        'license': {
-            'url': data['license'],
-            'name': data['license_name']
-        },
-        'grant': []
-    }
-
-
 def get_currency_symbol(currency, data):
     if not data['currency_symbol']:
         return currency
@@ -70,6 +56,41 @@ def get_file_type(file_type):
     return file_type
 
 
+def get_licence(data, acceptable_license):
+    if not acceptable_license:
+        return '&#x2715;'
+
+    licence_name = data['license_name']
+    image_name = False
+    if 'Creative Commons' in licence_name:
+        if 'Share-Alike ' in licence_name:
+            image_name = 'cc_by_sa'
+        else:
+            image_name = 'cc_by'
+    elif 'CCO' in licence_name:
+        image_name = 'cc_pd'
+    elif 'Open Government Licence' in licence_name:
+        image_name = 'ogl'
+    elif 'Open Data Commons' in licence_name:
+        image_name = 'pddl'
+
+    if image_name:
+        return "<a href=\"{}\"><img src=\"../images/licences/{}.png\" width='80' height='31'></a>".format(
+            data['license'], image_name
+        )
+    return licence_name
+
+
+def get_prefix_data(data):
+    return {
+        'publisher': {
+            'name': data['publisher']['name'],
+            'logo': data['publisher']['logo']
+        },
+        'grant': []
+    }
+
+
 def get_grant_data(data):
     # TODO TEST
     data_aggregates = data.get('datagetter_aggregates')
@@ -81,6 +102,7 @@ def get_grant_data(data):
             'type': get_file_type(data_metadata['file_type']),
             'available': data_metadata.get('downloads')
         },
+        'licence': get_licence(data, data_metadata.get('acceptable_license')),
         'num_recipients': format_value(data_aggregates.get('distinct_recipient_org_identifier_count')) if data_aggregates else '',
         'num_awards': format_value(data_aggregates.get('count')) if data_aggregates else '',
         'total_amount_awarded': get_total_amount_awarded(data_aggregates.get('currencies') if data_aggregates else None),
@@ -89,7 +111,6 @@ def get_grant_data(data):
         'issued_date': data.get('issued'),
         'modified_date': data.get('modified').split('T')[0],
         'valid': get_check_cross_symbol(data_metadata.get('valid')),
-        'acceptable_license': get_check_cross_symbol(data_metadata.get('acceptable_license'))
     }
 
 

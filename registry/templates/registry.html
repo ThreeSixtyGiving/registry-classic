@@ -33,17 +33,16 @@
   <thead>
     <tr>
       <th scope="col">Organisation</th>
-      <th scope="col">Licence</th>
       <th scope="col">File</th>
       <th scope="col">First published</th>
       <th scope="col">Last modified</th>
       <th scope="col">Valid?</th>
-      <th scope="col">Reuse?</th>
       <th scope="col">First grant</th>
       <th scope="col">Latest grant</th>
       <th scope="col">Grants</th>
       <th scope="col">Recipients</th>
       <th scope="col">Total value</th>
+      <th scope="col">Licence</th>
     </tr>
   </thead>
 
@@ -59,9 +58,6 @@
             </div>
             <div>{{ org_data['publisher']['name'] }}</div>
           </td>
-          <td scope="rowgroup" rowspan="{{ org_data['grant'] | length }}">
-            <a href="{{ org_data['license']['url'] }}">{{ org_data['license']['name'] }}</a>
-          </td>
           {% if org_data['grant'] %}
             <td>
               {% if org_data['grant'][0]['file']['available'] %}
@@ -73,7 +69,6 @@
             <td>{{ org_data['grant'][0]['issued_date'] }}</td>
             <td>{{ org_data['grant'][0]['modified_date'] }}</td>
             <td>{{ org_data['grant'][0]['valid'] | safe }}</td>
-            <td>{{ org_data['grant'][0]['acceptable_license'] | safe }}</td>
             <td>{{ org_data['grant'][0]['first_date'] }}</td>
             <td>{{ org_data['grant'][0]['last_date'] }}</td>
             <td>{{ org_data['grant'][0]['num_awards'] }}</td>
@@ -83,6 +78,7 @@
                 <div>{{ amount | safe }}</div>
               {% endfor %}
             </td>
+            <td>{{ org_data['grant'][0]['licence'] | safe }}</td>
           {% endif %}
         </tr>
         {% if org_data['grant'] | length > 1%}
@@ -98,7 +94,6 @@
               <td scope="row">{{ grant['issued_date'] }}</td>
               <td scope="row">{{ grant['modified_date'] }}</td>
               <td scope="row">{{ grant['valid'] | safe }}</td>
-              <td scope="row">{{ grant['acceptable_license'] | safe }}</td>
               <td scope="row">{{ grant['first_date'] }}</td>
               <td scope="row">{{ grant['last_date'] }}</td>
               <td scope="row">{{ grant['num_awards'] }}</td>
@@ -108,6 +103,7 @@
                   <div>{{ amount | safe }}</div>
                 {% endfor %}
               </td>
+              <td scope="row">{{ grant['licence'] | safe }}</td>
             </tr>
           {% endfor %}
         {% endif %}
