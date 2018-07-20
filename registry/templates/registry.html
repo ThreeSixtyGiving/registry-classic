@@ -66,11 +66,11 @@
                 </a>
               {% endif %}
             </td>
-            <td>{{ org_data['grant'][0]['issued_date'] }}</td>
-            <td>{{ org_data['grant'][0]['modified_date'] }}</td>
+            <td style="white-space:nowrap;">{{ org_data['grant'][0]['issued_date'] }}</td>
+            <td style="white-space:nowrap;">{{ org_data['grant'][0]['modified_date'] }}</td>
             <td>{{ org_data['grant'][0]['valid'] | safe }}</td>
-            <td>{{ org_data['grant'][0]['first_date'] }}</td>
-            <td>{{ org_data['grant'][0]['last_date'] }}</td>
+            <td style="white-space:nowrap;">{{ org_data['grant'][0]['first_date'] }}</td>
+            <td style="white-space:nowrap;">{{ org_data['grant'][0]['last_date'] }}</td>
             <td>{{ org_data['grant'][0]['num_awards'] }}</td>
             <td>{{ org_data['grant'][0]['num_recipients'] }}</td>
             <td>
@@ -91,11 +91,11 @@
                   </a>
                 {% endif %}
               </td>
-              <td scope="row">{{ grant['issued_date'] }}</td>
-              <td scope="row">{{ grant['modified_date'] }}</td>
+              <td scope="row" style="white-space:nowrap;">{{ grant['issued_date'] }}</td>
+              <td scope="row" style="white-space:nowrap;">{{ grant['modified_date'] }}</td>
               <td scope="row">{{ grant['valid'] | safe }}</td>
-              <td scope="row">{{ grant['first_date'] }}</td>
-              <td scope="row">{{ grant['last_date'] }}</td>
+              <td scope="row" style="white-space:nowrap;">{{ grant['first_date'] }}</td>
+              <td scope="row" style="white-space:nowrap;">{{ grant['last_date'] }}</td>
               <td scope="row">{{ grant['num_awards'] }}</td>
               <td scope="row">{{ grant['num_recipients'] }}</td>
               <td scope="row">
