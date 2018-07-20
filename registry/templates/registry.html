@@ -50,12 +50,12 @@
       {% for org_prefix, org_data in data.items() %}
         <tr>
           <td scope="rowgroup" rowspan="{{ org_data['grant'] | length }}">
-            <div>
+            <div>{{ org_data['publisher']['name'] }}</div>
+            <div class="mt-4">
               {% if org_data['publisher']['logo'] %}
                 <img class="tlogo" src="{{ org_data['publisher']['logo'] }}" width="100">
               {% endif %}
             </div>
-            <div>{{ org_data['publisher']['name'] }}</div>
           </td>
           {% if org_data['grant'] %}
             <td style="white-space:nowrap;">{{ org_data['grant'][0]['issued_date'] }}</td>
