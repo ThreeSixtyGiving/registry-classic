@@ -22,17 +22,17 @@ from tests.samples.registry_raw_data import RAW_DATA
 #     }]
 
 
-def test_data_is_sorted_alphabetically_by_org_name():
-    keys = list(get_data_by_prefix(RAW_DATA).keys())
-
-    assert keys[0] == '360g-cin'
-    assert keys[1] == '360G-blf'
-    assert keys[2] == '360G-CorraFoundation'
-
-
-def test_publisher_with_multiple_entries_is_consolidated_in_a_single_entry():
-    big_lottery_grant = get_data_by_prefix(RAW_DATA)['360G-blf']['grant']
-
-    assert len(big_lottery_grant) is 2
-    assert big_lottery_grant[0]['name'] == 'Big Lottery Fund - grants data 2015 to 2017'
-    assert big_lottery_grant[1]['name'] == 'Big Lottery Fund - grants data 2017-18 year-to-date'
+# def test_data_is_sorted_alphabetically_by_org_name():
+#     keys = list(get_data_by_prefix(RAW_DATA).keys())
+#
+#     assert keys[0] == '360g-cin'
+#     assert keys[1] == '360G-blf'
+#     assert keys[2] == '360G-CorraFoundation'
+#
+#
+# def test_publisher_with_multiple_entries_is_consolidated_in_a_single_entry():
+#     big_lottery_grant = get_data_by_prefix(RAW_DATA)['360G-blf']['grant']
+#
+#     assert len(big_lottery_grant) is 2
+#     assert big_lottery_grant[0]['name'] == 'Big Lottery Fund - grants data 2015 to 2017'
+#     assert big_lottery_grant[1]['name'] == 'Big Lottery Fund - grants data 2017-18 year-to-date'
