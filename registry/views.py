@@ -17,12 +17,26 @@ sentry = Sentry(app)
 
 
 def get_currency_symbol(currency, data):
+    """
+    :param currency: currency code (eg. GBP).
+    :param data:
+    {
+        "count": 6263,
+        "currency_symbol": "&pound;",
+        "max_amount": 3466000,
+        "min_amount": 271,
+        "total_amount": 257947904
+    }
+    """
     if not data['currency_symbol']:
         return currency
     return data['currency_symbol']
 
 
 def format_value(value):
+    """
+    Format value from 492793844.650000003 to 492,793,844.65
+    """
     if type(value) == float:
         value = float(format(value, '.2f'))
 
@@ -30,6 +44,18 @@ def format_value(value):
 
 
 def get_total_amount_awarded(data_by_currency):
+    """
+    :param data_by_currency:
+    {
+        "count": 6263,
+        "currency_symbol": "&pound;",
+        "max_amount": 3466000,
+        "min_amount": 271,
+        "total_amount": 257947904
+    }
+
+    :return: currency + total value (eg. '&pound; 257,947,904').
+    """
     # TODO TEST
     total_amount = []
 
@@ -43,6 +69,10 @@ def get_total_amount_awarded(data_by_currency):
 
 
 def get_check_cross_symbol(boolean_data):
+    """
+    :param boolean_data: Boolean.
+    :return: 'tick' if true, 'cross' if False else ''.
+    """
     if boolean_data is True:
         return '&#x2713;'
     if boolean_data is False:
