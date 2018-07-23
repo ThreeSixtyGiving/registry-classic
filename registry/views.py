@@ -38,10 +38,11 @@ def format_value(value):
     """
     Format value from 492793844.650000003 to 492,793,844.65
     """
-    if type(value) == float:
-        value = float(format(value, '.2f'))
-
-    return "{:,}".format(value)
+    if value and type(value) == float or type(value) == int:
+        if type(value) == float:
+            value = float(format(value, '.2f'))
+        return "{:,}".format(value)
+    return value
 
 
 def format_date(date):

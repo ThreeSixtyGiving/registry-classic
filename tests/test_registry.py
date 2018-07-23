@@ -1,4 +1,4 @@
-from registry.views import get_currency_symbol
+from registry.views import get_currency_symbol, format_value
 # from registry.views import get_data_by_prefix
 # from tests.samples.registry_raw_data import RAW_DATA
 
@@ -25,6 +25,30 @@ def test_get_currency_symbol_without_symbol_without_currency():
     response = get_currency_symbol('', {'currency_symbol': ''})
 
     assert response == ''
+
+
+def test_format_value_integer():
+    response = format_value(492793844)
+
+    assert response == '492,793,844'
+
+
+def test_format_value_float():
+    response = format_value(492793844.630005)
+
+    assert response == '492,793,844.63'
+
+
+def test_format_value_string():
+    response = format_value('492793844')
+
+    assert response == '492793844'
+
+
+def test_format_value_none():
+    response = format_value(None)
+
+    assert response is None
 
 # def test_data_correct_format():
 #     data = get_data_by_prefix(RAW_DATA)
