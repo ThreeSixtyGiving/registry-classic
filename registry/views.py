@@ -29,7 +29,7 @@ def get_currency_symbol(currency, data):
         "total_amount": 257947904
     }
     """
-    if not data['currency_symbol']:
+    if not data.get('currency_symbol'):
         return currency
     return data['currency_symbol']
 

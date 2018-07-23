@@ -1,6 +1,30 @@
+from registry.views import get_currency_symbol
 # from registry.views import get_data_by_prefix
 # from tests.samples.registry_raw_data import RAW_DATA
 
+
+def test_get_currency_symbol_with_symbol():
+    response = get_currency_symbol('GBP', {'currency_symbol': '&pound;'})
+
+    assert response == '&pound;'
+
+
+def test_get_currency_symbol_without_key():
+    response = get_currency_symbol('GBP', {})
+
+    assert response == 'GBP'
+
+
+def test_get_currency_symbol_without_symbol_with_currency():
+    response = get_currency_symbol('GBP', {'currency_symbol': ''})
+
+    assert response == 'GBP'
+
+
+def test_get_currency_symbol_without_symbol_without_currency():
+    response = get_currency_symbol('', {'currency_symbol': ''})
+
+    assert response == ''
 
 # def test_data_correct_format():
 #     data = get_data_by_prefix(RAW_DATA)
