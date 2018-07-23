@@ -1,5 +1,6 @@
 import os
 from collections import OrderedDict
+from datetime import datetime
 
 import requests
 from flask import Flask, render_template
@@ -41,6 +42,14 @@ def format_value(value):
         value = float(format(value, '.2f'))
 
     return "{:,}".format(value)
+
+
+def format_date(date):
+    """
+    :param date: string (yyyy-mm-dd)
+    :return: string (eg. Jun18)
+    """
+    return datetime.strptime(date, '%Y-%m-%d').strftime('%b%y')
 
 
 def get_total_amount_awarded(data_by_currency):
@@ -105,7 +114,7 @@ def get_licence(data, acceptable_license):
         image_name = 'pddl'
 
     if image_name:
-        return "<a href=\"{}\"><img src=\"../images/licences/{}.png\" width='80' height='31'></a>".format(
+        return "<a href=\"{}\"><img src=\"../images/licences/{}.png\" width='70' height='27'></a>".format(
             data['license'], image_name
         )
     return licence_name
@@ -128,18 +137,18 @@ def get_grant_data(data):
 
     return {
         'file': {
+            'title': data['distribution'][0]['title'],
             'url': data['distribution'][0]['downloadURL'],
             'type': get_file_type(data_metadata['file_type']),
             'available': data_metadata.get('downloads')
         },
         'licence': get_licence(data, data_metadata.get('acceptable_license')),
-        'num_recipients': format_value(data_aggregates.get('distinct_recipient_org_identifier_count')) if data_aggregates else '',
-        'num_awards': format_value(data_aggregates.get('count')) if data_aggregates else '',
-        'total_amount_awarded': get_total_amount_awarded(data_aggregates.get('currencies') if data_aggregates else None),
-        'first_date': data_aggregates.get('min_award_date') if data_aggregates else '',
-        'last_date': data_aggregates.get('max_award_date') if data_aggregates else '',
-        'issued_date': data.get('issued'),
-        'modified_date': data.get('modified').split('T')[0],
+        'total_value': get_total_amount_awarded(data_aggregates.get('currencies') if data_aggregates else None),
+        'period': {
+            'first_date': format_date(data_aggregates.get('min_award_date')) if data_aggregates else '',
+            'latest_date': format_date(data_aggregates.get('max_award_date')) if data_aggregates else ''
+        },
+        'issued_date': format_date(data.get('issued')),
         'valid': get_check_cross_symbol(data_metadata.get('valid')),
     }
 
