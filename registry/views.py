@@ -48,9 +48,9 @@ def format_value(value):
 def format_date(date):
     """
     :param date: string (yyyy-mm-dd)
-    :return: string (eg. Jun18)
+    :return: string (eg. Jun 18)
     """
-    return datetime.strptime(date, '%Y-%m-%d').strftime('%b%y')
+    return datetime.strptime(date, '%Y-%m-%d').strftime('%b %y')
 
 
 def get_total_amount_awarded(data_by_currency):
