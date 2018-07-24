@@ -1,4 +1,5 @@
-from registry.views import get_currency_symbol, format_value, format_date, get_total_value
+from registry.views import get_currency_symbol, format_value, format_date, get_total_value,\
+    get_check_cross_symbol
 # from registry.views import get_data_by_prefix
 # from tests.samples.registry_raw_data import RAW_DATA
 
@@ -115,6 +116,24 @@ def test_get_total_value_total_amount_empty_string():
     response = get_total_value(data_by_currency)
 
     assert response == ['&pound; 257,947']
+
+
+def test_get_check_symbol():
+    response = get_check_cross_symbol(True)
+
+    assert response == '&#x2713;'
+
+
+def test_get_cross_symbol():
+    response = get_check_cross_symbol(False)
+
+    assert response == '&#x2715;'
+
+
+def test_get_check_cross_symbol_return_string():
+    response = get_check_cross_symbol('true')
+
+    assert response == ''
 
 # def test_data_correct_format():
 #     data = get_data_by_prefix(RAW_DATA)
