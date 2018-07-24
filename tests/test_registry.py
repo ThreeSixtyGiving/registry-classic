@@ -1,4 +1,4 @@
-from registry.views import get_currency_symbol, format_value, format_date
+from registry.views import get_currency_symbol, format_value, format_date, get_total_value
 # from registry.views import get_data_by_prefix
 # from tests.samples.registry_raw_data import RAW_DATA
 
@@ -67,6 +67,54 @@ def test_format_date_wrong_date_param():
     response = format_date('23-07-2018')
 
     assert response == '23-07-2018'
+
+
+def test_get_total_value_one_currency():
+    response = get_total_value({'GBP': {'currency_symbol': '&pound;', 'total_amount': 257947}})
+
+    assert response == ['&pound; 257,947']
+
+
+def test_get_total_value_multiple_currencies():
+    data_by_currency = {
+        'GBP': {'currency_symbol': '&pound;', 'total_amount': 257947},
+        'CHP': {'currency_symbol': '', 'total_amount': 234.898000}
+    }
+    response = get_total_value(data_by_currency)
+
+    assert response == ['&pound; 257,947', 'CHP 234.9']
+
+
+def test_get_total_value_empty_dict():
+    response = get_total_value({})
+
+    assert response == []
+
+
+def test_get_total_value_currency_symbol_key_missing():
+    response = get_total_value({'GBP': {'total_amount': 257947}})
+
+    assert response == ['GBP 257,947']
+
+
+def test_get_total_value_total_amount_key_missing():
+    data_by_currency = {
+        'GBP': {'currency_symbol': '&pound;'},
+        'CHP': {'currency_symbol': '', 'total_amount': 234.898000}
+    }
+    response = get_total_value(data_by_currency)
+
+    assert response == ['CHP 234.9']
+
+
+def test_get_total_value_total_amount_empty_string():
+    data_by_currency = {
+        'GBP': {'currency_symbol': '&pound;', 'total_amount': 257947},
+        'CHP': {'currency_symbol': '', 'total_amount': ''}
+    }
+    response = get_total_value(data_by_currency)
+
+    assert response == ['&pound; 257,947']
 
 # def test_data_correct_format():
 #     data = get_data_by_prefix(RAW_DATA)

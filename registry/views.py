@@ -56,29 +56,36 @@ def format_date(date):
         return date
 
 
-def get_total_amount_awarded(data_by_currency):
+def get_total_value(data_by_currency):
     """
     :param data_by_currency:
     {
-        "count": 6263,
-        "currency_symbol": "&pound;",
-        "max_amount": 3466000,
-        "min_amount": 271,
-        "total_amount": 257947904
+        "GBP":
+            {
+                "count": 6263,
+                "currency_symbol": "&pound;",
+                "max_amount": 3466000,
+                "min_amount": 271,
+                "total_amount": 257947904
+            },
+        "CHF":
+            {...}
     }
 
     :return: currency + total value (eg. '&pound; 257,947,904').
     """
-    # TODO TEST
-    total_amount = []
+    total_value = []
 
     if data_by_currency:
         for currency, data in data_by_currency.items():
-            total_amount.append('{} {}'.format(
-                get_currency_symbol(currency, data),
-                format_value(data['total_amount'])
-            ))
-    return total_amount
+            total_amount = data.get('total_amount')
+
+            if total_amount and total_amount is not None:
+                total_value.append('{} {}'.format(
+                    get_currency_symbol(currency, data),
+                    format_value(total_amount)
+                ))
+    return total_value
 
 
 def get_check_cross_symbol(boolean_data):
@@ -147,7 +154,7 @@ def get_grant_data(data):
             'available': data_metadata.get('downloads')
         },
         'licence': get_licence(data, data_metadata.get('acceptable_license')),
-        'total_value': get_total_amount_awarded(data_aggregates.get('currencies') if data_aggregates else None),
+        'total_value': get_total_value(data_aggregates.get('currencies') if data_aggregates else None),
         'period': {
             'first_date': format_date(data_aggregates.get('min_award_date')) if data_aggregates else '',
             'latest_date': format_date(data_aggregates.get('max_award_date')) if data_aggregates else ''
