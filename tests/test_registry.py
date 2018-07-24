@@ -1,5 +1,5 @@
 from registry.views import get_currency_symbol, format_value, format_date, get_total_value,\
-    get_check_cross_symbol
+    get_check_cross_symbol, get_file_type
 # from registry.views import get_data_by_prefix
 # from tests.samples.registry_raw_data import RAW_DATA
 
@@ -134,6 +134,42 @@ def test_get_check_cross_symbol_return_string():
     response = get_check_cross_symbol('true')
 
     assert response == ''
+
+
+def test_get_file_type_csv():
+    response = get_file_type('csv')
+
+    assert response == 'csv'
+
+
+def test_get_file_type_json():
+    response = get_file_type('json')
+
+    assert response == 'json'
+
+
+def test_get_file_type_xlsx():
+    response = get_file_type('xlsx')
+
+    assert response == 'xlsx'
+
+
+def test_get_file_type_file():
+    response = get_file_type('Json')
+
+    assert response == 'file'
+
+
+def test_get_file_type_empty_strings():
+    response = get_file_type('')
+
+    assert response == 'file'
+
+
+def test_get_file_type_none():
+    response = get_file_type(None)
+
+    assert response == 'file'
 
 # def test_data_correct_format():
 #     data = get_data_by_prefix(RAW_DATA)
