@@ -106,29 +106,24 @@ def get_file_type(file_type):
     return file_type
 
 
-def get_licence(data, acceptable_license):
-    if not acceptable_license:
+def get_licence(name, url, acceptable):
+    if not acceptable:
         return '&#x2715;'
 
-    licence_name = data['license_name']
-    image_name = False
-    if 'Creative Commons' in licence_name:
-        if 'Share-Alike ' in licence_name:
-            image_name = 'cc_by_sa'
-        else:
-            image_name = 'cc_by'
-    elif 'CCO' in licence_name:
-        image_name = 'cc_pd'
-    elif 'Open Government Licence' in licence_name:
-        image_name = 'ogl'
-    elif 'Open Data Commons' in licence_name:
-        image_name = 'pddl'
+    licences = {
+        'CCO': 'cc_pd',
+        'Creative Commons Attribution 4.0': 'cc_by',
+        'Creative Commons Attribution 4.0 International (CC BY 4.0)': 'cc_by',
+        'Creative Commons Attribution Share-Alike 4.0': 'cc_by_sa',
+        'Open Data Commons Public Domain Dedication and Licence 1.0': 'pddl',
+        'Open Government Licence 3.0 (United Kingdom)': 'ogl'
+    }
 
-    if image_name:
+    if licences.get(name):
         return "<a href=\"{}\"><img src=\"../images/licences/{}.png\" width='70' height='27'></a>".format(
-            data['license'], image_name
+            url, licences.get(name)
         )
-    return licence_name
+    return name
 
 
 def get_prefix_data(data):
@@ -153,7 +148,8 @@ def get_grant_data(data):
             'type': get_file_type(data_metadata['file_type']),
             'available': data_metadata.get('downloads')
         },
-        'licence': get_licence(data, data_metadata.get('acceptable_license')),
+        'licence': get_licence(
+            data['license_name'], data['license'], data_metadata.get('acceptable_license')),
         'total_value': get_total_value(data_aggregates.get('currencies') if data_aggregates else None),
         'period': {
             'first_date': format_date(data_aggregates.get('min_award_date')) if data_aggregates else '',
