@@ -1,4 +1,4 @@
-from registry.views import get_currency_symbol, format_value
+from registry.views import get_currency_symbol, format_value, format_date
 # from registry.views import get_data_by_prefix
 # from tests.samples.registry_raw_data import RAW_DATA
 
@@ -49,6 +49,24 @@ def test_format_value_none():
     response = format_value(None)
 
     assert response is None
+
+
+def test_format_date_correct_date_param():
+    response = format_date('2018-07-23')
+
+    assert response == 'Jul 18'
+
+
+def test_format_date_empty_string():
+    response = format_date('')
+
+    assert response == ''
+
+
+def test_format_date_wrong_date_param():
+    response = format_date('23-07-2018')
+
+    assert response == '23-07-2018'
 
 # def test_data_correct_format():
 #     data = get_data_by_prefix(RAW_DATA)
