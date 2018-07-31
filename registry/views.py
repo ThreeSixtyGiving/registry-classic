@@ -123,6 +123,8 @@ def get_licence(name, url, acceptable):
         return "<a href=\"{}\"><img src=\"../images/licences/{}.png\" width='70' height='27'></a>".format(
             url, licences.get(name)
         )
+    if name and url:
+        return "<a href=\"{}\">{}</a>".format(url, name)
     return name
 
 

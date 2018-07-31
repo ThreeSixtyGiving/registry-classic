@@ -1,5 +1,5 @@
 from registry.views import get_currency_symbol, format_value, format_date, get_total_value,\
-    get_check_cross_symbol, get_file_type
+    get_check_cross_symbol, get_file_type, get_licence
 # from registry.views import get_data_by_prefix
 # from tests.samples.registry_raw_data import RAW_DATA
 
@@ -170,6 +170,37 @@ def test_get_file_type_none():
     response = get_file_type(None)
 
     assert response == 'file'
+
+
+def test_get_license_not_acceptable():
+    response = get_licence('CCO', 'url', False)
+
+    assert response == '&#x2715;'
+
+
+def test_get_license_acceptable():
+    response = get_licence('CCO', 'url', True)
+
+    assert response == "<a href=\"url\"><img src=\"../images/licences/cc_pd.png\" width='70' height='27'></a>"
+
+
+def test_get_license_with_name_not_in_dict_and_url():
+    response = get_licence('CC', 'url', True)
+
+    assert response == "<a href=\"url\">CC</a>"
+
+
+def test_get_license_name_not_in_dict_and_without_url():
+    response = get_licence('CC', None, True)
+
+    assert response == 'CC'
+
+
+def test_get_license_without_name_and_without_url():
+    response = get_licence(None, None, True)
+
+    assert response is None
+
 
 # def test_data_correct_format():
 #     data = get_data_by_prefix(RAW_DATA)
