@@ -55,7 +55,7 @@ def test_format_value_none():
 def test_format_date_correct_date_param():
     response = format_date('2018-07-23')
 
-    assert response == 'Jul 18'
+    assert response == 'Jul \'18'
 
 
 def test_format_date_empty_string():

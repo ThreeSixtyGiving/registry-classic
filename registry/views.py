@@ -48,10 +48,10 @@ def format_value(value):
 def format_date(date):
     """
     :param date: string (yyyy-mm-dd)
-    :return: string (eg. Jun 18)
+    :return: string (eg. Jun '18)
     """
     try:
-        return datetime.strptime(date, '%Y-%m-%d').strftime('%b %y')
+        return datetime.strptime(date, '%Y-%m-%d').strftime('%b \'%y')
     except ValueError:
         return date
 
