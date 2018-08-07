@@ -68,6 +68,30 @@ body .devs-info{
   font-family: Courier;
 }
 
+tbody {
+  display: block;
+  height: 500px;
+  overflow: auto;
+}
+
+thead {
+  display: table;
+  table-layout: fixed;
+  width: calc( 100% - 1em )
+}
+
+tbody tr td{
+  width: 12.5%;
+}
+
+thead tr th{
+  width: 12.5%;
+}
+
+.table tbody td, .table thead th {
+  padding: 0.75rem 0 0.75rem 0;
+}
+
 .footer {
   background-color: #3b3b3c;;
   color: #FFFFFF;
