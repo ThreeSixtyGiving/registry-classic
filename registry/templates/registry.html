@@ -37,6 +37,7 @@
       <th scope="col">Published</th>
       <th scope="col">Valid?</th>
       <th scope="col">Period</th>
+      <th scope="col">Records</th>
       <th scope="col">Total value</th>
       <th scope="col">File</th>
       <th scope="col">Licence</th>
@@ -64,6 +65,7 @@
               <div>to</div>
               <div style="white-space:nowrap;">{{ org_data['grant'][0]['period']['latest_date'] }}</div>
             </td>
+            <td>{{ org_data['grant'][0]['records'] }}</td>
             <td>
               {% for value in org_data['grant'][0]['total_value'] %}
                 <div>{{ value | safe }}</div>
@@ -90,6 +92,7 @@
                 <div>to</div>
                 <div style="white-space:nowrap;">{{ grant['period']['latest_date'] }}</div>
               </td>
+              <td scope="row">{{ grant['records'] }}</td>
               <td scope="row">
                 {% for value in grant['total_value']%}
                   <div>{{ value | safe }}</div>
