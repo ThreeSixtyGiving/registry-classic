@@ -164,7 +164,6 @@ def get_grant_data(data):
 
 
 def get_data_by_prefix(raw_data):
-    # TODO update docstring.
     """
     Given a json value where publishers can have more than one entry,
     this function creates a new dictionary keyed by publisher prefix.
@@ -175,13 +174,22 @@ def get_data_by_prefix(raw_data):
                 'name': string,
                 'logo': url of the logo,
             },
-            'license': {
-                'url': url of the license,
-                'name': string,
-            },
             'grant': [{
-                'url': url of the grant,
-                'name': string,
+                'file': {
+                    'title': string,
+                    'url': string,
+                    'type': string (eg. 'csv'),
+                    'available': boolean,
+                },
+                'licence': html code string with licence information,
+                'total_value': string with a float or integer,
+                'records': string with an integer,
+                'period': {
+                    'first_date': string with a date,
+                    'latest_date': string with a date
+                },
+                'issued_date': string with a date,
+                'valid': tick or cross html symbols,
             }]
         }
     }
