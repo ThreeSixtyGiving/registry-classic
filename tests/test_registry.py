@@ -172,31 +172,31 @@ def test_get_file_type_none():
     assert response == 'file'
 
 
-def test_get_license_not_acceptable():
+def test_get_licence_not_acceptable():
     response = get_licence('CCO', 'url', False)
 
     assert response == '&#x2715;'
 
 
-def test_get_license_acceptable():
+def test_get_licence_acceptable():
     response = get_licence('CCO', 'url', True)
 
     assert response == "<a href=\"url\"><img src=\"../images/licences/cc_pd.png\" width='70' height='27'></a>"
 
 
-def test_get_license_with_name_not_in_dict_and_url():
+def test_get_licence_with_name_not_in_dict_and_url():
     response = get_licence('CC', 'url', True)
 
     assert response == "<a href=\"url\">CC</a>"
 
 
-def test_get_license_name_not_in_dict_and_without_url():
+def test_get_licence_name_not_in_dict_and_without_url():
     response = get_licence('CC', None, True)
 
     assert response == 'CC'
 
 
-def test_get_license_without_name_and_without_url():
+def test_get_licence_without_name_and_without_url():
     response = get_licence(None, None, True)
 
     assert response is None
@@ -212,8 +212,8 @@ def test_get_license_without_name_and_without_url():
 #         'name': 'BBC Children in Need',
 #         'logo': 'http://www.threesixtygiving.org/wp-content/uploads/BBCCiN_CoreLogo.png'
 #     }
-#     assert bbc_data['license'] == {
-#         'url': 'https://creativecommons.org/licenses/by/4.0/',
+#     assert bbc_data['licence'] == {
+#         'url': 'https://creativecommons.org/licences/by/4.0/',
 #         'name': 'Creative Commons Attribution 4.0'
 #     }
 #     assert bbc_data['grant'] == [{
