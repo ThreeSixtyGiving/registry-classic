@@ -1,10 +1,10 @@
 import os
 from collections import OrderedDict
 from datetime import datetime
-import humanize
 
+import humanize
 import requests
-from flask import Flask, render_template
+from flask import Flask, render_template, Markup
 from raven.contrib.flask import Sentry
 
 from tests.samples.registry_raw_data import RAW_DATA
@@ -121,11 +121,11 @@ def get_licence(name, url, acceptable):
     }
 
     if licences.get(name):
-        return "<a href=\"{}\"><img src=\"../images/licences/{}.png\" width='70' height='27'></a>".format(
+        return Markup("<a href=\"{}\"><img src=\"../images/licences/{}.png\" width='70' height='27'></a>".format(
             url, licences.get(name)
-        )
+        ))
     if name and url:
-        return "<a href=\"{}\">{}</a>".format(url, name)
+        return Markup("<a href=\"{}\">{}</a>".format(url, name))
     return name
 
 
