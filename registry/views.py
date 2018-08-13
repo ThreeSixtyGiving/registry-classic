@@ -148,6 +148,7 @@ def get_grant_data(data):
             'title': data['distribution'][0]['title'],
             'url': data['distribution'][0]['downloadURL'],
             'type': get_file_type(data_metadata['file_type']),
+            'size': format_value(data_metadata.get('file_size')),
             'available': data_metadata.get('downloads')
         },
         'licence': get_licence(
