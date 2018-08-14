@@ -121,11 +121,10 @@ def get_licence(name, url, acceptable):
     }
 
     if licences.get(name):
-        return Markup("<a href=\"{}\"><img src=\"../images/licences/{}.png\" width='70' height='27'></a>".format(
-            url, licences.get(name)
-        ))
+        return Markup("<a href=\"{}\"><img src=\"../images/licences/{}.png\" width='70' height='27'></a>").format(
+            url, licences.get(name))
     if name and url:
-        return Markup("<a href=\"{}\">{}</a>".format(url, name))
+        return Markup("<a href=\"{}\">{}</a>").format(url, name)
     return name
 
 
