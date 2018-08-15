@@ -29,13 +29,18 @@
   </p>
 </div>
 
-<table class="table table-bordered">
+<table class="table table-bordered text-center">
   <thead>
     <tr>
-      <th scope="col">Logo</th>
       <th scope="col">Organisation</th>
-      <th scope="col">Data</th>
-      <th scope="col">License</th>
+      <th scope="col">Title</th>
+      <th scope="col">Published</th>
+      <th scope="col">Valid?</th>
+      <th scope="col">Period</th>
+      <th scope="col">Records</th>
+      <th scope="col">Total value</th>
+      <th scope="col">File</th>
+      <th scope="col">Licence</th>
     </tr>
   </thead>
 
@@ -43,19 +48,73 @@
     {% if data %}
       {% for org_prefix, org_data in data.items() %}
         <tr>
-          <td>
-            {% if org_data['publisher']['logo'] %}
-              <img class="tlogo" src="{{ org_data['publisher']['logo'] }}" width="100">
-            {% endif %}
+          <td scope="rowgroup" rowspan="{{ org_data['grant'] | length }}">
+            <div>{{ org_data['publisher']['name'] }}</div>
+            <div class="mt-4">
+              {% if org_data['publisher']['logo'] %}
+                <img class="tlogo" src="{{ org_data['publisher']['logo'] }}" width="100">
+              {% endif %}
+            </div>
           </td>
-          <td>{{ org_data['publisher']['name'] }}</td>
-          <td>
-            {% for grant in org_data['grant'] %}
-              <div><a href="{{ grant['url'] }}">{{ grant['name'] }}</a></div>
-            {% endfor %}
-          </td>
-          <td><a href="{{ org_data['license']['url'] }}">{{ org_data['license']['name'] }}</a></td>
+          {% if org_data['grant'] %}
+            <td>{{ org_data['grant'][0]['file']['title'] }}</td>
+            <td style="white-space:nowrap;">{{ org_data['grant'][0]['issued_date'] }}</td>
+            <td>{{ org_data['grant'][0]['valid'] | safe }}</td>
+            <td>
+              <div style="white-space:nowrap;">{{ org_data['grant'][0]['period']['first_date'] }}</div>
+              <div>to</div>
+              <div style="white-space:nowrap;">{{ org_data['grant'][0]['period']['latest_date'] }}</div>
+            </td>
+            <td>{{ org_data['grant'][0]['records'] }}</td>
+            <td>
+              {% for value in org_data['grant'][0]['total_value'] %}
+                <div>{{ value | safe }}</div>
+              {% endfor %}
+            </td>
+            <td>
+              {% if org_data['grant'][0]['file']['available'] %}
+                <div>
+                  <a href="{{ org_data['grant'][0]['file']['url'] }}">
+                    <img src="../images/files/{{ org_data['grant'][0]['file']['type'] }}.png" width="70" height="70">
+                  </a>
+                </div>
+                <div class="mt-4">{{ org_data['grant'][0]['file']['size'] }}</div>
+              {% endif %}
+            </td>
+            <td>{{ org_data['grant'][0]['licence'] | safe }}</td>
+          {% endif %}
         </tr>
+        {% if org_data['grant'] | length > 1%}
+          {% for grant in org_data['grant'][1:] %}
+            <tr>
+              <td scope="row">{{ grant['file']['title'] }}</td>
+              <td scope="row" style="white-space:nowrap;">{{ grant['issued_date'] }}</td>
+              <td scope="row">{{ grant['valid'] | safe }}</td>
+              <td scope="row">
+                <div style="white-space:nowrap;">{{ grant['period']['first_date'] }}</div>
+                <div>to</div>
+                <div style="white-space:nowrap;">{{ grant['period']['latest_date'] }}</div>
+              </td>
+              <td scope="row">{{ grant['records'] }}</td>
+              <td scope="row">
+                {% for value in grant['total_value']%}
+                  <div>{{ value | safe }}</div>
+                {% endfor %}
+              </td>
+              <td>
+                {% if org_data['grant'][0]['file']['available'] %}
+                  <div>
+                    <a href="{{ grant['file']['url'] }}">
+                      <img src="../images/files/{{ grant['file']['type'] }}.png" width="70" height="70">
+                    </a>
+                  </div>
+                  <div class="mt-4">{{ grant['file']['size'] }}</div>
+                {% endif %}
+              </td>
+              <td scope="row">{{ grant['licence'] | safe }}</td>
+            </tr>
+          {% endfor %}
+        {% endif %}
       {% endfor %}
     {% endif %}
   </tbody>
