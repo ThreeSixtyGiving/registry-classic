@@ -1,4 +1,4 @@
-from registry.views import get_currency_symbol, format_value, format_date, get_total_value,\
+from registry.registry import get_currency_symbol, format_value, format_date, get_total_value,\
     get_check_cross_symbol, get_file_type, get_licence
 # from registry.views import get_data_by_prefix
 # from tests.samples.registry_raw_data import RAW_DATA
