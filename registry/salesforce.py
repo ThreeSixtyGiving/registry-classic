@@ -33,14 +33,6 @@ def clean_output(api_output):
     return datasets
 
 
-def get_allowed_domains(output):
-    allowed_domains = set()
-    for dataset in output:
-        if dataset["publisher"]["domain"]:
-            allowed_domains.add(dataset["publisher"]["domain"])
-    return allowed_domains
-
-
 def get_salesforce_data():
     sf_query = "SELECT Id, Name, License__r.Name, License__r.URL__c, Access_URL__c, Description__c, Download_URL__c," \
             "Account__r.Id, Account__r.Logo__c, Account__r.Name, Account__r.Website, Account__r.prefix__c," \
