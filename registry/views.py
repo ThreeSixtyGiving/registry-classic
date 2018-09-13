@@ -1,7 +1,8 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, current_app
 from raven.contrib.flask import Sentry
 
-from .registry import get_raw_data, get_data_by_prefix
+from registry.registry import get_raw_data, get_data_by_prefix
+from registry.salesforce import get_salesforce_data
 
 app = Flask(
     __name__,
@@ -25,6 +26,12 @@ def data_registry():
 @app.route('/terms-conditions')
 def terms_and_conditions():
     return render_template('terms.html')
+
+
+@app.route('/data.json')
+def salesforce_data():
+    data = get_salesforce_data()
+    return current_app.response_class(data, mimetype="application/json")
 
 
 @app.route('/500')
