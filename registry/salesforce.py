@@ -1,10 +1,14 @@
 import json
+import os
 from urllib.parse import urlparse
 
 from simple_salesforce import Salesforce
 
-
-sf = Salesforce(username='360support@opendataservices.coop', password='', security_token='')
+salesforce = Salesforce(
+    username='360support@opendataservices.coop',
+    password=os.environ['SALESFORCE_PASSWORD'],
+    security_token=os.environ['SALESFORCE_SECURITY_TOKEN']
+)
 
 
 def clean_object(obj):
@@ -37,6 +41,6 @@ def get_salesforce_data():
     sf_query = "SELECT Id, Name, License__r.Name, License__r.URL__c, Access_URL__c, Description__c, Download_URL__c," \
             "Account__r.Id, Account__r.Logo__c, Account__r.Name, Account__r.Website, Account__r.prefix__c," \
             "Date_First_Published__c, LastModifiedDate, Approved__c from Dataset__c ORDER BY Account__r.Name"
-    output = clean_output(sf.query(sf_query))
+    output = clean_output(salesforce.query(sf_query))
 
     return json.dumps(output, sort_keys=True, indent=2)
