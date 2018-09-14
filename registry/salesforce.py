@@ -1,6 +1,5 @@
 import json
 import os
-from urllib.parse import urlparse
 
 from simple_salesforce import Salesforce
 
@@ -63,7 +62,7 @@ def clean_output(api_output):
 def get_salesforce_data():
     sf_query = "SELECT Id, Name, License__r.Name, License__r.URL__c, Access_URL__c, Description__c, Download_URL__c," \
             "Account__r.Id, Account__r.Logo__c, Account__r.Name, Account__r.Website, Account__r.prefix__c," \
-            "Date_First_Published__c, LastModifiedDate, Approved__c from Dataset__c ORDER BY Account__r.Name"
+            "Date_First_Published__c, LastModifiedDate, Approved__c from Dataset__c ORDER BY Account__r.Name"  # noqa: E126
     output = clean_output(salesforce.query(sf_query))
 
     return json.dumps(output, indent=2)
