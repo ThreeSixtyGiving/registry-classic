@@ -22,17 +22,40 @@ def clean_object(obj):
     return new_obj
 
 
+def get_output_dataset(dataset):
+    license = clean_object(dataset["license"])
+    publisher = clean_object(dataset["account"])
+
+    return {
+        "title": dataset["name"],
+        "description": dataset["description"],
+        "identifier": dataset["id"],
+        "license": license["uRL"],
+        "license_name": license["name"],
+        "issued": dataset["dateFirstPublished"],
+        "modified": dataset["lastModifiedDate"],
+        "publisher": {
+            "name": publisher["name"],
+            "website": publisher["website"],
+            "logo": publisher["logo"],
+            "prefix": publisher["prefix"]
+        },
+        "distribution": [{
+            "downloadURL": dataset["downloadURL"],
+            "accessURL": dataset["accessURL"],
+            "title": dataset["name"]
+        }]
+    }
+
+
 def clean_output(api_output):
     datasets = []
 
     for dataset in api_output['records']:
         if dataset['Approved__c']:
             clean_dataset = clean_object(dataset)
-            clean_dataset["license"] = clean_object(clean_dataset["license"])
-            clean_dataset["publisher"] = clean_object(clean_dataset["account"])
-            clean_dataset["publisher"]["domain"] = urlparse(clean_dataset["publisher"]["website"]).netloc
-            clean_dataset.pop("account")
-            datasets.append(clean_dataset)
+            output_dataset = get_output_dataset(clean_dataset)
+            datasets.append(output_dataset)
 
     return datasets
 
@@ -43,4 +66,4 @@ def get_salesforce_data():
             "Date_First_Published__c, LastModifiedDate, Approved__c from Dataset__c ORDER BY Account__r.Name"
     output = clean_output(salesforce.query(sf_query))
 
-    return json.dumps(output, sort_keys=True, indent=2)
+    return json.dumps(output, indent=2)
