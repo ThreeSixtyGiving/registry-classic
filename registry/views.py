@@ -30,7 +30,10 @@ def terms_and_conditions():
 
 @app.route('/data.json')
 def salesforce_data():
-    data = get_salesforce_data()
+    try:
+        data = get_salesforce_data()
+    except AttributeError:
+        return 'Please check that the access keys to Salesforce are correct.'
     return current_app.response_class(data, mimetype="application/json")
 
 
