@@ -3,11 +3,13 @@ import os
 
 from simple_salesforce import Salesforce
 
-salesforce = Salesforce(
-    username='360support@opendataservices.coop',
-    password=os.environ['SALESFORCE_PASSWORD'],
-    security_token=os.environ['SALESFORCE_SECURITY_TOKEN']
-)
+
+def get_salesforce_access():
+    return Salesforce(
+        username='360support@opendataservices.coop',
+        password=os.environ['SALESFORCE_PASSWORD'],
+        security_token=os.environ['SALESFORCE_SECURITY_TOKEN']
+    )
 
 
 def clean_object(obj):
@@ -60,9 +62,11 @@ def clean_output(api_output):
 
 
 def get_salesforce_data():
+    salesforce = get_salesforce_access()
     sf_query = "SELECT Id, Name, License__r.Name, License__r.URL__c, Access_URL__c, Description__c, Download_URL__c," \
             "Account__r.Id, Account__r.Logo__c, Account__r.Name, Account__r.Website, Account__r.prefix__c," \
             "Date_First_Published__c, LastModifiedDate, Approved__c from Dataset__c ORDER BY Account__r.Name"  # noqa: E126
+
     output = clean_output(salesforce.query(sf_query))
 
     return json.dumps(output, indent=2)
