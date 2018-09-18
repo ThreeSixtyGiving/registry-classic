@@ -147,7 +147,7 @@ def get_grant_data(data):
             'licence': get_licence(
                 data['license_name'], data['license'], data_metadata.get('acceptable_license')),
             'total_value': get_total_value(data_aggregates.get('currencies') if data_aggregates else None),
-            'records': format_value(data_aggregates['count'] if data_aggregates else None),
+            'records': format_value(data_aggregates.get('count') if data_aggregates else None),
             'period': {
                 'first_date': format_date(data_aggregates.get('min_award_date')) if data_aggregates else '',
                 'latest_date': format_date(data_aggregates.get('max_award_date')) if data_aggregates else ''
