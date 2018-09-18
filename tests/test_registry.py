@@ -83,7 +83,7 @@ def test_get_total_value_multiple_currencies():
     }
     response = get_total_value(data_by_currency)
 
-    assert response == ['&pound; 257,947', 'CHP 234.9']
+    assert response == ['&pound; 257,947', 'CHP 235']
 
 
 def test_get_total_value_empty_dict():
@@ -105,7 +105,7 @@ def test_get_total_value_total_amount_key_missing():
     }
     response = get_total_value(data_by_currency)
 
-    assert response == ['CHP 234.9']
+    assert response == ['CHP 235']
 
 
 def test_get_total_value_total_amount_empty_string():
@@ -116,6 +116,12 @@ def test_get_total_value_total_amount_empty_string():
     response = get_total_value(data_by_currency)
 
     assert response == ['&pound; 257,947']
+
+
+def test_get_total_value_rounded_value():
+    response = get_total_value({'GBP': {'total_amount': 257947.49}})
+
+    assert response == ['GBP 257,947']
 
 
 def test_get_check_symbol():

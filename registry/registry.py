@@ -26,13 +26,16 @@ def get_currency_symbol(currency, data):
     return data['currency_symbol']
 
 
-def format_value(value):
+def format_value(value, is_round=False):
     """
     Format value from 492793844.650000003 to 492,793,844.65
     """
     if value and type(value) == float or type(value) == int:
         if type(value) == float:
-            value = float(format(value, '.2f'))
+            if is_round:
+                value = round(value)
+            else:
+                value = float(format(value, '.2f'))
         return "{:,}".format(value)
     return value
 
@@ -75,7 +78,7 @@ def get_total_value(data_by_currency):
             if total_amount and total_amount is not None:
                 total_value.append('{} {}'.format(
                     get_currency_symbol(currency, data),
-                    format_value(total_amount)
+                    format_value(value=total_amount, is_round=True)
                 ))
     return total_value
 
