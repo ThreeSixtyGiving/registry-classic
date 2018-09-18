@@ -131,29 +131,30 @@ def get_prefix_data(data):
 
 def get_grant_data(data):
     # TODO TEST
-    data_aggregates = data.get('datagetter_aggregates')
-    data_metadata = data.get('datagetter_metadata')
-    file_size = data_metadata.get('file_size')
+    if data:
+        data_aggregates = data.get('datagetter_aggregates')
+        data_metadata = data.get('datagetter_metadata')
+        file_size = data_metadata.get('file_size')
 
-    return {
-        'file': {
-            'title': data['distribution'][0]['title'],
-            'url': data['distribution'][0]['downloadURL'],
-            'type': get_file_type(data_metadata.get('file_type')),
-            'size': humanize.naturalsize(file_size) if file_size else '-',
-            'available': data_metadata.get('downloads')
-        },
-        'licence': get_licence(
-            data['license_name'], data['license'], data_metadata.get('acceptable_license')),
-        'total_value': get_total_value(data_aggregates.get('currencies') if data_aggregates else None),
-        'records': format_value(data_aggregates['count'] if data_aggregates else None),
-        'period': {
-            'first_date': format_date(data_aggregates.get('min_award_date')) if data_aggregates else '',
-            'latest_date': format_date(data_aggregates.get('max_award_date')) if data_aggregates else ''
-        },
-        'issued_date': format_date(data.get('issued')),
-        'valid': get_check_cross_symbol(data_metadata.get('valid')),
-    }
+        return {
+            'file': {
+                'title': data['distribution'][0]['title'],
+                'url': data['distribution'][0]['downloadURL'],
+                'type': get_file_type(data_metadata.get('file_type')),
+                'size': humanize.naturalsize(file_size) if file_size else '-',
+                'available': data_metadata.get('downloads')
+            },
+            'licence': get_licence(
+                data['license_name'], data['license'], data_metadata.get('acceptable_license')),
+            'total_value': get_total_value(data_aggregates.get('currencies') if data_aggregates else None),
+            'records': format_value(data_aggregates['count'] if data_aggregates else None),
+            'period': {
+                'first_date': format_date(data_aggregates.get('min_award_date')) if data_aggregates else '',
+                'latest_date': format_date(data_aggregates.get('max_award_date')) if data_aggregates else ''
+            },
+            'issued_date': format_date(data.get('issued')),
+            'valid': get_check_cross_symbol(data_metadata.get('valid')),
+        }
 
 
 def get_data_by_prefix(raw_data):

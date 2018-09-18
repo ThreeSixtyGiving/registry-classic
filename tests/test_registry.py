@@ -1,7 +1,17 @@
+from collections import OrderedDict
+
 from registry.registry import get_currency_symbol, format_value, format_date, get_total_value,\
-    get_check_cross_symbol, get_file_type, get_licence
-# from registry.views import get_data_by_prefix
-# from tests.samples.registry_raw_data import RAW_DATA
+    get_check_cross_symbol, get_file_type, get_licence, get_grant_data, get_data_by_prefix
+
+
+def test_no_data_does_not_give_500_error():
+    response = get_grant_data('')
+
+    assert response is None
+
+    response = get_data_by_prefix('')
+
+    assert response == OrderedDict()
 
 
 def test_get_currency_symbol_with_symbol():
