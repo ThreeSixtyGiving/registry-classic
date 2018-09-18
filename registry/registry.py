@@ -133,13 +133,14 @@ def get_grant_data(data):
     # TODO TEST
     data_aggregates = data.get('datagetter_aggregates')
     data_metadata = data.get('datagetter_metadata')
+    file_size = data_metadata.get('file_size')
 
     return {
         'file': {
             'title': data['distribution'][0]['title'],
             'url': data['distribution'][0]['downloadURL'],
             'type': get_file_type(data_metadata.get('file_type')),
-            'size': humanize.naturalsize(data_metadata.get('file_size')),
+            'size': humanize.naturalsize(file_size) if file_size else '-',
             'available': data_metadata.get('downloads')
         },
         'licence': get_licence(
