@@ -29,6 +29,7 @@ def get_currency_symbol(currency, data):
 def format_value(value, is_round=False):
     """
     Format value from 492793844.650000003 to 492,793,844.65
+    If is_round=True, the value gets rounded.
     """
     if value and type(value) == float or type(value) == int:
         if type(value) == float:
