@@ -29,7 +29,7 @@ def get_output_dataset(dataset):
 
     return {
         "title": dataset["name"],
-        "description": dataset["description"] if dataset["description"] is not None else '',
+        "description": dataset["description"] if dataset["description"] is not None else "",
         "identifier": dataset["id"],
         "license": license["uRL"],
         "license_name": license["name"],
