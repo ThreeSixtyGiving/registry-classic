@@ -17,7 +17,7 @@ def test_correct_output():
 
     expected_response = {
         "title": 'Open Programme grants awarded from 2015 until February 2018',
-        "description": None,
+        "description": "",
         "identifier": 'a001p00000zgyHZAAY',
         "license": 'https://creativecommons.org/licenses/by/4.0/',
         "license_name": 'Creative Commons Attribution 4.0 International (CC BY 4.0)',
@@ -38,6 +38,12 @@ def test_correct_output():
 
     assert len(response) == 9
     assert response == expected_response
+
+
+def test_description_returns_empty_string_if_none():
+    response = clean_output(API_OUTPUT)[0]
+
+    assert response['description'] == ''
 
 
 def test_clean_object():
