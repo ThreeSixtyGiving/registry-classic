@@ -68,6 +68,10 @@ body .devs-info{
   font-family: Courier;
 }
 
+body .p_smaller_font_size {
+  font-size: 0.75rem;
+}
+
 .footer {
   background-color: #3b3b3c;;
   color: #FFFFFF;

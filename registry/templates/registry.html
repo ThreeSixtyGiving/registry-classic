@@ -29,6 +29,14 @@
   </p>
 </div>
 
+<div>
+  <p class="p_smaller_font_size">
+    <strong><sub>*</sub></strong>
+    Some funders make grants in different currencies. Grants are listed in the currency that were made.
+  </p>
+</div>
+
+
 <table class="table table-bordered text-center">
   <thead>
     <tr>
@@ -38,7 +46,7 @@
       <th scope="col">Valid?</th>
       <th scope="col">Period</th>
       <th scope="col">Records</th>
-      <th scope="col">Total value<a href="#asterisk"><sup>*</sup></a></th>
+      <th scope="col">Total value<sup>*</sup></th>
       <th scope="col">File</th>
       <th scope="col">Licence</th>
     </tr>
@@ -119,12 +127,5 @@
     {% endif %}
   </tbody>
 </table>
-
-<div>
-  <p>
-    <a id="asterisk"></a>
-    <sub>*</sub> Some funders make grants in different currencies. Grants are listed in the currency that were made.
-  </p>
-</div>
 
 {% endblock %}
