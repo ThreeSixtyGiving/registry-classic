@@ -26,7 +26,7 @@ def test_correct_output():
         "publisher": {
             "name": 'A B Charitable Trust',
             "website": 'http://abcharitabletrust.org.uk/',
-            "logo": None,
+            "logo": "",
             "prefix": '360G-ABCT'
         },
         "distribution": [{
@@ -44,6 +44,18 @@ def test_description_returns_empty_string_if_none():
     response = clean_output(API_OUTPUT)[0]
 
     assert response['description'] == ''
+
+
+def test_logo_returns_empty_string_if_none():
+    response = clean_output(API_OUTPUT)[0]
+
+    assert response['publisher']['logo'] == ''
+
+
+def test_website_returns_empty_string_if_none():
+    response = clean_output(API_OUTPUT)[1]
+
+    assert response['publisher']['website'] == ''
 
 
 def test_clean_object():
