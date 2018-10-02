@@ -37,8 +37,8 @@ def get_output_dataset(dataset):
         "modified": dataset["lastModifiedDate"],
         "publisher": {
             "name": publisher["name"],
-            "website": publisher["website"],
-            "logo": publisher["logo"],
+            "website": publisher["website"] if publisher["website"] else "",
+            "logo": publisher["logo"] if publisher["logo"] else "",
             "prefix": publisher["prefix"]
         },
         "distribution": [{
