@@ -131,7 +131,7 @@ API_OUTPUT = OrderedDict(
                             ('Id', '0012400000jmuxuAAA'),
                             ('Logo__c', 'https://www.threesixtygiving.org/wp-content/uploads/barrow-cadbury-trust.jpg'),
                             ('Name', 'Barrow Cadbury Trust'),
-                            ('Website', 'http://www.barrowcadbury.org.uk/'),
+                            ('Website', None),
                             ('prefix__c', '360G-barrowcadbury')
                         ]
                     )),
