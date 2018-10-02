@@ -16,10 +16,12 @@ sentry = Sentry(app)
 @app.route('/')
 def data_registry():
     raw_data = get_raw_data()
+    data_by_prefix = get_data_by_prefix(raw_data) if raw_data else None
 
     return render_template(
         'registry.html',
-        data=get_data_by_prefix(raw_data) if raw_data else None
+        data=data_by_prefix,
+        num_of_publishers=len(data_by_prefix)
     )
 
 
