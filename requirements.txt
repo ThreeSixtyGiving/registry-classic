@@ -1,7 +1,7 @@
 Flask==1.0.2
 humanize==0.5.1
 raven==6.9.0
-requests==2.19.1
+requests==2.20.1
 simple-salesforce==0.74.2
 
 ## The following requirements were added by pip freeze:
