@@ -151,6 +151,7 @@ def get_table_data(browser):
 
     return table_data_text
 
+
 @pytest.mark.usefixtures('live_server')
 @pytest.mark.parametrize('table_heading_text', [
     'Organisation',
@@ -208,19 +209,19 @@ def test_table_grants_order(browser):
     assert table_data[18] == 'Big Lottery Fund - grants data 2017-18'
 
 
-# @pytest.mark.usefixtures('live_server')
-# def test_table_logos(browser):
-#     browser.get(url_for('data_registry', _external=True))
-#
-#     table_data_logos = []
-#     for table_logo in browser.find_elements_by_css_selector('img.tlogo'):
-#         table_data_logos.append(table_logo.get_attribute("src"))
-#
-#     assert len(table_data_logos) == 2
-#     assert table_data_logos == [
-#         'http://www.threesixtygiving.org/wp-content/uploads/BBCCiN_CoreLogo.png',
-#         'http://www.threesixtygiving.org/wp-content/uploads/big-lottery-fund.png'
-#     ]
+@pytest.mark.usefixtures('live_server')
+def test_table_logos(browser):
+    browser.get(url_for('data_registry', _external=True))
+
+    table_data_logos = []
+    for table_logo in browser.find_elements_by_css_selector('img.tlogo'):
+        table_data_logos.append(table_logo.get_attribute("src"))
+
+    assert len(table_data_logos) == 2
+    assert table_data_logos == [
+        'http://www.threesixtygiving.org/wp-content/uploads/BBCCiN_CoreLogo.png',
+        'http://www.threesixtygiving.org/wp-content/uploads/big-lottery-fund.png'
+    ]
 
 
 @pytest.mark.usefixtures('live_server')
