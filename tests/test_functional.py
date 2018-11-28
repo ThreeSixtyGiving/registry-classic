@@ -141,51 +141,71 @@ def test_body_contact_us_link(browser):
     browser.switch_to.window(browser.window_handles[0])
 
 
-# @pytest.mark.usefixtures('live_server')
-# @pytest.mark.parametrize('table_heading_text', [
-#     'Logo',
-#     'Publisher',
-#     'File name',
-#     'Licence',
-#     ])
-# def test_table_heading(browser, table_heading_text):
-#     browser.get(url_for('data_registry', _external=True))
-#
-#     table_headings_text = []
-#     for table_heading in browser.find_elements_by_tag_name('th'):
-#         table_headings_text.append(table_heading.text)
-#
-#     assert table_heading_text in table_headings_text
+@pytest.mark.usefixtures('live_server')
+def get_table_data(browser):
+    browser.get(url_for('data_registry', _external=True))
+
+    table_data_text = []
+    for table_data in browser.find_elements_by_tag_name('td'):
+        table_data_text.append(table_data.text)
+
+    return table_data_text
+
+@pytest.mark.usefixtures('live_server')
+@pytest.mark.parametrize('table_heading_text', [
+    'Organisation',
+    'Title',
+    'Published',
+    'Valid?',
+    'Period',
+    'Records',
+    'Total value*',
+    'File',
+    'Licence',
+    ])
+def test_table_heading(browser, table_heading_text):
+    browser.get(url_for('data_registry', _external=True))
+
+    table_headings_text = []
+    for table_heading in browser.find_elements_by_tag_name('th'):
+        table_headings_text.append(table_heading.text)
+
+    assert table_heading_text in table_headings_text
 
 
-# @pytest.mark.usefixtures('live_server')
-# def test_table_data(browser):
-#     browser.get(url_for('data_registry', _external=True))
-#
-#     table_data_text = []
-#     for table_data in browser.find_elements_by_tag_name('td'):
-#         table_data_text.append(table_data.text)
-#
-#     assert len(table_data_text) == 13
-#     assert table_data_text[0:4] == [
-#         '',
-#         'BBC Children in Need',
-#         'Creative Commons Attribution 4.0',
-#         'BBC Children in Need grants'
-#     ]
-#     assert table_data_text[4:9] == [
-#         '',
-#         'Big Lottery Fund',
-#         'Open Government Licence 3.0 (United Kingdom)',
-#         'Big Lottery Fund - grants data 2015 to 2017',
-#         'Big Lottery Fund - grants data 2017-18 year-to-date'
-#     ]
-#     assert table_data_text[9:14] == [
-#         '',
-#         'The Corra Foundation, previously called Lloyds TSB Foundation for Scotland',
-#         'Creative Commons Attribution 4.0 International (CC BY 4.0)',
-#         'Grants awarded since 2015, as at 31 December 2017'
-#     ]
+@pytest.mark.usefixtures('live_server')
+def test_table_data(browser):
+    table_data = get_table_data(browser)
+
+    assert len(table_data) == 35
+    assert table_data[0:9] == [
+        'BBC Children in Need',
+        'BBC Children in Need grants',
+        'Jul \'16',
+        '✓',
+        'Nov \'11\nto\nNov \'15',
+        '1,693',
+        '£ 94,753,818',
+        '307.7 kB',
+        ''
+    ]
+
+
+@pytest.mark.usefixtures('live_server')
+def test_table_organisations_order(browser):
+    table_data = get_table_data(browser)
+
+    assert table_data[0] == 'BBC Children in Need'
+    assert table_data[9] == 'The Big Lottery Fund'
+    assert table_data[26] == 'The Corra Foundation, previously called Lloyds TSB Foundation for Scotland'
+
+
+@pytest.mark.usefixtures('live_server')
+def test_table_grants_order(browser):
+    table_data = get_table_data(browser)
+
+    assert table_data[10] == 'Big Lottery Fund - grants data 2015 to 2017'
+    assert table_data[18] == 'Big Lottery Fund - grants data 2017-18'
 
 
 # @pytest.mark.usefixtures('live_server')

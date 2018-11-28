@@ -201,7 +201,15 @@ def get_data_by_prefix(raw_data):
 
         data_by_prefix[prefix]['grant'].append(get_grant_data(data))
 
-    return OrderedDict(sorted(data_by_prefix.items(), key=lambda x: x[1]['publisher']['name']))
+    for prefix in data_by_prefix:
+        sort_by_grant_first_date = sorted(
+            data_by_prefix[prefix]['grant'], key=lambda x: x['period']['first_date'].split("'")[-1]
+        )
+        data_by_prefix[prefix]['grant'] = sort_by_grant_first_date
+
+    sort_by_publisher_name = sorted(data_by_prefix.items(), key=lambda x: x[1]['publisher']['name'])
+
+    return OrderedDict(sort_by_publisher_name)
 
 
 def get_raw_data():
