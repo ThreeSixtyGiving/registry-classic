@@ -201,6 +201,13 @@ def get_data_by_prefix(raw_data):
 
         data_by_prefix[prefix]['grant'].append(get_grant_data(data))
 
+    return data_by_prefix
+
+
+def sort_data_by_prefix(data_by_prefix):
+    """
+    Sort grants by the year of the first date and publishers by their name.
+    """
     for prefix in data_by_prefix:
         sort_by_grant_first_date = sorted(
             data_by_prefix[prefix]['grant'], key=lambda x: x['period']['first_date'].split("'")[-1]
@@ -217,3 +224,9 @@ def get_raw_data():
         return RAW_DATA
 
     return requests.get('https://storage.googleapis.com/datagetter-360giving-output/branch/master/status.json').json()
+
+
+def registry_main():
+    raw_data = get_raw_data()
+    data_by_prefix = get_data_by_prefix(raw_data) if raw_data else None
+    return sort_data_by_prefix(data_by_prefix)
