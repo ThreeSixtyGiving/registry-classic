@@ -205,8 +205,8 @@ def test_table_organisations_order(browser):
 def test_table_grants_order(browser):
     table_data = get_table_data(browser)
 
-    assert table_data[10] == 'Big Lottery Fund - grants data 2015 to 2017'
-    assert table_data[18] == 'Big Lottery Fund - grants data 2017-18'
+    assert table_data[10] == 'Big Lottery Fund - grants data 2017-18'
+    assert table_data[18] == 'Big Lottery Fund - grants data 2015 to 2017'
 
 
 @pytest.mark.usefixtures('live_server')

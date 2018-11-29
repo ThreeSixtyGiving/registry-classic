@@ -210,7 +210,7 @@ def sort_data_by_prefix(data_by_prefix):
     """
     for prefix in data_by_prefix:
         sort_by_grant_first_date = sorted(
-            data_by_prefix[prefix]['grant'], key=lambda x: x['period']['first_date'].split("'")[-1]
+            data_by_prefix[prefix]['grant'], key=lambda x: x['period']['latest_date'].split("'")[-1], reverse=True
         )
         data_by_prefix[prefix]['grant'] = sort_by_grant_first_date
 
