@@ -6,12 +6,12 @@ simple-salesforce==0.74.2
 
 ## The following requirements were added by pip freeze:
 blinker==1.4
-certifi==2018.8.24
+certifi==2018.10.15
 chardet==3.0.4
-click==6.7
+Click==7.0
 idna==2.7
-itsdangerous==0.24
+itsdangerous==1.1.0
 Jinja2==2.10
-MarkupSafe==1.0
-urllib3==1.23
+MarkupSafe==1.1.0
+urllib3==1.24.1
 Werkzeug==0.14.1
