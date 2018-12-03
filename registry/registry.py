@@ -204,9 +204,9 @@ def get_data_by_prefix(raw_data):
     return data_by_prefix
 
 
-def sort_data_by_prefix(data_by_prefix):
+def sort_data(data_by_prefix):
     """
-    Sort grants by the year of the first date and publishers by their name.
+    Sort grants first by publisher name and, and then by year of the latest date.
     """
     for prefix in data_by_prefix:
         sort_by_grant_first_date = sorted(
@@ -226,7 +226,7 @@ def get_raw_data():
     return requests.get('https://storage.googleapis.com/datagetter-360giving-output/branch/master/status.json').json()
 
 
-def registry_main():
+def get_data_sorted_by_prefix():
     raw_data = get_raw_data()
     data_by_prefix = get_data_by_prefix(raw_data) if raw_data else None
-    return sort_data_by_prefix(data_by_prefix)
+    return sort_data(data_by_prefix)
