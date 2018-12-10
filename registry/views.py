@@ -1,7 +1,7 @@
 from flask import Flask, render_template, current_app
 from raven.contrib.flask import Sentry
 
-from registry.registry import get_raw_data, get_data_by_prefix
+from registry.registry import get_data_sorted_by_prefix
 from registry.salesforce import get_salesforce_data
 
 app = Flask(
@@ -15,13 +15,12 @@ sentry = Sentry(app)
 
 @app.route('/')
 def data_registry():
-    raw_data = get_raw_data()
-    data_by_prefix = get_data_by_prefix(raw_data) if raw_data else None
+    data = get_data_sorted_by_prefix()
 
     return render_template(
         'registry.html',
-        data=data_by_prefix,
-        num_of_publishers=len(data_by_prefix)
+        data=data,
+        num_of_publishers=len(data)
     )
 
 
