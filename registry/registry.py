@@ -206,11 +206,11 @@ def get_data_by_prefix(raw_data):
 
 def sort_data(data_by_prefix):
     """
-    Sort grants first by publisher name and, and then by year of the latest date.
+    Sort grants first by publisher name and, and then by date of the latest date.
     """
     for prefix in data_by_prefix:
         sort_by_grant_latest_date = sorted(
-            data_by_prefix[prefix]['grant'], key=lambda x: x['period']['latest_date'].split("'")[-1], reverse=True
+            data_by_prefix[prefix]['grant'], key=lambda x: x['period']['latest_date'], reverse=True
         )
         data_by_prefix[prefix]['grant'] = sort_by_grant_latest_date
 
