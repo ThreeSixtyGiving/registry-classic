@@ -1,7 +1,10 @@
+import os
+
 from registry.registry import get_currency_symbol, format_value, format_date, get_total_value,\
-    get_check_cross_symbol, get_file_type, get_licence
-# from registry.views import get_data_by_prefix
-# from tests.samples.registry_raw_data import RAW_DATA
+    get_check_cross_symbol, get_file_type, get_licence, get_data_by_prefix, sort_data, get_data_sorted_by_prefix
+from tests.samples.registry_scvo_data import SCVO_DATA
+
+os.environ['FLASK_ENV'] = 'development'
 
 
 def test_get_currency_symbol_with_symbol():
@@ -242,3 +245,22 @@ def test_get_licence_without_name_and_without_url():
 #     assert len(big_lottery_grant) is 2
 #     assert big_lottery_grant[0]['name'] == 'Big Lottery Fund - grants data 2015 to 2017'
 #     assert big_lottery_grant[1]['name'] == 'Big Lottery Fund - grants data 2017-18 year-to-date'
+
+def test_max_award_date_correct_format():
+    data = get_data_sorted_by_prefix()
+    grants_blf = data['360G-blf']['grant']
+
+    assert grants_blf[0]['period']['latest_date'] == "Mar '18"
+    assert grants_blf[1]['period']['latest_date'] == "Mar '17"
+
+
+def test_publisher_data_is_sorted_by_max_award_date():
+    data_by_prefix = get_data_by_prefix(SCVO_DATA)
+    sorted_data = sort_data(data_by_prefix)
+    grants = sorted_data['360G-SCVO']['grant']
+
+    assert len(grants) == 4
+    assert grants[0]['period']['latest_date'] == "2019-05-13"
+    assert grants[1]['period']['latest_date'] == "2018-12-19"
+    assert grants[2]['period']['latest_date'] == "2018-11-02"
+    assert grants[3]['period']['latest_date'] == "2018-08-01"
