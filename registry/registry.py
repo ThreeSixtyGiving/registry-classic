@@ -153,7 +153,7 @@ def get_grant_data(data):
         'records': format_value(data_aggregates['count'] if data_aggregates else None),
         'period': {
             'first_date': format_date(data_aggregates.get('min_award_date')) if data_aggregates else '',
-            'latest_date': format_date(data_aggregates.get('max_award_date')) if data_aggregates else ''
+            'latest_date': data_aggregates.get('max_award_date') if data_aggregates else ''
         },
         'issued_date': format_date(data.get('issued')),
         'valid': get_check_cross_symbol(data_metadata.get('valid')),
@@ -219,6 +219,14 @@ def sort_data(data_by_prefix):
     return OrderedDict(sort_by_publisher_name)
 
 
+def format_latest_date(data_by_prefix):
+    for prefix in data_by_prefix:
+        for grant in data_by_prefix[prefix]['grant']:
+            grant['period']['latest_date'] = format_date(grant['period']['latest_date'])
+
+    return data_by_prefix
+
+
 def get_raw_data():
     if os.environ.get('FLASK_ENV') == 'development':
         return RAW_DATA
@@ -229,4 +237,6 @@ def get_raw_data():
 def get_data_sorted_by_prefix():
     raw_data = get_raw_data()
     data_by_prefix = get_data_by_prefix(raw_data) if raw_data else None
-    return sort_data(data_by_prefix)
+    sorted_data = sort_data(data_by_prefix)
+
+    return format_latest_date(sorted_data)
