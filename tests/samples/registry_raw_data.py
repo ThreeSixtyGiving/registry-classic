@@ -121,7 +121,7 @@ RAW_DATA = [
         "modified": "2018-08-03T10:26:34.000+0000",
         "publisher": {
             "logo": "http://www.threesixtygiving.org/wp-content/uploads/BBCCiN_CoreLogo.png",
-            "name": "BBC Children in Need",
+            "name": "bbc children in need",
             "prefix": "360g-cin",
             "website": "http://www.bbc.co.uk/corporate2/childreninneed"
         },

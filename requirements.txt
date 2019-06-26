@@ -1,17 +1,18 @@
-Flask==1.0.2
+Flask==1.0.3
 humanize==0.5.1
-raven==6.9.0
-requests==2.20.1
+raven==6.10.0
+requests==2.22.0
 simple-salesforce==0.74.2
 
 ## The following requirements were added by pip freeze:
 blinker==1.4
-certifi==2018.10.15
+certifi==2019.6.16
 chardet==3.0.4
 Click==7.0
-idna==2.7
+idna==2.8
 itsdangerous==1.1.0
-Jinja2==2.10
-MarkupSafe==1.1.0
-urllib3==1.24.1
-Werkzeug==0.14.1
+Jinja2==2.10.1
+MarkupSafe==1.1.1
+
+urllib3==1.25.3
+Werkzeug==0.15.4

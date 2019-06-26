@@ -214,7 +214,7 @@ def sort_data(data_by_prefix):
         )
         data_by_prefix[prefix]['grant'] = sort_by_grant_latest_date
 
-    sort_by_publisher_name = sorted(data_by_prefix.items(), key=lambda x: x[1]['publisher']['name'])
+    sort_by_publisher_name = sorted(data_by_prefix.items(), key=lambda x: x[1]['publisher']['name'].casefold())
 
     return OrderedDict(sort_by_publisher_name)
 

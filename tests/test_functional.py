@@ -180,7 +180,7 @@ def test_table_data(browser):
 
     assert len(table_data) == 35
     assert table_data[0:9] == [
-        'BBC Children in Need',
+        'bbc children in need',
         'BBC Children in Need grants',
         'Jul \'16',
         '✓',
@@ -196,7 +196,7 @@ def test_table_data(browser):
 def test_table_organisations_order(browser):
     table_data = get_table_data(browser)
 
-    assert table_data[0] == 'BBC Children in Need'
+    assert table_data[0] == 'bbc children in need'
     assert table_data[9] == 'The Big Lottery Fund'
     assert table_data[26] == 'The Corra Foundation, previously called Lloyds TSB Foundation for Scotland'
 
