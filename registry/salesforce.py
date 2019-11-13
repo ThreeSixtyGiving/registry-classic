@@ -51,12 +51,18 @@ def get_output_dataset(dataset):
 
 def clean_output(api_output):
     datasets = []
-
     for dataset in api_output['records']:
         if dataset['Approved__c']:
-            clean_dataset = clean_object(dataset)
-            output_dataset = get_output_dataset(clean_dataset)
-            datasets.append(output_dataset)
+            try:
+                clean_dataset = clean_object(dataset)
+                output_dataset = get_output_dataset(clean_dataset)
+                datasets.append(output_dataset)
+            # We have bad data
+            except Exception:
+                pass
+
+    if len(dataset) == 0:
+        raise Exception("No data could be cleaned for output")
 
     return datasets
 
