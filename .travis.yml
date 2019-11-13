@@ -7,8 +7,7 @@ python:
 
 install:
   - "pip install -r requirements_dev.txt"
-  - "wget https://chromedriver.storage.googleapis.com/2.37/chromedriver_linux64.zip; unzip chromedriver_linux64.zip -d chromedriver; export PATH=$PATH:`pwd`/chromedriver"
-
+  - "wget https://chromedriver.storage.googleapis.com/78.0.3904.70/chromedriver_linux64.zip; unzip chromedriver_linux64.zip -d chromedriver; export PATH=$PATH:`pwd`/chromedriver"
 
 script:
     - "flake8 ."
