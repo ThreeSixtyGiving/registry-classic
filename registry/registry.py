@@ -26,12 +26,18 @@ def get_currency_symbol(currency, data):
     return data['currency_symbol']
 
 
-def format_value(value, to_round=False):
+def format_value(value, to_round=False, shorten=False):
     """
     Format value from 492793844.650000003 to 492,793,844.65
     If to_round=True, the value gets rounded.
     """
-    if value and type(value) == float or type(value) == int:
+    if value and isinstance(value, (float, int)):
+        if shorten:
+            if value > 1000000000:
+                return "{:,.1f}bn".format(value / 1000000000)
+            if value > 1000000:
+                return "{:,.1f}m".format(value / 1000000)
+            # value = round(value)
         if type(value) == float:
             if to_round:
                 value = round(value)
@@ -41,13 +47,13 @@ def format_value(value, to_round=False):
     return value
 
 
-def format_date(date):
+def format_date(date, date_format='%b \'%y'):
     """
     :param date: string (yyyy-mm-dd)
     :return: string (eg. Jun '18)
     """
     try:
-        return datetime.strptime(date, '%Y-%m-%d').strftime('%b \'%y')
+        return datetime.strptime(date, '%Y-%m-%d').strftime(date_format)
     except ValueError:
         return date
 
@@ -79,7 +85,7 @@ def get_total_value(data_by_currency):
             if total_amount and total_amount is not None:
                 total_value.append('{} {}'.format(
                     get_currency_symbol(currency, data),
-                    format_value(value=total_amount, to_round=True)
+                    format_value(value=total_amount, to_round=True, shorten=True)
                 ))
     return total_value
 
@@ -100,27 +106,6 @@ def get_file_type(file_type):
     if file_type not in ['csv', 'json', 'xlsx']:
         return 'file'
     return file_type
-
-
-def get_licence(name, url, acceptable):
-    if not acceptable:
-        return '&#x2715;'
-
-    licences = {
-        'CCO': 'cc_pd',
-        'Creative Commons Attribution 4.0': 'cc_by',
-        'Creative Commons Attribution 4.0 International (CC BY 4.0)': 'cc_by',
-        'Creative Commons Attribution Share-Alike 4.0': 'cc_by_sa',
-        'Open Data Commons Public Domain Dedication and Licence 1.0': 'pddl',
-        'Open Government Licence 3.0 (United Kingdom)': 'ogl'
-    }
-
-    if licences.get(name):
-        return Markup("<a href=\"{}\"><img src=\"../images/licences/{}.png\" width='70' height='27'></a>").format(
-            url, licences.get(name))
-    if name and url:
-        return Markup("<a href=\"{}\">{}</a>").format(url, name)
-    return name
 
 
 def get_prefix_data(data):
@@ -147,15 +132,18 @@ def get_grant_data(data):
             'size': humanize.naturalsize(file_size) if file_size else '-',
             'available': data_metadata.get('downloads')
         },
-        'licence': get_licence(
-            data['license_name'], data['license'], data_metadata.get('acceptable_license')),
+        'licence': {
+            'name': data['license_name'],
+            'url': data['license'],
+            'acceptable': data_metadata.get('acceptable_license')
+        },
         'total_value': get_total_value(data_aggregates.get('currencies') if data_aggregates else None),
         'records': format_value(data_aggregates['count'] if data_aggregates else None),
         'period': {
             'first_date': format_date(data_aggregates.get('min_award_date')) if data_aggregates else '',
             'latest_date': data_aggregates.get('max_award_date') if data_aggregates else ''
         },
-        'issued_date': format_date(data.get('issued')),
+        'issued_date': format_date(data.get('issued'), "%b %Y"),
         'valid': get_check_cross_symbol(data_metadata.get('valid')),
     }
 
@@ -228,8 +216,8 @@ def format_latest_date(data_by_prefix):
 
 
 def get_raw_data():
-    if os.environ.get('FLASK_ENV') == 'development':
-        return RAW_DATA
+    # if os.environ.get('FLASK_ENV') == 'development':
+    #     return RAW_DATA
 
     return requests.get('http://store.data.threesixtygiving.org/reports/daily_status.json').json()
 

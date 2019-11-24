@@ -35,54 +35,99 @@
     </div>      
 </article>
 
-<div class="list-section">
-  <ul class="wrapper list-section-items">
+<ul class="list-section">
       
   {% if data %}
-    {% for org_prefix, org_data in data.items() %}
+    {% for org_prefix, pub in data.items() %}
     <li class="list-section__item" id="{{ org_prefix }}">
-      <article class="card card--data-literacy" title="{{ org_data['publisher']['name'] }}">
-        <header class="card__header">
-          <h3 class="card__heading">{{ org_data['publisher']['name'] }}</h3>
-        </header>
-  
-        <div class="card__content" aria-hidden>
-
-          {% for grant in org_data['grant'] %}
-          <div class="card__row">
-            <section class="card__main-content">
-              {# <a class="card__link" href="https://fingertips.phe.org.uk/" target="_blank" rel="noopener"><i class="material-icons">link</i></a> #}
-              <p class="card__text" style="white-space: pre;">{{ org_data['grant'][0]['file']['title'] }}</p>
-            </section>
-            <aside class="card__sidebar tags">
-              
-                {# <span class="tag tag--data-literacy" title="Data Literacy">Data Literacy</span> #}
-              
-            </aside>
-          </div>
-          {% endfor %}
-
-          <div class="card__row">
-            <section class="card__main-content">
-              
-              {% if org_data['publisher']['logo'] %}
-              <div class="card__image">
-                <img class="tlogo" src="{{ org_data['publisher']['logo'] }}" width="100">
-              </div>
-              {% endif %}
-              
-            </section>
-            
-          </div>
-
-          
-          {# <footer class="card__footer">
-            <p class="card__author">Uploaded by <strong>Kate Peters</strong></p>
-          </footer> #}
-          
+      <article class="registry-card" title="{{ pub.publisher.name }}">
+        <div class="registry-card__pub-logo">
+            <a href="{{ pub.publisher.website }}" target="_blank">
+            {% if pub.publisher.logo %}
+              <img src="{{ pub.publisher.logo }}" alt="{{ pub.publisher.name }}">
+            {% endif %}
+            </a>
         </div>
-      
-      </article>  
+        <div class="registry-card__content">
+          <h3 class="registry-card__pub-name">{{ pub.publisher.name }}</h3>
+          
+          <ul class="registry-card__list">
+
+            <li class="registry-card__item ">
+              <table class="registry-grant">
+                {% for grant in pub.grant %}
+                  <tr class="registry-grant__line">
+                    {# <td class="registry-grant__date-range">Records from {{ grant.period.first_date }} to {{ grant.period.latest_date }}</td> #}
+                    <td class="registry-grant__date-range">{{grant.file.title }}</td>
+                    <td class="registry-grant__records">
+                      {% if grant.records %}
+                      Records
+                      <span class="registry-grant__grant-n">{{grant.records}}</span>
+                      {% endif %}
+                    </td>
+                    <td class="registry-grant__amount">
+                      {% for value in grant['total_value']%}
+                        {% set value_split = value.split(" ") %}
+                        <div>
+                          {{value_split[0] | safe}}
+                          <span class="registry-grant__amount-n">{{ value_split[1] | safe }}</span>
+                        </div>
+                      {% endfor %}
+                    </td>
+                    <td class="registry-grant__download">
+                      <a download
+                        href="{{grant.file.url}}"
+                        title="{{grant.file.title}}">
+                        <i class="material-icons">cloud_download</i>
+                      </a>
+                    </td>  
+                  </tr>
+                  <tr class="registry-grant__line">
+                    <td class="registry-grant__pub-date">Published {{ grant.issued_date }}</td>
+                    {% if grant.valid %}
+                    <td class="registry-grant__validation registry-grant--validated">
+                      Data Validated
+                      <i class="material-icons">check_circle_outline</i>
+                    </td>
+                    {% else %}
+                    <td class="registry-grant__validation registry-grant--invalid">
+                      Data Invalid
+                      <i class="material-icons">highlight_off</i>
+                    </td>
+                    {% endif %}
+                    <td class="registry-grant__license">
+                      <a href="{{grant.licence.url}}" target="_blank">
+                      {% if grant.licence.name == "Creative Commons Attribution 4.0 International (CC BY 4.0)" %}
+                        
+                        <img class="license license--cc" src="{{ url_for('.static', filename='images/licences/creative-commons-main.svg') }}" alt="{{grant.licence.name}}">
+                      
+                      {% elif grant.licence.name == "Creative Commons Attribution 4.0" %}
+                        <img class="license license--cc" src="{{ url_for('.static', filename='images/licences/creative-commons-main.svg') }}" alt="{{grant.licence.name}}">
+                      
+                      {% elif grant.licence.name == "Creative Commons Attribution Share-Alike 4.0" %}
+                        <img class="license license--cc" src="{{ url_for('.static', filename='images/licences/creative-commons-main.svg') }}" alt="{{grant.licence.name}}">
+                        <img class="license license--cc" src="{{ url_for('.static', filename='images/licences/Cc-sa.svg') }}" alt="{{grant.licence.name}}">
+                      
+                      {% elif grant.licence.name == "CCO" %}
+                        <img class="license license--cc" src="{{ url_for('.static', filename='images/licences/Cc-zero.svg') }}" alt="{{grant.licence.name}}">
+                      
+                      {% elif grant.licence.name == "Open Data Commons Public Domain Dedication and Licence 1.0" %}
+                        <img class="license license--pddl" src="{{ url_for('.static', filename='images/licences/pddl.svg') }}" alt="{{grant.licence.name}}">
+                      
+                      {% elif grant.licence.name == "Open Government Licence 3.0 (United Kingdom)" %}
+                        <img class="license license--ogl" src="{{ url_for('.static', filename='images/licences/UKOpenGovernmentLicence.svg') }}" alt="{{grant.licence.name}}">
+                      {% endif %}
+                      </a>
+                    </td>
+                    <td class="registry-grant__spacer"></td>
+                  </tr>
+                {% endfor %}  
+              </table>
+            </li>
+          </ul>
+        </div>
+      </article>
+
     </li>
     {% endfor %}
   {% endif %}
