@@ -15,7 +15,7 @@
 
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/sanitize.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i&display=swap" type="text/css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" type="text/css" />
 
@@ -28,6 +28,14 @@
     </noscript>
   </head>
 
+  {%
+    set include = dict(
+      logo="registry", 
+      colour="orange",
+      title="Sharing grantmaking data for others to use" ,
+      blurb="You can use the table below to download datasets from these organisations. The data in these spreadsheets is used and displayed by a growing number of tools and websites.",
+    )
+  %}
   {% set home_link = url_for('.data_registry') %}
   {% set logo_url = url_for('.static', filename='images/360-registry-logo.svg') %}
   {% set tool_description = '360 Resources is a repository of resources to help Data Champions make better informed decisions by leveraging other people’s experiences.' %}
@@ -38,14 +46,16 @@
   } %}
 
   <body>
-    <main>
-      {% include "_parts/top-bar.html" %}
-      {% include "_parts/hero-section.html" %}
+    {# {% include "_parts/_top-bar.html" %} #}
+    {% include "_parts/_hero.html" %} 
 
-      {% block main_content %}{% endblock %}
+    <div class="page-section">
+      <main class="wrapper">
+        {% block main_content %}{% endblock %}
+      </main>
+    </div>
 
-      {% include "_parts/footer.html" %}
-    </main>
+    {% include "_parts/_footer.html" %}
     
     <footer class="by-ccm-design">
         <a class="by-line" href="http://ccmdesign.ca" target="_blank" title="Website design and development by ccm.design">by ccm.design</a>
