@@ -2,38 +2,23 @@
   <button class="top-bar__menu-trigger"><i class="material-icons">menu</i></button>
 
   <nav class="top-bar__menu contextual-menu">
-    <a href="/" class="contextual-menu__button">Home</a>
-    <a href="/elements.html" class="contextual-menu__button">Elements</a>
-    <a href="/components.html" class="contextual-menu__button">Components</a>
-    <a href="/blocks.html" class="contextual-menu__button">Blocks</a>
-    <a href="/templates.html" class="contextual-menu__button">Templates</a>
+    {% for p in top_bar.pages %}
+    <a href="{{p.url}}" class="contextual-menu__button">{{p.name}}</a>
+    {% endfor %}
   </nav>
 
-  <div class="off-canvas-menu{% if include.state %} off-canvas-menu--{{ include.state }}{% endif %}" aria-hidden>
+  <div class="off-canvas-menu{% if top_bar.state %} off-canvas-menu--{{ top_bar.state }}{% endif %}" aria-hidden>
     <button class="off-canvas-menu__trigger"><i class="material-icons">close</i></button>
 
     <nav>
       <ul class="off-canvas-menu__list">
         <a href="/" class="contextual-menu__button">Home</a>
 
+        {% for h, links in top_bar.links %}
         <h3 class="off-canvas-menu__heading">Elements</h3>
-        {% for i in site.elements %}
+        {% for i in links %}
         <li class="off-canvas-menu__item"><a href="{{i.url}}">{{i.name}}</a></li>
         {% endfor %}
-
-        <h3 class="off-canvas-menu__heading">Components</h3>
-        {% for i in site.components %}
-        <li class="off-canvas-menu__item"><a href="{{i.url}}">{{i.name}}</a></li>
-        {% endfor %}
-
-        <h3 class="off-canvas-menu__heading">Blocks</h3>
-        {% for i in site.blocks %}
-        <li class="off-canvas-menu__item"><a href="{{i.url}}">{{i.name}}</a></li>
-        {% endfor %}
-
-        <h3 class="off-canvas-menu__heading">Templates</h3>
-        {% for i in site.templates %}
-        <li class="off-canvas-menu__item"><a href="{{i.url}}">{{i.name}}</a></li>
         {% endfor %}
       </ul>
     </nav>

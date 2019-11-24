@@ -1,23 +1,19 @@
 <div class="hero-section">
   <div class="wrapper">
-    <div class="hero {% if include.colour %}hero--{{include.colour}}{% endif %}">
+    <div class="hero {% if hero.colour %}hero--{{hero.colour}}{% endif %}">
       <!-- .hero--orange, .hero--yellow, .hero--red -->
       <div class="hero__column hero__logo">
-        <a href="/"><img src="/images/360-logos/360giving-{{include.logo}}.svg" alt="360{{include.logo | capitalize }}"></a>
+        <a href="{% if hero.home_link %}{{ hero.home_link }}{% else %}/{% endif %}"><img src="{{hero.logo}}" alt="{{ hero.title }}"></a>
       </div>
       <div class="hero__column hero__lead">
         <h2 class="hero__title">
-          {% if include.title %}
-            {{include.title}}
-          {% else %}
-            See your grantmaking in new ways
+          {% if hero.subhead %}
+            {{hero.subhead}}
           {% endif %}
         </h2>
         <p class="hero__blurb">
-          {% if include.blurb %}
-            {{include.blurb}}
-          {% else %}
-            360 Resources is a repository of resources to help Data Champions make better informed decisions by leveraging other people’s experiences.
+          {% if hero.blurb %}
+            {{hero.blurb}}
           {% endif %}
         </p>
         

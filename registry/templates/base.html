@@ -28,25 +28,25 @@
     </noscript>
   </head>
 
-  {%
-    set include = dict(
-      logo="registry", 
+  {% set top_bar = dict(
+      pages=[
+        {"url": "https://threesixtygiving.org", "name": "360Giving"},
+        {"url": url_for('.data_registry'), "name": "Data Registry"},
+        {"url": url_for('.terms_and_conditions'), "name": "Terms"},
+      ],
+      links=[],
+    ) %}
+  {% set hero = dict(
+      home_link=url_for('.data_registry'),
+      title='360 Data Registry',
+      logo=url_for('.static', filename="/images/360-logos/360giving-registry.svg"), 
       colour="orange",
-      title="Sharing grantmaking data for others to use" ,
+      subhead="Sharing grantmaking data for others to use" ,
       blurb="You can use the table below to download datasets from these organisations. The data in these spreadsheets is used and displayed by a growing number of tools and websites.",
-    )
-  %}
-  {% set home_link = url_for('.data_registry') %}
-  {% set logo_url = url_for('.static', filename='images/360-registry-logo.svg') %}
-  {% set tool_description = '360 Resources is a repository of resources to help Data Champions make better informed decisions by leveraging other people’s experiences.' %}
-  {% set footer_logos = {
-    "inverted": url_for('.static', filename='images/360-giving-logo-white.svg'),
-    "github": url_for('.static', filename='images/github-logo.svg'),
-    "twitter": url_for('.static', filename='images/twitter-logo.svg'),
-  } %}
+    ) %}
 
   <body>
-    {# {% include "_parts/_top-bar.html" %} #}
+    {% include "_parts/_top-bar.html" %}
     {% include "_parts/_hero.html" %} 
 
     <div class="page-section">
