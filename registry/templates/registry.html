@@ -67,7 +67,7 @@
                     </td>
                     <td class="registry-grant__amount">
                       {% for value in grant['total_value']%}
-                        {% set value_split = value.split(" ") %}
+                        {% set value_split = value.split(" ", maxsplit=1) %}
                         <div>
                           {{value_split[0] | safe}}
                           <span class="registry-grant__amount-n">{{ value_split[1] | safe }}</span>
