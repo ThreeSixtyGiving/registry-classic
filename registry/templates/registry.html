@@ -78,7 +78,9 @@
                       <a download
                         href="{{grant.file.url}}"
                         title="{{grant.file.title}}">
-                        <i class="material-icons">cloud_download</i>
+                        <img src="{{ url_for('.static', filename='images/files/{}.png'.format(grant['file']['type']) )}}"
+                             style="width: 32px;height: 32px;max-width: 48px;">
+                        {# <i class="material-icons">cloud_download</i> #}
                       </a>
                     </td>  
                   </tr>
