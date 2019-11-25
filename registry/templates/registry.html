@@ -49,7 +49,9 @@
             </a>
         </div>
         <div class="registry-card__content">
-          <h3 class="registry-card__pub-name">{{ pub.publisher.name }}</h3>
+          <h3 class="registry-card__pub-name">
+            <a href="{{ pub.publisher.website }}" target="_blank">{{ pub.publisher.name }}</a>
+          </h3>
           
           <ul class="registry-card__list">
 
@@ -58,7 +60,13 @@
                 {% for grant in pub.grant %}
                   <tr class="registry-grant__line">
                     {# <td class="registry-grant__date-range">Records from {{ grant.period.first_date }} to {{ grant.period.latest_date }}</td> #}
-                    <td class="registry-grant__date-range">{{grant.file.title }}</td>
+                    <td class="registry-grant__date-range">
+                      <a download
+                        href="{{grant.file.url}}"
+                        title="{{grant.file.title}}">
+                        {{grant.file.title }} ({{grant.file.type}} - {{grant.file.size}})
+                      </a>
+                    </td>
                     <td class="registry-grant__records">
                       {% if grant.records %}
                       Records
@@ -78,7 +86,7 @@
                       <a download
                         href="{{grant.file.url}}"
                         title="{{grant.file.title}}">
-                        <img src="{{ url_for('.static', filename='images/files/{}.png'.format(grant['file']['type']) )}}"
+                        <img src="{{ url_for('.static', filename='images/files/{}.png'.format(grant['file']['type'].lower()) )}}"
                              style="width: 32px;height: 32px;max-width: 48px;">
                         {# <i class="material-icons">cloud_download</i> #}
                       </a>

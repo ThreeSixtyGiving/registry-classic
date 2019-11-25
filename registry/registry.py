@@ -103,16 +103,20 @@ def get_check_cross_symbol(boolean_data):
 
 
 def get_file_type(file_type):
-    if file_type not in ['csv', 'json', 'xlsx']:
-        return 'file'
-    return file_type
+    file_types = {
+        'csv': 'CSV',
+        'json': 'json',
+        'xlsx': 'Excel',
+    }
+    return file_types.get(file_type, 'file')
 
 
 def get_prefix_data(data):
     return {
         'publisher': {
             'name': data['publisher']['name'],
-            'logo': data['publisher']['logo']
+            'logo': data['publisher']['logo'],
+            'website': data['publisher']['website'],
         },
         'grant': []
     }
