@@ -12,10 +12,10 @@
 
     <nav>
       <ul class="off-canvas-menu__list">
-        <a href="/" class="contextual-menu__button">Home</a>
+        {# <a href="/" class="contextual-menu__button">Home</a> #}
 
         {% for h, links in top_bar.links %}
-        <h3 class="off-canvas-menu__heading">Elements</h3>
+        <h3 class="off-canvas-menu__heading">{{h}}</h3>
         {% for i in links %}
         <li class="off-canvas-menu__item"><a href="{{i.url}}">{{i.name}}</a></li>
         {% endfor %}
