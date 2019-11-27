@@ -2,6 +2,7 @@
 .idea/
 .pytest_cache/
 .ve/
+.vscode/
 
 get-pip.py
 
