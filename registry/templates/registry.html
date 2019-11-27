@@ -59,14 +59,11 @@
               <table class="registry-grant">
                 {% for grant in pub.grant %}
                   <tr class="registry-grant__line">
-                    {# <td class="registry-grant__date-range">Records from {{ grant.period.first_date }} to {{ grant.period.latest_date }}</td> #}
-                    <td class="registry-grant__date-range">
-                      <a download
-                        href="{{grant.file.url}}"
-                        title="{{grant.file.title}}">
-                        {{grant.file.title }} ({{grant.file.type}} - {{grant.file.size}})
-                      </a>
-                    </td>
+                    <td class="registry-grant__title" colspan="3">{{ grant.file.title }}</td>
+                  </tr>
+
+                  <tr class="registry-grant__line">
+                    <td class="registry-grant__pub-date">Published {{ grant.issued_date }}</td>
                     <td class="registry-grant__records">
                       {% if grant.records %}
                       Records
@@ -82,18 +79,19 @@
                         </div>
                       {% endfor %}
                     </td>
-                    <td class="registry-grant__download">
-                      <a download
-                        href="{{grant.file.url}}"
-                        title="{{grant.file.title}}">
-                        <img src="{{ url_for('.static', filename='images/files/{}.png'.format(grant['file']['type'].lower()) )}}"
-                             style="width: 32px;height: 32px;max-width: 48px;">
-                        {# <i class="material-icons">cloud_download</i> #}
-                      </a>
-                    </td>  
                   </tr>
                   <tr class="registry-grant__line">
-                    <td class="registry-grant__pub-date">Published {{ grant.issued_date }}</td>
+                    <td>
+                      {% if grant.file.type.lower() == 'excel' %}
+                      <a class="registry-grant__file registry-grant--xls"  href="{{grant.file.url}}" download title="Excel Spreadsheet - {{grant.file.size}}">Excel - {{grant.file.size}}</a>
+                      {% elif grant.file.type.lower() == 'csv' %}
+                      <a class="registry-grant__file registry-grant--csv"  href="{{grant.file.url}}" download title="JSON - {{grant.file.size}}">CSV - {{grant.file.size}}</a>
+                      {% elif grant.file.type.lower() == 'json' %}
+                      <a class="registry-grant__file registry-grant--json" href="{{grant.file.url}}" download title="Comma Separated Values - {{grant.file.size}}">JSON - {{grant.file.size}}</a>
+                      {% elif grant.file.type.lower() == 'ods' %}
+                      <a class="registry-grant__file registry-grant--ods"  href="{{grant.file.url}}" download title="Open Document Spreadsheet - {{grant.file.size}}">ODS - {{grant.file.size}}</a>
+                      {% endif %}
+                    </td>
                     {% if grant.valid %}
                     <td class="registry-grant__validation registry-grant--validated">
                       Data Validated
@@ -106,6 +104,7 @@
                     </td>
                     {% endif %}
                     <td class="registry-grant__license">
+                      Licence 
                       <a href="{{grant.licence.url}}" target="_blank">
                       {% if grant.licence.name == "Creative Commons Attribution 4.0 International (CC BY 4.0)" %}
                         
@@ -129,7 +128,6 @@
                       {% endif %}
                       </a>
                     </td>
-                    <td class="registry-grant__spacer"></td>
                   </tr>
                 {% endfor %}  
               </table>

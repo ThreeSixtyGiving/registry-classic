@@ -832,9 +832,9 @@ strong {
 
 .registry-grant, .registry-grant tr, .registry-grant td {
   border: 0; }
-.registry-grant tr:nth-child(2n + 2) {
+.registry-grant tr:nth-child(3n + 3) {
   border-bottom: 1px solid rgba(21, 54, 52, 0.1); }
-  .registry-grant tr:nth-child(2n + 2) td {
+  .registry-grant tr:nth-child(3n + 3) td {
     padding-bottom: 12px; }
 .registry-grant tr:last-child {
   border-bottom: 0; }
@@ -845,11 +845,15 @@ strong {
   width: 35%; }
 .registry-grant__download, .registry-grant__spacer {
   padding-left: 24px; }
-.registry-grant__date-range, .registry-grant__pub-date {
+.registry-grant__pub-date {
   width: 40%; }
+.registry-grant__title {
+  width: 100%; }
 .registry-grant__amount, .registry-grant__license {
   width: 100%;
   text-align: right; }
+.registry-grant__license a {
+  margin-left: 32px; }
 .registry-grant__validation > i {
   vertical-align: -5px; }
 .registry-grant--validated > i {
@@ -862,12 +866,29 @@ strong {
   font-weight: 300; }
 .registry-grant__amount-n {
   font-weight: 400; }
+.registry-grant__file {
+  color: white;
+  padding: 0 12px 2px;
+  border-radius: 20px;
+  font-weight: bold;
+  text-align: center;
+  display: inline-block; }
+.registry-grant--xls {
+  background-color: #DE6E26; }
+.registry-grant--csv {
+  background-color: #4DACB6; }
+.registry-grant--json {
+  background-color: #EFC329; }
+.registry-grant--ods {
+  background-color: #BC2C26; }
 
 .license {
   opacity: .4; }
   .license--cc {
-    max-width: 20px; }
+    max-width: 20px;
+    margin-bottom: -6px; }
   .license--ogl {
+    margin-bottom: -2px;
     max-width: 32px; }
   .license--pddl {
     max-width: 32px; }
