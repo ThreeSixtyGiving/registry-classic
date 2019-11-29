@@ -1,4 +1,6 @@
-from flask import Flask, render_template, current_app
+from datetime import datetime
+
+from flask import Flask, render_template, current_app, request
 from raven.contrib.flask import Sentry
 
 from registry.registry import get_data_sorted_by_prefix
@@ -11,6 +13,11 @@ app = Flask(
     template_folder='./templates',
 )
 sentry = Sentry(app)
+
+
+@app.context_processor
+def inject_current_time():
+    return dict(now=datetime.now())
 
 
 @app.route('/')
