@@ -4,6 +4,8 @@ from datetime import datetime
 import humanize
 import requests
 
+from tests.samples.registry_raw_data import RAW_DATA
+
 
 def get_currency_symbol(currency, data):
     """
@@ -221,15 +223,15 @@ def format_latest_date(data_by_prefix):
     return data_by_prefix
 
 
-def get_raw_data():
-    # if os.environ.get('FLASK_ENV') == 'development':
-    #     return RAW_DATA
+def get_raw_data(test=False):
+    if test:
+        return RAW_DATA
 
     return requests.get('http://store.data.threesixtygiving.org/reports/daily_status.json').json()
 
 
-def get_data_sorted_by_prefix():
-    raw_data = get_raw_data()
+def get_data_sorted_by_prefix(test=False):
+    raw_data = get_raw_data(test)
     data_by_prefix = get_data_by_prefix(raw_data) if raw_data else None
     sorted_data = sort_data(data_by_prefix)
 
