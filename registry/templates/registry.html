@@ -40,7 +40,7 @@
   {% if data %}
     {% for org_prefix, pub in data.items() %}
     <li class="list-section__item" id="{{ org_prefix }}">
-      <article class="registry-card" title="{{ pub.publisher.name }}">
+      <article class="registry-card">
         <div class="registry-card__pub-logo">
             <a href="{{ pub.publisher.website }}" target="_blank">
             {% if pub.publisher.logo %}
@@ -94,18 +94,30 @@
                     </td>
                     {% if grant.valid %}
                     <td class="registry-grant__validation registry-grant--validated">
-                      Data Validated
-                      <i class="material-icons">check_circle_outline</i>
+                      Valid data
+                      <i class="material-icons">
+                        <a href="https://dataquality.threesixtygiving.org/?source_url={{ grant.file.url | urlencode }}" 
+                           target="_blank"
+                           title="View this file on the data quality tool">
+                          check_circle_outline
+                        </a>
+                      </i>
                     </td>
                     {% else %}
                     <td class="registry-grant__validation registry-grant--invalid">
-                      Data Invalid
-                      <i class="material-icons">highlight_off</i>
+                      Invalid data
+                      <i class="material-icons">
+                        <a href="https://dataquality.threesixtygiving.org/?source_url={{ grant.file.url | urlencode }}" 
+                           target="_blank"
+                           title="View this file on the data quality tool">
+                          highlight_off
+                        </a>
+                      </i>
                     </td>
                     {% endif %}
                     <td class="registry-grant__license">
                       Licence 
-                      <a href="{{grant.licence.url}}" target="_blank">
+                      <a href="{{grant.licence.url}}" target="_blank" title="{{grant.licence.name}}">
                       {% if grant.licence.name == "Creative Commons Attribution 4.0 International (CC BY 4.0)" %}
                         
                         <img class="license license--cc" src="{{ url_for('.static', filename='images/licences/creative-commons-main.svg') }}" alt="{{grant.licence.name}}">
