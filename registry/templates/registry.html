@@ -58,11 +58,11 @@
             <li class="registry-card__item ">
               <table class="registry-grant">
                 {% for grant in pub.grant %}
-                  <tr class="registry-grant__line">
+                  <tr class="registry-grant__line registry-grant--title-line">
                     <td class="registry-grant__title" colspan="3">{{ grant.file.title }}</td>
                   </tr>
 
-                  <tr class="registry-grant__line">
+                  <tr class="registry-grant__line registry-grant--amounts-line">
                     <td class="registry-grant__pub-date">Published {{ grant.issued_date }}</td>
                     <td class="registry-grant__records">
                       {% if grant.records %}
@@ -80,8 +80,8 @@
                       {% endfor %}
                     </td>
                   </tr>
-                  <tr class="registry-grant__line">
-                    <td>
+                  <tr class="registry-grant__line registry-grant--data-line">
+                    <td class="registry-grant__download">
                       {% if grant.file.type.lower() == 'excel' %}
                       <a class="registry-grant__file registry-grant--xls"  href="{{grant.file.url}}" download title="Excel Spreadsheet - {{grant.file.size}}">Excel - {{grant.file.size}}</a>
                       {% elif grant.file.type.lower() == 'csv' %}
