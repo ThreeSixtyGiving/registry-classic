@@ -1,12 +1,8 @@
-import os
 from collections import OrderedDict
 from datetime import datetime
 
 import humanize
 import requests
-from flask import Markup
-
-from tests.samples.registry_raw_data import RAW_DATA
 
 
 def get_currency_symbol(currency, data):
@@ -133,7 +129,7 @@ def get_grant_data(data):
             'title': data['distribution'][0]['title'],
             'url': data['distribution'][0]['downloadURL'],
             'type': get_file_type(data_metadata.get('file_type')),
-            'size': humanize.naturalsize(file_size) if file_size else '-',
+            'size': humanize.naturalsize(file_size, format='%.0f') if file_size else '-',
             'available': data_metadata.get('downloads')
         },
         'licence': {
@@ -226,9 +222,6 @@ def format_latest_date(data_by_prefix):
 
 
 def get_raw_data():
-    # if os.environ.get('FLASK_ENV') == 'development':
-    #     return RAW_DATA
-
     return requests.get('https://storage.googleapis.com/datagetter-360giving-output/branch/master/status.json').json()
 
 
