@@ -30,7 +30,7 @@
 
   {% set top_bar = dict(
       pages=[
-        {"url": "https://threesixtygiving.org", "name": "360Giving"},
+        {"url": "https://grantnav.threesixtygiving.org", "name": "GrantNav"},
         {"url": url_for('.data_registry'), "name": "Data Registry"},
         {"url": url_for('.terms_and_conditions'), "name": "Terms"},
       ],
@@ -46,34 +46,20 @@
     ) %}
 
   <body>
-    {% include "_parts/_top-bar.html" %}
-    {% include "_parts/_hero.html" %} 
+    <div class="layout layout--single-column">
+      {% include "_parts/_top-bar.html" %}
+      {% include "_parts/_hero.html" %} 
 
-    <div class="page-section">
-      <main class="wrapper">
-        {% block main_content %}{% endblock %}
+      <main class="layout__content">
+        <div class="layout__content-inner">
+          {% block main_content %}{% endblock %}
+        </div>
       </main>
+
+      {% include "_parts/_footer.html" %}
     </div>
 
-    {% include "_parts/_footer.html" %}
-    
-    <footer class="by-ccm-design">
-        <a class="by-line" href="http://ccmdesign.ca" target="_blank" title="Website design and development by ccm.design">by ccm.design</a>
-    </footer>
-
-    <script type="text/javascript">
-    document.querySelectorAll('.top-bar__menu-trigger, .off-canvas-menu__trigger').forEach(function(el) {
-      el.onclick = function(){
-        const offCanvasMenu = document.querySelector('.off-canvas-menu');
-        offCanvasMenu.classList.toggle('off-canvas-menu--expanded');
-        if (offCanvasMenu.hasAttribute('aria-hidden')) {
-          offCanvasMenu.removeAttribute('aria-hidden')
-        } else {
-          offCanvasMenu.setAttribute('aria-hidden', '')
-        }
-      };
-    });
-    </script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/index.js') }}"></script>
 
     <!-- Matomo -->
     <script type="text/javascript">

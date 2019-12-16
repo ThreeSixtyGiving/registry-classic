@@ -2,59 +2,74 @@
 {% block main_content %}
 
 <article class="prose-section__main">
-    <div class="prose">
-      <section class="prose__section prose__intro">
-        <h1 class="h1">{{ num_of_publishers }} funding organisations are publishing their grants data openly.</h1>
-      </section>
-        <section class="prose__section">
-          <p class="p">
-            This registry lists all of the organisations that currently publish data about their grants to the 360Giving data
+  <div class="prose">
+    <div class="accordion">
+      <section class="prose__section grid grid--three-columns">
+        <div class="grid__1">
+          <div class="box box--orange">
+            <p>
+              If you want to explore the grants data by location, sector or recipient, head to 
+              <a href="http://grantnav.threesixtygiving.org/" target="_blank">GrantNav</a>.
+            </p>
+            <p>
+              You can use GrantNav to search, compare and download the data for free.
+            </p>
+          </div>
+        </div>
+        <div class="grid__2">
+          <p>
+            This registry lists all {{ num_of_publishers }} organisations that currently publish data about their grants to the 360Giving data
             standard.
           </p>
-          <p class="p">
-            Under each organisation, you can find:
-          </p>
-          <ul class="ul">
-            <li class="li">a short description of the data they have published</li>
-            <li class="li">the date they last published</li>
-            <li class="li">links to download the data and visit their original data source</li>
-            <li class="li">the licence they have published the data with (which affects how you can use it)</li>
-            <li class="li">the value of the grants they have published data about</li>
-          </ul>
-          <p class="p">
+          <p>
             This registry is useful if you want to see a full list of funders who publish to the standard, or if you want to access
-            the data in a machine-readable format to use in research, tools or websites. You can find examples of what can be
+            the data in a machine-readable format to use in research, tools or websites.
+          </p>
+          <p>
+            You can find examples of what can be
             created using this open grants data on the <a href="http://www.threesixtygiving.org/data/find-data/" target="_blank">Tools &amp; Projects</a>
             page.
           </p>
-          <p class="p devs-info">
-            <strong>Developers:</strong> For a JSON feed of published datasets visit
-            <a href="http://standard.threesixtygiving.org/en/latest/getdata/" target="_blank">
-              http://standard.threesixtygiving.org/en/latest/getdata/</a>
-          </p>
-          <p class="p">
-            If you want to explore the grants data by location, sector or recipient, head to 
-            <a href="http://grantnav.threesixtygiving.org/" target="_blank">GrantNav</a>. 
-            You can use GrantNav to search, compare and download the data for free.
-          </p>
-          <p class="p">
-            If you are a funder and would like to understand how to publish your grants data openly with the 360Giving data
-            standard, visit our <a href="https://www.threesixtygiving.org/support/" target="_blank">support page</a> or 
-            <a href="http://www.threesixtygiving.org/contact/" target="_blank">get in touch</a>.
-          </p>
-          <p class="p p_smaller_font_size">
-            <strong><sub>*</sub></strong>
-            Funders make grants in different currencies. Grants are listed in the currency in which they were made.
-          </p>
+          <button class="accordion__trigger button button--small button--teal">More Information</button>
+          <div class="accordion__extra">
+            <p class="p">
+              Under each organisation, you can find:
+            </p>
+            <ul class="ul">
+              <li class="li">a short description of the data they have published</li>
+              <li class="li">the date they last published</li>
+              <li class="li">links to download the data and visit their original data source</li>
+              <li class="li">the licence they have published the data with (which affects how you can use it)</li>
+              <li class="li">the value of the grants they have published data about</li>
+            </ul>
+            <div class="box box--teal">
+              <h3 class="box__heading">Developers</h3>
+              <p>For a JSON feed of published datasets visit
+              <a href="http://standard.threesixtygiving.org/en/latest/getdata/" target="_blank">
+                http://standard.threesixtygiving.org/en/latest/getdata/</a>
+              </p>
+            </div>
+            <p>
+              If you are a funder and would like to understand how to publish your grants data openly with the 360Giving data
+              standard, visit our <a href="https://www.threesixtygiving.org/support/" target="_blank">support page</a> or 
+              <a href="http://www.threesixtygiving.org/contact/" target="_blank">get in touch</a>.
+            </p>
+            <p>
+              <small>
+                *Funders make grants in different currencies. Grants are listed in the currency in which they were made.
+              </small>
+            </p>
+          </div>
         </section>
+      </div>
     </div>      
 </article>
 
-<ul class="list-section">
+<ul class="card-list">
       
   {% if data %}
     {% for org_prefix, pub in data.items() %}
-    <li class="list-section__item" id="{{ org_prefix }}">
+    <li class="card-list__item" id="{{ org_prefix }}">
       <article class="registry-card">
         <div class="registry-card__pub-logo">
             <a href="{{ pub.publisher.website }}" target="_blank">
@@ -65,7 +80,9 @@
         </div>
         <div class="registry-card__content">
           <h3 class="registry-card__pub-name">
-            <a href="{{ pub.publisher.website }}" target="_blank">{{ pub.publisher.name }}</a>
+            {# <a href="{{ pub.publisher.website }}" target="_blank"> #}
+            {{ pub.publisher.name }}
+            {# </a> #}
           </h3>
           
           <ul class="registry-card__list">
@@ -111,22 +128,22 @@
                     <td class="registry-grant__validation registry-grant--validated">
                       Valid data
                       <i class="material-icons">
-                        <a href="https://dataquality.threesixtygiving.org/?source_url={{ grant.file.url | urlencode }}" 
+                        {# <a href="https://dataquality.threesixtygiving.org/?source_url={{ grant.file.url | urlencode }}" 
                            target="_blank"
-                           title="View this file on the data quality tool">
+                           title="View this file on the data quality tool"> #}
                           check_circle_outline
-                        </a>
+                        {# </a> #}
                       </i>
                     </td>
                     {% else %}
                     <td class="registry-grant__validation registry-grant--invalid">
                       Invalid data
                       <i class="material-icons">
-                        <a href="https://dataquality.threesixtygiving.org/?source_url={{ grant.file.url | urlencode }}" 
+                        {# <a href="https://dataquality.threesixtygiving.org/?source_url={{ grant.file.url | urlencode }}" 
                            target="_blank"
-                           title="View this file on the data quality tool">
+                           title="View this file on the data quality tool"> #}
                           highlight_off
-                        </a>
+                        {# </a> #}
                       </i>
                     </td>
                     {% endif %}
