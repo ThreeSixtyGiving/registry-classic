@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from flask import Flask, render_template, current_app, request
+from flask import Flask, render_template, current_app
 from raven.contrib.flask import Sentry
 
 from registry.registry import get_data_sorted_by_prefix
