@@ -154,23 +154,23 @@
                       <a href="{{grant.licence.url}}" target="_blank" title="{{grant.licence.name}}">
                       {% if grant.licence.name == "Creative Commons Attribution 4.0 International (CC BY 4.0)" %}
                         
-                        <img class="license license--cc" src="{{ url_for('.static', filename='images/licences/creative-commons-main.svg') }}" alt="{{grant.licence.name}}">
+                        <img class="license license--cc" src="{{ url_for('.static', filename='images/licenses/creative-commons-main.svg') }}" alt="{{grant.licence.name}}">
                       
                       {% elif grant.licence.name == "Creative Commons Attribution 4.0" %}
-                        <img class="license license--cc" src="{{ url_for('.static', filename='images/licences/creative-commons-main.svg') }}" alt="{{grant.licence.name}}">
+                        <img class="license license--cc" src="{{ url_for('.static', filename='images/licenses/creative-commons-main.svg') }}" alt="{{grant.licence.name}}">
                       
                       {% elif grant.licence.name == "Creative Commons Attribution Share-Alike 4.0" %}
-                        <img class="license license--cc" src="{{ url_for('.static', filename='images/licences/creative-commons-main.svg') }}" alt="{{grant.licence.name}}">
-                        <img class="license license--cc" src="{{ url_for('.static', filename='images/licences/Cc-sa.svg') }}" alt="{{grant.licence.name}}">
+                        <img class="license license--cc" src="{{ url_for('.static', filename='images/licenses/creative-commons-main.svg') }}" alt="{{grant.licence.name}}">
+                        <img class="license license--cc" src="{{ url_for('.static', filename='images/licenses/Cc-sa.svg') }}" alt="{{grant.licence.name}}">
                       
                       {% elif grant.licence.name == "CCO" %}
-                        <img class="license license--cc" src="{{ url_for('.static', filename='images/licences/Cc-zero.svg') }}" alt="{{grant.licence.name}}">
+                        <img class="license license--cc" src="{{ url_for('.static', filename='images/licenses/Cc-zero.svg') }}" alt="{{grant.licence.name}}">
                       
                       {% elif grant.licence.name == "Open Data Commons Public Domain Dedication and Licence 1.0" %}
-                        <img class="license license--pddl" src="{{ url_for('.static', filename='images/licences/pddl.svg') }}" alt="{{grant.licence.name}}">
+                        <img class="license license--pddl" src="{{ url_for('.static', filename='images/licenses/pddl.svg') }}" alt="{{grant.licence.name}}">
                       
                       {% elif grant.licence.name == "Open Government Licence 3.0 (United Kingdom)" %}
-                        <img class="license license--ogl" src="{{ url_for('.static', filename='images/licences/UKOpenGovernmentLicence.svg') }}" alt="{{grant.licence.name}}">
+                        <img class="license license--ogl" src="{{ url_for('.static', filename='images/licenses/UKOpenGovernmentLicence.svg') }}" alt="{{grant.licence.name}}">
                       {% endif %}
                       </a>
                     </td>
