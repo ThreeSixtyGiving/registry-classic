@@ -190,7 +190,7 @@ def test_get_file_type_none():
 # def test_get_licence_acceptable():
 #     response = get_licence('CCO', 'url', True)
 
-#     assert response == "<a href=\"url\"><img src=\"../images/licences/cc_pd.png\" width='70' height='27'></a>"
+#     assert response == "<a href=\"url\"><img src=\"../images/licenses/cc_pd.png\" width='70' height='27'></a>"
 
 
 # def test_get_licence_with_name_not_in_dict_and_url():
@@ -222,7 +222,7 @@ def test_get_file_type_none():
 #         'logo': 'http://www.threesixtygiving.org/wp-content/uploads/BBCCiN_CoreLogo.png'
 #     }
 #     assert bbc_data['licence'] == {
-#         'url': 'https://creativecommons.org/licences/by/4.0/',
+#         'url': 'https://creativecommons.org/licenses/by/4.0/',
 #         'name': 'Creative Commons Attribution 4.0'
 #     }
 #     assert bbc_data['grant'] == [{
