@@ -1,7 +1,7 @@
 import os
 
 from registry.registry import get_currency_symbol, format_value, format_date, get_total_value,\
-    get_check_cross_symbol, get_file_type, get_data_by_prefix, sort_data, get_data_sorted_by_prefix
+    get_check_cross_symbol, get_file_type, get_data_by_prefix, sort_data, get_data_sorted_by_prefix, get_raw_data
 from tests.samples.registry_scvo_data import SCVO_DATA
 
 os.environ['FLASK_ENV'] = 'development'
@@ -247,7 +247,8 @@ def test_get_file_type_none():
 #     assert big_lottery_grant[1]['name'] == 'Big Lottery Fund - grants data 2017-18 year-to-date'
 
 def test_max_award_date_correct_format():
-    data = get_data_sorted_by_prefix(True)
+    raw_data = get_raw_data(True)
+    data = get_data_sorted_by_prefix(raw_data)
     grants_blf = data['360G-blf']['grant']
 
     assert grants_blf[0]['period']['latest_date'] == "Mar '18"
