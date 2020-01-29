@@ -1,6 +1,8 @@
 from collections import OrderedDict
 from datetime import datetime
 
+from flask import url_for
+
 import humanize
 import requests
 
@@ -143,7 +145,7 @@ def get_grant_data(data):
         'records': format_value(data_aggregates['count'] if data_aggregates else None),
         'period': {
             'first_date': format_date(data_aggregates.get('min_award_date')) if data_aggregates else '',
-            'latest_date': data_aggregates.get('max_award_date') if data_aggregates else ''
+            'latest_date': format_date(data_aggregates.get('max_award_date')) if data_aggregates else ''
         },
         'issued_date': format_date(data.get('issued'), "%b %Y"),
         'valid': get_check_cross_symbol(data_metadata.get('valid')),
@@ -230,9 +232,56 @@ def get_raw_data(test=False):
     return requests.get('https://storage.googleapis.com/datagetter-360giving-output/branch/master/status.json').json()
 
 
-def get_data_sorted_by_prefix(test=False):
-    raw_data = get_raw_data(test)
+def get_data_sorted_by_prefix(raw_data):
     data_by_prefix = get_data_by_prefix(raw_data) if raw_data else None
     sorted_data = sort_data(data_by_prefix)
 
     return format_latest_date(sorted_data)
+
+
+def get_schema_org_list(raw_data):
+    datacatalog = {
+        "@type": "DataCatalog",
+        "name": "360Giving Data Registry",
+        "url": url_for('data_registry', _external=True),
+        "description": "A registry of data about grants made, published using the 360Giving data standard",
+        "maintainer": {
+            "@type": "Organization",
+            "url": "https://www.threesixtygiving.org/",
+            "name": "360Giving",
+        }
+    }
+    schemaorg = [datacatalog] + [
+        {
+            "@context": "https://schema.org/",
+            "@type": "Dataset",
+            "name": d.get('title', ''),
+            "description": 'Data on grants made by {} published using the 360Giving data standard'.format(
+                d.get("publisher", {}).get('name', '')
+            ),
+            "url": d.get('distribution', [{}])[0].get('accessURL'),
+            "license": d.get('license', ''),
+            "creator": {
+                "@type": "Organization",
+                "url": d.get("publisher", {}).get('website', ''),
+                "name": d.get("publisher", {}).get('name', ''),
+            },
+            "includedInDataCatalog": {
+                "@type": "DataCatalog",
+                "name": datacatalog['name']
+            },
+            "distribution": [
+                {
+                    "@type": "DataDownload",
+                    "encodingFormat": d.get("datagetter_metadata", {}).get('file_type'),
+                    "contentUrl": d.get('distribution', [{}])[0].get('downloadURL'),
+                },
+            ],
+            "temporalCoverage": "{}/{}".format(
+                d.get("datagetter_aggregates", {}).get('min_award_date'),
+                d.get("datagetter_aggregates", {}).get('max_award_date'),
+            )
+        }
+        for d in raw_data
+    ]
+    return schemaorg
