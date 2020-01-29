@@ -241,6 +241,7 @@ def get_data_sorted_by_prefix(raw_data):
 
 def get_schema_org_list(raw_data):
     datacatalog = {
+        "@context": "https://schema.org/",
         "@type": "DataCatalog",
         "name": "360Giving Data Registry",
         "url": url_for('data_registry', _external=True),
