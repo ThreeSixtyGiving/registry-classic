@@ -132,6 +132,7 @@ def get_grant_data(data):
         'file': {
             'title': data['distribution'][0]['title'],
             'url': data['distribution'][0]['downloadURL'],
+            'accessURL': data['distribution'][0]['accessURL'],
             'type': get_file_type(data_metadata.get('file_type')),
             'size': humanize.naturalsize(file_size, format='%.0f') if file_size else '-',
             'available': data_metadata.get('downloads')
@@ -144,8 +145,8 @@ def get_grant_data(data):
         'total_value': get_total_value(data_aggregates.get('currencies') if data_aggregates else None),
         'records': format_value(data_aggregates['count'] if data_aggregates else None),
         'period': {
-            'first_date': format_date(data_aggregates.get('min_award_date')) if data_aggregates else '',
-            'latest_date': format_date(data_aggregates.get('max_award_date')) if data_aggregates else ''
+            'first_date': format_date(data_aggregates.get('min_award_date'), '%b %Y') if data_aggregates else '',
+            'latest_date': format_date(data_aggregates.get('max_award_date'), '%b %Y') if data_aggregates else ''
         },
         'issued_date': format_date(data.get('issued'), "%b %Y"),
         'valid': get_check_cross_symbol(data_metadata.get('valid')),

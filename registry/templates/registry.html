@@ -5,67 +5,33 @@
 
 <article class="prose-section__main">
   <div class="prose">
-    <div class="accordion">
-      <section class="prose__section grid grid--three-columns">
-        <div class="grid__1">
-          <button class="accordion__trigger button button--small button--yellow">More Information</button>
-        </div>
-        <div class="grid__2">
-          <p>
-            This registry lists all {{ num_of_publishers }} organisations that currently publish data about their grants to the 360Giving data
-            standard.
-          </p>
-          <p>
-            This registry is useful if you want to see a full list of funders who publish to the standard, or if you want to access
-            the data in a machine-readable format to use in research, tools or websites.
-          </p>
-          <div class="box box--orange">
-            <p>
-              If you want to explore the grants data by location, sector or recipient, head to 
-              <a href="http://grantnav.threesixtygiving.org/" target="_blank">GrantNav</a>.
-              You can use GrantNav to search, compare and download the data for free.
-            </p>
-          </div>
-        </div>
-      </section>
-      <section class="prose__section accordion__extra grid grid--three-columns" aria-hidden>
-        <div class="grid__1">&nbsp;</div>
-        <div class="grid__2">
-          <p>
-            You can find examples of what can be
-            created using this open grants data on the <a href="http://www.threesixtygiving.org/data/find-data/" target="_blank">Tools &amp; Projects</a>
-            page.
-          </p>
-          <p class="p">
-            Under each organisation, you can find:
-          </p>
-          <ul class="ul">
-            <li class="li">a short description of the data they have published</li>
-            <li class="li">the date they last published</li>
-            <li class="li">links to download the data and visit their original data source</li>
-            <li class="li">the licence they have published the data with (which affects how you can use it)</li>
-            <li class="li">the value of the grants they have published data about</li>
-          </ul>
-          <div class="box box--teal">
-            <h3 class="box__heading">Developers</h3>
-            <p>For a JSON feed of published datasets visit
-            <a href="http://standard.threesixtygiving.org/en/latest/getdata/" target="_blank">
-              http://standard.threesixtygiving.org/en/latest/getdata/</a>
-            </p>
-          </div>
-          <p>
-            If you are a funder and would like to understand how to publish your grants data openly with the 360Giving data
-            standard, visit our <a href="https://www.threesixtygiving.org/support/" target="_blank">support page</a> or 
-            <a href="http://www.threesixtygiving.org/contact/" target="_blank">get in touch</a>.
-          </p>
-          <p>
-            <small>
-              *Funders make grants in different currencies. Grants are listed in the currency in which they were made.
-            </small>
-          </p>
-        </div>
-      </section>
-    </div>
+    <section class="prose__section grid grid--three-columns">
+      <div class="grid__3">
+        <p>
+          This registry lists all {{ num_of_publishers }} organisations that currently publish data about 
+          their grants to the 360Giving data standard. 
+        </p>
+      </div>
+      <div class="box box--orange grid__1">
+        <p>
+          Looking to explore the grants data by location, sector or recipient? Head to
+          <a href="http://grantnav.threesixtygiving.org/" target="_blank">GrantNav</a>.
+        </p>
+      </div>
+      <div class="box box--teal grid__1">
+        <p>
+          Looking to build tools or do research with the data?
+          <a href="http://standard.threesixtygiving.org/en/latest/getdata/#registry" target="_blank">Use our JSON feed</a>.
+        </p>
+      </div>
+      <div class="box box--red grid__1">
+        <p>
+          Want to publish your grants data openly with the 360Giving standard? Visit our
+          <a href="https://www.threesixtygiving.org/support/" target="_blank">support page</a> or
+          <a href="http://www.threesixtygiving.org/contact/" target="_blank">get in touch</a>.
+        </p>
+      </div>
+    </section>
   </div>
 </article>
 
@@ -95,11 +61,20 @@
               <table class="registry-grant">
                 {% for grant in pub.grant %}
                   <tr class="registry-grant__line registry-grant--title-line">
-                    <td class="registry-grant__title" colspan="3">{{ grant.file.title }}</td>
+                    <td class="registry-grant__title" colspan="3">
+                      <a href="{{grant.file.accessURL}}">{{ grant.file.title }}</a>
+                    </td>
                   </tr>
 
                   <tr class="registry-grant__line registry-grant--amounts-line">
-                    <td class="registry-grant__pub-date">Published {{ grant.issued_date }}</td>
+                    <td class="registry-grant__pub-date">
+                      {% if grant.period.first_date %}
+                      Grants from {{ grant.period.first_date }}
+                      {% if grant.period.first_date != grant.period.latest_date %}
+                      to {{ grant.period.latest_date }}
+                      {% endif %}
+                      {% endif %}
+                    </td>
                     <td class="registry-grant__records">
                       {% if grant.records %}
                       Records
@@ -110,6 +85,9 @@
                       {% for value in grant['total_value']%}
                         {% set value_split = value.split(" ", maxsplit=1) %}
                         <div>
+                          {% if loop.index0==0 %}
+                          Total grants
+                          {% endif %}
                           {{value_split[0] | safe}}
                           <span class="registry-grant__amount-n">{{ value_split[1] | safe }}</span>
                         </div>
