@@ -104,6 +104,8 @@
                       <a class="registry-grant__file registry-grant--json" href="{{grant.file.url}}" download title="Comma Separated Values - {{grant.file.size}}">JSON - {{grant.file.size}}</a>
                       {% elif grant.file.type.lower() == 'ods' %}
                       <a class="registry-grant__file registry-grant--ods"  href="{{grant.file.url}}" download title="Open Document Spreadsheet - {{grant.file.size}}">ODS - {{grant.file.size}}</a>
+                      {% else %}
+                      <a class="registry-grant__file"  href="{{grant.file.url}}" download title="Download">Download</a>
                       {% endif %}
                     </td>
                     {% if grant.valid %}
