@@ -246,7 +246,7 @@ def get_schema_org_list(raw_data):
         "@type": "DataCatalog",
         "name": "360Giving Data Registry",
         "url": url_for('data_registry', _external=True),
-        "description": "A registry of data about grants made, published using the 360Giving data standard",
+        "description": "A registry of data about grants made, published using the 360Giving Data Standard",
         "maintainer": {
             "@type": "Organization",
             "url": "https://www.threesixtygiving.org/",
@@ -258,7 +258,7 @@ def get_schema_org_list(raw_data):
             "@context": "https://schema.org/",
             "@type": "Dataset",
             "name": d.get('title', ''),
-            "description": 'Data on grants made by {} published using the 360Giving data standard'.format(
+            "description": 'Data on grants made by {} published using the 360Giving Data Standard'.format(
                 d.get("publisher", {}).get('name', '')
             ),
             "url": d.get('distribution', [{}])[0].get('accessURL'),
