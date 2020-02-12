@@ -231,7 +231,7 @@ def get_raw_data():
     if os.environ.get('FLASK_ENV') == 'development':
         return RAW_DATA
 
-    return requests.get('https://storage.googleapis.com/datagetter-360giving-output/branch/master/status.json').json()
+    return requests.get('http://store.data.threesixtygiving.org/reports/daily_status.json').json()
 
 
 def get_data_sorted_by_prefix():
