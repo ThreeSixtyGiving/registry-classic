@@ -145,6 +145,7 @@ def get_grant_data(data):
         'total_value': get_total_value(data_aggregates.get('currencies') if data_aggregates else None),
         'records': format_value(data_aggregates['count'] if data_aggregates else None),
         'period': {
+            'max_award_date': data_aggregates.get('max_award_date'),
             'first_date': format_date(data_aggregates.get('min_award_date'), '%b %Y') if data_aggregates else '',
             'latest_date': format_date(data_aggregates.get('max_award_date'), '%b %Y') if data_aggregates else ''
         },
@@ -203,7 +204,7 @@ def sort_data(data_by_prefix):
     """
     for prefix in data_by_prefix:
         sort_by_grant_latest_date = sorted(
-            data_by_prefix[prefix]['grant'], key=lambda x: x['period']['latest_date'], reverse=True
+            data_by_prefix[prefix]['grant'], key=lambda x: x['period']['max_award_date'], reverse=True
         )
         data_by_prefix[prefix]['grant'] = sort_by_grant_latest_date
 
