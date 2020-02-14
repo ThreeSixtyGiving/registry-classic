@@ -5,32 +5,26 @@
 
 <article class="prose-section__main">
   <div class="prose">
-    <section class="prose__section grid grid--three-columns">
-      <div class="grid__3">
+    <section class="prose__section prose__intro">
         <p>
-          This registry lists all {{ num_of_publishers }} organisations that currently publish data about 
+          This registry lists {{ num_of_publishers }} organisations that publish data about 
           their grants to the 360Giving Data Standard. 
         </p>
-      </div>
-      <div class="box box--orange grid__1">
+      <div class="box box--orange">
         <p>
           Looking to explore the grants data by location, sector or recipient? Head to
           <a href="http://grantnav.threesixtygiving.org/" target="_blank">GrantNav</a>.
         </p>
       </div>
-      <div class="box box--teal grid__1">
         <p>
           Looking to build tools or do research with the data?
           <a href="http://standard.threesixtygiving.org/en/latest/getdata/#registry" target="_blank">Use our JSON feed</a>.
         </p>
-      </div>
-      <div class="box box--red grid__1">
         <p>
           Want to publish your grants data openly with the 360Giving standard? Visit our
           <a href="https://www.threesixtygiving.org/support/" target="_blank">support page</a> or
           <a href="http://www.threesixtygiving.org/contact/" target="_blank">get in touch</a>.
         </p>
-      </div>
     </section>
   </div>
 </article>
@@ -84,8 +78,11 @@
                     <td class="registry-grant__amount">
                       {% for value in grant['total_value']%}
                         {% set value_split = value.split(" ", maxsplit=1) %}
+                        {% if loop.index0==0 and loop.length > 1 %}
+                        <div>Total grants</div>
+                        {% endif %}
                         <div>
-                          {% if loop.index0==0 %}
+                          {% if loop.length == 1 %}
                           Total grants
                           {% endif %}
                           {{value_split[0] | safe}}
@@ -97,7 +94,7 @@
                   <tr class="registry-grant__line registry-grant--data-line">
                     <td class="registry-grant__download">
                       {% if grant.file.type.lower() == 'excel' %}
-                      <a class="registry-grant__file registry-grant--xls"  href="{{grant.file.url}}" download title="Excel Spreadsheet - {{grant.file.size}}">Excel - {{grant.file.size}}</a>
+                      <a class="registry-grant__file registry-grant--xls"  href="{{grant.file.url}}" download title="Excel Spreadsheet - {{grant.file.size}}">XLSX - {{grant.file.size}}</a>
                       {% elif grant.file.type.lower() == 'csv' %}
                       <a class="registry-grant__file registry-grant--csv"  href="{{grant.file.url}}" download title="JSON - {{grant.file.size}}">CSV - {{grant.file.size}}</a>
                       {% elif grant.file.type.lower() == 'json' %}
