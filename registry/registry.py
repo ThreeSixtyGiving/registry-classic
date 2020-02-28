@@ -124,8 +124,8 @@ def get_prefix_data(data):
 
 def get_grant_data(data):
     # TODO TEST
-    data_aggregates = data.get('datagetter_aggregates')
-    data_metadata = data.get('datagetter_metadata')
+    data_aggregates = data.get('datagetter_aggregates', {})
+    data_metadata = data.get('datagetter_metadata', {})
     file_size = data_metadata.get('file_size')
 
     return {
@@ -203,10 +203,13 @@ def sort_data(data_by_prefix):
     Sort grants first by publisher name and, and then by date of the latest date.
     """
     for prefix in data_by_prefix:
-        sort_by_grant_latest_date = sorted(
-            data_by_prefix[prefix]['grant'], key=lambda x: x['period']['max_award_date'], reverse=True
-        )
-        data_by_prefix[prefix]['grant'] = sort_by_grant_latest_date
+        try:
+            sort_by_grant_latest_date = sorted(
+                data_by_prefix[prefix]['grant'], key=lambda x: x['period']['max_award_date'], reverse=True
+            )
+            data_by_prefix[prefix]['grant'] = sort_by_grant_latest_date
+        except TypeError as e:
+            pass
 
     def get_publisher_name(x):
         name = x[1]['publisher']['name'].casefold()
