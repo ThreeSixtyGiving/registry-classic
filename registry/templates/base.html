@@ -46,9 +46,11 @@
     ) %}
 
   <body>
+    {% include "_parts/top-bar.html" %}
     <div class="layout layout--single-column">
-      {% include "_parts/_top-bar.html" %}
-      {% include "_parts/_hero.html" %} 
+      <header class="layout__header">
+        {% include "_parts/hero.html" %}
+      </header> 
 
       <main class="layout__content">
         <div class="layout__content-inner">
@@ -56,7 +58,10 @@
         </div>
       </main>
 
-      {% include "_parts/_footer.html" %}
+      <footer class="layout__footer">
+        {% include "_parts/subscribe.html" %}
+        {% include "_parts/footer.html" %}
+      </footer>
     </div>
 
     <script type="text/javascript" src="{{ url_for('static', filename='js/index.js') }}"></script>
