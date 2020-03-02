@@ -1,4 +1,6 @@
 from datetime import datetime
+import json
+import os
 
 from flask import Flask, render_template, current_app
 from raven.contrib.flask import Sentry
@@ -16,8 +18,12 @@ sentry = Sentry(app)
 
 
 @app.context_processor
-def inject_current_time():
-    return dict(now=datetime.now())
+def inject_footer_menu():
+    with open(os.path.join(os.path.dirname(__file__), 'footer.json')) as a:
+        return dict(
+            settings360=json.load(a),
+            now=datetime.now(),
+        )
 
 
 @app.route('/')

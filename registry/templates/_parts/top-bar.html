@@ -12,13 +12,11 @@
 
     <nav>
       <ul class="off-canvas-menu__list">
-        {# <a href="/" class="contextual-menu__button">Home</a> #}
-
-        {% for h, links in top_bar.links %}
-        <h3 class="off-canvas-menu__heading">{{h}}</h3>
-        {% for i in links %}
-        <li class="off-canvas-menu__item"><a href="{{i.url}}">{{i.name}}</a></li>
-        {% endfor %}
+        {% for m in settings360.menus.menu_off_canvas["items"] %}
+        <li class="off-canvas-menu__item">
+            <a href="{{ m.url }}">{{ m.title|safe }}</a>
+            <p>{{ m.description|safe }}</p>
+        </li>
         {% endfor %}
       </ul>
     </nav>
