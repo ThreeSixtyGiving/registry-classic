@@ -113,10 +113,10 @@
     }
   ],
   "newsletter": {
-    "form_url": "http://mailchimp.us8.list-manage.com/subscribe/post",
+    "form_url": "https://threesixtygiving.us10.list-manage.com/subscribe",
     "u": "216b8b926250184f90c7198e8",
     "id": "91870dde44",
-    "email_field": "MERGE0"
+    "email_field": "EMAIL"
   },
   "footer_tagline": "Open data for more effective grantmaking"
 }
