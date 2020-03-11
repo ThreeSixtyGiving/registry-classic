@@ -208,7 +208,7 @@ def sort_data(data_by_prefix):
                 data_by_prefix[prefix]['grant'], key=lambda x: x['period']['max_award_date'], reverse=True
             )
             data_by_prefix[prefix]['grant'] = sort_by_grant_latest_date
-        except TypeError as e:
+        except TypeError:
             pass
 
     def get_publisher_name(x):
