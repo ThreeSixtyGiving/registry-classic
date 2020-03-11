@@ -251,8 +251,8 @@ def test_max_award_date_correct_format():
     data = get_data_sorted_by_prefix(raw_data)
     grants_blf = data['360G-blf']['grant']
 
-    assert grants_blf[0]['period']['latest_date'] == "Mar '18"
-    assert grants_blf[1]['period']['latest_date'] == "Mar '17"
+    assert grants_blf[0]['period']['latest_date'] == "Mar 2018"
+    assert grants_blf[1]['period']['latest_date'] == "Mar 2017"
 
 
 def test_publisher_data_is_sorted_by_max_award_date():
@@ -261,7 +261,7 @@ def test_publisher_data_is_sorted_by_max_award_date():
     grants = sorted_data['360G-SCVO']['grant']
 
     assert len(grants) == 4
-    assert grants[0]['period']['latest_date'] == "2019-05-13"
-    assert grants[1]['period']['latest_date'] == "2018-12-19"
-    assert grants[2]['period']['latest_date'] == "2018-11-02"
-    assert grants[3]['period']['latest_date'] == "2018-08-01"
+    assert grants[0]['period']['latest_date'] == "May 2019"
+    assert grants[1]['period']['latest_date'] == "Dec 2018"
+    assert grants[2]['period']['latest_date'] == "Nov 2018"
+    assert grants[3]['period']['latest_date'] == "Aug 2018"

@@ -73,8 +73,8 @@ def test_table_organisations_order(browser):
 
     assert len(headers) == 3
     assert headers[0] == 'bbc children in need'
-    assert headers[0] == 'The Big Lottery Fund'
-    assert headers[0] == 'The Corra Foundation, previously called Lloyds TSB Foundation for Scotland'
+    assert headers[1] == 'The Big Lottery Fund'
+    assert headers[2] == 'The Corra Foundation, previously called Lloyds TSB Foundation for Scotland'
 
 
 @pytest.mark.usefixtures('live_server')
@@ -117,6 +117,7 @@ def test_footer_links(browser, link_text):
 
 @pytest.mark.usefixtures('live_server')
 def test_footer_terms_and_conditions_link(browser, live_server):
+    browser.get(url_for('data_registry', _external=True))
     browser.find_element_by_link_text('Terms').click()
 
     assert browser.current_url == live_server.url() + '/terms-conditions'
@@ -125,6 +126,7 @@ def test_footer_terms_and_conditions_link(browser, live_server):
 
 @pytest.mark.usefixtures('live_server')
 def test_footer_take_down_policy_link(browser):
+    browser.get(url_for('data_registry', _external=True))
     browser.find_element_by_link_text('Take Down Policy').click()
 
     assert browser.current_url.endswith('/take-down-policy/')
@@ -132,6 +134,7 @@ def test_footer_take_down_policy_link(browser):
 
 @pytest.mark.usefixtures('live_server')
 def test_footer_license_link(browser):
+    browser.get(url_for('data_registry', _external=True))
     browser.find_element_by_link_text('Creative Commons Attribution 4.0 International License').click()
 
     assert browser.current_url == 'https://creativecommons.org/licenses/by/4.0/'
