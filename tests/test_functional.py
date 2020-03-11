@@ -26,6 +26,7 @@ def browser(request):
 
 @pytest.mark.usefixtures('live_server')
 def test_nav_menu_home_link(browser):
+    browser.get(url_for('data_registry', _external=True))
     browser.find_element_by_link_text('GrantNav').click()
 
     assert browser.current_url == 'https://grantnav.threesixtygiving.org/'
@@ -33,6 +34,7 @@ def test_nav_menu_home_link(browser):
 
 @pytest.mark.usefixtures('live_server')
 def test_nav_menu_standard_link(browser):
+    browser.get(url_for('data_registry', _external=True))
     browser.find_element_by_link_text('The Data Standard').click()
 
     assert browser.current_url.endswith('/support/standard/')
@@ -57,7 +59,7 @@ def get_card_data(browser):
 
 @pytest.mark.usefixtures('live_server')
 def test_registry_cards(browser):
-    cards = get_card_data()
+    cards = get_card_data(browser)
     assert len(cards) == 3
 
 

@@ -1,5 +1,6 @@
 from collections import OrderedDict
 from datetime import datetime
+import os
 
 from flask import url_for
 
@@ -231,7 +232,7 @@ def format_latest_date(data_by_prefix):
 
 
 def get_raw_data(test=False):
-    if test:
+    if test or "PYTEST_CURRENT_TEST" in os.environ:
         return RAW_DATA
 
     return requests.get('http://store.data.threesixtygiving.org/reports/daily_status.json').json()
