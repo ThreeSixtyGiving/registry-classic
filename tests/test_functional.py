@@ -135,6 +135,6 @@ def test_footer_take_down_policy_link(browser):
 @pytest.mark.usefixtures('live_server')
 def test_footer_license_link(browser):
     browser.get(url_for('data_registry', _external=True))
-    browser.find_element_by_link_text('Creative Commons Attribution 4.0 International License').click()
+    link = browser.find_element_by_link_text('Creative Commons Attribution 4.0 International License')
 
-    assert browser.current_url == 'https://creativecommons.org/licenses/by/4.0/'
+    assert link.get_attribute("href") == 'https://creativecommons.org/licenses/by/4.0/'
