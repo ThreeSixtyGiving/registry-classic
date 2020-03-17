@@ -38,7 +38,6 @@ def format_value(value, to_round=False, shorten=False):
                 return "{:,.1f}bn".format(value / 1000000000)
             if value > 1000000:
                 return "{:,.1f}m".format(value / 1000000)
-            # value = round(value)
         if type(value) == float:
             if to_round:
                 value = round(value)
@@ -150,7 +149,7 @@ def get_grant_data(data):
             'first_date': format_date(data_aggregates.get('min_award_date'), '%b %Y') if data_aggregates else '',
             'latest_date': format_date(data_aggregates.get('max_award_date'), '%b %Y') if data_aggregates else ''
         },
-        'issued_date': format_date(data.get('issued'), "%b %Y"),
+        'issued_date': format_date(data.get('issued'), '%b %Y'),
         'valid': get_check_cross_symbol(data_metadata.get('valid')),
     }
 
@@ -212,8 +211,8 @@ def sort_data(data_by_prefix):
         except TypeError:
             pass
 
-    def get_publisher_name(x):
-        name = x[1]['publisher']['name'].casefold()
+    def get_publisher_name(datarow):
+        name = datarow[1]['publisher']['name'].casefold()
         if name.lower().startswith("the "):
             return name[4:]
         return name
