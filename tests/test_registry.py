@@ -1,7 +1,7 @@
 import os
 
 from registry.registry import get_currency_symbol, format_value, format_date, get_total_value,\
-    get_check_cross_symbol, get_file_type, get_licence, get_data_by_prefix, sort_data, get_data_sorted_by_prefix
+    get_check_cross_symbol, get_file_type, get_data_by_prefix, sort_data, get_data_sorted_by_prefix, get_raw_data
 from tests.samples.registry_scvo_data import SCVO_DATA
 
 os.environ['FLASK_ENV'] = 'development'
@@ -148,7 +148,7 @@ def test_get_check_cross_symbol_return_string():
 def test_get_file_type_csv():
     response = get_file_type('csv')
 
-    assert response == 'csv'
+    assert response == 'CSV'
 
 
 def test_get_file_type_json():
@@ -160,7 +160,7 @@ def test_get_file_type_json():
 def test_get_file_type_xlsx():
     response = get_file_type('xlsx')
 
-    assert response == 'xlsx'
+    assert response == 'Excel'
 
 
 def test_get_file_type_file():
@@ -181,34 +181,34 @@ def test_get_file_type_none():
     assert response == 'file'
 
 
-def test_get_licence_not_acceptable():
-    response = get_licence('CCO', 'url', False)
+# def test_get_licence_not_acceptable():
+#     response = get_licence('CCO', 'url', False)
 
-    assert response == '&#x2715;'
-
-
-def test_get_licence_acceptable():
-    response = get_licence('CCO', 'url', True)
-
-    assert response == "<a href=\"url\"><img src=\"../images/licences/cc_pd.png\" width='70' height='27'></a>"
+#     assert response == '&#x2715;'
 
 
-def test_get_licence_with_name_not_in_dict_and_url():
-    response = get_licence('CC', 'url', True)
+# def test_get_licence_acceptable():
+#     response = get_licence('CCO', 'url', True)
 
-    assert response == "<a href=\"url\">CC</a>"
-
-
-def test_get_licence_name_not_in_dict_and_without_url():
-    response = get_licence('CC', None, True)
-
-    assert response == 'CC'
+#     assert response == "<a href=\"url\"><img src=\"../images/licenses/cc_pd.png\" width='70' height='27'></a>"
 
 
-def test_get_licence_without_name_and_without_url():
-    response = get_licence(None, None, True)
+# def test_get_licence_with_name_not_in_dict_and_url():
+#     response = get_licence('CC', 'url', True)
 
-    assert response is None
+#     assert response == "<a href=\"url\">CC</a>"
+
+
+# def test_get_licence_name_not_in_dict_and_without_url():
+#     response = get_licence('CC', None, True)
+
+#     assert response == 'CC'
+
+
+# def test_get_licence_without_name_and_without_url():
+#     response = get_licence(None, None, True)
+
+#     assert response is None
 
 
 # def test_data_correct_format():
@@ -222,7 +222,7 @@ def test_get_licence_without_name_and_without_url():
 #         'logo': 'http://www.threesixtygiving.org/wp-content/uploads/BBCCiN_CoreLogo.png'
 #     }
 #     assert bbc_data['licence'] == {
-#         'url': 'https://creativecommons.org/licences/by/4.0/',
+#         'url': 'https://creativecommons.org/licenses/by/4.0/',
 #         'name': 'Creative Commons Attribution 4.0'
 #     }
 #     assert bbc_data['grant'] == [{
@@ -247,11 +247,12 @@ def test_get_licence_without_name_and_without_url():
 #     assert big_lottery_grant[1]['name'] == 'Big Lottery Fund - grants data 2017-18 year-to-date'
 
 def test_max_award_date_correct_format():
-    data = get_data_sorted_by_prefix()
+    raw_data = get_raw_data(True)
+    data = get_data_sorted_by_prefix(raw_data)
     grants_blf = data['360G-blf']['grant']
 
-    assert grants_blf[0]['period']['latest_date'] == "Mar '18"
-    assert grants_blf[1]['period']['latest_date'] == "Mar '17"
+    assert grants_blf[0]['period']['latest_date'] == "Mar 2018"
+    assert grants_blf[1]['period']['latest_date'] == "Mar 2017"
 
 
 def test_publisher_data_is_sorted_by_max_award_date():
@@ -260,7 +261,7 @@ def test_publisher_data_is_sorted_by_max_award_date():
     grants = sorted_data['360G-SCVO']['grant']
 
     assert len(grants) == 4
-    assert grants[0]['period']['latest_date'] == "2019-05-13"
-    assert grants[1]['period']['latest_date'] == "2018-12-19"
-    assert grants[2]['period']['latest_date'] == "2018-11-02"
-    assert grants[3]['period']['latest_date'] == "2018-08-01"
+    assert grants[0]['period']['latest_date'] == "May 2019"
+    assert grants[1]['period']['latest_date'] == "Dec 2018"
+    assert grants[2]['period']['latest_date'] == "Nov 2018"
+    assert grants[3]['period']['latest_date'] == "Aug 2018"

@@ -11,11 +11,30 @@
     <title>Data Registry | 360Giving</title>
     <meta property="og:title" content="Data Registry | 360Giving">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" href="../images/logos/favicon.ico" type="image/x-icon"/>
+    <link rel="apple-touch-icon" sizes="57x57" href="{{ url_for('static', filename='images/favicon/apple-icon-57x57.png') }}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{{ url_for('static', filename='images/favicon/apple-icon-60x60.png') }}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ url_for('static', filename='images/favicon/apple-icon-72x72.png') }}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ url_for('static', filename='images/favicon/apple-icon-76x76.png') }}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{ url_for('static', filename='images/favicon/apple-icon-114x114.png') }}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{{ url_for('static', filename='images/favicon/apple-icon-120x120.png') }}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{{ url_for('static', filename='images/favicon/apple-icon-144x144.png') }}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{ url_for('static', filename='images/favicon/apple-icon-152x152.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='images/favicon/apple-icon-180x180.png') }}">
+    <link rel="icon" type="image/png" sizes="192x192"  href="{{ url_for('static', filename='images/favicon/android-icon-192x192.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='images/favicon/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{{ url_for('static', filename='images/favicon/favicon-96x96.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='images/favicon/favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ url_for('static', filename='images/favicon/manifest.json') }}">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="{{ url_for('static', filename='images/favicon/ms-icon-144x144.png') }}">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon/favicon.ico') }}" type="image/x-icon" />
 
     <!-- CSS -->
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous"
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/sanitize.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i&display=swap" type="text/css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" type="text/css" />
 
     <noscript>
       <style>
@@ -26,70 +45,43 @@
     </noscript>
   </head>
 
+  {% set top_bar = dict(
+      pages=[
+        {"url": url_for('.data_registry'), "name": "Data Registry"},
+        {"url": "https://grantnav.threesixtygiving.org", "name": "GrantNav"},
+        {"url": url_for('.terms_and_conditions'), "name": "Terms"},
+      ],
+      links=[],
+    ) %}
+  {% set hero = dict(
+      home_link=url_for('.data_registry'),
+      title='360 Data Registry',
+      logo=url_for('.static', filename="/images/360-logos/360giving-registry.svg"), 
+      colour="orange",
+      subhead="Which funders publish grants data openly?" ,
+      blurb="Explore this list of organisations that publish to the 360Giving Data Standard and download the data.",
+    ) %}
+
   <body>
-    <nav class="navbar">
-        <div class="container">
-        <div class="navbar-header logo">
-          <a class="navbar-brand pull-right" href="http://www.threesixtygiving.org/">
-            <img src="../images/logos/360_logo.png" alt="360Giving" width="175" height="125">
-          </a>
+    {% include "_parts/top-bar.html" %}
+    <div class="layout layout--single-column">
+      <header class="layout__header">
+        {% include "_parts/hero.html" %}
+      </header> 
+
+      <main class="layout__content">
+        <div class="layout__content-inner">
+          {% block main_content %}{% endblock %}
         </div>
+      </main>
 
-         <ul class="nav justify-content-end">
-           <li class="nav-item dropdown nav-dropdown-menu-title">
-             <p class="dropdown-toggle" id="menu" data-toggle="dropdown">MENU</p>
-             <div class="dropdown-menu dropdown-menu-right">
-               <a class="dropdown-item" href="http://www.threesixtygiving.org/">Home</a>
-               <a class="dropdown-item" href="http://www.threesixtygiving.org/support/standard/">The 360Giving Standard</a>
-               <a class="dropdown-item" href="https://forum.threesixtygiving.org/">Discussion Forum</a>
-             </div>
-           </li>
-         </ul>
-      </div>
-    </nav>
-
-    <div class="container body-main">
-      {% block main_content %}{% endblock %}
+      <footer class="layout__footer">
+        {% include "_parts/subscribe.html" %}
+        {% include "_parts/footer.html" %}
+      </footer>
     </div>
 
-    <footer class="footer">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-6">
-            <div class="row align-items-start">
-              <a href="http://www.threesixtygiving.org/">
-                <img src="../images/logos/360_logo_invert.png" alt="360Giving" width="140" height="100">
-              </a>
-            </div>
-          </div>
-          <div class="col-sm-3">
-            <ul>
-              <li><a class="tel" href="tel:+442037525775">020 3752 5775</a></li>
-              <li><a class="email" href="mailto:info@threesixtygiving.org">info@threesixtygiving.org</a></li>
-            </ul>
-          </div>
-          <div class="col-sm-3">
-            <ul>
-              <li><a title="Terms &#038; Conditions" href="/terms-conditions">Terms &amp; Conditions</a></li>
-              <li><a title="Take Down Policy" href="http://www.threesixtygiving.org/take-down-policy/">Take Down Policy</a></li>
-              <li><a title="License" href="https://creativecommons.org/licenses/by/4.0/">License</a></li>
-            </ul>
-          </div>
-
-        </div>
-      </div>
-      <hr/>
-      <div class="container">
-        <div class="row sub-footer">
-          <div class="col">
-            360Giving is a company limited by guarantee
-            <a href="https://beta.companieshouse.gov.uk/company/09668396" target="_blank">09668396</a>
-            and a registered charity
-            <a href="http://beta.charitycommission.gov.uk/charity-details/?regid=1164883&subid=0"  target="_blank">1164883</a>
-          </div>
-        </div>
-      </div>
-    </footer>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/index.js') }}"></script>
 
     <!-- Matomo -->
     <script type="text/javascript">

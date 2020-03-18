@@ -1,10 +1,11 @@
-import os
 from collections import OrderedDict
 from datetime import datetime
+import os
+
+from flask import url_for
 
 import humanize
 import requests
-from flask import Markup
 
 from tests.samples.registry_raw_data import RAW_DATA
 
@@ -26,12 +27,17 @@ def get_currency_symbol(currency, data):
     return data['currency_symbol']
 
 
-def format_value(value, to_round=False):
+def format_value(value, to_round=False, shorten=False):
     """
     Format value from 492793844.650000003 to 492,793,844.65
     If to_round=True, the value gets rounded.
     """
-    if value and type(value) == float or type(value) == int:
+    if value and isinstance(value, (float, int)):
+        if shorten:
+            if value > 1000000000:
+                return "{:,.1f}bn".format(value / 1000000000)
+            if value > 1000000:
+                return "{:,.1f}m".format(value / 1000000)
         if type(value) == float:
             if to_round:
                 value = round(value)
@@ -41,13 +47,13 @@ def format_value(value, to_round=False):
     return value
 
 
-def format_date(date):
+def format_date(date, date_format='%b \'%y'):
     """
     :param date: string (yyyy-mm-dd)
     :return: string (eg. Jun '18)
     """
     try:
-        return datetime.strptime(date, '%Y-%m-%d').strftime('%b \'%y')
+        return datetime.strptime(date, '%Y-%m-%d').strftime(date_format)
     except ValueError:
         return date
 
@@ -79,7 +85,7 @@ def get_total_value(data_by_currency):
             if total_amount and total_amount is not None:
                 total_value.append('{} {}'.format(
                     get_currency_symbol(currency, data),
-                    format_value(value=total_amount, to_round=True)
+                    format_value(value=total_amount, to_round=True, shorten=True)
                 ))
     return total_value
 
@@ -97,37 +103,20 @@ def get_check_cross_symbol(boolean_data):
 
 
 def get_file_type(file_type):
-    if file_type not in ['csv', 'json', 'xlsx']:
-        return 'file'
-    return file_type
-
-
-def get_licence(name, url, acceptable):
-    if not acceptable:
-        return '&#x2715;'
-
-    licences = {
-        'CCO': 'cc_pd',
-        'Creative Commons Attribution 4.0': 'cc_by',
-        'Creative Commons Attribution 4.0 International (CC BY 4.0)': 'cc_by',
-        'Creative Commons Attribution Share-Alike 4.0': 'cc_by_sa',
-        'Open Data Commons Public Domain Dedication and Licence 1.0': 'pddl',
-        'Open Government Licence 3.0 (United Kingdom)': 'ogl'
+    file_types = {
+        'csv': 'CSV',
+        'json': 'json',
+        'xlsx': 'Excel',
     }
-
-    if licences.get(name):
-        return Markup("<a href=\"{}\"><img src=\"../images/licences/{}.png\" width='70' height='27'></a>").format(
-            url, licences.get(name))
-    if name and url:
-        return Markup("<a href=\"{}\">{}</a>").format(url, name)
-    return name
+    return file_types.get(file_type, 'file')
 
 
 def get_prefix_data(data):
     return {
         'publisher': {
             'name': data['publisher']['name'],
-            'logo': data['publisher']['logo']
+            'logo': data['publisher']['logo'],
+            'website': data['publisher']['website'],
         },
         'grant': []
     }
@@ -135,27 +124,32 @@ def get_prefix_data(data):
 
 def get_grant_data(data):
     # TODO TEST
-    data_aggregates = data.get('datagetter_aggregates')
-    data_metadata = data.get('datagetter_metadata')
+    data_aggregates = data.get('datagetter_aggregates', {})
+    data_metadata = data.get('datagetter_metadata', {})
     file_size = data_metadata.get('file_size')
 
     return {
         'file': {
             'title': data['distribution'][0]['title'],
             'url': data['distribution'][0]['downloadURL'],
+            'accessURL': data['distribution'][0]['accessURL'],
             'type': get_file_type(data_metadata.get('file_type')),
-            'size': humanize.naturalsize(file_size) if file_size else '-',
+            'size': humanize.naturalsize(file_size, format='%.0f') if file_size else '-',
             'available': data_metadata.get('downloads')
         },
-        'licence': get_licence(
-            data['license_name'], data['license'], data_metadata.get('acceptable_license')),
+        'licence': {
+            'name': data['license_name'],
+            'url': data['license'],
+            'acceptable': data_metadata.get('acceptable_license')
+        },
         'total_value': get_total_value(data_aggregates.get('currencies') if data_aggregates else None),
         'records': format_value(data_aggregates['count'] if data_aggregates else None),
         'period': {
-            'first_date': format_date(data_aggregates.get('min_award_date')) if data_aggregates else '',
-            'latest_date': data_aggregates.get('max_award_date') if data_aggregates else ''
+            'max_award_date': data_aggregates.get('max_award_date'),
+            'first_date': format_date(data_aggregates.get('min_award_date'), '%b %Y') if data_aggregates else '',
+            'latest_date': format_date(data_aggregates.get('max_award_date'), '%b %Y') if data_aggregates else ''
         },
-        'issued_date': format_date(data.get('issued')),
+        'issued_date': format_date(data.get('issued'), '%b %Y'),
         'valid': get_check_cross_symbol(data_metadata.get('valid')),
     }
 
@@ -209,12 +203,21 @@ def sort_data(data_by_prefix):
     Sort grants first by publisher name and, and then by date of the latest date.
     """
     for prefix in data_by_prefix:
-        sort_by_grant_latest_date = sorted(
-            data_by_prefix[prefix]['grant'], key=lambda x: x['period']['latest_date'], reverse=True
-        )
-        data_by_prefix[prefix]['grant'] = sort_by_grant_latest_date
+        try:
+            sort_by_grant_latest_date = sorted(
+                data_by_prefix[prefix]['grant'], key=lambda x: x['period']['max_award_date'], reverse=True
+            )
+            data_by_prefix[prefix]['grant'] = sort_by_grant_latest_date
+        except TypeError:
+            pass
 
-    sort_by_publisher_name = sorted(data_by_prefix.items(), key=lambda x: x[1]['publisher']['name'].casefold())
+    def get_publisher_name(datarow):
+        name = datarow[1]['publisher']['name'].casefold()
+        if name.lower().startswith("the "):
+            return name[4:]
+        return name
+
+    sort_by_publisher_name = sorted(data_by_prefix.items(), key=get_publisher_name)
 
     return OrderedDict(sort_by_publisher_name)
 
@@ -227,16 +230,64 @@ def format_latest_date(data_by_prefix):
     return data_by_prefix
 
 
-def get_raw_data():
-    if os.environ.get('FLASK_ENV') == 'development':
+def get_raw_data(test=False):
+    if test or "PYTEST_CURRENT_TEST" in os.environ:
         return RAW_DATA
 
     return requests.get('http://store.data.threesixtygiving.org/reports/daily_status.json').json()
 
 
-def get_data_sorted_by_prefix():
-    raw_data = get_raw_data()
+def get_data_sorted_by_prefix(raw_data):
     data_by_prefix = get_data_by_prefix(raw_data) if raw_data else None
     sorted_data = sort_data(data_by_prefix)
 
     return format_latest_date(sorted_data)
+
+
+def get_schema_org_list(raw_data):
+    datacatalog = {
+        "@context": "https://schema.org/",
+        "@type": "DataCatalog",
+        "name": "360Giving Data Registry",
+        "url": url_for('data_registry', _external=True),
+        "description": "A registry of data about grants made, published using the 360Giving Data Standard",
+        "maintainer": {
+            "@type": "Organization",
+            "url": "https://www.threesixtygiving.org/",
+            "name": "360Giving",
+        }
+    }
+    schemaorg = [datacatalog] + [
+        {
+            "@context": "https://schema.org/",
+            "@type": "Dataset",
+            "name": d.get('title', ''),
+            "description": 'Data on grants made by {} published using the 360Giving Data Standard'.format(
+                d.get("publisher", {}).get('name', '')
+            ),
+            "url": d.get('distribution', [{}])[0].get('accessURL'),
+            "license": d.get('license', ''),
+            "creator": {
+                "@type": "Organization",
+                "url": d.get("publisher", {}).get('website', ''),
+                "name": d.get("publisher", {}).get('name', ''),
+            },
+            "includedInDataCatalog": {
+                "@type": "DataCatalog",
+                "name": datacatalog['name']
+            },
+            "distribution": [
+                {
+                    "@type": "DataDownload",
+                    "encodingFormat": d.get("datagetter_metadata", {}).get('file_type'),
+                    "contentUrl": d.get('distribution', [{}])[0].get('downloadURL'),
+                },
+            ],
+            "temporalCoverage": "{}/{}".format(
+                d.get("datagetter_aggregates", {}).get('min_award_date'),
+                d.get("datagetter_aggregates", {}).get('max_award_date'),
+            )
+        }
+        for d in raw_data
+    ]
+    return schemaorg
