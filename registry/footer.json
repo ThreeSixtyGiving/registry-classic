@@ -34,7 +34,7 @@
                     "description": ""
                 },
                 {
-                    "url": "http://data.threesixtygiving.org/",
+                    "url": "https://data.threesixtygiving.org/",
                     "title": "Data Registry",
                     "description": ""
                 },
@@ -94,14 +94,14 @@
                     "description": "A search-engine for grants data. Explore and download in detail on where and how much funding goes across billions of pounds of grants."
                 },
                 {
-                    "url": "https://insights.threesixtygiving.org.uk/",
+                    "url": "https://insights.threesixtygiving.org/",
                     "title": "360Insights",
-                    "description": "A tool to combine and visualise 360Giving and charity data to understand funders better. You can explore funding across different areas – from grant dates to types of recipients."
+                    "description": "A tool to combine and visualise 360Giving and charity data to understand funders better. You can explore funding across different areas \u2013 from grant dates to types of recipients."
                 },
                 {
                     "url": "https://standard.threesixtygiving.org/",
                     "title": "360Giving Data Standard",
-                    "description": "A uniform and consistent way to describe grants data. Publishing data in this standard format means it’s easier to find, understand and compare funding across the UK."
+                    "description": "A uniform and consistent way to describe grants data. Publishing data in this standard format means it\u2019s easier to find, understand and compare funding across the UK."
                 },
                 {
                     "url": "https://data.threesixtygiving.org/",
