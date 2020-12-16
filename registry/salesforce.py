@@ -6,7 +6,7 @@ from simple_salesforce import Salesforce
 
 def get_salesforce_access():
     return Salesforce(
-        username='360support@opendataservices.coop',
+        username=os.environ['SALESFORCE_USERNAME'],
         password=os.environ['SALESFORCE_PASSWORD'],
         security_token=os.environ['SALESFORCE_SECURITY_TOKEN']
     )
