@@ -2850,7 +2850,9 @@ a.base-card:hover:before {
     padding-bottom: 64px; }
   .layout--single-column {
     display: grid;
-    grid-template-areas: "header" "content" "footer"; }
+    grid-template-areas: "header"
+ "content"
+ "footer"; }
     .layout--single-column .layout__content {
       max-width: 960px;
       margin-left: auto;
@@ -2862,12 +2864,18 @@ a.base-card:hover:before {
     width: 100vw; }
   .layout--two-columns {
     display: grid;
-    grid-template-areas: "nav" "header" "content" "footer"; }
+    grid-template-areas: "nav"
+ "header"
+ "content"
+ "footer"; }
     @media (min-width: 36em) {
       .layout--two-columns {
         grid-template-columns: 320px 1fr;
         grid-template-rows: auto auto 1fr auto;
-        grid-template-areas: "nav nav" "header header" "sidebar content" "footer footer"; } }
+        grid-template-areas: "nav nav"
+ "header header"
+ "sidebar content"
+ "footer footer"; } }
     .layout--two-columns .layout__nav {
       grid-area: nav; }
     .layout--two-columns .layout__header {
