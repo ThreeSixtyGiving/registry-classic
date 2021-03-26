@@ -107,6 +107,7 @@ def get_file_type(file_type):
         'csv': 'CSV',
         'json': 'json',
         'xlsx': 'Excel',
+        'ods': 'ODS',
     }
     return file_types.get(file_type, 'file')
 
