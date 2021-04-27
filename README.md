@@ -38,7 +38,7 @@ In order to run the application see the relevant commands below:
 **Development**
 ```bash
 export FLASK_APP=registry/views.py
-export
+export FLASK_ENV=development
 python -m flask run
 ```
 
