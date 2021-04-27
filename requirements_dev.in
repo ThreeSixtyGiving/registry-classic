@@ -2,3 +2,4 @@ pytest
 pytest-flask
 selenium
 flake8
+pyscss
