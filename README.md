@@ -8,21 +8,42 @@ To download all the files listed in the registy, the 360Giving [datagetter](http
 
 Install dependencies:
 
-```
-$ python3 -m venv .ve
-$ source .ve/bin/activate
-$ pip install -r requirements_dev.txt
-```
-
-Run:
-
-Server
-```
-$ export FLASK_APP=registry/views.py
-$ python -m flask run
+```bash
+python3 -m venv .ve
+source .ve/bin/activate
+pip install -r requirements_dev.txt
 ```
 
-Tests
+This project uses pip-tools. To update the requirements files, run:
+
+```bash
+pip-compile requirements.in
+# or
+pip-compile requirements_dev.in
 ```
-$ python -m pytest
+
+This project uses PyScss. To update the compile css file, run:
+
+```bash
+pysassc registry/sass/main.scss registry/static/css/theme.css
+```
+
+To run the tests:
+```bash
+python -m pytest
+```
+
+In order to run the application see the relevant commands below:
+
+**Development**
+```bash
+export FLASK_APP=registry/views.py
+export
+python -m flask run
+```
+
+**Server**
+```bash
+export FLASK_APP=registry/views.py
+python -m flask run
 ```
