@@ -1,6 +1,16 @@
-{% extends 'base.html' %}
-{% block main_content %}
+{% extends 'base.html' %} {% block main_content %}
 
-Hello World
+<div class="tab">
+  <button class="button button--small button--teal right">
+    <a href="/dashboard">
+      <h3 class="media-card__heading inline">By publisher</h3>
+    </a>
+  </button>
+  <button class="button button--small button--teal right">
+    <a href="/publishers">
+      <h3 class="media-card__heading inline">By Grants</h3>
+    </a>
+  </button>
+</div>
 
-{% endblock %}
+{% include '_parts/_dashboard_cards.html' %} {% endblock %}
