@@ -11,7 +11,7 @@
         </p>
         <div class="grid grid--two-columns">
           <span class="inline grid__1">
-            <h2 class="inline">66%</h2>
+            <h2 class="inline">{{ data.publisher.recipient_location }}%</h2>
             <img
               class="stat-logo"
               src="{{ url_for('.static', filename='images/360-logos/360giving-standard.svg') }}"
@@ -20,7 +20,7 @@
             <p>of publishers providing recipient locations</p>
           </span>
           <span class="inline grid__1">
-            <h2 class="inline">37%</h2>
+            <h2 class="inline">{{ data.publisher.beneficiary_location_names }}%</h2>
             <img
               class="stat-logo"
               src="{{ url_for('.static', filename='images/360-logos/360giving-standard.svg') }}"
@@ -44,16 +44,16 @@
         </p>
         <div class="grid grid--two-columns">
           <span class="inline grid__1">
-            <h2 class="inline">90%</h2>
+            <h2 class="inline">{{ data.publisher.charity_numbers }}%</h2>
             <img
               class="stat-logo"
               src="{{ url_for('.static', filename='images/360-logos/360giving-standard.svg') }}"
               alt="publisher locations"
             />
-            <p>of publishers providing recipient locations</p>
+            <p>Has company or charity numbers</p>
           </span>
           <span class="inline grid__1">
-            <h2 class="inline">29%</h2>
+            <h2 class="inline">{{ data.publisher.external_identifiers_95 }}%</h2>
             <img
               class="stat-logo"
               src="{{ url_for('.static', filename='images/360-logos/360giving-standard.svg') }}"
@@ -74,24 +74,15 @@
 <script>
   window.onload = function () {
     var ctx = document.getElementById("location-chart");
+    var graph_data = {{ data.org_info_graph|safe }}
     var myChart = new Chart(ctx, {
       type: "bar",
       data: {
+        labels: graph_data.labels,
         datasets: [
           {
             label: "# of publishers",
-            data: [
-              { x: "10%", y: 20 },
-              { x: "20%", y: 10 },
-              { x: "30%", y: 0 },
-              { x: "40%", y: 50 },
-              { x: "50%", y: 30 },
-              { x: "60%", y: 60 },
-              { x: "70%", y: 65 },
-              { x: "80%", y: 80 },
-              { x: "90%", y: 20 },
-              { x: "100%", y: 90 },
-            ],
+            data: graph_data.data,
             backgroundColor: "hsl(186, 42%, 51%)",
           },
         ],
@@ -108,21 +99,24 @@
     });
 
     var location = document.getElementById("location-plot");
+    var layout = {
+      xaxis: {
+        type: 'category'
+      }
+    };
     Plotly.newPlot(
       location,
       [
         {
-          x: [1, 2, 3, 4, 5],
-          y: [1, 2, 4, 8, 16],
+          x: graph_data.labels,
+          y: graph_data.data,
           type: "bar",
           marker: {
             color: "hsl(186, 42%, 51%)",
           },
         },
       ],
-      {
-        margin: { t: 0 },
-      }
+      layout,
     );
   };
 </script>
