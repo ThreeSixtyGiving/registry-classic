@@ -2,7 +2,7 @@ from datetime import datetime
 import json
 import os
 
-from flask import Flask, render_template, current_app
+from flask import Flask, render_template, current_app, url_for, redirect
 from raven.contrib.flask import Sentry
 
 from registry.registry import get_data_sorted_by_prefix, get_schema_org_list, get_raw_data
@@ -27,13 +27,26 @@ def inject_footer_menu():
 
 
 @app.route('/')
+def home():
+    return redirect(url_for('data_dashboard'))
+
+
+@app.route('/dashboard')
+def data_dashboard():
+
+    return render_template(
+        'dashboard.html'
+    )
+
+
+@app.route('/publishers')
 def data_registry():
     raw_data = get_raw_data()
     data = get_data_sorted_by_prefix(raw_data)
     schema = get_schema_org_list(raw_data)
 
     return render_template(
-        'registry.html',
+        'publishers.html',
         data=data,
         schema=schema,
         num_of_publishers=len(data)
