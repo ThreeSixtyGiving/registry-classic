@@ -3,3 +3,4 @@ pytest-flask
 selenium
 flake8
 pyscss
+black
