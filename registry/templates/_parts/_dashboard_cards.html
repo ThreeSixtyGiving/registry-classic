@@ -1,0 +1,128 @@
+<ul class="card-list">
+  <li class="card-list__item">
+    <article class="media-card media-card--red">
+      <div class="media-card__content">
+        <header class="media-card__header">
+          <h3 class="media-card__heading">Locations</h3>
+        </header>
+        <p>
+          Grants with location data can be used to map grants, and help people
+          understand where the money goes
+        </p>
+        <div class="grid grid--two-columns">
+          <span class="inline grid__1">
+            <h2 class="inline">66%</h2>
+            <img
+              class="stat-logo"
+              src="{{ url_for('.static', filename='images/360-logos/360giving-standard.svg') }}"
+              alt="publisher locations"
+            />
+            <p>of publishers providing recipient locations</p>
+          </span>
+          <span class="inline grid__1">
+            <h2 class="inline">37%</h2>
+            <img
+              class="stat-logo"
+              src="{{ url_for('.static', filename='images/360-logos/360giving-standard.svg') }}"
+              alt="publisher locations"
+            />
+            <p>of publishers provide beneficiary location names</p>
+          </span>
+        </div>
+      </div>
+    </article>
+  </li>
+  <li class="card-list__item">
+    <article class="media-card media-card--teal">
+      <div class="media-card__content">
+        <header class="media-card__header">
+          <h3 class="media-card__heading">Organisation Information</h3>
+        </header>
+        <p>
+          High-quality organisation information helps data users know exactly
+          who's involved in each grant
+        </p>
+        <div class="grid grid--two-columns">
+          <span class="inline grid__1">
+            <h2 class="inline">90%</h2>
+            <img
+              class="stat-logo"
+              src="{{ url_for('.static', filename='images/360-logos/360giving-standard.svg') }}"
+              alt="publisher locations"
+            />
+            <p>of publishers providing recipient locations</p>
+          </span>
+          <span class="inline grid__1">
+            <h2 class="inline">37%</h2>
+            <img
+              class="stat-logo"
+              src="{{ url_for('.static', filename='images/360-logos/360giving-standard.svg') }}"
+              alt="publisher locations"
+            />
+            <p>of publishers provide beneficiary location names</p>
+          </span>
+          <span class="inline grid__all">
+            <canvas id="location-chart" width="400" height="200"></canvas>
+            <div id="location-plot" style='width="400"; height="200";'></div>
+          </span>
+        </div>
+      </div>
+    </article>
+  </li>
+</ul>
+
+<script>
+  window.onload = function () {
+    var ctx = document.getElementById("location-chart");
+    var myChart = new Chart(ctx, {
+      type: "bar",
+      data: {
+        datasets: [
+          {
+            label: "# of publishers",
+            data: [
+              { x: "10%", y: 20 },
+              { x: "20%", y: 10 },
+              { x: "30%", y: 0 },
+              { x: "40%", y: 50 },
+              { x: "50%", y: 30 },
+              { x: "60%", y: 60 },
+              { x: "70%", y: 65 },
+              { x: "80%", y: 80 },
+              { x: "90%", y: 20 },
+              { x: "100%", y: 90 },
+            ],
+            backgroundColor: "hsl(186, 42%, 51%)",
+          },
+        ],
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            xAxisKey: "x",
+            yAxisKey: "y",
+          },
+        },
+      },
+    });
+
+    var location = document.getElementById("location-plot");
+    Plotly.newPlot(
+      location,
+      [
+        {
+          x: [1, 2, 3, 4, 5],
+          y: [1, 2, 4, 8, 16],
+          type: "bar",
+          marker: {
+            color: "hsl(186, 42%, 51%)",
+          },
+        },
+      ],
+      {
+        margin: { t: 0 },
+      }
+    );
+  };
+</script>
