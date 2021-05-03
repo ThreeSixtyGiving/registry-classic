@@ -1,6 +1,8 @@
 from datetime import datetime
 import json
 import os
+from typing import Dict, List
+from random import randrange
 
 from flask import Flask, render_template, current_app, url_for, redirect
 from raven.contrib.flask import Sentry
@@ -31,11 +33,31 @@ def home():
     return redirect(url_for('data_dashboard'))
 
 
+@app.route('/dashboard_data')
+def get_data():
+    return {
+        'publisher': {
+            'recipient_location': randrange(100),
+            'beneficiary_location_names': randrange(100),
+            'charity_numbers': randrange(100),
+            'external_identifiers_95': randrange(100),
+        },
+        'org_info_graph': 
+            dict(
+                labels = ["10%","20%","30%","40%","50%","60%","70%","80%","90%","100%"],
+                data = [20, 10, 0, 50, 30, 60, 65, 80, 20, 90]
+            )
+        }
+
+
 @app.route('/dashboard')
 def data_dashboard():
 
+    data = get_data()
+
     return render_template(
-        'dashboard.html'
+        'dashboard.html',
+        data=data
     )
 
 
