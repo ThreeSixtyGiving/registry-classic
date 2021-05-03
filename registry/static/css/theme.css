@@ -1709,3 +1709,27 @@ body.modal--shown {
     width: auto;
     z-index: 100000;
     /* Above WP toolbar. */ }
+
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  background-color: transparent;
+  margin: 32px 0; }
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: transparent; }
+
+.inline {
+  display: inline-block; }
+
+.right {
+  float: right; }
+
+.flex-full {
+  flex: 0 0 100%; }
+
+.stat-logo {
+  max-width: 200px;
+  max-height: 80px;
+  float: right; }
