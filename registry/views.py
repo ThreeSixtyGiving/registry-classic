@@ -53,22 +53,24 @@ def get_data():
 @app.route('/dashboard')
 def data_dashboard():
 
-    data = get_data()
+    stats = get_data()
 
     return render_template(
         'dashboard.html',
-        data=data
+        stats=stats
     )
 
 
 @app.route('/publishers')
 def data_registry():
+    stats = get_data()
     raw_data = get_raw_data()
     data = get_data_sorted_by_prefix(raw_data)
     schema = get_schema_org_list(raw_data)
 
     return render_template(
         'publishers.html',
+        stats=stats,
         data=data,
         schema=schema,
         num_of_publishers=len(data)

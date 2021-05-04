@@ -11,22 +11,27 @@
         </p>
         <div class="grid grid--two-columns">
           <span class="inline grid__1">
-            <h2 class="inline">{{ data.publisher.recipient_location }}%</h2>
+            <h2 class="inline">{{ stats.publisher.recipient_location }}%</h2>
             <img
               class="stat-logo"
-              src="{{ url_for('.static', filename='images/360-logos/360giving-standard.svg') }}"
+              src="{{ url_for('.static', filename='images/logos/location.svg') }}"
               alt="publisher locations"
             />
             <p>of publishers providing recipient locations</p>
           </span>
           <span class="inline grid__1">
-            <h2 class="inline">{{ data.publisher.beneficiary_location_names }}%</h2>
+            <h2 class="inline">
+              {{ stats.publisher.beneficiary_location_names }}%
+            </h2>
             <img
               class="stat-logo"
-              src="{{ url_for('.static', filename='images/360-logos/360giving-standard.svg') }}"
+              src="{{ url_for('.static', filename='images/logos/badge.svg') }}"
               alt="publisher locations"
             />
             <p>of publishers provide beneficiary location names</p>
+          </span>
+          <span class="inline grid__all">
+            <div id="location-plot" style='width="400"; height="200";'></div>
           </span>
         </div>
       </div>
@@ -44,26 +49,27 @@
         </p>
         <div class="grid grid--two-columns">
           <span class="inline grid__1">
-            <h2 class="inline">{{ data.publisher.charity_numbers }}%</h2>
+            <h2 class="inline">{{ stats.publisher.charity_numbers }}%</h2>
             <img
               class="stat-logo"
-              src="{{ url_for('.static', filename='images/360-logos/360giving-standard.svg') }}"
+              src="{{ url_for('.static', filename='images/logos/hash.svg') }}"
               alt="publisher locations"
             />
             <p>Has company or charity numbers</p>
           </span>
           <span class="inline grid__1">
-            <h2 class="inline">{{ data.publisher.external_identifiers_95 }}%</h2>
+            <h2 class="inline">
+              {{ stats.publisher.external_identifiers_95 }}%
+            </h2>
             <img
               class="stat-logo"
-              src="{{ url_for('.static', filename='images/360-logos/360giving-standard.svg') }}"
+              src="{{ url_for('.static', filename='images/logos/link.svg') }}"
               alt="publisher locations"
             />
             <p>Have at least 95% external identifiers for recipients</p>
           </span>
           <span class="inline grid__all">
             <canvas id="location-chart" width="400" height="200"></canvas>
-            <div id="location-plot" style='width="400"; height="200";'></div>
           </span>
         </div>
       </div>
@@ -74,7 +80,7 @@
 <script>
   window.onload = function () {
     var ctx = document.getElementById("location-chart");
-    var graph_data = {{ data.org_info_graph|safe }}
+    var graph_data = {{ stats.org_info_graph|safe }}
     var myChart = new Chart(ctx, {
       type: "bar",
       data: {
