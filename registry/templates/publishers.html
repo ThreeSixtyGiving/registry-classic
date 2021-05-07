@@ -1,10 +1,34 @@
 {% extends 'base.html' %}
 {% block main_content %}
 
-{% include '_parts/_structured_data.html' %}
+<button onclick="loadPublishers()">Click Me</button>
 
 {% include '_parts/_publisher_summary.html' %}
 
-{% include '_parts/_publishers_list.html' %}
+<div id='publisher_list_wrapper'>
+  {% include '_parts/publisher_list.html' %}
+</div>
+
+<script>
+
+window.onload = function() {
+  // loadPublishers();
+};
+
+function loadPublishers() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    var publishersList;
+    if (this.readyState == 4 && this.status == 200) {
+      publishersList = this.responseText;
+      var list = document.getElementById('publisher_list_wrapper');
+      list.innerHTML = publishersList;
+    }
+  };
+  xhttp.open("GET", "/publisher_list", true);
+  xhttp.send();
+};
+  
+</script>
 
 {% endblock %}

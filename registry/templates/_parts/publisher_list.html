@@ -1,0 +1,25 @@
+<h2>Included Publishers:</h2>
+<ul class="card-list" id="publisher-list-updater">
+  {% if publishers %}
+    {% for publisher in publishers %}
+      <li class="card-list__item" id="{{ publisher.prefix }}">
+        <article class="registry-card">
+          <div class="registry-card__pub-logo">
+              <a href="{{ publisher.website }}" target="_blank">
+              {% if publisher.logo %}
+                <img src="{{ publisher.logo }}" alt="{{ publisher.name }}">
+              {% endif %}
+              </a>
+          </div>
+          <div class="registry-card__content">
+            <h3 class="registry-card__pub-name">
+              {# <a href="{{ publisher.website }}" target="_blank"> #}
+              {{ publisher.name }}
+              {# </a> #}
+            </h3>
+          </div>
+        </article>
+      </li>
+    {% endfor %}
+  {% endif %}
+</ul>
