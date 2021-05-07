@@ -7,8 +7,8 @@ from random import randrange
 from flask import Flask, render_template, current_app, url_for, redirect
 from raven.contrib.flask import Sentry
 
-from registry.registry import get_data_sorted_by_prefix, get_schema_org_list, get_raw_data
 from registry.salesforce import get_salesforce_data
+from registry.datastore import get_publisher_json
 
 app = Flask(
     __name__,
@@ -46,7 +46,7 @@ def get_data():
             dict(
                 labels = ["10%","20%","30%","40%","50%","60%","70%","80%","90%","100%"],
                 data = [20, 10, 0, 50, 30, 60, 65, 80, 20, 90]
-            )
+            ),
         }
 
 
@@ -64,17 +64,22 @@ def data_dashboard():
 @app.route('/publishers')
 def data_registry():
     stats = get_data()
-    raw_data = get_raw_data()
-    data = get_data_sorted_by_prefix(raw_data)
-    schema = get_schema_org_list(raw_data)
+    data = get_publisher_json()
 
     return render_template(
         'publishers.html',
         stats=stats,
-        data=data,
-        schema=schema,
+        publishers=data,
         num_of_publishers=len(data)
     )
+
+
+@app.route('/publisher_list')
+def publisher_list():
+        data = get_publisher_json()
+        return render_template('_parts/publisher_list.html',
+            publishers=data
+        )
 
 
 @app.route('/terms-conditions')
