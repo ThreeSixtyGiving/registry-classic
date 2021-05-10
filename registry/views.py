@@ -4,7 +4,7 @@ import os
 from typing import Dict, List
 from random import randrange
 
-from flask import Flask, render_template, current_app, url_for, redirect
+from flask import Flask, render_template, current_app, url_for, redirect, request
 from raven.contrib.flask import Sentry
 
 from registry.salesforce import get_salesforce_data
@@ -75,8 +75,10 @@ def data_registry():
 
 
 @app.route('/publisher_list')
-def publisher_list():
-        data = get_publisher_json()
+def publisher_list(args={}):
+        searchTerm = request.args.get('search')
+        args['search'] = searchTerm
+        data = get_publisher_json(args)
         return render_template('_parts/publisher_list.html',
             publishers=data
         )

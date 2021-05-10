@@ -1,28 +1,17 @@
 <ul class="registry-card__list">
+  <div>
+    <input
+      placeholder="Search for publishers"
+      type="text"
+      id="publisher-search-input"
+    />
+    <button id="publisher-search-submit" class="button">Search</button>
+  </div>
   <li class="registry-card__item">
     <div class="publisher-summary base-card">
       <div class="base-card__content">
         <section class="grid grid--three-columns">
           <h2 class="base-card__title">589,282 Grants</h2>
-          <div class="chart-container">
-            <canvas id="dates-chart"></canvas>
-          </div>
-          <div>
-            <form role="search" action="#">
-              <label class="search-block__form-item-label" for="search_query"
-                >Enter a search term</label
-              >
-              <div class="search-block__form-group">
-                <input
-                  name="search_query"
-                  class="form-control large-search"
-                  placeholder="Search for publishers"
-                  type="text"
-                />
-                <input class="" name="submit" type="submit" value="Search" />
-              </div>
-            </form>
-          </div>
         </section>
         <section class="grid grid--four-columns">
           <span class="inline grid__1">
@@ -70,32 +59,3 @@
     </div>
   </li>
 </ul>
-
-<script>
-  window.onload = function () {
-    var ctx = document.getElementById("dates-chart");
-    var myChart = new Chart(ctx, {
-      type: "bar",
-      data: {
-        labels: ["2020-01", "2020-02", "2020-03"],
-        datasets: [
-          {
-            label: "# of publishers",
-            data: [12, 36, 21],
-            backgroundColor: "hsl(186, 42%, 51%)",
-          },
-        ],
-      },
-      options: {
-        responsive: true,
-        scales: {
-          y: {
-            beginAtZero: true,
-            xAxisKey: "x",
-            yAxisKey: "y",
-          },
-        },
-      },
-    });
-  };
-</script>
