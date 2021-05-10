@@ -10,25 +10,20 @@
 </div>
 
 <script>
-
-window.onload = function() {
-  // loadPublishers();
-};
-
-function loadPublishers() {
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    var publishersList;
-    if (this.readyState == 4 && this.status == 200) {
-      publishersList = this.responseText;
-      var list = document.getElementById('publisher_list_wrapper');
-      list.innerHTML = publishersList;
-    }
+  window.onload = function () {
+    var searchSubmit = document.getElementById("publisher-search-submit").addEventListener('click', function() {
+      var searchInput = document.getElementById("publisher-search-input").value;
+      $.ajax({
+        type: "GET",
+        url: "/publisher_list", 
+        data: {search: searchInput},
+        success: function(result) {
+          var publishersList = result;
+          var list = document.getElementById('publisher_list_wrapper');
+          list.innerHTML = publishersList;
+        },
+      })
+    })
   };
-  xhttp.open("GET", "/publisher_list", true);
-  xhttp.send();
-};
-  
 </script>
-
 {% endblock %}
