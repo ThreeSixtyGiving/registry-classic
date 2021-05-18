@@ -26,7 +26,7 @@ export default {
       hero: {
         home_link:"/",
         title:'360 Data Registry',
-        logo:"@/assets/images/360-logos/360giving-registry.svg", 
+        logo:require("@/assets/images/360-logos/360giving-registry.svg"), 
         colourClass:`hero--orange`,
         subhead:"Which funders publish grants data openly?" ,
         blurb:"Explore this list of organisations that publish to the 360Giving Data Standard and download the data.",

@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HomePageVue from '../components/organisms/HomePage';
-import DashboardPageVue from '../components/organisms/DashboardPage';
-import PublisherPageVue from '../components/organisms/PublisherPage';
+import HomePageVue from '../components/home/HomePage';
+import DashboardPageVue from '../components/dashboard/DashboardPage';
+import PublisherPageVue from '../components/publishers/PublisherPage';
 
 Vue.use(Router)
 
