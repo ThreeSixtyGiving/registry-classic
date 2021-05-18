@@ -1,38 +1,16 @@
 <template>
-  <body>
-    <div class="layout layout--single-column">
-      <main class="layout__content">
-        <div class="layout__content-inner">
-          <div id="search-wrapper">
-            <SearchFieldVue :searchFunction="searchFunction" />
-          </div>
-          <div id="publisher-summary-wrapper">
-            <PublisherSummaryVue />
-          </div>
-          <div id="publisher-list-wrapper">
-            <PublisherListVue :publishers="publishers" />
-          </div>
-        </div>
-      </main>
-    </div>
-  </body>
+  <div id="app">
+    <router-view></router-view>
+  </div>
 </template>
 
 <script>
-import PublisherListVue from "./components/PublisherList.vue";
-import PublisherSummaryVue from "./components/PublisherSummary.vue";
-import SearchFieldVue from "./components/SearchField";
-
 export default {
   name: "App",
-  components: {
-    PublisherListVue,
-    PublisherSummaryVue,
-    SearchFieldVue,
-  },
   methods: {
-    searchFunction(searchTerm="") {
-      const query = [``, `search=${searchTerm}`].join('&')
+    searchFunction(searchTerm = null) {
+      const query =
+        searchTerm !== null ? [`&search=${searchTerm}`].join("&") : "";
       fetch(
         `http://store.dev.default.threesixtygiving.uk0.bigv.io/api/dashboard/publishers?format=json${query}`
       )
@@ -52,6 +30,11 @@ export default {
   },
 };
 </script>
+
+
+
+
+
 
 <style>
 @import url("https://fonts.googleapis.com/css?family=Roboto:200,200i,300,300i,400,400i,500,500i,600,600i,700,700i&display=swap");
