@@ -12,7 +12,7 @@
               <img
                 class="stat-logo"
                 src="@/assets/images/logos/location.svg"
-                alt="publisher locations"
+                alt=""
               />
               <p>of publishers providing recipient locations</p>
             </span>
@@ -23,7 +23,7 @@
               <img
                 class="stat-logo"
                 src="@/assets/images/logos/badge.svg"
-                alt="publisher locations"
+                alt=""
               />
               <p>of publishers provide beneficiary location names</p>
             </span>
@@ -32,7 +32,7 @@
               <img
                 class="stat-logo"
                 src="@/assets/images/logos/hash.svg"
-                alt="publisher locations"
+                alt=""
               />
               <p>Has company or charity numbers</p>
             </span>
@@ -43,7 +43,7 @@
               <img
                 class="stat-logo"
                 src="@/assets/images/logos/link.svg"
-                alt="publisher locations"
+                alt=""
               />
               <p>Have at least 95% external identifiers for recipients</p>
             </span>
