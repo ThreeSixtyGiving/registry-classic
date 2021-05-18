@@ -1,40 +1,13 @@
 <template>
-  <div id="app">
-    <router-view></router-view>
-  </div>
+    <router-view />
 </template>
 
 <script>
+
 export default {
   name: "App",
-  methods: {
-    searchFunction(searchTerm = null) {
-      const query =
-        searchTerm !== null ? [`&search=${searchTerm}`].join("&") : "";
-      fetch(
-        `http://store.dev.default.threesixtygiving.uk0.bigv.io/api/dashboard/publishers?format=json${query}`
-      )
-        .then((response) => response.json())
-        .then((json) => {
-          this.publishers = json;
-        });
-    },
-  },
-  data() {
-    return {
-      publishers: {},
-    };
-  },
-  created() {
-    this.searchFunction();
-  },
 };
 </script>
-
-
-
-
-
 
 <style>
 @import url("https://fonts.googleapis.com/css?family=Roboto:200,200i,300,300i,400,400i,500,500i,600,600i,700,700i&display=swap");

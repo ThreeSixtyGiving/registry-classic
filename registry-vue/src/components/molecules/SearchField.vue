@@ -6,7 +6,13 @@
       id="publisher-search-input"
       v-model="searchTerm"
     />
-    <button id="publisher-search-submit" class="button" v-on:click="searchFunction(searchTerm)">Search</button>
+    <button
+      id="publisher-search-submit"
+      class="button"
+      v-on:click="searchFunction(searchTerm)"
+    >
+      Search
+    </button>
   </div>
 </template>
 
@@ -14,12 +20,12 @@
 export default {
   name: "SearchField",
   props: {
-    searchFunction: { type: Function }
+    searchFunction: { type: Function },
   },
-  data: function() {
+  data: function () {
     return {
       searchTerm: "",
-    }
+    };
   },
 };
 </script>

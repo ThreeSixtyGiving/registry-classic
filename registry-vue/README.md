@@ -1,4 +1,4 @@
-# registry
+# registry-vue2
 
 ## Project setup
 ```
