@@ -15,9 +15,9 @@
 </template>
 
 <script>
-import PublisherListVue from "../molecules/PublisherList";
-import PublisherSummaryVue from "../molecules/PublisherSummary";
-import SearchFieldVue from "../molecules/SearchField";
+import PublisherListVue from "./parts/PublisherList";
+import PublisherSummaryVue from "./parts/PublisherSummary";
+import SearchFieldVue from "./parts/SearchField";
 
 export default {
   name: "PublisherPage",

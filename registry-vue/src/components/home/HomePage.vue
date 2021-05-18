@@ -3,12 +3,16 @@
     <header class="layout__header">
       <Hero />
     </header>
+    <nav class="layout__content">
+      <button><router-link to="/dashboard">Dashboard</router-link></button>
+      <button><router-link to="/publishers">Publishers</router-link></button>
+    </nav>
     <router-view />
   </div>
 </template>
 
 <script>
-import Hero from "../molecules/Hero"
+import Hero from "./parts/Hero"
 
 export default {
   name: "HomePage",
