@@ -12,9 +12,9 @@
               <img
                 class="stat-logo"
                 src="@/assets/images/logos/location.svg"
-                alt="publisher locations"
+                alt=""
               />
-              <p>of publishers providing recipient locations</p>
+              <p>include grant duration</p>
             </span>
             <span class="inline grid__1">
               <h2 class="inline">
@@ -23,29 +23,18 @@
               <img
                 class="stat-logo"
                 src="@/assets/images/logos/badge.svg"
-                alt="publisher locations"
+                alt=""
               />
-              <p>of publishers provide beneficiary location names</p>
+              <p>include grant programme names</p>
             </span>
             <span class="inline grid__1">
               <h2 class="inline">{{ stats.publisher.charity_numbers }}%</h2>
               <img
                 class="stat-logo"
                 src="@/assets/images/logos/hash.svg"
-                alt="publisher locations"
+                alt=""
               />
-              <p>Has company or charity numbers</p>
-            </span>
-            <span class="inline grid__1">
-              <h2 class="inline">
-                {{ stats.publisher.external_identifiers_95 }}%
-              </h2>
-              <img
-                class="stat-logo"
-                src="@/assets/images/logos/link.svg"
-                alt="publisher locations"
-              />
-              <p>Have at least 95% external identifiers for recipients</p>
+              <p>include grant classifications</p>
             </span>
           </section>
         </div>
@@ -56,7 +45,7 @@
 
 <script>
 export default {
-  name: "PublisherSummary",
+  name: "DashboardGrants",
   data() {
     return {
       stats: {

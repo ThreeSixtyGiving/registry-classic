@@ -2,6 +2,7 @@
   <div class="layout layout--single-column">
     <header class="layout__header">
       <Hero />
+      <TopStats />
     </header>
     <nav class="layout__content">
       <button><router-link to="/dashboard">Dashboard</router-link></button>
@@ -12,12 +13,14 @@
 </template>
 
 <script>
-import Hero from "./parts/Hero"
+import Hero from "./parts/Hero";
+import TopStats from "./parts/TopStats";
 
 export default {
   name: "HomePage",
   components: {
     Hero,
+    TopStats,
   },
 };
 </script>
