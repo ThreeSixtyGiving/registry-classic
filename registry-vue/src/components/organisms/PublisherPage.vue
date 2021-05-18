@@ -1,19 +1,17 @@
 <template>
-  <div class="layout layout--single-column">
-    <main class="layout__content">
-      <div class="layout__content-inner">
-        <div id="search-wrapper">
-          <SearchFieldVue :searchFunction="searchFunction" />
-        </div>
-        <div id="publisher-summary-wrapper">
-          <PublisherSummaryVue />
-        </div>
-        <div id="publisher-list-wrapper">
-          <PublisherListVue :publishers="publishers" />
-        </div>
+  <main class="layout__content">
+    <div class="layout__content-inner">
+      <div id="search-wrapper">
+        <SearchFieldVue :searchFunction="searchFunction" />
       </div>
-    </main>
-  </div>
+      <div id="publisher-summary-wrapper">
+        <PublisherSummaryVue />
+      </div>
+      <div id="publisher-list-wrapper">
+        <PublisherListVue :publishers="publishers" />
+      </div>
+    </div>
+  </main>
 </template>
 
 <script>
@@ -28,9 +26,26 @@ export default {
     PublisherSummaryVue,
     SearchFieldVue,
   },
-  props: {
-    searchFunction: { type: Function },
-    publishers: {},
+  methods: {
+    searchFunction(searchTerm = null) {
+      const query =
+        searchTerm !== null ? [`&search=${searchTerm}`].join("&") : "";
+      fetch(
+        `http://store.dev.default.threesixtygiving.uk0.bigv.io/api/dashboard/publishers?format=json${query}`
+      )
+        .then((response) => response.json())
+        .then((json) => {
+          this.publishers = json;
+        });
+    },
+  },
+  data() {
+    return {
+      publishers: {},
+    };
+  },
+  created() {
+    this.searchFunction();
   },
 };
 </script>
