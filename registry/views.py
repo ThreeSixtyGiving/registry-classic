@@ -1,14 +1,12 @@
 from datetime import datetime
 import json
 import os
-from typing import Dict, List
-from random import randrange
 
-from flask import Flask, render_template, current_app, url_for, redirect, request
+from flask import Flask, render_template, current_app
 from raven.contrib.flask import Sentry
 
+from registry.registry import get_data_sorted_by_prefix, get_schema_org_list, get_raw_data
 from registry.salesforce import get_salesforce_data
-from registry.datastore import get_publisher_json
 
 app = Flask(
     __name__,
@@ -29,59 +27,17 @@ def inject_footer_menu():
 
 
 @app.route('/')
-def home():
-    return redirect(url_for('data_dashboard'))
-
-
-@app.route('/dashboard_data')
-def get_data():
-    return {
-        'publisher': {
-            'recipient_location': randrange(100),
-            'beneficiary_location_names': randrange(100),
-            'charity_numbers': randrange(100),
-            'external_identifiers_95': randrange(100),
-        },
-        'org_info_graph': 
-            dict(
-                labels = ["10%","20%","30%","40%","50%","60%","70%","80%","90%","100%"],
-                data = [20, 10, 0, 50, 30, 60, 65, 80, 20, 90]
-            ),
-        }
-
-
-@app.route('/dashboard')
-def data_dashboard():
-
-    stats = get_data()
-
-    return render_template(
-        'dashboard.html',
-        stats=stats
-    )
-
-
-@app.route('/publishers')
 def data_registry():
-    stats = get_data()
-    data = get_publisher_json()
+    raw_data = get_raw_data()
+    data = get_data_sorted_by_prefix(raw_data)
+    schema = get_schema_org_list(raw_data)
 
     return render_template(
-        'publishers.html',
-        stats=stats,
-        publishers=data,
+        'registry.html',
+        data=data,
+        schema=schema,
         num_of_publishers=len(data)
     )
-
-
-@app.route('/publisher_list')
-def publisher_list(args={}):
-        searchTerm = request.args.get('search')
-        args['search'] = searchTerm
-        data = get_publisher_json(args)
-        return render_template('_parts/publisher_list.html',
-            publishers=data
-        )
 
 
 @app.route('/terms-conditions')
