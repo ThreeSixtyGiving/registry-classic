@@ -33,13 +33,8 @@
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/sanitize.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/theme.css') }}" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i&display=swap" type="text/css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" type="text/css" />
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
     <noscript>
       <style>
@@ -72,11 +67,7 @@
       {% include "_parts/top-bar.html" %}
       <header class="layout__header">
         {% include "_parts/hero.html" %}
-      </header>
-
-      <nav class="layout__content">
-        {% include "_parts/_tabs.html" %}
-      </nav>
+      </header> 
 
       <main class="layout__content">
         <div class="layout__content-inner">
