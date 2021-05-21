@@ -1,18 +1,8 @@
-const fetch = require('node-fetch');
+var path = require('path');
 
 module.exports = {
-  devServer: {
-    before: function(app, server) {
-      app.get('/data.json', async function(req, res) {
-        fetch("https://data.threesixtygiving.org/data.json", { method: "GET" })
-          .then(res => res.json())
-          .then((json) => {
-            res.writeHead(200, {'Content-Type': 'application/json'});
-            res.end(JSON.stringify(json));
-          });
-      });
-    }
-  },
+  outputDir: process.env.NODE_ENV === 'production' ? '../registry/templates/' : 'dist',
+  assetsDir: process.env.NODE_ENV === 'production' ? '../static/' : '',
   configureWebpack: config => {
     if (process.env.NODE_ENV === 'production') {
       // mutate config for production...

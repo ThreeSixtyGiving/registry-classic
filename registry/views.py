@@ -8,12 +8,15 @@ from raven.contrib.flask import Sentry
 from registry.registry import get_data_sorted_by_prefix, get_schema_org_list, get_raw_data
 from registry.salesforce import get_salesforce_data
 
-app = Flask(
-    __name__,
-    static_url_path='',
-    static_folder='./static',
-    template_folder='./templates',
-)
+
+# template_dir = os.path.abspath('./dist')
+# static_dir = os.path.abspath('./dist/static')
+
+app = Flask(__name__,
+            # static_folder = static_dir,
+            # template_folder = template_dir,
+            )
+
 sentry = Sentry(app)
 
 
@@ -25,9 +28,13 @@ def inject_footer_menu():
             now=datetime.now(),
         )
 
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def data_registry(path):
+    return render_template("index.html")
 
-@app.route('/')
-def data_registry():
+@app.route('/backup')
+def backup_app():
     raw_data = get_raw_data()
     data = get_data_sorted_by_prefix(raw_data)
     schema = get_schema_org_list(raw_data)
@@ -38,7 +45,6 @@ def data_registry():
         schema=schema,
         num_of_publishers=len(data)
     )
-
 
 @app.route('/terms-conditions')
 def terms_and_conditions():
