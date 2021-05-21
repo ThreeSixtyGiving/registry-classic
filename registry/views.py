@@ -25,12 +25,12 @@ def inject_footer_menu():
 
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
-def data_registry(path):
-    return render_template("index.html")
+def dashboard(path):
+    return render_template("vue-build/index.html")
 
 
 @app.route('/registry')
-def backup_app():
+def data_registry():
     raw_data = get_raw_data()
     data = get_data_sorted_by_prefix(raw_data)
     schema = get_schema_org_list(raw_data)
