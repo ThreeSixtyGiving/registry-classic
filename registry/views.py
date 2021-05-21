@@ -9,13 +9,7 @@ from registry.registry import get_data_sorted_by_prefix, get_schema_org_list, ge
 from registry.salesforce import get_salesforce_data
 
 
-# template_dir = os.path.abspath('./dist')
-# static_dir = os.path.abspath('./dist/static')
-
-app = Flask(__name__,
-            # static_folder = static_dir,
-            # template_folder = template_dir,
-            )
+app = Flask(__name__)
 
 sentry = Sentry(app)
 
@@ -28,12 +22,14 @@ def inject_footer_menu():
             now=datetime.now(),
         )
 
+
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def data_registry(path):
     return render_template("index.html")
 
-@app.route('/backup')
+
+@app.route('/registry')
 def backup_app():
     raw_data = get_raw_data()
     data = get_data_sorted_by_prefix(raw_data)
@@ -45,6 +41,7 @@ def backup_app():
         schema=schema,
         num_of_publishers=len(data)
     )
+
 
 @app.route('/terms-conditions')
 def terms_and_conditions():
