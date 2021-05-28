@@ -1,25 +1,29 @@
 <template>
   <main class="layout__content">
     <div class="layout__content-inner">
-      <div id="search-wrapper">
-        <SearchFieldVue :searchFunction="searchFunction" />
-      </div>
-      <div v-if="dataDownloaded" id="publisher-list-wrapper">
+      <DataTable />
+      <div class="spacer-2"></div>
+      <SortFilter />
+      <div class="spacer-4"></div>
+      <template v-if="dataDownloaded" id="publisher-list-wrapper">
         <PublisherResult v-for="publisher in publishers" :key="publisher.prefix" :publisher="publisher" />
-      </div>
+        <div class="spacer-1"></div>
+      </template>
     </div>
   </main>
 </template>
 
 <script>
-import SearchFieldVue from "./parts/SearchField";
 import PublisherResult from "./parts/PublisherResult";
+import DataTable from './parts/DataTable';
+import SortFilter from './parts/SortFilter';
 
 export default {
   name: "PublisherPage",
   components: {
-    SearchFieldVue,
     PublisherResult,
+    DataTable,
+    SortFilter,
   },
   methods: {
     searchFunction(searchTerm = null) {

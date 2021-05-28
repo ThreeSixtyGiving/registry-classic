@@ -21,7 +21,7 @@ export default {
   props: {
     publishers: {},
   },
-  data: function () {
+  data() {
     return {
       radioOptions: [{ name: "Publisher", default: true }, { name: "Grant" }],
       cards: {
