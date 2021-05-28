@@ -4,27 +4,22 @@
       <div id="search-wrapper">
         <SearchFieldVue :searchFunction="searchFunction" />
       </div>
-      <div id="publisher-summary-wrapper">
-        <PublisherSummaryVue />
-      </div>
-      <div id="publisher-list-wrapper">
-        <PublisherListVue :publishers="publishers" />
+      <div v-if="dataDownloaded" id="publisher-list-wrapper">
+        <PublisherResult v-for="publisher in publishers" :key="publisher.prefix" :publisher="publisher" />
       </div>
     </div>
   </main>
 </template>
 
 <script>
-import PublisherListVue from "./parts/PublisherList";
-import PublisherSummaryVue from "./parts/PublisherSummary";
 import SearchFieldVue from "./parts/SearchField";
+import PublisherResult from "./parts/PublisherResult";
 
 export default {
   name: "PublisherPage",
   components: {
-    PublisherListVue,
-    PublisherSummaryVue,
     SearchFieldVue,
+    PublisherResult,
   },
   methods: {
     searchFunction(searchTerm = null) {
@@ -36,12 +31,17 @@ export default {
         .then((response) => response.json())
         .then((json) => {
           this.publishers = json;
+          this.dataDownloaded = true
         });
     },
   },
   data() {
     return {
-      publishers: {},
+      publishers: Object,
+      dataDownloaded: {
+        type: Boolean,
+        default: false
+      }
     };
   },
   created() {

@@ -11,7 +11,7 @@
               <h2 class="inline">{{ stats.publisher.recipient_location }}%</h2>
               <img
                 class="stat-logo"
-                src="@/assets/images/logos/location.svg"
+                src=""
                 alt=""
               />
               <p>of publishers providing recipient locations</p>
@@ -22,7 +22,7 @@
               </h2>
               <img
                 class="stat-logo"
-                src="@/assets/images/logos/badge.svg"
+                src=""
                 alt=""
               />
               <p>of publishers provide beneficiary location names</p>
@@ -31,7 +31,7 @@
               <h2 class="inline">{{ stats.publisher.charity_numbers }}%</h2>
               <img
                 class="stat-logo"
-                src="@/assets/images/logos/hash.svg"
+                src=""
                 alt=""
               />
               <p>Has company or charity numbers</p>
@@ -42,7 +42,7 @@
               </h2>
               <img
                 class="stat-logo"
-                src="@/assets/images/logos/link.svg"
+                src=""
                 alt=""
               />
               <p>Have at least 95% external identifiers for recipients</p>
@@ -86,7 +86,3 @@ export default {
   },
 };
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-</style>
