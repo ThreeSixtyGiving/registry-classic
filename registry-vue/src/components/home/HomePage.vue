@@ -1,26 +1,45 @@
 <template>
   <div class="layout layout--single-column">
-    <header class="layout__header">
-      <Hero />
-      <TopStats />
-    </header>
-    <nav class="layout__content">
-      <button><router-link to="/dashboard">Dashboard</router-link></button>
-      <button><router-link to="/publishers">Publishers</router-link></button>
-    </nav>
-    <router-view />
+    <Nav />
+    <hr class="separator-light">
+    <main>
+      <div class="layout__content dashboard-page">
+        <TopStats />
+        <Tabs />
+        <router-view />
+      </div>
+    </main>
+    <Footer />
   </div>
 </template>
 
 <script>
-import Hero from "./parts/Hero";
+import Nav from "./parts/Nav";
 import TopStats from "./parts/TopStats";
+import Footer from "./parts/Footer";
+import Tabs from "./parts/Tabs";
 
 export default {
   name: "HomePage",
   components: {
-    Hero,
+    Nav,
     TopStats,
+    Footer,
+    Tabs,
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.dashboard-page {
+  &__back-link {
+    color: $black;
+  }
+
+  &__pager {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 48px;
+  }
+}
+</style>

@@ -7,11 +7,11 @@ import PublisherPageVue from '../components/publishers/PublisherPage';
 Vue.use(Router)
 
 const routes = [
-  { path: '/', redirect: '/dashboard'},
+  { path: '/', redirect: '/overview'},
   { path: '/', 
     component: HomePageVue,
     children: [
-      { path: '/dashboard', name: "Dashboard", component: DashboardPageVue },
+      { path: '/overview', name: "Overview", component: DashboardPageVue },
       { path: '/publishers', name: "Publishers", component: PublisherPageVue },
     ]
   },
