@@ -28,7 +28,7 @@
     <hr class="separator-light">
 
     <div>
-      <a href="#" class="button">See More</a>
+      <router-link class="button" :to="{ name: 'publisher', params: { id: publisher.prefix } }">See More</router-link>
     </div>
   </div>
 </template>
