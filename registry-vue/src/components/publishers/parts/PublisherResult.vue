@@ -28,7 +28,7 @@
     <hr class="separator-light">
 
     <div>
-      <router-link class="button" :to="{ name: 'publisher', params: { id: publisher.prefix } }">See More</router-link>
+      <a class="button" :href="$router.resolve({name: 'publisher', params: { id: publisher.prefix }}).href">See More</a>
     </div>
   </div>
 </template>

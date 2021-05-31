@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="tabs" v-if="$router.currentRoute.name === 'overview' || 'publishers'">
+    <div class="tabs" v-if="$router.currentRoute.name !== 'publisher'">
       <span :class="`tab tab${$router.currentRoute.name === 'overview' ? '--active' : '--inactive'}`">
         <a class="tab__inner" href="/overview">Overview</a>
       </span>
