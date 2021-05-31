@@ -1,17 +1,29 @@
 <template>
-  <div class="tabs">
-    <span class="tab tab--active">
-      <a class="tab__inner" href="/overview">Overview</a>
-    </span>
-  
-    <span class="tab tab--inactive">
-      <a class="tab__inner" href="/publishers">Publishers</a>
-    </span>
-    <span class="tabs-empty-bar" />
+  <div>
+    <div class="tabs" v-if="$router.currentRoute.name === 'overview' || 'publishers'">
+      <span :class="`tab tab${$router.currentRoute.name === 'overview' ? '--active' : '--inactive'}`">
+        <a class="tab__inner" href="/overview">Overview</a>
+      </span>
+    
+      <span :class="`tab tab${$router.currentRoute.name === 'publishers' ? '--active' : '--inactive'}`">
+        <a class="tab__inner" href="/publishers">Publishers</a>
+      </span>
+      <span class="tabs-empty-bar" />
+    </div>
+
+    <div v-if="$router.currentRoute.name === 'publisher'">
+      <a href="/publishers" class="dashboard-page__back-link">
+        <div class="icon">
+          <i class="material-icons icon__mat-icon">arrow_back</i>
+        </div>
+        Back to Publishers
+      </a>
+    </div>
   </div>
 </template>
 
 <script>
+ 
 export default {
   name: "Tabs",
 };
