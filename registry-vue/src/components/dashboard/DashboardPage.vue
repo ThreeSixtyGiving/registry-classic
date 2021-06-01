@@ -4,25 +4,34 @@
       <RadioButtons :radioOptions="radioOptions" />
     </div>
     <div class="spacer-2 clearfix"></div>
-    <DashboardCard v-for="(cardData, index) in cards" :key="`card-${index}`" :cardData="cardData" />
+    <DashboardCard v-for="(cardData, index) in cards" :key="`card-${index}`" :cardData="cardData" v-on:showModalEvent="controlModal(true)" />
+    <Modal v-if="showModal" v-on:hideModalEvent="controlModal(false)" />
   </div>
 </template>
 
 <script>
 import DashboardCard from "./parts/DashboardCard";
 import RadioButtons from "./parts/RadioButtons";
+import Modal from './parts/Modal';
 
 export default {
   name: "DashboardPage",
   components: {
     DashboardCard,
     RadioButtons,
+    Modal,
   },
   props: {
     publishers: {},
   },
+  methods: {
+    controlModal(visibleStatus) {
+      this.showModal = visibleStatus;
+    }
+  },
   data() {
     return {
+      showModal: false,
       radioOptions: [{ name: "Publisher", value: "publisher", default: true }, { name: "Grant", value: "grant" }],
       cards: [
         {
