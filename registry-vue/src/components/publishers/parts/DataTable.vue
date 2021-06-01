@@ -320,7 +320,6 @@ export default {
 
   th, td {
     padding: 8px;
-    vertical-align: top;
     color: hsla(var(--table-text-hsl), 1);
     display: block;
     @include breakpoint($medium) {
