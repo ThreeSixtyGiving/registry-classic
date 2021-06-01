@@ -5,6 +5,9 @@
       <div class="spacer-2"></div>
       <SortFilter />
       <div class="spacer-4"></div>
+      <div v-if="!dataDownloaded">
+        <Spinner />
+      </div>
       <template v-if="dataDownloaded" id="publisher-list-wrapper">
         <PublisherResult v-for="publisher in publishers" :key="publisher.prefix" :publisher="publisher" />
         <div class="spacer-1"></div>
@@ -17,6 +20,7 @@
 import PublisherResult from "./parts/PublisherResult";
 import DataTable from './parts/DataTable';
 import SortFilter from './parts/SortFilter';
+import Spinner from '../generic/Spinner'
 
 export default {
   name: "PublisherPage",
@@ -24,6 +28,7 @@ export default {
     PublisherResult,
     DataTable,
     SortFilter,
+    Spinner,
   },
   methods: {
     searchFunction(searchTerm = null) {
@@ -41,11 +46,8 @@ export default {
   },
   data() {
     return {
-      publishers: Object,
-      dataDownloaded: {
-        type: Boolean,
-        default: false
-      }
+      publishers: {},
+      dataDownloaded: false
     };
   },
   created() {
