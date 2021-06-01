@@ -1,9 +1,18 @@
 <template>
   <span class="icon-badge">
-    <img :src="`@/assets/images/icons/${badge.icon_name}.svg`" alt="" />
-    {{ label }}
+    <img :src="`@/assets/images/icons/${badge.iconName}.svg`" alt="" />
+    {{ badge.label }}
   </span>
 </template>
+
+<script>
+export default {
+  name: 'IconBadge',
+  props: {
+    badge: {}
+  }
+}
+</script>
 
 <style lang="scss" scoped>
 .icon-badge {

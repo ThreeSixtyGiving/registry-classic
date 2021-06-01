@@ -3,7 +3,7 @@
     <details class="collapsed-table__details" open>
       <summary>
         <span class="summary-label">All publishers data</span>
-        <span class="summary-icon" aria-hidden="true"><img :src="`@/assets/images/icons/chevron-down.svg`" alt="" /></span>
+        <span class="summary-icon" aria-hidden="true"><img src="@/assets/images/icons/chevron_down.svg" alt="" /></span>
       </summary>
       <div class="collapsed-table--content">
         <div class="table table--zebra table--primary-light">
@@ -19,7 +19,7 @@
                     class="table__lead-cell"
                     :data-header="header.th1"
                   >
-                    <img :src="`@/assets/images/icons/${item.icon_name}.svg`" alt="" />
+                    <img :src="`@/assets/images/icons/${item.iconName}.svg`" alt="" />
                     {{ item.label }}: <strong>{{ item.value }}</strong>
                   </td>
                 </tr>
@@ -45,14 +45,14 @@ export default {
     &[open] {
       summary {
         .summary-icon {
-          svg {
+          img {
             transform: rotateX(180deg);
           }
         }
 
         &:hover {
           .summary-icon {
-            svg {
+            img {
               transform: translateY(-2px) rotateX(180deg);
             }
           }

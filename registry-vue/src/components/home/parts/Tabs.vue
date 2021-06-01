@@ -13,9 +13,7 @@
 
     <div v-if="$router.currentRoute.name === 'publisher'">
       <a href="/publishers" class="dashboard-page__back-link">
-        <div class="icon">
-          <i class="material-icons icon__mat-icon">arrow_back</i>
-        </div>
+        <MaterialIcon :iconName="'arrow_back'" />
         Back to Publishers
       </a>
     </div>
@@ -23,9 +21,13 @@
 </template>
 
 <script>
+import MaterialIcon from '../../generic/MaterialIcon'
  
 export default {
   name: "Tabs",
+  components: {
+    MaterialIcon,
+  }
 };
 </script>
 

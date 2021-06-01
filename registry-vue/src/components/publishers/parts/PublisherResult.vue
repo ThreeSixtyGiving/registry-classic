@@ -14,8 +14,8 @@
       </div>
     </div>
 
-    <span v-for="(badge, index) in publisher.badges" :key="index" class="dashboard-publisher-result__badge">
-      <IconBadge />
+    <span v-for="(badge, index) in badges" :key="index" class="dashboard-publisher-result__badge">
+      <IconBadge :badge="badge" />
     </span>
 
     <hr class="separator-light">
@@ -44,7 +44,62 @@ export default {
     IconBadge,
   },
   props: {
-    publisher: {},
+    publisher: {
+      type: Object,
+      required: true,
+    }
+  },
+  computed: {
+    calculateBadges: function() {
+      return {
+        badges: [
+          {
+            "iconName": "location_on",
+            "label": "Include recipient location codes"
+          },
+          {
+            "iconName": "edit_location",
+            "label": "Include grant location name"
+          },
+          {
+            "iconName": "add_location",
+            "label": "Include grant location codes"
+          },
+          {
+            "iconName": "money",
+            "label": "Include charity or company nos."
+          },
+          {
+            "iconName": "confirmation_number",
+            "label": "Include external org IDs"
+          },
+          {
+            "iconName": "event_note",
+            "label": "Include grant duration"
+          },
+          {
+            "iconName": "format_quote",
+            "label": "Include programme names"
+          },
+          {
+            "iconName": "label",
+            "label": "Include classifications"
+          },
+          {
+            "overlaid_text": "xlsx",
+            "label": "Publish using spreadsheets"
+          },
+          {
+            "iconName": "reorder",
+            "label": "Include metadata"
+          },
+          {
+            "iconName": "event_available",
+            "label": "Published data in the last year"
+          }
+        ]
+      }
+    }
   }
 }
 </script>
