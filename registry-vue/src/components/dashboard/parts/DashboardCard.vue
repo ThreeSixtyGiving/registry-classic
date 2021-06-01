@@ -7,7 +7,7 @@
       </div>
 
       <div class="dashboard-stats-card__right-side">
-        <AlertTag :label="cardData.infoLabel" />
+        <AlertTag v-on="$listeners" :label="cardData.infoLabel" />
       </div>
     </div>
 
@@ -52,7 +52,7 @@ export default {
         }
       ],
     }
-  }
+  },
 };
 </script>
 
