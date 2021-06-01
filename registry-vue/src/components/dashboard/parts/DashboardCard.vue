@@ -7,13 +7,13 @@
       </div>
 
       <div class="dashboard-stats-card__right-side">
-        <AlertTag :label="cardData.info_label" />
+        <AlertTag :label="cardData.infoLabel" />
       </div>
     </div>
 
     <div class="dashboard-stats-card__groups">
       <div v-for="(stats, index) in cardData.stats" :key="index" class="dashboard-stats-card__group">
-        <span><img :src="`@/assets/images/icons/${stats.icon_name}.svg`" alt=""></span>
+        <span><img :src="`@/assets/images/icons/${stats.iconName}.svg`" alt=""></span>
         <span :id="`stat-${index}`">{{ stats.label }}</span>
         <span :aria-labelledby="`stat-${index}`" class="dashboard-stats-card__value">{{ stats.value }}</span>
       </div>
@@ -26,7 +26,6 @@
 
       <div class="graph-label">{{ cardData.graph_description }}</div>
       <div class="graph-container">
-        <img src="assets/images/dashboard-samples/overview-graph-publishers-with-ids.png" alt="Publishers with IDs">
       </div>
     </div>
   </div>
@@ -44,12 +43,12 @@ export default {
     cardData: {
       title: "",
       description: "",
-      info_label: "",
+      infoLabel: "",
       stats: [
         {
           label: "",
           values: "",
-          icon_name: "",
+          iconName: "",
         }
       ],
     }
