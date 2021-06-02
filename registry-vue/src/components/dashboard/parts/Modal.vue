@@ -1,8 +1,8 @@
 <template>
 <div id="modal-00" class="modal modal--shown dashboard-modal">
-  <div class="modal__overlay modal__trigger" data-id="modal-00"></div>
+  <div v-on:click="hideModal" class="modal__overlay modal__trigger" data-id="modal-00"></div>
   <div class="modal__window">
-    <button class="modal__close modal__trigger" data-id="modal-00" v-on:click="hideModal"></button>
+    <button v-on:click="hideModal" class="modal__close modal__trigger" data-id="modal-00"></button>
     <div class="modal__content">
       <h3>Know more: Location</h3>
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
@@ -42,12 +42,59 @@ export default {
   methods: {
     hideModal() {
       this.$emit('hideModalEvent');
-    }
+    },
   }
 }
 </script>
 
 <style lang="scss" scoped>
+.modal {
+  transition: all .4s ease;
+  align-items: center;
+  justify-content: center;
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+  width: 100vw;
+  height: 100vh;
+  
+  &__overlay {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;  
+    background-color: hsla(var(--white-hsl), .4);
+  }
+  
+  &__trigger { cursor: pointer; }
+  
+  &__close { 
+    all: unset; // Resets button native styles
+    float: right;
+    &:after {
+      @extend .u-material-icons;
+      content: 'close';
+    }
+  }
+
+  &__window {
+    position: relative;
+    padding: 40px;
+    max-height: 90vh;
+    max-width: 80vw;
+    min-width: 22vw;
+    overflow-y: auto;
+    background-color: hsla(var(--white-hsl), 1);
+    box-shadow: 8px 8px 32px hsla(var(--base-hsl), .1);
+  }
+}
+
+.modal.modal--shown { display: flex; }
+body.modal--shown { overflow: hidden; }
+
 .dashboard-modal {
   background: rgba(100, 100, 100, 0.4);
   padding: 1rem;  
