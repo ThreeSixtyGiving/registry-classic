@@ -1,5 +1,5 @@
 <template>
-  <div class="dashboard-stats-card">
+  <div :class="`dashboard-stats-card ${overviewMode==='grant' ? 'dashboard-stats-card--grant' : ''}`">
     <div class="dashboard-stats-card__head">
       <div class="dashboard-stats-card__left-side">
         <h3 class="dashboard-stats-card__title">{{ cardData.title }}</h3>
@@ -40,6 +40,7 @@ export default {
     AlertTag,
   },
   props: {
+    overviewMode: String,
     cardData: {
       title: "",
       description: "",
