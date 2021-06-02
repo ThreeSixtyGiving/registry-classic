@@ -1,10 +1,10 @@
 <template>
   <div>
     <div class="dashboard-page__section-radios">
-      <RadioButtons :radioOptions="radioOptions" />
+      <RadioButtons :overviewMode="overviewMode" v-on:setOverviewMode="setOverviewMode($event)" />
     </div>
     <div class="spacer-2 clearfix"></div>
-    <DashboardCard v-for="(cardData, index) in cards" :key="`card-${index}`" :cardData="cardData" v-on:showModalEvent="controlModal(true)" />
+    <DashboardCard v-for="(cardData, index) in cards" :key="`card-${index}`" :overviewMode="overviewMode" :cardData="cardData" v-on:showModalEvent="controlModal(true)" />
     <Modal v-if="showModal" v-on:hideModalEvent="controlModal(false)" />
   </div>
 </template>
@@ -27,12 +27,15 @@ export default {
   methods: {
     controlModal(visibleStatus) {
       this.showModal = visibleStatus;
+    },
+    setOverviewMode(value) {
+      this.overviewMode = value;
     }
   },
   data() {
     return {
       showModal: false,
-      radioOptions: [{ name: "Publisher", value: "publisher", default: true }, { name: "Grant", value: "grant" }],
+      overviewMode: 'publisher',
       cards: [
         {
           title: "Location data",
