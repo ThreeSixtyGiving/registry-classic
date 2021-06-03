@@ -23,8 +23,8 @@
   <div class="spacer-1"></div>
 
   <div class="dashboard-publisher-result-wrapper__external-buttons align-right">
-    <a :href="`https://grantnav.threesixtygiving.org/funder/${publisher.prefix}`" class="button">See in GrantNav</a>
-    <a href="#" class="button button--black">See in 360Insights</a>
+    <a :href="`https://grantnav.threesixtygiving.org/publisher/${publisher.prefix}`" target="_blank" class="button">See in GrantNav</a>
+    <a href="#" target="_blank" class="button button--black">See in 360Insights</a>
   </div>
 
   <div class="spacer-3"></div>
@@ -32,9 +32,7 @@
   <div class="dashboard-publisher-result">
     <h4 class="dashboard-publisher-result__title">Total grants published</h4>
     <p>The number of grants published by award year for the past 10 years, with the total grants published that were awarded 11 or more years ago.</p>
-    <div>
-      <YearsChart :chart="publisher.chart" />
-    </div>
+    <YearsChart :chart="publisher.chart" />
   </div>
 
   <div class="dashboard-publisher-result">
