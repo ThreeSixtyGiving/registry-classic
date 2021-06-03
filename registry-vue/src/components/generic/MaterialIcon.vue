@@ -20,7 +20,7 @@ export default {
   --icon-color: var(--color-teal);
 
   display: inline-block;
-  $icon-size: 16px;
+  $icon-size: 24px;
 
   &__overlaid-text {
     font-size: $icon-size / 2;
