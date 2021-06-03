@@ -13,7 +13,7 @@
 
     <div class="dashboard-stats-card__groups">
       <div v-for="(stats, index) in cardData.stats" :key="index" class="dashboard-stats-card__group">
-        <span><img :src="`@/assets/images/icons/${stats.iconName}.svg`" alt=""></span>
+        <MaterialIcon :iconName="stats.iconName" />
         <span :id="`stat-${index}`">{{ stats.label }}</span>
         <span :aria-labelledby="`stat-${index}`" class="dashboard-stats-card__value">{{ stats.value }}</span>
       </div>
@@ -25,19 +25,20 @@
       <hr class="separator-light">
 
       <div class="graph-label">{{ cardData.graph_description }}</div>
-      <div class="graph-container">
-      </div>
+      <Plotly />
     </div>
   </div>
 </template>
 
 <script>
 import AlertTag from "../../generic/AlertTag";
+import MaterialIcon from "../../generic/MaterialIcon";
 
 export default {
   name: "DashboardCard",
   components: {
     AlertTag,
+    MaterialIcon,
   },
   props: {
     overviewMode: String,

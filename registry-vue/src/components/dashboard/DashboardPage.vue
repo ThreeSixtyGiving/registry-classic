@@ -66,14 +66,14 @@ export default {
           infoLabel: "Learn more about organisation identifiers",
           stats: [
             {
-              "icon_name": "tag",
-              "label": "Include charity or company nos.",
-              "value": "64%"
+              iconName: "tag",
+              label: "Include charity or company nos.",
+              value: "64%"
             },
             {
-              "icon_name": "confirmation_number",
-              "label": "Include external org IDs for at least 50% of recipients",
-              "value": "37%"
+              iconName: "confirmation_number",
+              label: "Include external org IDs for at least 50% of recipients",
+              value: "37%"
             }
           ],
           graph_description: "Percentage of recipients with external org IDs\n",
@@ -84,19 +84,19 @@ export default {
           infoLabel: "Learn more about grant data",
           stats: [
             {
-              "icon_name": "event_note",
-              "label": "Include grant duration",
-              "value": "37%"
+              iconName: "event_note",
+              label: "Include grant duration",
+              value: "37%"
             },
             {
-              "icon_name": "format_quote",
-              "label": "Include programme names",
-              "value": "64%"
+              iconName: "format_quote",
+              label: "Include programme names",
+              value: "64%"
             },
             {
-              "icon_name": "label",
-              "label": "Include classifications",
-              "value": "64%"
+              iconName: "label",
+              label: "Include classifications",
+              value: "64%"
             }
           ]
         },
@@ -106,14 +106,14 @@ export default {
           infoLabel: "Learn more about data updates",
           stats: [
             {
-              "icon_name": "event_available",
-              "label": "Have published in the last year",
-              "value": "52%"
+              iconName: "event_available",
+              label: "Have published in the last year",
+              value: "52%"
             },
             {
-              "icon_name": "event_available",
-              "label": "Have published in the last month",
-              "value": "90%"
+              iconName: "event_available",
+              label: "Have published in the last month",
+              value: "90%"
             }
           ],
           graph_description: "Publishers with grants awarded in\neach of the past 10 years\n"
