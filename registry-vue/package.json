@@ -11,6 +11,7 @@
     "core-js": "^3.6.5",
     "node-fetch": "^2.6.1",
     "vue": "^2.6.11",
+    "vue-plotly": "^1.1.0",
     "vue-router": "^3.5.1"
   },
   "devDependencies": {
