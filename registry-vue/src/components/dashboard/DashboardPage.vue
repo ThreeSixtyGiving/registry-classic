@@ -76,7 +76,26 @@ export default {
               value: "37%"
             }
           ],
-          graph_description: "Percentage of recipients with external org IDs\n",
+          graph: {
+            data: [{
+              x: [0,20,40,60,80,100],
+              y: [10,15,42,17,42,64],
+              type:"bar",
+              marker: {
+                color:  ['#153634', '#DE6E26', '#4DACB6', '#EFC329', '#BC2C26', '#FFFFF',]
+              }
+            }],
+            layout:{
+              title: "Percentage of recipients with external org IDs",
+              xaxis: {
+                type: 'category',
+                title: '# of Publishers'
+              },
+              yaxis: {
+                title: '% with external org IDs'
+              }
+            }
+          }
         },
         {
           title: "Grant data",
@@ -99,6 +118,31 @@ export default {
               value: "64%"
             }
           ]
+        },
+        {
+          title: "Metadata",
+          description: "360Giving is a file-based data standard, supporting both spreadsheet and JSON publishing",
+          graph: {
+            data: [{
+              x: [50,70,30,100],
+              y: ['CSV','XLSX','ODF','JSON'],
+              type:"bar",
+              orientation: 'h',
+              marker: {
+                color:  ['#153634', '#DE6E26', '#4DACB6', '#EFC329', '#BC2C26', '#FFFFF',]
+              }
+            }],
+            layout:{
+              title: "Number of publishers using each file type",
+              yaxis: {
+                type: 'category',
+                title: 'File type'
+              },
+              xaxis: {
+                title: '% using file type'
+              },
+            }
+          }
         },
         {
           title: "Data updates",
