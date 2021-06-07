@@ -6,7 +6,7 @@
         <p class="dashboard-stats-card__description">{{ cardData.description }}</p>
       </div>
 
-      <div class="dashboard-stats-card__right-side">
+      <div v-if="cardData.infoLabel" class="dashboard-stats-card__right-side">
         <AlertTag v-on="$listeners" :label="cardData.infoLabel" />
       </div>
     </div>
@@ -25,7 +25,7 @@
       <hr class="separator-light">
 
       <div class="graph-label">{{ cardData.graph_description }}</div>
-      <Plotly />
+      <Plotly :data="cardData.graph.data" :layout="cardData.graph.layout" />
     </div>
   </div>
 </template>
@@ -33,12 +33,14 @@
 <script>
 import AlertTag from "../../generic/AlertTag";
 import MaterialIcon from "../../generic/MaterialIcon";
+import { Plotly } from "vue-plotly"; 
 
 export default {
   name: "DashboardCard",
   components: {
     AlertTag,
     MaterialIcon,
+    Plotly,
   },
   props: {
     overviewMode: String,
