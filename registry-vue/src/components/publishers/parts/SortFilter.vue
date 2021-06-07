@@ -4,9 +4,9 @@
 
     <div class="sort-filters">
       <div v-for="(filter,index) in filters" :key="`filter-${index}`" class="sort-filters__select-wrapper">
-        <select :if="filter.active ? `class=sort-filters__filter-active aria-label=${filter.status}` : ''">
-          <option value="">{{ filter.label }}</option>
-          <option :if="filter.selected_item" selected :value="filter.selected_item">{{ filter.selected_item }}</option>
+        <select v-model="values[filter.id]" @change="filterChange()" :if="filter.active ? `class=sort-filters__filter-active aria-label=${filter.status}` : ''">
+          <option v-if="filter.label" value="">{{ filter.label }}</option>
+          <option v-for="(option, index) in filter.options" :key="`option-${index}`" :value="`option-${index}`" :selected="filter.activeDefault">{{ option }}</option>
         </select>
       </div>
     </div>
@@ -18,32 +18,44 @@ export default {
   name: "SortFilter",
   data() {
     return {
-      "filters": [
+      filters: [
         {
-          "label": "Alphabetically",
-          "active": true,
-          "status": "Sorting alphabetically"
+          id: 'sort',
+          active: true,
+          activeDefault: true,
+          options: ['Alphabetically', 'Total grants', 'Total amount'],
         },
         {
-          "label": "Filter by recipient",
-          "active": false
+          id: 'recipient',
+          label: "Filter by recipient",
+          active: true,
+          options: ['Jim', 'Pete', 'Simon'],
         },
         {
-          "label": "Filter by data feature",
-          "active": true,
-          "selected_item": "Include charity or company nos.",
-          "status": "Filtering by: Include charity or company nos."
+          id: 'feature',
+          label: "Filter by data feature",
+          active: true,
+          options: ['Include metadata', 'Include external org IDs', 'Include location codes'],
         },
         {
-          "label": "Filter by data file",
-          "active": false
+          id: 'file',
+          label: "Filter by data file",
+          active: true,
+          options: ['CSV', 'JSON', 'XLSX', 'ODS'],
         },
-        {
-          "label": "Filter by data file",
-          "active": false
-        }
-      ]
+      ],
+      values: {
+        sort: "option-0",
+        recipient: "",
+        feature: "",
+        file: "",
+      }
     }
+  },
+  methods: {
+    filterChange() {
+      this.$emit('filterChange', this.values);
+    },
   }
 }
 </script>
