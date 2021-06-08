@@ -36,7 +36,7 @@ export default {
       const query =
         searchTerm !== null ? [`&search=${searchTerm}`].join("&") : "";
       fetch(
-        `http://store.dev.default.threesixtygiving.uk0.bigv.io/api/dashboard/publishers?format=json${query}`
+        `${process.env.VUE_APP_DATASTORE_API}/publishers?format=json${query}`
       )
         .then((response) => response.json())
         .then((json) => {
