@@ -3,10 +3,10 @@
     <div class="layout__content-inner">
       <DataTable />
       <div class="spacer-2"></div>
-      <SortFilter />
+      <SortFilter :publisherList="publisherList" :key="dataDownloaded" v-on:filterChange="searchFunction($event.publisher)" />
       <div class="spacer-4"></div>
       <div v-if="!dataDownloaded">
-        <Spinner />
+        <Spinner :key="dataDownloaded" />
       </div>
       <template v-if="dataDownloaded" id="publisher-list-wrapper">
         <PublisherResult v-for="publisher in publishers" :key="publisher.prefix" :publisher="publisher" />
@@ -32,6 +32,7 @@ export default {
   },
   methods: {
     searchFunction(searchTerm = null) {
+      this.dataDownloaded = false;
       const query =
         searchTerm !== null ? [`&search=${searchTerm}`].join("&") : "";
       fetch(
@@ -40,6 +41,9 @@ export default {
         .then((response) => response.json())
         .then((json) => {
           this.publishers = json;
+          this.publisherList = json.reduce((list, publisher) => {
+            return {...list, [publisher.prefix]: publisher.name}
+          }, this.publisherList);
           this.dataDownloaded = true
         });
     },
@@ -47,6 +51,7 @@ export default {
   data() {
     return {
       publishers: {},
+      publisherList: {},
       dataDownloaded: false
     };
   },
