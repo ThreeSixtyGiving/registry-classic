@@ -34,10 +34,8 @@ export default {
     searchFunction(searchTerm = null) {
       this.dataDownloaded = false;
       const query =
-        searchTerm !== null ? [`&search=${searchTerm}`].join("&") : "";
-      fetch(
-        `${process.env.VUE_APP_DATASTORE_API}/publishers?format=json${query}`
-      )
+        searchTerm === null ? '' : [`&search=${searchTerm}`].join("&");
+      fetch(`${process.env.VUE_APP_DATASTORE_API}/publishers?format=json${query}`)
         .then((response) => response.json())
         .then((json) => {
           this.publishers = json;

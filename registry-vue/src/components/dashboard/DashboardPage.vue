@@ -30,14 +30,23 @@ export default {
     },
     setOverviewMode(value) {
       this.overviewMode = value;
-    }
-  },
-  data() {
-    return {
-      showModal: false,
-      overviewMode: 'publisher',
-      cards: [
-        {
+    },
+    searchFunction(mode=null) {
+      this.dataDownloaded = false;
+      const query = mode === null ? '' : [`?mode=${mode}`];
+      fetch(`${process.env.VUE_APP_DATASTORE_API}overview${query}`)
+        .then((response) => response.json())
+        .then((json) => {
+          this.stats = json.stats;
+          this.getCards();
+          this.dataDownloaded = true;
+        });
+    },
+    getPercentageString(value) {
+      return `${parseInt(value * 100)}%`;
+    },
+    getCards() {
+      this.cards = [{
           title: "Location data",
           description:
             "Grants with location data can be used to map grants, and help people understand where the money goes.\n",
@@ -46,7 +55,7 @@ export default {
             {
               iconName: "person_pin_circle",
               label: "Include recipient locations",
-              value: "64%",
+              value: this.getPercentageString(this.stats.hasRecipientOrgLocations),
             },
             {
               iconName: "edit_location",
@@ -161,8 +170,18 @@ export default {
             }
           ],
           graph_description: "Publishers with grants awarded in\neach of the past 10 years\n"
-        }
-      ]
+        }]
+    }
+  },
+  created() {
+    this.searchFunction('publishers');
+  },
+  data() {
+    return {
+      showModal: false,
+      overviewMode: 'publisher',
+      stats: {},
+      cards: [],
     };
   },
 };
