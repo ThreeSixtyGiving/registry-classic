@@ -26,7 +26,7 @@ export default {
           id: 'sort',
           active: true,
           activeDefault: true,
-          options: {alphabetically: 'Alphabetically', grants: 'Total grants', amount: 'Total amount'},
+          options: {alphabetically: 'Alphabetically', grants: 'Total grants', modified: 'Last modified'},
         },
         {
           id: 'publisher',
