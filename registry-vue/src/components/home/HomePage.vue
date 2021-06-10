@@ -31,15 +31,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.dashboard-page {
-  &__back-link {
-    color: $black;
-  }
-
-  &__pager {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 48px;
-  }
-}
+@import "../../../../../360-ds/src/components/06-prototypes/dashboard/dashboard.scss";
 </style>

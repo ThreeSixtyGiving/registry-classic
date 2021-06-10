@@ -188,14 +188,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.dashboard-page {
-  &__section-radios {
-    float: right;
-
-    label {
-      min-width: 6rem;
-      text-align: center;
-    }
-  }
-}
+@import "../../../../../360-ds/src/components/06-prototypes/dashboard/dashboard.scss";
 </style>
