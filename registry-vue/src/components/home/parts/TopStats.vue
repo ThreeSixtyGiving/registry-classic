@@ -39,22 +39,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.cards-section {
-  padding: 32px 0;
-  
-  &__heading,
-  &__tagline {
-    text-align: center;
-    font-size: 2rem;
-  }    
-
-  &__tagline {
-    font-weight: 200;
-
-    > a { 
-      color: hsla(var(--orange-dark-hsl), 1); 
-      font-weight: 200;
-    }
-  }
-}
+@import "../../../../../360-ds/src/components/05-templates/cards-section/cards-section.scss";
 </style>

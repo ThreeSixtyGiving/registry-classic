@@ -44,31 +44,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.file-summary {
-  align-items: baseline;
-
-  &__label {
-    margin-right: 0.5rem;
-  }
-
-  &__stat {
-    font-size: 2rem;
-  }
-
-  &__specs {
-    // This is also a `.tag` so gets most styling from that element.
-    border-color: $red;
-    color: $red;
-  }
-
-  &__native-icon {
-    position: relative;
-    top: 5px;
-
-    img {
-      width: 22px;
-      height: auto;
-    }
-  }
-}
+@import "../../../../../360-ds/src/components/03-components/file-summary/file-summary.scss";
 </style>
