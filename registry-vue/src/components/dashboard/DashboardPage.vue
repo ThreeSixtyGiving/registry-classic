@@ -43,7 +43,7 @@ export default {
         });
     },
     getPercentageString(value) {
-      return `${parseInt(value * 100)}%`;
+      return parseInt(value * 100);
     },
     getCards() {
       this.cards = [{
@@ -55,17 +55,17 @@ export default {
             {
               iconName: "person_pin_circle",
               label: "Include recipient locations",
-              value: this.getPercentageString(this.stats.hasRecipientOrgLocations),
+              value: `${this.getPercentageString(this.stats.hasRecipientOrgLocations)}%`,
             },
             {
               iconName: "edit_location",
-              label: "Include grant location names",
-              value: "37%",
+              label: "Include beneficiary location names",
+              value: `${this.getPercentageString(this.stats.hasBeneficiaryLocationName)}%`,
             },
             {
               iconName: "add_location",
-              label: "Include grant location codes",
-              value: "64%",
+              label: "Include beneficiary location codes",
+              value: `${this.getPercentageString(this.stats.hasBeneficiaryLocationCodes)}%`,
             },
           ],
         },
@@ -77,18 +77,18 @@ export default {
             {
               iconName: "tag",
               label: "Include charity or company nos.",
-              value: "64%"
+              value: ""
             },
             {
               iconName: "confirmation_number",
               label: "Include external org IDs for at least 50% of recipients",
-              value: "37%"
+              value: ""
             }
           ],
           graph: {
             data: [{
               x: [0,20,40,60,80,100],
-              y: [10,15,42,17,42,64],
+              y: [10,10,10,10,10,10],
               type:"bar",
               marker: {
                 color:  ['#153634', '#DE6E26', '#4DACB6', '#EFC329', '#BC2C26', '#FFFFF',]
@@ -114,17 +114,17 @@ export default {
             {
               iconName: "event_note",
               label: "Include grant duration",
-              value: "37%"
+              value: `${this.getPercentageString(this.stats.hasGrantDuration)}%`
             },
             {
               iconName: "format_quote",
               label: "Include programme names",
-              value: "64%"
+              value: `${this.getPercentageString(this.stats.hasGrantProgrammeTitle)}%`
             },
             {
               iconName: "label",
               label: "Include classifications",
-              value: "64%"
+              value: `${this.getPercentageString(this.stats.hasGrantClassification)}%`
             }
           ]
         },
@@ -133,7 +133,7 @@ export default {
           description: "360Giving is a file-based data standard, supporting both spreadsheet and JSON publishing",
           graph: {
             data: [{
-              x: [50,70,30,100],
+              x: [this.getPercentageString(this.stats.csvFiles),this.getPercentageString(this.stats.xlsxFiles),this.getPercentageString(this.stats.odsFiles),this.getPercentageString(this.stats.jsonFiles)],
               y: ['CSV','XLSX','ODF','JSON'],
               type:"bar",
               orientation: 'h',
@@ -161,12 +161,12 @@ export default {
             {
               iconName: "event_available",
               label: "Have published in the last year",
-              value: "52%"
+              value: ""
             },
             {
               iconName: "event_available",
               label: "Have published in the last month",
-              value: "90%"
+              value: ""
             }
           ],
           graph_description: "Publishers with grants awarded in\neach of the past 10 years\n"
