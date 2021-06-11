@@ -5,7 +5,7 @@
     </div>
     <div class="spacer-2 clearfix"></div>
     <DashboardCard v-for="(cardData, index) in cards" :key="`card-${index}`" :overviewMode="overviewMode" :cardData="cardData" v-on:showModalEvent="controlModal(true, $event)" />
-    <Modal v-if="modalState" :key="this.modalRef" :cardData="this.cards.filter(card => card.modalRef===modalRef)[0]" v-on:hideModalEvent="controlModal(false)" />
+    <Modal v-if="modalState" :key="this.modalRef" :cardData="this.cards.find(card => card.modalRef===modalRef)" v-on:hideModalEvent="controlModal(false)" />
   </div>
 </template>
 

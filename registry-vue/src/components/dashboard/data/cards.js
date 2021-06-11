@@ -9,6 +9,8 @@ const getCardData = stats => {
       "Grants with location data can be used to map grants, and help people understand where the money goes.\n",
     infoLabel: "Learn more about location data",
     modalRef: "location_data",
+    modalMeaning: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
+    modalReason: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
     stats: [
       {
         iconName: "person_pin_circle",
