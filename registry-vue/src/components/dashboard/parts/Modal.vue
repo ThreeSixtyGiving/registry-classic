@@ -4,26 +4,30 @@
   <div class="modal__window">
     <button v-on:click="hideModal" class="modal__close modal__trigger" data-id="modal-00"></button>
     <div class="modal__content">
-      <h3>Know more: Location</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+      <h3>{{ cardData.infoLabel }}</h3>
+      <p>{{ cardData.description }}</p>
 
       <hr class="separator-light">
 
-      <div class="dashboard-modal__groups">
-        <div class="dashboard-modal__group">
-          <div class="dashboard-modal__stat">
-            <span><MaterialIcon :icon_name='add_location' /></span>
-            <span>Includes grant location codes</span>
-            <span class="dashboard-modal__stat-value-placeholder">00%</span>
+      <div v-for="stats in cardData.stats" :key="stats.iconName">
+        <div class="dashboard-modal__groups">
+          <div class="dashboard-modal__group">
+            <div class="dashboard-modal__stat">
+              <span><MaterialIcon :iconName='stats.iconName' /></span>
+              <span>{{ stats.label }}</span>
+              <span class="dashboard-modal__stat-value-placeholder">{{ stats.value }}</span>
+            </div>
+          </div>
+
+          <div class="dashboard-modal__group">
+            <h4 class="dashboard-modal__subtitle">This means</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.</p>
+            <h4 class="dashboard-modal__subtitle">This is useful because</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.</p>
           </div>
         </div>
 
-        <div class="dashboard-modal__group">
-          <h4 class="dashboard-modal__subtitle">This means</h4>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.</p>
-          <h4 class="dashboard-modal__subtitle">This is useful because</h4>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.</p>
-        </div>
+        <hr class="separator-light">
       </div>
 
     </div>
@@ -43,10 +47,18 @@ export default {
     hideModal() {
       this.$emit('hideModalEvent');
     },
+  },
+  props: {
+    modalState: String,
+    cardData: {},
+  },
+  created() {
+    console.log(this.cardData)
   }
 }
 </script>
 
 <style lang="scss" scoped>
-@import "../../../../../360-ds/src/components/03-components/modal/modal.scss"
+@import "../../../../../360-ds/src/components/03-components/modal/modal.scss";
+@import "../../../../../360-ds/src/components/04-modules/dashboard-modal/dashboard-modal.scss";
 </style>
