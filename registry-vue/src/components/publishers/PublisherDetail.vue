@@ -24,7 +24,6 @@
 
   <div class="dashboard-publisher-result-wrapper__external-buttons align-right">
     <a :href="`https://grantnav.threesixtygiving.org/publisher/${publisher.prefix}`" target="_blank" class="button">See in GrantNav</a>
-    <a href="#" target="_blank" class="button button--black">See in 360Insights</a>
   </div>
 
   <div class="spacer-3"></div>
@@ -38,7 +37,8 @@
   <div class="dashboard-publisher-result">
     <h4 class="dashboard-publisher-result__title">Datasets</h4>
     <p>{{ publisher.files_description }}</p>
-    <FileSummary v-for="(summary, index) in publisher.fileSummaries" :key="`summary-${index}`" :summary="summary" />
+    <hr class="separator-light">
+    <FileSummary v-for="(summary, index) in publisher.fileSummaries" :key="`summary-${index}`" :prefix="publisher.prefix" :summary="summary" />
   </div>
 </div>
 </template>
