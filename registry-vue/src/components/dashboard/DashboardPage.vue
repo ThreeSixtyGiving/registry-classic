@@ -4,8 +4,8 @@
       <RadioButtons :overviewMode="overviewMode" v-on:setOverviewMode="setOverviewMode($event)" />
     </div>
     <div class="spacer-2 clearfix"></div>
-    <DashboardCard v-for="(cardData, index) in cards" :key="`card-${index}`" :overviewMode="overviewMode" :cardData="cardData" v-on:showModalEvent="controlModal(true)" />
-    <Modal v-if="showModal" v-on:hideModalEvent="controlModal(false)" />
+    <DashboardCard v-for="(cardData, index) in cards" :key="`card-${index}`" :overviewMode="overviewMode" :cardData="cardData" v-on:showModalEvent="controlModal(true, $event)" />
+    <Modal v-if="modalState" :key="this.modalRef" :cardData="this.cards.filter(card => card.modalRef===modalRef)[0]" v-on:hideModalEvent="controlModal(false)" />
   </div>
 </template>
 
@@ -26,8 +26,9 @@ export default {
     publishers: {},
   },
   methods: {
-    controlModal(visibleStatus) {
-      this.showModal = visibleStatus;
+    controlModal(modalState, modalRef="") {
+      this.modalState = modalState;
+      this.modalRef = modalRef;
     },
     setOverviewMode(value) {
       this.overviewMode = value;
@@ -52,7 +53,8 @@ export default {
   },
   data() {
     return {
-      showModal: false,
+      modalState: false,
+      modalRef: "",
       overviewMode: 'publisher',
       stats: {},
       cards: [],
