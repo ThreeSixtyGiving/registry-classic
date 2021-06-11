@@ -4,14 +4,19 @@
       <RadioButtons :overviewMode="overviewMode" v-on:setOverviewMode="setOverviewMode($event)" />
     </div>
     <div class="spacer-2 clearfix"></div>
+    <div v-if="!dataDownloaded">
+      <Spinner :key="dataDownloaded" />
+    </div>
     <DashboardCard v-for="(cardData, index) in cards" :key="`card-${index}`" :overviewMode="overviewMode" :cardData="cardData" v-on:showModalEvent="controlModal(true, $event)" />
     <Modal v-if="modalState" :key="this.modalRef" :cardData="this.cards.find(card => card.modalRef===modalRef)" v-on:hideModalEvent="controlModal(false)" />
+    <div class="spacer-2 clearfix"></div>
   </div>
 </template>
 
 <script>
 import DashboardCard from "./parts/DashboardCard";
 import RadioButtons from "./parts/RadioButtons";
+import Spinner from '../generic/Spinner.vue';
 import Modal from './parts/Modal';
 import getCardData from './data/cards';
 
@@ -21,6 +26,7 @@ export default {
     DashboardCard,
     RadioButtons,
     Modal,
+    Spinner,
   },
   props: {
     publishers: {},
@@ -39,14 +45,15 @@ export default {
       fetch(`${process.env.VUE_APP_DATASTORE_API}overview${query}`)
         .then((response) => response.json())
         .then((json) => {
-          this.stats = json.stats;
-          this.getCards();
+          this.quality = json.quality;
+          this.aggregate = json.aggregate;
+          this.cards = getCardData(json.quality, json.aggregate);
           this.dataDownloaded = true;
+        })
+        .catch(error => {
+          console.error('Error:', error);
         });
     },
-    getCards() {
-      this.cards = getCardData(this.stats);
-    }
   },
   created() {
     this.searchFunction('publishers');
@@ -56,8 +63,10 @@ export default {
       modalState: false,
       modalRef: "",
       overviewMode: 'publisher',
-      stats: {},
+      quality: {},
       cards: [],
+      aggregate: {},
+      dataDownloaded: false,
     };
   },
 };
