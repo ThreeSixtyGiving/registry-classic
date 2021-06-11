@@ -8,6 +8,7 @@ const getCardData = stats => {
     description:
       "Grants with location data can be used to map grants, and help people understand where the money goes.\n",
     infoLabel: "Learn more about location data",
+    modalRef: "location_data",
     stats: [
       {
         iconName: "person_pin_circle",
@@ -30,6 +31,7 @@ const getCardData = stats => {
     title: "Organisation identifiers",
     description: "Org IDs help users to understand who is involved in each grant. External\norg IDs are used to show when funders give grants to the same\nrecipient and allow grants data to be linked to official sources of\norganisation data.\n",
     infoLabel: "Learn more about organisation identifiers",
+    modalRef: "org_ids",
     stats: [
       {
         iconName: "tag",
@@ -67,6 +69,7 @@ const getCardData = stats => {
     title: "Grant data",
     description: "All 360Giving data includes information about award amounts,\naward dates and the purpose of each grant. Information about the grant\nduration, grant programmes names and classifications help users to\nunderstand more context for each grant.\n",
     infoLabel: "Learn more about grant data",
+    modalRef: "grant_data",
     stats: [
       {
         iconName: "event_note",
@@ -88,6 +91,8 @@ const getCardData = stats => {
   {
     title: "Metadata",
     description: "360Giving is a file-based data standard, supporting both spreadsheet and JSON publishing",
+    infoLabel: "Learn more about Metadata",
+    modalRef: "metadata",
     graph: {
       data: [{
         x: [getPercentage(stats.csvFiles),getPercentage(stats.xlsxFiles),getPercentage(stats.odsFiles),getPercentage(stats.jsonFiles)],
@@ -114,6 +119,7 @@ const getCardData = stats => {
     title: "Data updates",
     description: "Timely updates provide users with an up-to-date picture of grantmaking.\nPublishers make updates at different frequencies; annual, biannual, quarterly, monthly\nor some publish in real-time.\n",
     infoLabel: "Learn more about data updates",
+    modalRef: "data_updates",
     stats: [
       {
         iconName: "event_available",

@@ -7,7 +7,7 @@
       </div>
 
       <div v-if="cardData.infoLabel" class="dashboard-stats-card__right-side">
-        <AlertTag v-on="$listeners" :label="cardData.infoLabel" />
+        <AlertTag v-on="$listeners" :label="cardData.infoLabel" :modalRef="cardData.modalRef" />
       </div>
     </div>
 
