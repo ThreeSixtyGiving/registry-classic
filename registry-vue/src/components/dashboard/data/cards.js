@@ -2,7 +2,7 @@ const getPercentage = value => {
   return parseInt(value * 100);
 }
 
-const getCardData = stats => {
+const getCardData = (statsData, aggregates) => {
   return [{
     title: "Location data",
     description:
@@ -13,21 +13,21 @@ const getCardData = stats => {
       {
         iconName: "person_pin_circle",
         label: "Include recipient locations",
-        value: `${getPercentage(stats.hasRecipientOrgLocations)}%`,
+        value: `${getPercentage(statsData.hasRecipientOrgLocations)}%`,
         modalMeaning: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
         modalReason: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
       },
       {
         iconName: "edit_location",
         label: "Include beneficiary location names",
-        value: `${getPercentage(stats.hasBeneficiaryLocationName)}%`,
+        value: `${getPercentage(statsData.hasBeneficiaryLocationName)}%`,
         modalMeaning: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
         modalReason: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
       },
       {
         iconName: "add_location",
         label: "Include beneficiary location codes",
-        value: `${getPercentage(stats.hasBeneficiaryLocationCodes)}%`,
+        value: `${getPercentage(statsData.hasBeneficiaryLocationCodes)}%`,
         modalMeaning: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
         modalReason: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
       },
@@ -84,21 +84,21 @@ const getCardData = stats => {
       {
         iconName: "event_note",
         label: "Include grant duration",
-        value: `${getPercentage(stats.hasGrantDuration)}%`,
+        value: `${getPercentage(statsData.hasGrantDuration)}%`,
         modalMeaning: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
         modalReason: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
       },
       {
         iconName: "format_quote",
         label: "Include programme names",
-        value: `${getPercentage(stats.hasGrantProgrammeTitle)}%`,
+        value: `${getPercentage(statsData.hasGrantProgrammeTitle)}%`,
         modalMeaning: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
         modalReason: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
       },
       {
         iconName: "label",
         label: "Include classifications",
-        value: `${getPercentage(stats.hasGrantClassification)}%`,
+        value: `${getPercentage(statsData.hasGrantClassification)}%`,
         modalMeaning: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
         modalReason: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
       }
@@ -111,7 +111,7 @@ const getCardData = stats => {
     modalRef: "metadata",
     graph: {
       data: [{
-        x: [getPercentage(stats.csvFiles),getPercentage(stats.xlsxFiles),getPercentage(stats.odsFiles),getPercentage(stats.jsonFiles)],
+        x: [getPercentage(aggregates.csvFiles),getPercentage(aggregates.xlsxFiles),getPercentage(aggregates.odsFiles),getPercentage(aggregates.jsonFiles)],
         y: ['CSV','XLSX','ODF','JSON'],
         type:"bar",
         orientation: 'h',
