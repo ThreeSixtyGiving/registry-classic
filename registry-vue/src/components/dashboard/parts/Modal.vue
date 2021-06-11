@@ -21,9 +21,9 @@
 
           <div class="dashboard-modal__group">
             <h4 class="dashboard-modal__subtitle">This means</h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.</p>
+            <p>{{ stats.modalMeaning}}</p>
             <h4 class="dashboard-modal__subtitle">This is useful because</h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.</p>
+            <p>{{ stats.modalReason }}</p>
           </div>
         </div>
 
@@ -52,9 +52,6 @@ export default {
     modalState: String,
     cardData: {},
   },
-  created() {
-    console.log(this.cardData)
-  }
 }
 </script>
 
