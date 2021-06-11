@@ -9,23 +9,27 @@ const getCardData = stats => {
       "Grants with location data can be used to map grants, and help people understand where the money goes.\n",
     infoLabel: "Learn more about location data",
     modalRef: "location_data",
-    modalMeaning: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
-    modalReason: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
     stats: [
       {
         iconName: "person_pin_circle",
         label: "Include recipient locations",
         value: `${getPercentage(stats.hasRecipientOrgLocations)}%`,
+        modalMeaning: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
+        modalReason: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
       },
       {
         iconName: "edit_location",
         label: "Include beneficiary location names",
         value: `${getPercentage(stats.hasBeneficiaryLocationName)}%`,
+        modalMeaning: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
+        modalReason: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
       },
       {
         iconName: "add_location",
         label: "Include beneficiary location codes",
         value: `${getPercentage(stats.hasBeneficiaryLocationCodes)}%`,
+        modalMeaning: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
+        modalReason: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
       },
     ],
   },
@@ -38,12 +42,16 @@ const getCardData = stats => {
       {
         iconName: "tag",
         label: "Include charity or company nos.",
-        value: ""
+        value: "",
+        modalMeaning: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
+        modalReason: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
       },
       {
         iconName: "confirmation_number",
         label: "Include external org IDs for at least 50% of recipients",
-        value: ""
+        value: "",
+        modalMeaning: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
+        modalReason: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
       }
     ],
     graph: {
@@ -76,17 +84,23 @@ const getCardData = stats => {
       {
         iconName: "event_note",
         label: "Include grant duration",
-        value: `${getPercentage(stats.hasGrantDuration)}%`
+        value: `${getPercentage(stats.hasGrantDuration)}%`,
+        modalMeaning: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
+        modalReason: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
       },
       {
         iconName: "format_quote",
         label: "Include programme names",
-        value: `${getPercentage(stats.hasGrantProgrammeTitle)}%`
+        value: `${getPercentage(stats.hasGrantProgrammeTitle)}%`,
+        modalMeaning: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
+        modalReason: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
       },
       {
         iconName: "label",
         label: "Include classifications",
-        value: `${getPercentage(stats.hasGrantClassification)}%`
+        value: `${getPercentage(stats.hasGrantClassification)}%`,
+        modalMeaning: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
+        modalReason: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
       }
     ]
   },
@@ -126,12 +140,16 @@ const getCardData = stats => {
       {
         iconName: "event_available",
         label: "Have published in the last year",
-        value: ""
+        value: "",
+        modalMeaning: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
+        modalReason: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
       },
       {
         iconName: "event_available",
         label: "Have published in the last month",
-        value: ""
+        value: "",
+        modalMeaning: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
+        modalReason: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
       }
     ],
     graph_description: "Publishers with grants awarded in\neach of the past 10 years\n"
