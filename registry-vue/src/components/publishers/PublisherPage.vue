@@ -3,7 +3,7 @@
     <div class="layout__content-inner">
       <DataTable />
       <div class="spacer-2"></div>
-      <SortFilter v-if="activateSorting" :publisherList="publisherList" :key="dataDownloaded" v-on:filterChange="searchFunction($event.publisher)" />
+      <SortFilter v-if="false" :publisherList="publisherList" :key="dataDownloaded" v-on:filterChange="searchFunction($event.publisher)" />
       <div class="spacer-4"></div>
       <div v-if="!dataDownloaded">
         <Spinner :key="dataDownloaded" />
@@ -43,6 +43,9 @@ export default {
             return {...list, [publisher.prefix]: publisher.name}
           }, this.publisherList);
           this.dataDownloaded = true
+        })
+        .catch(error => {
+          console.error('Error:', error);
         });
     },
   },
