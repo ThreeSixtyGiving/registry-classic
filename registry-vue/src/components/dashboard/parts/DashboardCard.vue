@@ -1,5 +1,5 @@
 <template>
-  <div :class="`dashboard-stats-card ${overviewMode==='grant' ? 'dashboard-stats-card--grant' : ''}`">
+  <div :class="`dashboard-stats-card ${overviewMode==='grants' ? 'dashboard-stats-card--grant' : ''}`">
     <div class="dashboard-stats-card__head">
       <div class="dashboard-stats-card__left-side">
         <h3 class="dashboard-stats-card__title">{{ cardData.title }}</h3>
@@ -13,7 +13,7 @@
 
     <div class="dashboard-stats-card__groups">
       <div v-for="(stats, index) in cardData.stats" :key="index" class="dashboard-stats-card__group">
-        <MaterialIcon :iconName="stats.iconName" />
+        <MaterialIcon :iconName="stats.iconName" :color="overviewMode === 'publishers' ? 'teal' : 'orange'" />
         <span :id="`stat-${index}`">{{ stats.label }}</span>
         <span :aria-labelledby="`stat-${index}`" class="dashboard-stats-card__value">{{ stats.value }}</span>
       </div>

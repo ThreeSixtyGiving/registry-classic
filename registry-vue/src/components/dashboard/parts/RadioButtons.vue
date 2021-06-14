@@ -12,7 +12,7 @@ export default {
   name: "RadioButtons",
   data: function() {
     return {
-      radioOptions: [{ name: "Publisher", value: "publisher", default: true }, { name: "Grant", value: "grant" }],
+      radioOptions: [{ name: "Publishers", value: "publishers", default: true }, { name: "Grants", value: "grants" }],
     }
   },
   props: {
