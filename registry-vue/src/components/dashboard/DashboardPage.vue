@@ -7,8 +7,10 @@
     <div v-if="!dataDownloaded">
       <Spinner :key="dataDownloaded" />
     </div>
-    <DashboardCard v-for="(cardData, index) in cards" :key="`card-${index}`" :overviewMode="overviewMode" :cardData="cardData" v-on:showModalEvent="controlModal(true, $event)" />
-    <Modal v-if="modalState" :key="this.modalRef" :cardData="this.cards.find(card => card.modalRef===modalRef)" v-on:hideModalEvent="controlModal(false)" />
+    <div v-if="dataDownloaded">
+      <DashboardCard v-for="(cardData, index) in cards" :key="`card-${index}`" :overviewMode="overviewMode" :cardData="cardData" v-on:showModalEvent="controlModal(true, $event)" />
+      <Modal v-if="modalState" :key="this.modalRef" :cardData="this.cards.find(card => card.modalRef===modalRef)" v-on:hideModalEvent="controlModal(false)" />
+    </div>
     <div class="spacer-2 clearfix"></div>
   </div>
 </template>
@@ -18,7 +20,7 @@ import DashboardCard from "./parts/DashboardCard";
 import RadioButtons from "./parts/RadioButtons";
 import Spinner from '../generic/Spinner.vue';
 import Modal from './parts/Modal';
-import getCardData from './data/cards';
+import { getPublisherCards, getGrantsCards } from './data/cards';
 
 export default {
   name: "DashboardPage",
@@ -45,9 +47,7 @@ export default {
       fetch(`${process.env.VUE_APP_DATASTORE_API}overview${query}`)
         .then((response) => response.json())
         .then((json) => {
-          this.quality = json.quality;
-          this.aggregate = json.aggregate;
-          this.cards = getCardData(json.quality, json.aggregate);
+          this.cards = mode === 'publishers' ? getPublisherCards(json) : getGrantsCards(json);
           this.dataDownloaded = true;
         })
         .catch(error => {
@@ -56,16 +56,19 @@ export default {
     },
   },
   created() {
-    this.searchFunction('publishers');
+    this.searchFunction(this.overviewMode);
+  },
+  watch: {
+    overviewMode: function() {
+      this.searchFunction(this.overviewMode)
+    }
   },
   data() {
     return {
       modalState: false,
       modalRef: "",
-      overviewMode: 'publisher',
-      quality: {},
+      overviewMode: 'publishers',
       cards: [],
-      aggregate: {},
       dataDownloaded: false,
     };
   },
