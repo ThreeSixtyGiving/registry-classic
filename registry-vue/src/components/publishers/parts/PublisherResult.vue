@@ -20,12 +20,14 @@
 
     <hr class="separator-light">
 
-    <h5>Total grants published</h5>
-    <div>
-      <YearsChart :chart="chart" />
+    <div v-if="false">
+      <h5>Total grants published</h5>
+      <div>
+        <YearsChart :chart="chart" />
+      </div>
+    <hr class="separator-light">
     </div>
 
-    <hr class="separator-light">
 
     <div>
       <a class="button" :href="$router.resolve({name: 'publisher', params: { id: publisher.prefix }}).href">See More</a>
