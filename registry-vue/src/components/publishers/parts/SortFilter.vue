@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h4>Sort:</h4>
+    <h4>Sort: (not implemented)</h4>
 
     <div class="sort-filters">
       <div v-for="(filter, index) in filters" :key="`filter-${index}`" class="sort-filters__select-wrapper">
