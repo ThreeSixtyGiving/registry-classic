@@ -58,7 +58,6 @@ export default {
   methods: {
     getData() {
       this.dataDownloaded = false;
-      console.log(this.$router.currentRoute)
       const endpoint = this.$router.currentRoute.name === 'publisher' ? `/publisher/${this.$router.currentRoute.params.id}` : `/overview?mode=publishers`;
       fetch(`${process.env.VUE_APP_DATASTORE_API}${endpoint}`)
         .then((response) => response.json())

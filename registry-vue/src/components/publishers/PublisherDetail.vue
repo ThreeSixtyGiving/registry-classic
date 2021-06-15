@@ -155,7 +155,6 @@ export default {
       fetch(`${process.env.VUE_APP_DATASTORE_API}/publisher/${this.id}?format=json${query}`)
         .then((response) => response.json())
         .then((json) => {
-          console.log(json)
           this.publisher = json;
           this.badges = getBadges(json.quality)
           this.dataDownloaded = true
