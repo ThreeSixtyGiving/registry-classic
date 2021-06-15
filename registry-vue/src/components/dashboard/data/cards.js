@@ -42,48 +42,48 @@ const getPublisherCards = (data) => {
         },
       ],
     },
-    // {
-    //   title: "Organisation identifiers",
-    //   description: "Org IDs help users to understand who is involved in each grant. External\norg IDs are used to show when funders give grants to the same\nrecipient and allow grants data to be linked to official sources of\norganisation data.\n",
-    //   infoLabel: "Learn more about organisation identifiers",
-    //   modalRef: "org_ids",
-    //   stats: [
-    //     {
-    //       iconName: "tag",
-    //       label: "Include charity or company nos.",
-    //       value: "",
-    //       modalMeaning: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
-    //       modalReason: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
-    //     },
-    //     {
-    //       iconName: "confirmation_number",
-    //       label: "Include external org IDs for at least 50% of recipients",
-    //       value: "",
-    //       modalMeaning: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
-    //       modalReason: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
-    //     }
-    //   ],
-    //   graph: {
-    //     data: [{
-    //       x: [0,20,40,60,80,100],
-    //       y: [10,10,10,10,10,10],
-    //       type:"bar",
-    //       marker: {
-    //         color:  ['#153634', '#DE6E26', '#4DACB6', '#EFC329', '#BC2C26', '#FFFFF',]
-    //       }
-    //     }],
-    //     layout:{
-    //       title: "Percentage of recipients with external org IDs",
-    //       xaxis: {
-    //         type: 'category',
-    //         title: '# of Publishers'
-    //       },
-    //       yaxis: {
-    //         title: '% with external org IDs'
-    //       }
-    //     }
-    //   }
-    // },
+    {
+      title: "Organisation identifiers",
+      description: "Org IDs help users to understand who is involved in each grant. External\norg IDs are used to show when funders give grants to the same\nrecipient and allow grants data to be linked to official sources of\norganisation data.\n",
+      infoLabel: "Learn more about organisation identifiers",
+      modalRef: "org_ids",
+      stats: [
+        {
+          iconName: "tag",
+          label: "Include charity or company nos.",
+          value: "Unknown",
+          modalMeaning: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
+          modalReason: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
+        },
+        {
+          iconName: "confirmation_number",
+          label: "Include external org IDs for at least 50% of recipients",
+          value: "Unknown",
+          modalMeaning: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
+          modalReason: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
+        }
+      ],
+      graph: {
+        data: [{
+          x: [0,20,40,60,80,100],
+          y: [10,10,10,10,10,10],
+          type:"bar",
+          marker: {
+            color:  ['#153634', '#DE6E26', '#4DACB6', '#EFC329', '#BC2C26', '#FFFFF',]
+          }
+        }],
+        layout:{
+          title: "**** Mock Data - Percentage of recipients with external org IDs ****",
+          xaxis: {
+            type: 'category',
+            title: '# of Publishers'
+          },
+          yaxis: {
+            title: '% with external org IDs'
+          }
+        }
+      }
+    },
     {
       title: "Grant data",
       description:
@@ -278,48 +278,48 @@ const getGrantsCards = (data) => {
         },
       ],
     },
-    // {
-    //   title: "Organisation identifiers",
-    //   description: "Org IDs help users to understand who is involved in each grant. External\norg IDs are used to show when funders give grants to the same\nrecipient and allow grants data to be linked to official sources of\norganisation data.\n",
-    //   infoLabel: "Learn more about organisation identifiers",
-    //   modalRef: "org_ids",
-    //   stats: [
-    //     {
-    //       iconName: "tag",
-    //       label: "Include charity or company nos.",
-    //       value: "",
-    //       modalMeaning: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
-    //       modalReason: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
-    //     },
-    //     {
-    //       iconName: "confirmation_number",
-    //       label: "Include external org IDs for at least 50% of recipients",
-    //       value: "",
-    //       modalMeaning: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
-    //       modalReason: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
-    //     }
-    //   ],
-    //   graph: {
-    //     data: [{
-    //       x: [0,20,40,60,80,100],
-    //       y: [10,10,10,10,10,10],
-    //       type:"bar",
-    //       marker: {
-    //         color:  ['#153634', '#DE6E26', '#4DACB6', '#EFC329', '#BC2C26', '#FFFFF',]
-    //       }
-    //     }],
-    //     layout:{
-    //       title: "Percentage of recipients with external org IDs",
-    //       xaxis: {
-    //         type: 'category',
-    //         title: '# of Publishers'
-    //       },
-    //       yaxis: {
-    //         title: '% with external org IDs'
-    //       }
-    //     }
-    //   }
-    // },
+    {
+      title: "Organisation identifiers",
+      description: "Org IDs help users to understand who is involved in each grant. External\norg IDs are used to show when funders give grants to the same\nrecipient and allow grants data to be linked to official sources of\norganisation data.\n",
+      infoLabel: "Learn more about organisation identifiers",
+      modalRef: "org_ids",
+      stats: [
+        {
+          iconName: "tag",
+          label: "Include charity or company nos.",
+          value: "Unknown",
+          modalMeaning: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
+          modalReason: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
+        },
+        {
+          iconName: "confirmation_number",
+          label: "Include external org IDs for at least 50% of recipients",
+          value: "Unknown",
+          modalMeaning: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
+          modalReason: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
+        }
+      ],
+      graph: {
+        data: [{
+          x: [0,20,40,60,80,100],
+          y: [10,10,10,10,10,10],
+          type:"bar",
+          marker: {
+            color:  ['#153634', '#DE6E26', '#4DACB6', '#EFC329', '#BC2C26', '#FFFFF',]
+          }
+        }],
+        layout:{
+          title: "**** Mock Data - Percentage of recipients with external org IDs ****",
+          xaxis: {
+            type: 'category',
+            title: '# of Publishers'
+          },
+          yaxis: {
+            title: '% with external org IDs'
+          }
+        }
+      }
+    },
     {
       title: "Grant data",
       description:

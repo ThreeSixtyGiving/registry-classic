@@ -44,7 +44,7 @@ export default {
     searchFunction(mode=null) {
       this.dataDownloaded = false;
       const query = mode === null ? '' : [`?mode=${mode}`];
-      fetch(`${process.env.VUE_APP_DATASTORE_API}overview${query}`)
+      fetch(`${process.env.VUE_APP_DATASTORE_API}/overview${query}`)
         .then((response) => response.json())
         .then((json) => {
           this.cards = mode === 'publishers' ? getPublisherCards(json) : getGrantsCards(json);
