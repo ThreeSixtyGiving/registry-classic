@@ -39,7 +39,6 @@ export default {
         .then((response) => response.json())
         .then((json) => {
           this.publishers = json;
-          console.log(json);
           this.publisherList = json.reduce((list, publisher) => {
             return {...list, [publisher.prefix]: publisher.name}
           }, this.publisherList);
