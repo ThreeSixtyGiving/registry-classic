@@ -14,7 +14,7 @@ const routes = [
     children: [
       { path: '/overview', name: "overview", component: DashboardPageVue },
       { path: '/publishers', name: "publishers", component: PublisherPageVue },
-      { path: '/publisher/:id', name: "publisher", component: PublisherDetailVue },
+      { path: '/publisher/:id', name: "publisher", component: PublisherDetailVue, props: true },
     ]
   },
   ]
