@@ -3,7 +3,7 @@
     <div class="layout__content-inner">
       <DataTable />
       <div class="spacer-2"></div>
-      <SortFilter v-if="false" :publisherList="publisherList" :key="dataDownloaded" v-on:filterChange="searchFunction($event.publisher)" />
+      <SortFilter :publisherList="publisherList" :key="dataDownloaded" v-on:filterChange="searchFunction($event.publisher)" />
       <div class="spacer-4"></div>
       <div v-if="!dataDownloaded">
         <Spinner :key="dataDownloaded" />
@@ -31,14 +31,15 @@ export default {
     Spinner,
   },
   methods: {
-    searchFunction(searchTerm = null) {
+    searchFunction(searchTerm = '') {
       this.dataDownloaded = false;
-      const query =
-        searchTerm === null ? '' : [`&search=${searchTerm}`].join("&");
+      const query = searchTerm;
+        // searchTerm === '' ? '' : [`&search=${searchTerm}`].join("&");
       fetch(`${process.env.VUE_APP_DATASTORE_API}/publishers?format=json${query}`)
         .then((response) => response.json())
         .then((json) => {
           this.publishers = json;
+          console.log(json);
           this.publisherList = json.reduce((list, publisher) => {
             return {...list, [publisher.prefix]: publisher.name}
           }, this.publisherList);
