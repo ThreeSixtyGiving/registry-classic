@@ -1,12 +1,12 @@
 <template>
   <div>
-    <h4>Sort: (not implemented)</h4>
+    <h4>Sort: (not fully implemented)</h4>
 
     <div class="sort-filters">
       <div v-for="(filter, index) in filters" :key="`filter-${index}`" class="sort-filters__select-wrapper">
-        <select v-model="values[filter.id]" @change="filterChange()" :if="filter.active ? `class=sort-filters__filter-active aria-label=${filter.status}` : ''">
-          <option v-if="filter.label" value="">{{ filter.label }}</option>
-          <option v-for="(option, key, index) in filter.options" :key="`option-${index}`" :value="key" :selected="filter.activeDefault">{{ option }}</option>
+        <select v-model="values[filter.id]" @change="filterChange()" :class="filter.active ? `sort-filters__filter-active aria-label='${filter.label}'` : ''">
+          <option value="" disabled>{{ filter.label }}</option>
+          <option v-for="(option, key, index) in filter.options" :key="`option-${index}`" :value="key || ''" :selected="filter.activeDefault">{{ option }}</option>
         </select>
       </div>
     </div>
@@ -24,9 +24,10 @@ export default {
       filters: [
         {
           id: 'sort',
+          label: "Please select a sorting option",
           active: true,
           activeDefault: true,
-          options: {alphabetically: 'Alphabetically', grants: 'Total grants', modified: 'Last modified'},
+          options: {alphabeticallyAsc: 'Alphabetically (ascending)', alphabeticallyDesc: 'Alphabetically (descending)',},
         },
         {
           id: 'publisher',
@@ -37,18 +38,18 @@ export default {
         {
           id: 'feature',
           label: "Filter by data feature",
-          active: true,
+          active: false,
           options: {metadata: 'Include metadata', externalIds: 'Include external org IDs', locationCode: 'Include location codes'},
         },
         {
           id: 'file',
           label: "Filter by data file",
-          active: true,
+          active: false,
           options: {csv: 'CSV', json: 'JSON', xlsx: 'XLSX', ods: 'ODS'},
         },
       ],
       values: {
-        sort: "alphabetically",
+        sort: "alphabeticallyAsc",
         publisher: "",
         feature: "",
         file: "",
