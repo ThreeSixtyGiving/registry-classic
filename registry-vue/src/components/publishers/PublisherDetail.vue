@@ -78,8 +78,7 @@ export default {
   methods: {
     searchFunction(searchTerm = null) {
       this.dataDownloaded = false;
-      const query =
-        searchTerm === null ? '' : [`&search=${searchTerm}`].join("&");
+      const query = searchTerm === null ? '' : [`&search=${searchTerm}`].join("&");
       fetch(`${process.env.VUE_APP_DATASTORE_API}/publisher/${this.id}?format=json${query}`)
         .then((response) => response.json())
         .then((json) => {
