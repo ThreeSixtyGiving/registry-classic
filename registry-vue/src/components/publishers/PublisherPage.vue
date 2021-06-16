@@ -3,7 +3,7 @@
     <div class="layout__content-inner">
       <DataTable />
       <div class="spacer-2"></div>
-      <SortFilter :publisherList="publisherList" :key="dataDownloaded" v-on:filterChange="searchFunction($event)" />
+      <SortFilter :sortValues="sortValues" :publisherList="publisherList" :key="dataDownloaded" v-on:filterChange="filterChange($event)" />
       <div class="spacer-4"></div>
       <div v-if="!dataDownloaded">
         <Spinner :key="dataDownloaded" />
@@ -51,12 +51,22 @@ export default {
           console.error('Error:', error);
         });
     },
+    filterChange(sortChangeEvent) {
+      this.sortValues = sortChangeEvent;
+      this.searchFunction(sortChangeEvent);
+    }
   },
   data() {
     return {
       publishers: {},
       publisherList: {},
-      dataDownloaded: false
+      dataDownloaded: false,
+      sortValues: {
+        sort: "alphabeticallyAsc",
+        publisher: "",
+        feature: "",
+        file: "",
+      }
     };
   },
   created() {
