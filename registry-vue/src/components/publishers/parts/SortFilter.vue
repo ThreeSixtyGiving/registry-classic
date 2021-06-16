@@ -4,8 +4,9 @@
 
     <div class="sort-filters">
       <div v-for="(filter, index) in filters" :key="`filter-${index}`" class="sort-filters__select-wrapper">
-        <select v-model="values[filter.id]" @change="filterChange()" :class="filter.active ? `sort-filters__filter-active aria-label='${filter.label}'` : ''">
+        <select v-model="sortValues[filter.id]" @change="filterChange()" :class="filter.active ? `sort-filters__filter-active aria-label='${filter.label}'` : ''">
           <option value="" disabled>{{ filter.label }}</option>
+          <option v-if="!filter.activeDefault" value="">No Filter</option>
           <option v-for="(option, key, index) in filter.options" :key="`option-${index}`" :value="key || ''" :selected="filter.activeDefault">{{ option }}</option>
         </select>
       </div>
@@ -18,6 +19,7 @@ export default {
   name: "SortFilter",
   props: {
     publisherList: {},
+    sortValues: {}
   },
   data() {
     return {
@@ -48,17 +50,11 @@ export default {
           options: {csv: 'CSV', json: 'JSON', xlsx: 'XLSX', ods: 'ODS'},
         },
       ],
-      values: {
-        sort: "alphabeticallyAsc",
-        publisher: "",
-        feature: "",
-        file: "",
-      }
     }
   },
   methods: {
     filterChange() {
-      this.$emit('filterChange', this.values);
+      this.$emit('filterChange', this.sortValues);
     },
   }
 }
