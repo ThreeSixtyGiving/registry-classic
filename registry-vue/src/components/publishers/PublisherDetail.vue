@@ -54,6 +54,7 @@ import YearsChart from "../generic/YearsChart";
 import FileSummary from './parts/FileSummary.vue';
 import IconBadge from './parts/IconBadge';
 import getBadges from './data/badges';
+import getAwardYearsArray from '../generic/awardYears';
 
 export default {
   name: "PublisherDetail",
@@ -71,80 +72,7 @@ export default {
       publisher: {},
       dataDownloaded: {},
       badges: {},
-      chart: [
-        {
-          "label": "Older data",
-          "value": 0.15,
-          "value_text": "1.5k",
-          "detail": "1.5k grants awarded before 2011"
-        },
-        {
-          "label": 2011,
-          "value": 0,
-          "value_text": "",
-          "detail": "No grants awarded in 2011"
-        },
-        {
-          "label": 2012,
-          "value": 0,
-          "value_text": "",
-          "detail": "No grants awarded in 2012"
-        },
-        {
-          "label": 2013,
-          "value": 1,
-          "value_text": "10k+",
-          "detail": "10k+ grants awarded in 2013"
-        },
-        {
-          "label": 2014,
-          "value": 0.2,
-          "value_text": "2k",
-          "detail": "2k grants awarded in 2014"
-        },
-        {
-          "label": 2015,
-          "value": 0.2,
-          "value_text": "2k",
-          "detail": "2k grants awarded in 2015"
-        },
-        {
-          "label": 2016,
-          "value": 0.2,
-          "value_text": "2k",
-          "detail": "2k grants awarded in 2016"
-        },
-        {
-          "label": 2017,
-          "value": 0.25,
-          "value_text": "2.5k",
-          "detail": "2.5k grants awarded in 2017"
-        },
-        {
-          "label": 2018,
-          "value": 0.05,
-          "value_text": "0.5k",
-          "detail": "0.5k grants awarded in 2018"
-        },
-        {
-          "label": 2019,
-          "value": 0.05,
-          "value_text": "0.5k",
-          "detail": "0.5k grants awarded in 2019"
-        },
-        {
-          "label": 2020,
-          "value": 0.05,
-          "value_text": "0.5k",
-          "detail": "0.5k grants awarded in 2020"
-        },
-        {
-          "label": 2021,
-          "value": 1.5,
-          "value_text": "15k+",
-          "detail": "15k+ grants awarded in 2018"
-        }
-      ],
+      chart: {},
     }
   },
   methods: {
@@ -156,8 +84,9 @@ export default {
         .then((response) => response.json())
         .then((json) => {
           this.publisher = json;
-          this.badges = getBadges(json.quality)
-          this.dataDownloaded = true
+          this.badges = getBadges(json.quality);
+          this.chart = getAwardYearsArray(this.publisher.aggregate.awardYears);
+          this.dataDownloaded = true;
         })
         .catch(error => {
           console.error('Error:', error);
