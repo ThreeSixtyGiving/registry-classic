@@ -9,7 +9,7 @@
     </div>
     <div class="grid__1 align-right">
       <span class="file-summary__label">Records</span>
-      <span class="file-summary__stat">{{ file.grants }}</span>
+      <span class="file-summary__stat">{{ file.aggregate.count }}</span>
     </div>
     <div class="grid__1 align-right">
       <span class="file-summary__label">Total Grants &pound;</span>
