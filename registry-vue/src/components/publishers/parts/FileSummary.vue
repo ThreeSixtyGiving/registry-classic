@@ -13,7 +13,7 @@
     </div>
     <div class="grid__1 align-right">
       <span class="file-summary__label">Total Grants &pound;</span>
-      Unknown
+      {{ file.aggregate.currencies.GBP.total_amount }}
       <span class="file-summary__stat">{{ file.grant_total_shorthand }}</span>
     </div>
     <div class="grid__1">
