@@ -77,7 +77,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped>
-@import "../../../../../360-ds/src/components/05-templates/cards-section/cards-section.scss";
-</style>

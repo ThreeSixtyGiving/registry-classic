@@ -5,6 +5,15 @@
 npm install
 ```
 
+### Compile theme
+Make sure the git submodule is checked out
+```
+cd 360-ds
+npm install
+npm run compile-sass -- --path ../registry-vue/src/assets/styles/
+```
+
+
 ### Compiles and hot-reloads for development
 ```
 npm run serve

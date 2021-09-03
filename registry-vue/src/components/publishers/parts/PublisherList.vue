@@ -33,7 +33,3 @@ export default {
 };
 </script>
 
-<style scoped>
-@import "../../../../../360-ds/src/components/04-modules/card-list/card-list.scss";
-@import "../../../../../360-ds/src/components/04-modules/registry-card/registry-card.scss";
-</style>

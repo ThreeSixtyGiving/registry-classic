@@ -232,7 +232,3 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-@import "../../../../../360-ds/src/components/04-modules/collapsed-publishers-table/collapsed-publishers-table.scss";
-@import "../../../../../360-ds/src/components/03-components/table/table.scss";
-</style>

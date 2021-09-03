@@ -59,7 +59,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-@import "../../../../../360-ds/src/components/04-modules/dashboard-stats-card/dashboard-stats-card.scss";
-</style>

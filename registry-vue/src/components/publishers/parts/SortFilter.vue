@@ -59,7 +59,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-@import "../../../../../360-ds/src/components/04-modules/sort-filter-bar/sort-filter-bar.scss";
-</style>

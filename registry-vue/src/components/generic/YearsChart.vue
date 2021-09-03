@@ -17,7 +17,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-@import "../../../../../360-ds/src/components/03-components/years-chart/years-chart.scss";
-</style>
