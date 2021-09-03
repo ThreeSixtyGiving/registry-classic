@@ -52,7 +52,3 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-@import "../../../../../360-ds/src/components/02-elements/tag/tag.scss";
-@import "../../../../../360-ds/src/components/03-components/file-summary/file-summary.scss";
-</style>

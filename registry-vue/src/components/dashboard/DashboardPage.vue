@@ -74,7 +74,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-@import "../../../../../360-ds/src/components/06-prototypes/dashboard/dashboard.scss";
-</style>

@@ -61,7 +61,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-@import "../../../../../360-ds/src/components/04-modules/dashboard-publisher-result/dashboard-publisher-result.scss";
-</style>

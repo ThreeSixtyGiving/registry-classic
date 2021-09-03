@@ -15,7 +15,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-@import "../../../../../360-ds/src/components/02-elements/icon/icon.scss";
-</style>
