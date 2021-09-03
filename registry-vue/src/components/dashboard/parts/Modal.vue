@@ -55,7 +55,3 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-@import "../../../../../360-ds/src/components/03-components/modal/modal.scss";
-@import "../../../../../360-ds/src/components/04-modules/dashboard-modal/dashboard-modal.scss";
-</style>

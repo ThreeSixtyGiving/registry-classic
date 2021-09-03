@@ -12,7 +12,3 @@ export default {
   name: 'Spinner',
 }
 </script>
-
-<style lang="scss" scoped>
-@import "../../../../../360-ds/src/components/02-elements/spinner/spinner.scss";
-</style>

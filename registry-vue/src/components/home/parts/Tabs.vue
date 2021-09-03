@@ -30,7 +30,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss">
-@import "../../../../../360-ds/src/components/02-elements/tab/tab.scss";
-</style>
