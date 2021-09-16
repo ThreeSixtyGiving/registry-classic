@@ -20,8 +20,8 @@
       <div class="base-card base-card--teal grid__1">
         <div class="base-card__content">
           <Spinner v-if="!dataDownloaded" />
-          <h2 v-if="dataDownloaded" class="base-card__title">Unknown</h2>
-          <p class="base-card__text">Funders</p>
+          <h2 v-if="dataDownloaded" class="base-card__title">{{ (stats.publishers).toLocaleString() }}</h2>
+          <p class="base-card__text">Publishers</p>
         </div>
       </div>
 

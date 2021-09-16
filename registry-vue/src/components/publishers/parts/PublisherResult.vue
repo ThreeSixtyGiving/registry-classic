@@ -9,7 +9,7 @@
 
       <div class="dashboard-publisher-result__right-side">
         <div class="dashboard-publisher-result__date">
-          Last update: <time :datetime="publisher.aggregate.lastLastModified">{{ new Date(publisher.aggregate.lastLastModified).toUTCString().substring(4,16) }}</time>
+          Last update: <time :datetime="publisher.lastLastModified">{{ new Date(publisher.lastLastModified).toUTCString().substring(4,16) }}</time>
         </div>
       </div>
     </div>
@@ -21,7 +21,7 @@
     <hr class="separator-light">
 
     <div>
-      <h5>Total grants published</h5>
+      <h5>Total grants awarded</h5>
       <div>
         <YearsChart :chart="chart" />
       </div>
