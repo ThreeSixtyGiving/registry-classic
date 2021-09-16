@@ -1,10 +1,6 @@
-const getPercentage = value => {
-  return parseInt(value * 100);
-};
 
 const getPublisherCards = (data) => {
-  const { quality, aggregate, minAwardYears: timelinessGraph } = data;
-  Object.keys(timelinessGraph).forEach(key => timelinessGraph[key] = getPercentage(timelinessGraph[key]));
+  const { quality, aggregate } = data;
   return [
     {
       title: "Location data",
@@ -16,7 +12,7 @@ const getPublisherCards = (data) => {
         {
           iconName: "person_pin_circle",
           label: "Include recipient locations",
-          value: `${getPercentage(quality.hasRecipientOrgLocations)}%`,
+          value: `${quality.hasRecipientOrgLocations}%`,
           modalMeaning:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
           modalReason:
@@ -25,7 +21,7 @@ const getPublisherCards = (data) => {
         {
           iconName: "edit_location",
           label: "Include beneficiary location names",
-          value: `${getPercentage(quality.hasBeneficiaryLocationName)}%`,
+          value: `${quality.hasBeneficiaryLocationName}%`,
           modalMeaning:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
           modalReason:
@@ -34,7 +30,7 @@ const getPublisherCards = (data) => {
         {
           iconName: "add_location",
           label: "Include beneficiary location codes",
-          value: `${getPercentage(quality.hasBeneficiaryLocationCodes)}%`,
+          value: `${quality.hasBeneficiaryLocationGeoCode}%`,
           modalMeaning:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
           modalReason:
@@ -51,29 +47,29 @@ const getPublisherCards = (data) => {
         {
           iconName: "tag",
           label: "Include charity or company nos.",
-          value: "Unknown",
+          value: `${quality.hasRecipientOrgCompanyOrCharityNumber}%`,
           modalMeaning: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
           modalReason: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
         },
         {
           iconName: "confirmation_number",
           label: "Include external org IDs for at least 50% of recipients",
-          value: "Unknown",
+          value: `${quality.has50pcExternalOrgId}%`,
           modalMeaning: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
           modalReason: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
         }
       ],
       graph: {
         data: [{
-          x: [0,20,40,60,80,100],
-          y: [10,10,10,10,10,10],
+          x: Object.keys(aggregate.recipientsExternalOrgId),
+          y: Object.values(aggregate.recipientsExternalOrgId),
           type:"bar",
           marker: {
             color:  ['#153634', '#DE6E26', '#4DACB6', '#EFC329', '#BC2C26', '#FFFFF',]
           }
         }],
         layout:{
-          title: "**** Mock Data - Percentage of recipients with external org IDs ****",
+          title: "Percentage of publishers that have recipients with external org IDs",
           xaxis: {
             type: 'category',
             title: '# of Publishers'
@@ -94,7 +90,7 @@ const getPublisherCards = (data) => {
         {
           iconName: "event_note",
           label: "Include grant duration",
-          value: `${getPercentage(quality.hasGrantDuration)}%`,
+          value: `${quality.hasGrantDuration}%`,
           modalMeaning:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
           modalReason:
@@ -103,7 +99,7 @@ const getPublisherCards = (data) => {
         {
           iconName: "format_quote",
           label: "Include programme names",
-          value: `${getPercentage(quality.hasGrantProgrammeTitle)}%`,
+          value: `${quality.hasGrantProgrammeTitle}%`,
           modalMeaning:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
           modalReason:
@@ -112,7 +108,7 @@ const getPublisherCards = (data) => {
         {
           iconName: "label",
           label: "Include classifications",
-          value: `${getPercentage(quality.hasGrantClassification)}%`,
+          value: `${quality.hasGrantClassification}%`,
           modalMeaning:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
           modalReason:
@@ -130,10 +126,10 @@ const getPublisherCards = (data) => {
         data: [
           {
             x: [
-              getPercentage(aggregate.csvFiles),
-              getPercentage(aggregate.xlsxFiles),
-              getPercentage(aggregate.odsFiles),
-              getPercentage(aggregate.jsonFiles),
+              aggregate.csvFiles,
+              aggregate.xlsxFiles,
+              aggregate.odsFiles,
+              aggregate.jsonFiles,
             ],
             y: ["CSV", "XLSX", "ODF", "JSON"],
             type: "bar",
@@ -172,7 +168,7 @@ const getPublisherCards = (data) => {
         {
           iconName: "event_available",
           label: "Have published in the last year",
-          value: `${getPercentage(aggregate.publishedThisYear)}%`,
+          value: `${aggregate.publishedThisYear}%`,
           modalMeaning:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
           modalReason:
@@ -181,7 +177,7 @@ const getPublisherCards = (data) => {
         {
           iconName: "event_available",
           label: "Have published in the last month",
-          value: `${getPercentage(aggregate.publishedThisMonth)}%`,
+          value: `${aggregate.publishedThisMonth}%`,
           modalMeaning:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
           modalReason:
@@ -193,30 +189,8 @@ const getPublisherCards = (data) => {
       graph: {
         data: [
           {
-            x: [
-              '2012',
-              '2013',
-              '2014',
-              '2015',
-              '2016',
-              '2017',
-              '2018',
-              '2019',
-              '2020',
-              '2021',
-            ],
-            y: [
-              timelinessGraph['2012'],
-              timelinessGraph['2013'],
-              timelinessGraph['2014'],
-              timelinessGraph['2015'],
-              timelinessGraph['2016'],
-              timelinessGraph['2017'],
-              timelinessGraph['2018'],
-              timelinessGraph['2019'],
-              timelinessGraph['2020'],
-              timelinessGraph['2021'],
-            ],
+            x: Object.keys(aggregate.awardYears),
+            y: Object.values(aggregate.awardYears),
             type: "bar",
             marker: {
               color: "#DE6E26",
@@ -224,7 +198,7 @@ const getPublisherCards = (data) => {
           },
         ],
         layout: {
-          title: "# of publishers with grants beginning in a given year",
+          title: "# of publishers with grants awarded in a given year",
           yaxis: {
             title: "# of publishers",
           },
@@ -240,7 +214,6 @@ const getPublisherCards = (data) => {
 
 const getGrantsCards = (data) => {
   const { quality, aggregate} = data;
-  const { grantsByYear: timelinessGraph } = aggregate;
   return [
     {
       title: "Location data",
@@ -252,7 +225,7 @@ const getGrantsCards = (data) => {
         {
           iconName: "person_pin_circle",
           label: "Include recipient locations",
-          value: `${getPercentage(quality.hasRecipientOrgLocations)}%`,
+          value: `${quality.hasRecipientOrgLocations}%`,
           modalMeaning:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
           modalReason:
@@ -261,7 +234,7 @@ const getGrantsCards = (data) => {
         {
           iconName: "edit_location",
           label: "Include beneficiary location names",
-          value: `${getPercentage(quality.hasBeneficiaryLocationName)}%`,
+          value: `${quality.hasBeneficiaryLocationName}%`,
           modalMeaning:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
           modalReason:
@@ -270,7 +243,7 @@ const getGrantsCards = (data) => {
         {
           iconName: "add_location",
           label: "Include beneficiary location codes",
-          value: `${getPercentage(quality.hasBeneficiaryLocationCodes)}%`,
+          value: `${quality.hasBeneficiaryLocationGeoCode}%`,
           modalMeaning:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
           modalReason:
@@ -330,7 +303,7 @@ const getGrantsCards = (data) => {
         {
           iconName: "event_note",
           label: "Include grant duration",
-          value: `${getPercentage(quality.hasGrantDuration)}%`,
+          value: `${quality.hasGrantDuration}%`,
           modalMeaning:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
           modalReason:
@@ -339,7 +312,7 @@ const getGrantsCards = (data) => {
         {
           iconName: "format_quote",
           label: "Include programme names",
-          value: `${getPercentage(quality.hasGrantProgrammeTitle)}%`,
+          value: `${quality.hasGrantProgrammeTitle}%`,
           modalMeaning:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
           modalReason:
@@ -348,7 +321,7 @@ const getGrantsCards = (data) => {
         {
           iconName: "label",
           label: "Include classifications",
-          value: `${getPercentage(quality.hasGrantClassification)}%`,
+          value: `${quality.hasGrantClassification}%`,
           modalMeaning:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
           modalReason:
@@ -366,10 +339,10 @@ const getGrantsCards = (data) => {
         data: [
           {
             x: [
-              getPercentage(aggregate.csvFiles),
-              getPercentage(aggregate.xlsxFiles),
-              getPercentage(aggregate.odsFiles),
-              getPercentage(aggregate.jsonFiles),
+              aggregate.csvFiles,
+              aggregate.xlsxFiles,
+              aggregate.odsFiles,
+              aggregate.jsonFiles,
             ],
             y: ["CSV", "XLSX", "ODF", "JSON"],
             type: "bar",
@@ -408,7 +381,7 @@ const getGrantsCards = (data) => {
         {
           iconName: "event_available",
           label: "Have published in the last year",
-          value: `${getPercentage(aggregate.publishedThisYear)}%`,
+          value: `${aggregate.publishedThisYear}%`,
           modalMeaning:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
           modalReason:
@@ -417,7 +390,7 @@ const getGrantsCards = (data) => {
         {
           iconName: "event_available",
           label: "Have published in the last month",
-          value: `${getPercentage(aggregate.publishedThisMonth)}%`,
+          value: `${aggregate.publishedThisMonth}%`,
           modalMeaning:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis ultricies vitae maecenas.",
           modalReason:
@@ -429,30 +402,8 @@ const getGrantsCards = (data) => {
       graph: {
         data: [
           {
-            x: [
-              '2012',
-              '2013',
-              '2014',
-              '2015',
-              '2016',
-              '2017',
-              '2018',
-              '2019',
-              '2020',
-              '2021',
-            ],
-            y: [
-              timelinessGraph['2012'],
-              timelinessGraph['2013'],
-              timelinessGraph['2014'],
-              timelinessGraph['2015'],
-              timelinessGraph['2016'],
-              timelinessGraph['2017'],
-              timelinessGraph['2018'],
-              timelinessGraph['2019'],
-              timelinessGraph['2020'],
-              timelinessGraph['2021'],
-            ],
+            x: Object.keys(aggregate.awardYears),
+            y: Object.values(aggregate.awardYears),
             type: "bar",
             marker: {
               color: "#DE6E26",
@@ -460,7 +411,7 @@ const getGrantsCards = (data) => {
           },
         ],
         layout: {
-          title: "# of grants beginning in a given year",
+          title: "# of grants awarded in a given year",
           yaxis: {
             title: "# of grants",
           },
