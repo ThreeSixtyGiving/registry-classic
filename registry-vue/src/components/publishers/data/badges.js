@@ -16,8 +16,8 @@ const badges = [
   },
   {
     qualityMetric: 'hasRecipientOrgLocations',
-    iconName: '',
-    label: 'Unknown Badge - Recipient Org Location'
+    iconName: 'edit_location',
+    label: 'Recipient Org Location'
   },
   {
     qualityMetric: 'hasBeneficiaryLocationName',
@@ -33,7 +33,7 @@ const badges = [
 
 const getBadges = quality => {
   const wonBadges = Object.keys(quality).filter(key => {
-    return quality[key] === 1 ? key : null;
+    return quality[key] === 100 ? key : null;
   });
   return badges.filter(badge => wonBadges.includes(badge.qualityMetric))
 }
