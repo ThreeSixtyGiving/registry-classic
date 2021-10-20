@@ -17,7 +17,7 @@ const badges = [
   {
     qualityMetric: 'hasRecipientOrgLocations',
     iconName: 'edit_location',
-    label: 'Recipient Org Location'
+    label: 'Include recipient location codes'
   },
   {
     qualityMetric: 'hasBeneficiaryLocationName',
@@ -25,17 +25,58 @@ const badges = [
     label: 'Include grant location name'
   },
   {
-    qualityMetric: 'hasBeneficiaryLocationCodes',
+    qualityMetric: 'hasBeneficiaryLocationGeoCodes',
     iconName: 'location_on',
-    label: 'Include recipient location codes'
+    label: 'Include grant location codes'
   },
-]
+  {
+    qualityMetric: 'has50pcExternalOrgId',
+    iconName: 'confirmation_number',
+    label: 'Includes over 50% external org IDs'
+  },
+  {
+    qualityMetric: 'publishedThisYear',
+    iconName: 'event_available',
+    label: 'Have published in the last year'
+  },
+  {
+    qualityMetric: 'publishedLastThreeMonths',
+    iconName: 'event_available',
+    label: 'Have published within the last three months'
+  },
+];
 
-const getBadges = quality => {
-  const wonBadges = Object.keys(quality).filter(key => {
-    return quality[key] === 100 ? key : null;
+const today = new Date();
+
+const getBadges = publisher => {
+  const wonBadges = Object.keys(publisher.quality).filter(key => {
+    return publisher.quality[key] === 100 ? key : null;
   });
-  return badges.filter(badge => wonBadges.includes(badge.qualityMetric))
+
+  return badges.filter(function(badge) {
+
+    if (badge.qualityMetric == 'publishedLastThreeMonths'){
+      let lastLastModifiedDate = new Date(publisher.lastLastModified);
+      let todayLessThreeMonths = new Date(today.getTime() - (2628000000*3));
+
+      if (lastLastModifiedDate.getTime() >= todayLessThreeMonths.getTime()){
+        return true;
+      }
+    }
+
+    if (badge.qualityMetric == 'publishedThisYear'){
+      let lastLastModifiedDate = new Date(publisher.lastLastModified);
+
+      let todayLessAYear = new Date(today.getTime() - (2628000000*12));
+
+      if (lastLastModifiedDate.getTime() >= todayLessAYear.getTime()){
+        return true;
+      }
+    }
+
+    return wonBadges.includes(badge.qualityMetric);
+
+  })
 }
 
 export default getBadges;
