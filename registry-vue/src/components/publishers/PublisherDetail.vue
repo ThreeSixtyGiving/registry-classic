@@ -83,7 +83,7 @@ export default {
         .then((response) => response.json())
         .then((json) => {
           this.publisher = json;
-          this.badges = getBadges(json.quality);
+          this.badges = getBadges(json);
           this.chart = getAwardYearsArray(this.publisher.aggregate.awardYears);
           this.dataDownloaded = true;
         })
