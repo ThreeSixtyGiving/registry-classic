@@ -56,7 +56,7 @@ export default {
   data: function () {
     return {
       chart: getAwardYearsArray(this.publisher.aggregate.awardYears),
-      badges: getBadges(this.publisher.quality)
+      badges: getBadges(this.publisher)
     }
   }
 }
