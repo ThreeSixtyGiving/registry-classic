@@ -5,7 +5,9 @@
     <button v-on:click="hideModal" class="modal__close modal__trigger" data-id="modal-00"></button>
     <div class="modal__content">
       <h3>{{ cardData.infoLabel }}</h3>
-      <p>{{ cardData.description }}</p>
+
+      <p v-if="!cardData.modalDescription">{{ cardData.description }}</p>
+      <p else v-html="cardData.modalDescription"></p>
 
       <hr class="separator-light">
 
@@ -21,9 +23,9 @@
 
           <div class="dashboard-modal__group">
             <h4 class="dashboard-modal__subtitle">This means</h4>
-            <p>{{ stats.modalMeaning}}</p>
+            <p v-html="stats.modalMeaning"></p>
             <h4 class="dashboard-modal__subtitle">This is useful because</h4>
-            <p>{{ stats.modalReason }}</p>
+            <p v-html="stats.modalReason"></p>
           </div>
         </div>
 
