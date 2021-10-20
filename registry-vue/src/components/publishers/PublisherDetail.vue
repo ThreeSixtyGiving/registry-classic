@@ -21,7 +21,7 @@
     <span v-for="(badge, index) in this.badges" :key="index" class="dashboard-publisher-result__badge">
       <IconBadge :badge="badge" />
     </span>
-    
+
     <hr class="separator-light">
 
     <div class="spacer-1"></div>
