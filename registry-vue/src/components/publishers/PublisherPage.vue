@@ -1,8 +1,8 @@
 <template>
   <main class="layout__content">
     <div class="layout__content-inner">
-      <DataTable />
-      <div class="spacer-2"></div>
+      <!-- <DataTable /> Not yet implemented
+      <div class="spacer-2"></div> -->
       <SortFilter :sortValues="sortValues" :publisherList="publisherList" :key="dataDownloaded" v-on:filterChange="filterChange($event)" />
       <div class="spacer-4"></div>
       <div v-if="!dataDownloaded">
@@ -18,7 +18,7 @@
 
 <script>
 import PublisherResult from "./parts/PublisherResult";
-import DataTable from './parts/DataTable';
+// import DataTable from './parts/DataTable';
 import SortFilter from './parts/SortFilter';
 import Spinner from '../generic/Spinner'
 
@@ -26,7 +26,7 @@ export default {
   name: "PublisherPage",
   components: {
     PublisherResult,
-    DataTable,
+//    DataTable,
     SortFilter,
     Spinner,
   },
