@@ -39,6 +39,7 @@ export default {
       this.modalRef = modalRef;
     },
     setOverviewMode(value) {
+      window.location.hash = value;
       this.overviewMode = value;
     },
     searchFunction(mode=null) {
@@ -56,6 +57,14 @@ export default {
     },
   },
   created() {
+    if (window.location.hash == "#publishers"){
+      this.overviewMode = "publishers";
+    }
+
+    if (window.location.hash == "#grants"){
+      this.overviewMode = "grants";
+    }
+
     this.searchFunction(this.overviewMode);
   },
   watch: {
