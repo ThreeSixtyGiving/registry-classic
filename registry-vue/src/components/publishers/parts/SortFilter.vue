@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h4>Sort: (not fully implemented)</h4>
+    <h4>Sort:</h4>
 
     <div class="sort-filters">
       <div v-for="(filter, index) in filters" :key="`filter-${index}`" class="sort-filters__select-wrapper">
@@ -36,7 +36,7 @@ export default {
           label: "Filter by publisher",
           active: true,
           options: this.publisherList,
-        },
+        },/*
         {
           id: 'feature',
           label: "Filter by data feature",
@@ -48,7 +48,7 @@ export default {
           label: "Filter by data file",
           active: false,
           options: {csv: 'CSV', json: 'JSON', xlsx: 'XLSX', ods: 'ODS'},
-        },
+        },*/
       ],
     }
   },
