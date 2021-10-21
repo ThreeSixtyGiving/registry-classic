@@ -7,13 +7,13 @@
     <div class="dashboard-publisher-result__head">
       <div class="dashboard-publisher-result__left-side">
         <div class="dashboard-publisher-result__title">
-          {{ publisher.title }}
+          {{ publisher.name}}
         </div>
       </div>
 
       <div class="dashboard-publisher-result__right-side">
         <div class="dashboard-publisher-result__date">
-          Last update: <time :datetime="publisher.aggregate.lastLastModified">{{ new Date(publisher.aggregate.lastLastModified).toUTCString().substring(4,16) }}</time>
+          Last update: <time :datetime="publisher.lastLastModified">{{ new Date(publisher.lastLastModified).toUTCString().substring(4,16) }}</time>
         </div>
       </div>
     </div>
