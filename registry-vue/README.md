@@ -6,7 +6,7 @@ npm install
 ```
 
 ### Compile theme
-Make sure the git submodule is checked out
+Make sure the git submodule is checked out and the theme is compiled
 ```
 cd 360-ds
 npm install
