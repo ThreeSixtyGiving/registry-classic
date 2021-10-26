@@ -16,7 +16,7 @@ const badges = [
   },
   {
     qualityMetric: 'hasRecipientOrgLocations',
-    iconName: 'edit_location',
+    iconName: 'person_pin_circle',
     label: 'Include recipient location codes'
   },
   {
