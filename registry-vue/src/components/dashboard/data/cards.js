@@ -6,6 +6,7 @@ const getPublisherCards = (data) => {
       title: "Location data",
       description:
         "Location data helps users to understand where grants go. Location names help people using the data, while location codes enable grant data to be visualised in maps and to be linked to official statistics.\n",
+      modalDescription: "360Giving data has a range of fields for describing location which are split into two types; recipient and grant (known as beneficiary) location. <br /><br /><i>These statistics show the percentage of organisations sharing 360Giving data (known as publishers) that include this information in their grants data.</i>",
       infoLabel: "Learn more about location data",
       modalRef: "location_data",
       stats: [
@@ -42,7 +43,7 @@ const getPublisherCards = (data) => {
       title: "Organisation identifiers",
       description: "Org IDs help users to understand who is involved in each grant. External org IDs make it possible to see when funders give grants to the same recipient and allow grants data to be linked to official sources of organisation data.",
       modalDescription: "360Giving data identifies recipient and funding organisations in two main ways - by name and with a unique organisation identifier. These org IDs often use an official reference, such as a charity or company number. <br /><br /><i>These statistics show the percentage of organisations sharing 360Giving data (known as publishers) that include this information in their grants data.</i>",
-      infoLabel: "Learn more about organisation identifiers",
+      infoLabel: "Learn more about org IDs",
       modalRef: "org_ids",
       stats: [
         {
@@ -86,7 +87,7 @@ const getPublisherCards = (data) => {
       description:
         "All 360Giving data includes information about award amounts, award dates and the purpose of each grant. Information about the grant duration, grant programme names and classifications help users to understand more context for each grant.",
       modalDescription:
-        "360Giving data has 10 core fields which provide information about the who, what, when and how much of each grant. Further information can be provided in fields which provide useful context which allows the grantmaking to be understood better. <br />These statistics show the percentage of organisations sharing 360Giving data (known as publishers) that include this information in their grants data.",
+        "360Giving data has 10 core fields which provide information about the who, what, when and how much of each grant. Further information can be provided in fields which provide useful context which allows the grantmaking to be understood better. <br /><i>These statistics show the percentage of organisations sharing 360Giving data (known as publishers) that include this information in their grants data.</i>",
       infoLabel: "Learn more about grant data",
       modalRef: "grant_data",
       stats: [
@@ -150,13 +151,13 @@ const getPublisherCards = (data) => {
           },
         ],
         layout: {
-          title: "Number of publishers using each file type",
+          title: "Type of file used to publish 360Giving data",
           yaxis: {
             type: "category",
             title: "File type",
           },
           xaxis: {
-            title: "% using file type",
+            title: "percentage of publishers",
           },
         },
       },
@@ -180,7 +181,7 @@ const getPublisherCards = (data) => {
         },
         {
           iconName: "event_available",
-          label: "Have published within the last three months",
+          label: "Have published in the last 3 months",
           value: `${aggregate.publishedLastThreeMonths}%`,
           modalMeaning:
             "The organisation has published 360Giving data within the last three months.",
@@ -239,7 +240,7 @@ const getGrantsCards = (data) => {
         },
         {
           iconName: "edit_location",
-          label: "Include recipient location names",
+          label: "Include grant location names",
           value: `${quality.hasBeneficiaryLocationName}%`,
           modalMeaning:
            "The grants include place names which describe where the funded work is being delivered or the intended beneficiaries are based. <br /><br/>This could be any type of location: an estate, a town, city, ward, local government area or parliamentary constituency, a region or country whichever is appropriate for the grant.",
@@ -260,7 +261,7 @@ const getGrantsCards = (data) => {
     {
       title: "Organisation identifiers",
       description: "Org IDs help users to understand who is involved in each grant. External org IDs make it possible to see when funders give grants to the same recipient and allow grants data to be linked to official sources of organisation data.",
-      infoLabel: "Learn more about organisation identifiers",
+      infoLabel: "Learn more about org IDs",
       modalDescription: "360Giving data identifies recipient and funding organisations in two main ways - by name and with a unique organisation identifier. These org IDs often use an official reference, such as a charity or company number. <br /><br /><i>These statistics show the percentage of grant records that include this information</i>.",
       modalRef: "org_ids",
       stats: [
@@ -273,7 +274,7 @@ const getGrantsCards = (data) => {
         },
         {
           iconName: "confirmation_number",
-          label: "Include external org IDs for at least 50% of recipients",
+          label: "Use external org IDs",
           value: `${quality.has50pcExternalOrgId}%`,
           modalMeaning: "The grants have a recipient identified using an external reference, such as a registered charity or company number.",
           modalReason: "Including an external reference makes it possible to see when they have received grants from multiple funders. It allows grant data to be linked or combined with information taken from official registers.<br /><br />Some organisations, such as small unregistered groups, do not have an official registration number that can be used to create org ID. This means a lower percentage of external org IDs in 360Giving data could be because of the type of recipients being funded.",
@@ -368,13 +369,13 @@ const getGrantsCards = (data) => {
           },
         ],
         layout: {
-          title: "Number of publishers using each file type",
+          title: "Type of file used to publish 360Giving data",
           yaxis: {
             type: "category",
             title: "File type",
           },
           xaxis: {
-            title: "% using file type",
+            title: "percentage of publishers",
           },
         },
       },
@@ -398,7 +399,7 @@ const getGrantsCards = (data) => {
         },
         {
           iconName: "event_available",
-          label: "Include grants awarded within the last three months",
+          label: "Include grants awarded in the last 3 months",
           value: `${aggregate.awardedLastThreeMonths}%`,
           modalMeaning:
             "The organisation has published data with grants awarded in the last 3 months.",
