@@ -25,7 +25,7 @@ const badges = [
     label: 'Include grant location name'
   },
   {
-    qualityMetric: 'hasBeneficiaryLocationGeoCodes',
+    qualityMetric: 'hasBeneficiaryLocationGeoCode',
     iconName: 'location_on',
     label: 'Include grant location codes'
   },
