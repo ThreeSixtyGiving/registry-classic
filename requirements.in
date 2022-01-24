@@ -3,4 +3,5 @@ humanize
 raven[flask]
 requests
 simple_salesforce
+gunicorn
 
