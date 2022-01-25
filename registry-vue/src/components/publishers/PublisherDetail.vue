@@ -7,7 +7,7 @@
     <div class="dashboard-publisher-result__head">
       <div class="dashboard-publisher-result__left-side">
         <div class="dashboard-publisher-result__title">
-          {{ publisher.name}}
+          <h1>{{ publisher.name}}</h1>
         </div>
       </div>
 
@@ -18,9 +18,17 @@
       </div>
     </div>
 
-    <span v-for="(badge, index) in this.badges" :key="index" class="dashboard-publisher-result__badge">
+    <h3>Features available in this data</h3>
+    <span v-for="(badge, index) in this.badges.available" :key="index" class="dashboard-publisher-result__badge">
       <IconBadge :badge="badge" />
     </span>
+    <a href="#" v-on:click.prevent="showUnavailableFeatures = !showUnavailableFeatures" v-if="badges.unavailable.length" title="Show unavailable features">{{badges.unavailable.length}} features are unavailable</a>
+    <template v-if="showUnavailableFeatures">
+      <h3>Features unavailable in this data</h3>
+      <span v-for="(badge, index) in this.badges.unavailable" :key="index" class="dashboard-publisher-result__badge">
+        <IconBadge :badge="badge" />
+      </span>
+    </template>
 
     <hr class="separator-light">
 
@@ -28,6 +36,7 @@
 
     <div class="dashboard-publisher-result-wrapper__external-buttons align-right">
       <a :href="`https://grantnav.threesixtygiving.org/publisher/${publisher.prefix}`" target="_blank" class="button">See in GrantNav</a>
+      <!-- <a :href="`https://insights.threesixtygiving.org/data?funder=${publisher.prefix}`" target="_blank" class="button">See in Insights</a> -->
     </div>
 
     <div class="spacer-3"></div>
@@ -73,6 +82,7 @@ export default {
       dataDownloaded: {},
       badges: {},
       chart: {},
+      showUnavailableFeatures: false,
     }
   },
   methods: {

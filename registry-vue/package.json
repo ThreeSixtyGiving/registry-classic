@@ -12,6 +12,7 @@
     "node-fetch": "^2.6.1",
     "numeral": "^2.0.6",
     "vue": "^2.6.11",
+    "vue-numeral-filter": "^2.2.0",
     "vue-plotly": "^1.1.0",
     "vue-router": "^3.5.1"
   },

@@ -1,23 +1,20 @@
 <template>
 <div >
-  <div class="grid__1 align-right dashboard-publisher-result-wrapper__external-buttons align-right">
-    <a :href="`https://insights.threesixtygiving.org/file/${file.id}`" target="_blank" class="button button--black">See in 360Insights</a>
-  </div>
   <div class="file-summary grid grid--three-columns">
     <div class="grid__1">
       {{ file.distribution.title }}
     </div>
     <div class="grid__1 align-right">
-      <span class="file-summary__label">Records</span>
-      <span class="file-summary__stat">{{ file.aggregate.count }}</span>
+      <span class="file-summary__label">Grants</span>
+      <span class="file-summary__stat">{{ (file.aggregate.count).toLocaleString() }}</span>
     </div>
     <div class="grid__1 align-right">
-      <span class="file-summary__label">Total Grants &pound;</span>
-      {{ file.aggregate.currencies.GBP.total_amount }}
+      <span class="file-summary__label">Total amount &pound;</span>
+      {{ (file.aggregate.currencies.GBP.total_amount).toLocaleString() }}
       <span class="file-summary__stat">{{ file.grant_total_shorthand }}</span>
     </div>
     <div class="grid__1">
-      <span class="tag file-summary__specs">{{ file.datagetter_data.file_type }} &ndash; {{ file.datagetter_data.file_size }}</span>
+     <a v-bind:href="file.distribution.downloadURL"> <span class="tag file-summary__specs">{{ file.datagetter_data.file_type }} &ndash; {{ file.datagetter_data.file_size|numeral('0b') }}</span></a>
     </div>
     <div class="grid__1 align-right">
       <span class="file-summary__label">Valid data</span>
@@ -25,12 +22,11 @@
       <MaterialIcon v-else iconName='priority_high' />
     </div>
     <div class="grid__1 align-right">
-      <span class="file-summary__label">Licence</span>
-      Unknown
-      <span v-if="file.licence === 'cc'" class="file-summary__native-icon">
-        <img src="@/assets/images/icons/cc.svg" alt="">
+      <span class="file-summary__label">License</span>
+      <span v-if="file.license.indexOf('Creative Commons') === 0" class="file-summary__native-icon">
+        <img src="@/assets/images/icons/cc.svg" style="height: 22px; width: 22px; vertical-align: unset" v-bind:alt="file.license" v-bind:title="file.license">
       </span>
-      <span v-else class="file-summary__stat">{{ file.licence }}</span>
+      <span v-else>{{ file.license }}</span>
     </div>
   </div>
   <hr class="separator-light">
