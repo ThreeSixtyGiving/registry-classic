@@ -2,37 +2,37 @@ const badges = [
   {
     qualityMetric: 'hasGrantDuration',
     iconName: 'event_note',
-    label: 'Include grant duration'
+    label: 'Includes grant duration'
   },
   {
     qualityMetric: 'hasGrantClassification',
     iconName: 'label',
-    label: 'Include classifications'
+    label: 'Includes classifications'
   },
   {
     qualityMetric: 'hasGrantProgrammeTitle',
     iconName: 'format_quote',
-    label: 'Include programme names'
+    label: 'Includes programme names'
   },
   {
     qualityMetric: 'hasRecipientOrgLocations',
     iconName: 'person_pin_circle',
-    label: 'Include recipient location codes'
+    label: 'Includes recipient location codes'
   },
   {
     qualityMetric: 'hasBeneficiaryLocationName',
     iconName: 'edit_location',
-    label: 'Include grant location name'
+    label: 'Includes grant location name'
   },
   {
     qualityMetric: 'hasBeneficiaryLocationGeoCode',
     iconName: 'location_on',
-    label: 'Include grant location codes'
+    label: 'Includes grant location codes'
   },
   {
     qualityMetric: 'has50pcExternalOrgId',
     iconName: 'confirmation_number',
-    label: 'Includes over 50% external org IDs'
+    label: 'Includess over 50% external org IDs'
   },
   {
     qualityMetric: 'publishedThisYear',
@@ -53,14 +53,24 @@ const getBadges = publisher => {
     return publisher.quality[key] === 100 ? key : null;
   });
 
-  return badges.filter(function(badge) {
+  let available = [];
+  let unavailable = [];
+
+
+  badges.forEach((badge)=> {
+
+    if (wonBadges.includes(badge.qualityMetric)){
+      available.push(badge);
+    } else {
+      unavailable.push(badge);
+    }
 
     if (badge.qualityMetric == 'publishedLastThreeMonths'){
       let lastLastModifiedDate = new Date(publisher.lastLastModified);
       let todayLessThreeMonths = new Date(today.getTime() - (2628000000*3));
 
       if (lastLastModifiedDate.getTime() >= todayLessThreeMonths.getTime()){
-        return true;
+        return available.push(badge);
       }
     }
 
@@ -70,13 +80,12 @@ const getBadges = publisher => {
       let todayLessAYear = new Date(today.getTime() - (2628000000*12));
 
       if (lastLastModifiedDate.getTime() >= todayLessAYear.getTime()){
-        return true;
+        return available.push(badge);
       }
     }
+  });
 
-    return wonBadges.includes(badge.qualityMetric);
-
-  })
+  return { available: available, unavailable: unavailable }
 }
 
 export default getBadges;

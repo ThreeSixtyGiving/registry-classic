@@ -14,7 +14,7 @@
       </div>
     </div>
 
-    <span v-for="(badge, index) in badges" :key="index" class="dashboard-publisher-result__badge">
+    <span v-for="(badge, index) in badges.available" :key="index" class="dashboard-publisher-result__badge">
       <IconBadge :badge="badge" />
     </span>
 

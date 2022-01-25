@@ -143,7 +143,7 @@ export default {
               "icon": {
                 "icon_name": "tag"
               },
-              "label": "Include charity or company nos.",
+              "label": "Include charity or company fields.",
               "value": "Unknown"
             },
             {

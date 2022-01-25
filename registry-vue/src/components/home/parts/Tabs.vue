@@ -2,9 +2,9 @@
   <div>
     <div class="tabs" v-if="$router.currentRoute.name !== 'publisher'">
       <span :class="`tab tab${$router.currentRoute.name === 'overview' ? '--active' : '--inactive'}`">
-        <a class="tab__inner" href="/overview">Overview</a>
+        <a class="tab__inner" href="/overview">All Data</a>
       </span>
-    
+
       <span :class="`tab tab${$router.currentRoute.name === 'publishers' ? '--active' : '--inactive'}`">
         <a class="tab__inner" href="/publishers">Publishers</a>
       </span>
@@ -22,7 +22,7 @@
 
 <script>
 import MaterialIcon from '../../generic/MaterialIcon'
- 
+
 export default {
   name: "Tabs",
   components: {
