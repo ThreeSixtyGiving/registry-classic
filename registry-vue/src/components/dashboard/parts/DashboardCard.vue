@@ -24,8 +24,10 @@
     <div v-if="cardData.graph">
       <hr class="separator-light">
 
-      <div class="graph-label">{{ cardData.graph_description }}</div>
       <Plotly :data="cardData.graph.data" :layout="cardData.graph.layout" />
+      <!-- not in use <div class="graph-label">{{ cardData.graphDescription }}</div> -->
+      <div class="spacer-2"></div>
+      <div class="spacer-2"></div>
     </div>
   </div>
 </template>
@@ -33,7 +35,7 @@
 <script>
 import AlertTag from "../../generic/AlertTag";
 import MaterialIcon from "../../generic/MaterialIcon";
-import { Plotly } from "vue-plotly"; 
+import { Plotly } from "vue-plotly";
 
 export default {
   name: "DashboardCard",

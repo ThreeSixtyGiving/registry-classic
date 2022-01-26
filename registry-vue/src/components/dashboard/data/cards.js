@@ -1,3 +1,22 @@
+const orange = "#df6c26";
+const teal = "#4eacb7";
+
+const orgIdDescriptions = {
+    "CHC":   "Registered Charity (E&W)",
+    "SC":    "Registered Charity (Scotland)",
+    "NIC":   "Registered Charity (NI)",
+    "COH":   "Registered Company",
+    "GOR":   "Government",
+    "MPR":   "Mutual",
+    "NHS":   "NHS",
+    "UKPRN": "School/University/Education (UKPRN)",
+    "EDU":   "School/University/Education (DFE)",
+    "SHPE":  "Social Housing Provider",
+    "LAE":   "Local Authority (E)",
+    "LAS":   "Local Authority (Scotland)",
+    "REV":   "Registered Charity (HMRC)",
+    "EIN":   "US registered with IRS"
+}
 
 const getPublisherCards = (data) => {
   const { quality, aggregate } = data;
@@ -67,7 +86,7 @@ const getPublisherCards = (data) => {
           y: Object.values(aggregate.recipientsExternalOrgId),
           type:"bar",
           marker: {
-            color:  ['#153634', '#DE6E26', '#4DACB6', '#EFC329', '#BC2C26', '#FFFFF',]
+            color:  teal,
           }
         }],
         layout:{
@@ -139,14 +158,7 @@ const getPublisherCards = (data) => {
             type: "bar",
             orientation: "h",
             marker: {
-              color: [
-                "#153634",
-                "#DE6E26",
-                "#4DACB6",
-                "#EFC329",
-                "#BC2C26",
-                "#FFFFF",
-              ],
+              color: teal,
             },
           },
         ],
@@ -180,7 +192,7 @@ const getPublisherCards = (data) => {
             "It is good practise to make updates to add new grants on at least an annual basis to ensure the data is relevant for informing the decision-making of users.",
         },
         {
-          iconName: "event_available",
+          iconName: "date_range",
           label: "Have published in the last 3 months",
           value: `${aggregate.publishedLastThreeMonths}%`,
           modalMeaning:
@@ -198,7 +210,7 @@ const getPublisherCards = (data) => {
             y: Object.values(aggregate.awardYears),
             type: "bar",
             marker: {
-              color: "#DE6E26",
+              color: teal,
             },
           },
         ],
@@ -282,25 +294,29 @@ const getGrantsCards = (data) => {
       ],
       graph: {
         data: [{
-          x: Object.keys(aggregate.orgIdTypes),
-          y: Object.values(aggregate.orgIdTypes),
+          x: Object.keys(aggregate.orgIdTypes).slice(0,7).map((orgId) => {
+            return orgIdDescriptions[orgId];
+          }),
+          y: Object.values(aggregate.orgIdTypes).slice(0,6),
           type:"bar",
           marker: {
-            color:  ['#153634', '#DE6E26', '#4DACB6', '#EFC329', '#BC2C26', '#FFFFF',]
+            color:  orange,
           }
         }],
         layout:{
           title: "Org type of external org ID used",
           xaxis: {
             type: 'category',
-            title: 'Org type'
+            title: 'Org type',
+            automargin: true,
           },
           yaxis: {
             title: 'Number of grants'
           }
         }
-      }
+      },
     },
+
     {
       title: "Grant data",
       description:
@@ -357,14 +373,7 @@ const getGrantsCards = (data) => {
             type: "bar",
             orientation: "h",
             marker: {
-              color: [
-                "#153634",
-                "#DE6E26",
-                "#4DACB6",
-                "#EFC329",
-                "#BC2C26",
-                "#FFFFF",
-              ],
+              color: orange,
             },
           },
         ],
@@ -398,7 +407,7 @@ const getGrantsCards = (data) => {
             "Information about grants awarded within the past year are likely to be current and therefore more useful for informing the decision-making of users.",
         },
         {
-          iconName: "event_available",
+          iconName: "date_range",
           label: "Include grants awarded in the last 3 months",
           value: `${aggregate.awardedLastThreeMonths}%`,
           modalMeaning:
@@ -416,7 +425,7 @@ const getGrantsCards = (data) => {
             y: Object.values(aggregate.awardYears),
             type: "bar",
             marker: {
-              color: "#DE6E26",
+              color: orange,
             },
           },
         ],
