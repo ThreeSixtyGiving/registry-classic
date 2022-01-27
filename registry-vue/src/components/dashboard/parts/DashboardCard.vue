@@ -24,10 +24,14 @@
     <div v-if="cardData.graph">
       <hr class="separator-light">
 
-      <Plotly :data="cardData.graph.data" :layout="cardData.graph.layout" />
+      <Plotly
+        :data="cardData.graph.data"
+        :layout="cardData.graph.layout"
+        :displaylogo="false"
+        :modeBarButtonsToRemove="[ 'zoom2d', 'select2d', 'pan2d', 'lasso2d', 'autoScale2d', 'toggleSpikelines', 'hoverClosestCartesian', 'hoverCompareCartesian']"
+        :toImageButtonOptions='{ filename: "360Giving-"+cardData.title}'
+      />
       <!-- not in use <div class="graph-label">{{ cardData.graphDescription }}</div> -->
-      <div class="spacer-2"></div>
-      <div class="spacer-2"></div>
     </div>
   </div>
 </template>
