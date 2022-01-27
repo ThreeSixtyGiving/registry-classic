@@ -140,41 +140,6 @@ const getPublisherCards = (data) => {
       ],
     },
     {
-      title: "Files",
-      description:
-        "The 360Giving Data Standard is file-based and supports publishing using spreadsheet and JSON file formats.",
-      infoLabel: "",
-      modalRef: "metadata",
-      graph: {
-        data: [
-          {
-            x: [
-              aggregate.csvFiles,
-              aggregate.xlsxFiles,
-              aggregate.odsFiles,
-              aggregate.jsonFiles,
-            ],
-            y: ["CSV", "XLSX", "ODF", "JSON"],
-            type: "bar",
-            orientation: "h",
-            marker: {
-              color: teal,
-            },
-          },
-        ],
-        layout: {
-          title: "Type of file used to publish 360Giving data",
-          yaxis: {
-            type: "category",
-            title: "File type",
-          },
-          xaxis: {
-            title: "percentage of publishers",
-          },
-        },
-      },
-    },
-    {
       title: "Data updates",
       description:
         "Timely updates provide users with an up-to-date picture of grantmaking. Publishers make updates at different frequencies; annual, biannual, quarterly, monthly or some publish in real-time.",
@@ -353,41 +318,6 @@ const getGrantsCards = (data) => {
             "Classifications provide a clear indication of how the data is categorised by the funder, making it easier to understand the data thematically.<br /><br />For funders who don’t have grant programmes, classifications can be used as an alternative way to show their different types of funding and priorities.",
         },
       ],
-    },
-    {
-      title: "Files",
-      description:
-        "The 360Giving Data Standard is file-based and supports publishing using spreadsheet and JSON file formats.",
-      infoLabel: "",
-      modalRef: "metadata",
-      graph: {
-        data: [
-          {
-            x: [
-              aggregate.csvFiles,
-              aggregate.xlsxFiles,
-              aggregate.odsFiles,
-              aggregate.jsonFiles,
-            ],
-            y: ["CSV", "XLSX", "ODF", "JSON"],
-            type: "bar",
-            orientation: "h",
-            marker: {
-              color: orange,
-            },
-          },
-        ],
-        layout: {
-          title: "Type of file used to publish 360Giving data",
-          yaxis: {
-            type: "category",
-            title: "File type",
-          },
-          xaxis: {
-            title: "percentage of publishers",
-          },
-        },
-      },
     },
     {
       title: "Data updates",
