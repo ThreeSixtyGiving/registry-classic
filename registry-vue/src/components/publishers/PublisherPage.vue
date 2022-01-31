@@ -31,28 +31,63 @@ export default {
     Spinner,
   },
   methods: {
+    sortPublisherAlpa(){
+      this.publishers.sort((publisherA, publisherB)=> {
+            let a = publisherA.name.toLowerCase();
+            let b = publisherB.name.toLowerCase();
+
+            if (a.indexOf("the ") == 0){
+              a = a.substr(4);
+            }
+
+            if (b.indexOf("the ") == 0){
+              b = b.substr(4);
+            }
+
+            if (a > b){
+              if (this.sortValues.sort == "alphabeticallyDesc"){
+                return -1;
+              }
+              return 1;
+            }
+
+            if (a < b){
+              if (this.sortValues.sort == "alphabeticallyDesc"){
+                return 1;
+              }
+              return -1;
+            }
+
+            return 0;
+          });
+
+    },
     searchFunction(queryObject = null) {
       this.dataDownloaded = false;
-      const sortOption = {
-        alphabeticallyAsc: 'data__name',
-        alphabeticallyDesc: '-data__name',
-      }
-      const query = queryObject === null ? '' : `&search=${queryObject.publisher}&ordering=${sortOption[queryObject.sort]}`;
+      const query = queryObject === null ? '' : `&search=${queryObject.publisher}`;
       fetch(`${process.env.VUE_APP_DATASTORE_API}/publishers?format=json${query}`)
         .then((response) => response.json())
         .then((json) => {
+
           this.publishers = json;
+
+          this.sortPublisherAlpa();
+
           this.publisherList = json.reduce((list, publisher) => {
             return {...list, [publisher.prefix]: publisher.name}
           }, this.publisherList);
-          this.dataDownloaded = true
+         this.dataDownloaded = true
         })
         .catch(error => {
           console.error('Error:', error);
         });
     },
     filterChange(sortChangeEvent) {
-      this.sortValues = sortChangeEvent;
+      /* We're only sorting and nothing else so do this without a new fetch */
+      if (sortChangeEvent.changed == "sort" && this.publishers.length > 0){
+        this.sortPublisherAlpa();
+        return;
+      }
       this.searchFunction(sortChangeEvent);
     }
   },

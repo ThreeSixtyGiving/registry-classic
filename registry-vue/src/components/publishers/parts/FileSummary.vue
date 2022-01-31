@@ -1,8 +1,5 @@
 <template>
 <div >
-  <div class="grid__1 align-right dashboard-publisher-result-wrapper__external-buttons align-right">
-    <a :href="`https://insights.threesixtygiving.org/file/${file.id}`" target="_blank" class="button button--black">See in 360Insights</a>
-  </div>
   <div class="file-summary grid grid--three-columns">
     <div class="grid__1">
       {{ file.distribution.title }}
@@ -17,7 +14,7 @@
       <span class="file-summary__stat">{{ file.grant_total_shorthand }}</span>
     </div>
     <div class="grid__1">
-      <span class="tag file-summary__specs">{{ file.datagetter_data.file_type }} &ndash; {{ file.datagetter_data.file_size }}</span>
+     <a v-bind:href="file.distribution.downloadURL"> <span class="tag file-summary__specs">{{ file.datagetter_data.file_type }} &ndash; {{ file.datagetter_data.file_size }}</span></a>
     </div>
     <div class="grid__1 align-right">
       <span class="file-summary__label">Valid data</span>

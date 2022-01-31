@@ -1,10 +1,10 @@
 <template>
-<div id="modal-00" class="modal modal--shown dashboard-modal">
+<div id="modal-00" class="modal modal--shown dashboard-modal" role="dialog" aria-labelledby="modal-heading" tabindex="-1">
   <div v-on:click="hideModal" class="modal__overlay modal__trigger" data-id="modal-00"></div>
   <div class="modal__window">
     <button v-on:click="hideModal" class="modal__close modal__trigger" data-id="modal-00"></button>
     <div class="modal__content">
-      <h3>{{ cardData.infoLabel }}</h3>
+      <h3 id="modal-heading">{{ cardData.infoLabel }}</h3>
 
       <p v-if="!cardData.modalDescription">{{ cardData.description }}</p>
       <p else v-html="cardData.modalDescription"></p>
