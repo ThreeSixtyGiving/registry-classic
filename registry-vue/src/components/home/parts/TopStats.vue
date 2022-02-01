@@ -28,8 +28,8 @@
       <div class="base-card base-card--red grid__1">
         <div class="base-card__content">
           <Spinner v-if="!dataDownloaded" />
-          <h2 v-if="dataDownloaded" class="base-card__title">£{{ stats.GBP }}</h2>
-          <p class="base-card__text">Total</p>
+          <h2 v-if="dataDownloaded" class="base-card__title">£{{ stats.GBP|numeral("0.00a")}}</h2>
+          <p class="base-card__text">Total amount</p>
         </div>
       </div>
     </section>
@@ -37,7 +37,6 @@
 </template>
 
 <script>
-import numeral from "numeral";
 import Spinner from '../../generic/Spinner'
 
 export default {
@@ -63,8 +62,6 @@ export default {
         .then((response) => response.json())
         .then((json) => {
           this.stats = json.aggregate.total;
-          const totalValue = numeral(json.aggregate.total.GBP);
-          this.stats.GBP = totalValue.format('( 0.00 a)');
           this.dataDownloaded = true
         })
         .catch(error => {

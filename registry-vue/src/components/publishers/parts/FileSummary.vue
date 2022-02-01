@@ -5,16 +5,16 @@
       {{ file.distribution.title }}
     </div>
     <div class="grid__1 align-right">
-      <span class="file-summary__label">Records</span>
-      <span class="file-summary__stat">{{ file.aggregate.count }}</span>
+      <span class="file-summary__label">Grants</span>
+      <span class="file-summary__stat">{{ (file.aggregate.count).toLocaleString() }}</span>
     </div>
     <div class="grid__1 align-right">
       <span class="file-summary__label">Total Grants &pound;</span>
-      {{ file.aggregate.currencies.GBP.total_amount }}
+      {{ (file.aggregate.currencies.GBP.total_amount).toLocaleString() }}
       <span class="file-summary__stat">{{ file.grant_total_shorthand }}</span>
     </div>
     <div class="grid__1">
-     <a v-bind:href="file.distribution.downloadURL"> <span class="tag file-summary__specs">{{ file.datagetter_data.file_type }} &ndash; {{ file.datagetter_data.file_size }}</span></a>
+     <a v-bind:href="file.distribution.downloadURL"> <span class="tag file-summary__specs">{{ file.datagetter_data.file_type }} &ndash; {{ file.datagetter_data.file_size|numeral('0b') }}</span></a>
     </div>
     <div class="grid__1 align-right">
       <span class="file-summary__label">Valid data</span>

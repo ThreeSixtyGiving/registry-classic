@@ -64,7 +64,7 @@ export default {
     },
     searchFunction(queryObject = null) {
       this.dataDownloaded = false;
-      const query = queryObject === null ? '' : `&search=${queryObject.publisher}`;
+      const query = queryObject === null ? '' : `&prefix=${queryObject.publisher}`;
       fetch(`${process.env.VUE_APP_DATASTORE_API}/publishers?format=json${query}`)
         .then((response) => response.json())
         .then((json) => {
