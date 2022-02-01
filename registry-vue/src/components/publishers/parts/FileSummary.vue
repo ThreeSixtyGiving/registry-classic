@@ -26,7 +26,7 @@
       <span v-if="file.license.indexOf('Creative Commons') === 0" class="file-summary__native-icon">
         <img src="@/assets/images/icons/cc.svg" style="height: 22px; width: 22px; vertical-align: unset" v-bind:alt="file.license" v-bind:title="file.license">
       </span>
-      <span v-else class="file-summary__stat">{{ file.license }}</span>
+      <span v-else>{{ file.license }}</span>
     </div>
   </div>
   <hr class="separator-light">

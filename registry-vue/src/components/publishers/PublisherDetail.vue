@@ -36,6 +36,7 @@
 
     <div class="dashboard-publisher-result-wrapper__external-buttons align-right">
       <a :href="`https://grantnav.threesixtygiving.org/publisher/${publisher.prefix}`" target="_blank" class="button">See in GrantNav</a>
+      <!-- <a :href="`https://insights.threesixtygiving.org/data?funder=${publisher.prefix}`" target="_blank" class="button">See in Insights</a> -->
     </div>
 
     <div class="spacer-3"></div>
