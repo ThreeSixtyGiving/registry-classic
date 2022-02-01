@@ -1,7 +1,7 @@
 <template>
   <div>
-    <button class="button button--orange" v-bind:style="activeGrantsStyle" v-on:click="setOverviewMode('grants')">Grants</button>
-    <button class="button button--teal" v-bind:style="activePublishersStyle" v-on:click="setOverviewMode('publishers')" style="margin-left: 5px">Publishers</button>
+    <button class="button button--teal" v-bind:style="activePublishersStyle" v-on:click="setOverviewMode('publishers')" style="margin-right: 5px">By Publisher</button>
+    <button class="button button--orange" v-bind:style="activeGrantsStyle" v-on:click="setOverviewMode('grants')">By Grant</button>
   </div>
 </template>
 

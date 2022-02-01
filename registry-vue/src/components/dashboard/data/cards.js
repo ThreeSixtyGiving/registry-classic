@@ -31,7 +31,7 @@ const getPublisherCards = (data) => {
       stats: [
         {
           iconName: "person_pin_circle",
-          label: "Include recipient location codes",
+          label: "Includes recipient location codes",
           value: `${quality.hasRecipientOrgLocations}%`,
           modalMeaning:
             "Postcodes or <a href=\"https://en.wikipedia.org/wiki/ONS_coding_system\">ONS geocodes</a> for region, local authority, ward or super output area have been included which show where the recipient is located.",
@@ -40,7 +40,7 @@ const getPublisherCards = (data) => {
         },
         {
           iconName: "edit_location",
-          label: "Include grant location names",
+          label: "Includes grant location names",
           value: `${quality.hasBeneficiaryLocationName}%`,
           modalMeaning:
             "Place names have been included which describe where the funded work is being delivered or the intended beneficiaries are based. <br /> This could be any type of location: an estate, a town, city, ward, local government area or parliamentary constituency, a region or country whichever is appropriate for the grant.",
@@ -49,7 +49,7 @@ const getPublisherCards = (data) => {
         },
         {
           iconName: "add_location",
-          label: "Include grant location codes",
+          label: "Includes grant location codes",
           value: `${quality.hasBeneficiaryLocationGeoCode}%`,
           modalMeaning:
             "Postcodes or <a href=\"https://en.wikipedia.org/wiki/ONS_coding_system\">ONS</a> geocodes for region, local authority, ward or super output area have been included which shows where the funded work is being delivered or the intended beneficiaries are based.",
@@ -61,23 +61,23 @@ const getPublisherCards = (data) => {
     {
       title: "Organisation identifiers",
       description: "Org IDs help users to understand who is involved in each grant. External org IDs make it possible to see when funders give grants to the same recipient and allow grants data to be linked to official sources of organisation data.",
-      modalDescription: "360Giving data identifies recipient and funding organisations in two main ways - by name and with a unique organisation identifier. These org IDs often use an official reference, such as a charity or company number. <br /><br /><i>These statistics show the percentage of organisations sharing 360Giving data (known as publishers) that include this information in their grants data.</i>",
+      modalDescription: "360Giving data identifies recipient and funding organisations in two main ways - by name and with a unique organisation identifier. These org IDs often use an official reference, such as a charity or company number or school number. <br /><br /><i>These statistics show the percentage of organisations sharing 360Giving data (known as publishers) that include this information in their grants data.</i>",
       infoLabel: "Learn more about org IDs",
       modalRef: "org_ids",
       stats: [
         {
           iconName: "tag",
-          label: "Include charity or company nos.",
+          label: "Includes charity or company nos.",
           value: `${quality.hasRecipientOrgCompanyOrCharityNumber}%`,
           modalMeaning: "Separate fields for sharing the registered charity and/or company numbers for recipient organisations have been included in the data.",
           modalReason: "Company and charity numbers are important for understanding grantmaking in the UK and including these separately makes it easier for users to match grants data with official sources of information about the recipients.",
         },
         {
           iconName: "confirmation_number",
-          label: "Include external org IDs for over half of recipients",
+          label: "Includes external org IDs for over half of recipients",
           value: `${quality.has50pcExternalOrgId}%`,
           modalMeaning: "More than half of recipients are identified using an external reference, such as a registered charity or company number.",
-          modalReason: "Including an external reference makes it possible to see when they have received grants from multiple funders. It allows grant data to be linked or combined with information taken from official registers. <br /><br/>Some organisations, such as small unregistered groups, do not have an official registration number that can be used to create org ID. This means a lower percentage of external org IDs in 360Giving data could be because of the type of recipients being funded.",
+          modalReason: "Including an external reference makes it possible to see when they have received grants from multiple funders. It allows grant data to be linked or combined with information taken from official registers. <br /><br/>Some organisations, such as small unregistered groups, do not have an official registration number that can be used to create an org ID. This means a lower percentage of external org IDs in 360Giving data could be because of the type of recipients being funded.",
         }
       ],
       graph: {
@@ -112,7 +112,7 @@ const getPublisherCards = (data) => {
       stats: [
         {
           iconName: "event_note",
-          label: "Include grant duration",
+          label: "Includes grant duration",
           value: `${quality.hasGrantDuration}%`,
           modalMeaning:
             "Planned start and end date, and/or grant duration have been included in the data which show the duration of the project or funding.",
@@ -121,7 +121,7 @@ const getPublisherCards = (data) => {
         },
         {
           iconName: "format_quote",
-          label: "Include programme names",
+          label: "Includes programme names",
           value: `${quality.hasGrantProgrammeTitle}%`,
           modalMeaning:
             "Grant programme names have been included in the data which show which grants were awarded under different programmes.",
@@ -130,7 +130,7 @@ const getPublisherCards = (data) => {
         },
         {
           iconName: "label",
-          label: "Include classifications",
+          label: "Includes classifications",
           value: `${quality.hasGrantClassification}%`,
           modalMeaning:
             "Classification information has been included in the data to show how the grants have been categorised by the funder. These can be about a wide range of things related to the grant or recipient, and are likely to be specific to each funder.",
@@ -208,7 +208,7 @@ const getGrantsCards = (data) => {
       stats: [
         {
           iconName: "person_pin_circle",
-          label: "Include recipient locations codes",
+          label: "Includes recipient locations codes",
           value: `${quality.hasRecipientOrgLocations}%`,
           modalMeaning:
             "The grants include postcodes or <a href=\"https://en.wikipedia.org/wiki/ONS_coding_system\">ONS geocodes</a> for region, local authority, ward or super output area which show where the recipient is located.",
@@ -217,7 +217,7 @@ const getGrantsCards = (data) => {
         },
         {
           iconName: "edit_location",
-          label: "Include grant location names",
+          label: "Includes grant location names",
           value: `${quality.hasBeneficiaryLocationName}%`,
           modalMeaning:
            "The grants include place names which describe where the funded work is being delivered or the intended beneficiaries are based. <br /><br/>This could be any type of location: an estate, a town, city, ward, local government area or parliamentary constituency, a region or country whichever is appropriate for the grant.",
@@ -226,7 +226,7 @@ const getGrantsCards = (data) => {
         },
         {
           iconName: "add_location",
-          label: "Include grant location codes",
+          label: "Includes grant location codes",
           value: `${quality.hasBeneficiaryLocationGeoCode}%`,
           modalMeaning:
             "The grants include postcodes or <a href=\"https://en.wikipedia.org/wiki/ONS_coding_system\">ONS geocodes</a> for region, local authority, ward or super output area which shows where the funded work is being delivered or the intended beneficiaries are based.",
@@ -239,12 +239,12 @@ const getGrantsCards = (data) => {
       title: "Organisation identifiers",
       description: "Org IDs help users to understand who is involved in each grant. External org IDs make it possible to see when funders give grants to the same recipient and allow grants data to be linked to official sources of organisation data.",
       infoLabel: "Learn more about org IDs",
-      modalDescription: "360Giving data identifies recipient and funding organisations in two main ways - by name and with a unique organisation identifier. These org IDs often use an official reference, such as a charity or company number. <br /><br /><i>These statistics show the percentage of grant records that include this information</i>.",
+      modalDescription: "360Giving data identifies recipient and funding organisations in two main ways - by name and with a unique organisation identifier. These org IDs often use an official reference, such as a charity or company number or school number. <br /><br /><i>These statistics show the percentage of grant records that include this information</i>.",
       modalRef: "org_ids",
       stats: [
         {
           iconName: "tag",
-          label: "Include charity or company nos.",
+          label: "Includes at least one charity or company no.",
           value: `${quality.hasRecipientOrgCompanyOrCharityNumber}%`,
           modalMeaning: "The grants include registered charity and/or company numbers for recipient organisations. ",
           modalReason: "Company and charity numbers are important for understanding grantmaking in the UK and including these separately makes it easier for users to match grants data with official sources of information about the recipients. ",
@@ -269,7 +269,7 @@ const getGrantsCards = (data) => {
           }
         }],
         layout:{
-          title: "Org type of external org ID used",
+          title: "Org type of external org IDs used",
           xaxis: {
             type: 'category',
             title: 'Org type',
@@ -292,7 +292,7 @@ const getGrantsCards = (data) => {
       stats: [
         {
           iconName: "event_note",
-          label: "Include grant duration",
+          label: "Includes grant duration",
           value: `${quality.hasGrantDuration}%`,
           modalMeaning:
             "The grants include planned start and end date, and/or grant duration which show the duration of the project or funding.",
@@ -301,7 +301,7 @@ const getGrantsCards = (data) => {
         },
         {
           iconName: "format_quote",
-          label: "Include programme names",
+          label: "Includes programme names",
           value: `${quality.hasGrantProgrammeTitle}%`,
           modalMeaning:
             "The grants include grant programme names which show which grants were awarded under different programmes.",
@@ -310,7 +310,7 @@ const getGrantsCards = (data) => {
         },
         {
           iconName: "label",
-          label: "Include classifications",
+          label: "Includes classifications",
           value: `${quality.hasGrantClassification}%`,
           modalMeaning:
             "The grants include classification information to show how the grants have been categorised by the funder. These can be about a wide range of things related to the grant or recipient, and are likely to be specific to each funder.",
@@ -329,7 +329,7 @@ const getGrantsCards = (data) => {
       stats: [
         {
           iconName: "event_available",
-          label: "Include grants awarded in the last year",
+          label: "Includes grants awarded in the last year",
           value: `${aggregate.awardedThisYear}%`,
           modalMeaning:
             "The organisation has published data with grants awarded in the last 12 months.",
@@ -338,7 +338,7 @@ const getGrantsCards = (data) => {
         },
         {
           iconName: "date_range",
-          label: "Include grants awarded in the last 3 months",
+          label: "Includes grants awarded in the last 3 months",
           value: `${aggregate.awardedLastThreeMonths}%`,
           modalMeaning:
             "The organisation has published data with grants awarded in the last 3 months.",

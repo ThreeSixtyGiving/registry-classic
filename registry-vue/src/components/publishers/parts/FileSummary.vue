@@ -9,7 +9,7 @@
       <span class="file-summary__stat">{{ (file.aggregate.count).toLocaleString() }}</span>
     </div>
     <div class="grid__1 align-right">
-      <span class="file-summary__label">Total Grants &pound;</span>
+      <span class="file-summary__label">Total amount &pound;</span>
       {{ (file.aggregate.currencies.GBP.total_amount).toLocaleString() }}
       <span class="file-summary__stat">{{ file.grant_total_shorthand }}</span>
     </div>
@@ -22,12 +22,11 @@
       <MaterialIcon v-else iconName='priority_high' />
     </div>
     <div class="grid__1 align-right">
-      <span class="file-summary__label">Licence</span>
-      Unknown
-      <span v-if="file.licence === 'cc'" class="file-summary__native-icon">
-        <img src="@/assets/images/icons/cc.svg" alt="">
+      <span class="file-summary__label">License</span>
+      <span v-if="file.license.indexOf('Creative Commons') === 0" class="file-summary__native-icon">
+        <img src="@/assets/images/icons/cc.svg" style="height: 22px; width: 22px; vertical-align: unset" v-bind:alt="file.license" v-bind:title="file.license">
       </span>
-      <span v-else class="file-summary__stat">{{ file.licence }}</span>
+      <span v-else class="file-summary__stat">{{ file.license }}</span>
     </div>
   </div>
   <hr class="separator-light">
