@@ -18,13 +18,13 @@
       </div>
     </div>
 
-    <h3>Features available in this data</h3>
+    <h3>This data includes these features</h3>
     <span v-for="(badge, index) in this.badges.available" :key="index" class="dashboard-publisher-result__badge">
       <IconBadge :badge="badge" />
     </span>
-    <a href="#" v-on:click.prevent="showUnavailableFeatures = !showUnavailableFeatures" v-if="badges.unavailable.length" title="Show unavailable features">{{badges.unavailable.length}} features are unavailable</a>
+    <a href="#" v-on:click.prevent="showUnavailableFeatures = !showUnavailableFeatures" v-if="badges.unavailable.length" title="Show unavailable features">{{badges.unavailable.length}} features are not included</a>
     <template v-if="showUnavailableFeatures">
-      <h3>Features unavailable in this data</h3>
+      <h3>This data does not include these features</h3>
       <span v-for="(badge, index) in this.badges.unavailable" :key="index" class="dashboard-publisher-result__badge">
         <IconBadge :badge="badge" />
       </span>
