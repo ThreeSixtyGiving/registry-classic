@@ -25,7 +25,7 @@ const getPublisherCards = (data) => {
       title: "Location data",
       description:
         "Location data helps users to understand where grants go. Location names help people using the data, while location codes enable grant data to be visualised in maps and to be linked to official statistics.\n",
-      modalDescription: "360Giving data has a range of fields for describing location which are split into two types; recipient and grant (known as beneficiary) location. <br /><br /><i>These statistics show the percentage of organisations sharing 360Giving data (known as publishers) that include this information in their grants data.</i>",
+      modalDescription: "360Giving data has a range of fields for describing location which are split into two main types; recipient and grant (known as beneficiary) location. <br /><br /><i>These statistics show the percentage of organisations sharing 360Giving data (known as publishers) that include this information in their grants data.</i>",
       infoLabel: "Learn more about location data",
       modalRef: "location_data",
       stats: [
@@ -36,25 +36,25 @@ const getPublisherCards = (data) => {
           modalMeaning:
             "Postcodes or <a href=\"https://en.wikipedia.org/wiki/ONS_coding_system\">ONS geocodes</a> for region, local authority, ward or super output area have been included which show where the recipient is located.",
           modalReason:
-            "Geocodes (including postcodes) provide a consistent way to describe a location. They can be used to produce maps showing the distribution of funding geographically and allow grants data to be looked at alongside official statistics, such as the <a href=\"https://en.wikipedia.org/wiki/Multiple_deprivation_index\">Indices of multiple deprivation</a>.<br /> 360Giving data that includes recipient postcodes or geocodes works with the <a href=\"https://help.grantnav.threesixtygiving.org/en/latest/locations.html\">location filtering functions of GrantNav</a>.",
+            "Geocodes (including postcodes) provide a consistent way to describe a location. They can be used to produce maps showing the geographical distribution of funding and allow grants data to be looked at alongside official statistics, such as the <a href=\"https://en.wikipedia.org/wiki/Multiple_deprivation_index\">Indices of multiple deprivation</a>.<br /> 360Giving data that includes recipient postcodes or geocodes works with the <a href=\"https://help.grantnav.threesixtygiving.org/en/latest/locations.html\">location filtering functions of GrantNav</a>.",
         },
         {
           iconName: "edit_location",
           label: "Includes grant location names",
           value: `${quality.hasBeneficiaryLocationName}%`,
           modalMeaning:
-            "Place names have been included which describe where the funded work is being delivered or the intended beneficiaries are based. <br /> This could be any type of location: an estate, a town, city, ward, local government area or parliamentary constituency, a region or country whichever is appropriate for the grant.",
+            "Place names have been included which describe where the funded work is being delivered or the people who access the service or activity are based. <br /> This could be any type of location: an estate, ward, town or city, local government area or parliamentary constituency, region or country, whichever is relevant for the grant.",
           modalReason:
-            "Grant location names allow users to understand which places are benefitting from funding. This data can be more accurate in showing where funding is going as recipients may be based in a different location from the activity being funded."
+            "Grant location names allow users to understand which places funding is reaching. This data can be more accurate in showing where grants are going geographically, especially in cases where the recipient location is in a different place from the activity being funded."
         },
         {
           iconName: "add_location",
           label: "Includes grant location codes",
           value: `${quality.hasBeneficiaryLocationGeoCode}%`,
           modalMeaning:
-            "Postcodes or <a href=\"https://en.wikipedia.org/wiki/ONS_coding_system\">ONS</a> geocodes for region, local authority, ward or super output area have been included which shows where the funded work is being delivered or the intended beneficiaries are based.",
+            "Postcodes or <a href=\"https://en.wikipedia.org/wiki/ONS_coding_system\">ONS</a> geocodes for region, local authority, ward or super output area have been included which shows where the funded work is being delivered or the people who access the service or activity are based.",
           modalReason:
-            "Including geocodes that correspond with the grant location names increases the usability of the data by providing a consistent way to identify these places. They can be used to produce maps showing the distribution of funding geographically and allow grants data to be looked at alongside official statistics.",
+            "Including geocodes that correspond with the grant location names increases the usability of the data by providing a consistent way to identify these places. They can be used to produce maps showing the geographical distribution of funding and allow grants data to be looked at alongside official statistics.",
         },
       ],
     },
@@ -67,7 +67,7 @@ const getPublisherCards = (data) => {
       stats: [
         {
           iconName: "tag",
-          label: "Includes charity or company nos.",
+          label: "Includes charity or company no. fields",
           value: `${quality.hasRecipientOrgCompanyOrCharityNumber}%`,
           modalMeaning: "Separate fields for sharing the registered charity and/or company numbers for recipient organisations have been included in the data.",
           modalReason: "Company and charity numbers are important for understanding grantmaking in the UK and including these separately makes it easier for users to match grants data with official sources of information about the recipients.",
@@ -90,13 +90,13 @@ const getPublisherCards = (data) => {
           }
         }],
         layout:{
-          title: "Percentage of publishers that have recipients with external org IDs",
+          title: "Use of external recipient org IDs",
           xaxis: {
             type: 'category',
-            title: '# of Publishers'
+            title: 'Percentage of Publishers'
           },
           yaxis: {
-            title: '% with external org IDs'
+            title: 'Percentage of recipients with external org IDs'
           }
         }
       }
@@ -213,25 +213,25 @@ const getGrantsCards = (data) => {
           modalMeaning:
             "The grants include postcodes or <a href=\"https://en.wikipedia.org/wiki/ONS_coding_system\">ONS geocodes</a> for region, local authority, ward or super output area which show where the recipient is located.",
           modalReason:
-            "Geocodes (including postcodes) provide a consistent way to describe a location. They can be used to produce maps showing the distribution of funding geographically and allow grants data to be looked at alongside official statistics, such as the <a href=\"https://en.wikipedia.org/wiki/Multiple_deprivation_index\">Indices of multiple deprivation</a>.<br/<br/>360Giving data that includes recipient postcodes or geocodes works with the <a href=\"https://help.grantnav.threesixtygiving.org/en/latest/locations.html\">location filtering functions of GrantNav</a>.",
+            "Geocodes (including postcodes) provide a consistent way to describe a location. They can be used to produce maps showing the geographical distribution of funding and allow grants data to be looked at alongside official statistics, such as the <a href=\"https://en.wikipedia.org/wiki/Multiple_deprivation_index\">Indices of multiple deprivation</a>.<br/<br/>360Giving data that includes recipient postcodes or geocodes works with the <a href=\"https://help.grantnav.threesixtygiving.org/en/latest/locations.html\">location filtering functions of GrantNav</a>.",
         },
         {
           iconName: "edit_location",
           label: "Includes grant location names",
           value: `${quality.hasBeneficiaryLocationName}%`,
           modalMeaning:
-           "The grants include place names which describe where the funded work is being delivered or the intended beneficiaries are based. <br /><br/>This could be any type of location: an estate, a town, city, ward, local government area or parliamentary constituency, a region or country whichever is appropriate for the grant.",
+           "The grants include place names which describe where the funded work is being delivered or the people who access the service or activity are based. <br /> This could be any type of location: an estate, ward, town or city, local government area or parliamentary constituency, region or country, whichever is relevant for the grant.",
           modalReason:
-           "Grant location names allow users to understand which places are benefitting from funding. This data can be more accurate in showing where funding is going as recipients may be based in a different location from the activity being funded.",
+           "Grant location names allow users to understand which places funding is reaching. This data can be more accurate in showing where grants are going geographically, especially in cases where the recipient location is in a different place from the activity being funded.",
         },
         {
           iconName: "add_location",
           label: "Includes grant location codes",
           value: `${quality.hasBeneficiaryLocationGeoCode}%`,
           modalMeaning:
-            "The grants include postcodes or <a href=\"https://en.wikipedia.org/wiki/ONS_coding_system\">ONS geocodes</a> for region, local authority, ward or super output area which shows where the funded work is being delivered or the intended beneficiaries are based.",
+            "The grants include postcodes or <a href=\"https://en.wikipedia.org/wiki/ONS_coding_system\">ONS geocodes</a> for region, local authority, ward or super output area which shows where the funded work is being delivered or the people who access the service or activity are based.",
           modalReason:
-            "Including geocodes that correspond with the grant location names increases the usability of the data by providing a consistent way to identify these places. They can be used to produce maps showing the distribution of funding geographically and allow grants data to be looked at alongside official statistics.",
+            "Including geocodes that correspond with the grant location names increases the usability of the data by providing a consistent way to identify these places. They can be used to produce maps showing the geographical distribution of funding and allow grants data to be looked at alongside official statistics.",
         },
       ],
     },
@@ -269,10 +269,10 @@ const getGrantsCards = (data) => {
           }
         }],
         layout:{
-          title: "Org type of external org IDs used",
+          title: "Main types of external org IDs used",
           xaxis: {
             type: 'category',
-            title: 'Org type',
+            title: 'Type of org ID',
             automargin: true,
           },
           yaxis: {
@@ -360,7 +360,7 @@ const getGrantsCards = (data) => {
           },
         ],
         layout: {
-          title: "Grants awarded in the past 10 years",
+          title: "Number of grants published by award year",
           yaxis: {
             title: "Number of grants",
           },
