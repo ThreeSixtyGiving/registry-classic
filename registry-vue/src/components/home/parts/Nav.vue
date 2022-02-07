@@ -1,8 +1,7 @@
 <template>
     <div class="nav-bar nav-bar--minimal">
         <a class="nav-bar__home-button" href="/">
-            <img src="@/assets/images/360-logos/registry/360registry-color.svg" alt="360Registry">
-            <span class="nav-bar__product-name">Dashboard</span>
+            <img src="@/assets/images/360-logos/360dataqualitydashboard-color.svg" alt="360DataQualityDashboard" style="width: unset; height:94px">
         </a>
 
         <nav class="nav-bar__nav-menu">
@@ -14,7 +13,7 @@
         </nav>
     </div>
 </template>
-  
+
 <script>
 export default {
   name: "Nav",
