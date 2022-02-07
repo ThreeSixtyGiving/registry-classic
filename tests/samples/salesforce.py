@@ -42,7 +42,8 @@ API_OUTPUT = OrderedDict(
                             ('Logo__c', None),
                             ('Name', 'A B Charitable Trust'),
                             ('Website', 'http://abcharitabletrust.org.uk/'),
-                            ('prefix__c', '360G-ABCT')
+                            ('prefix__c', '360G-ABCT'),
+                            ('Last_published_date__c', '2021-12-13'),
                         ]
                     )),
                     ('Date_First_Published__c', '2018-06-21'),
@@ -87,7 +88,8 @@ API_OUTPUT = OrderedDict(
                             ('Logo__c', 'http://www.threesixtygiving.org/wp-content/uploads/Arcadia-Logo.jpg'),
                             ('Name', 'ARCADIA'),
                             ('Website', 'https://www.arcadiafund.org.uk/'),
-                            ('prefix__c', '360G-ArcadiaFund')
+                            ('prefix__c', '360G-ArcadiaFund'),
+                            ('Last_published_date__c', '2021-11-10'),
                         ]
                     )),
                     ('Date_First_Published__c', '2017-08-31'),
@@ -132,7 +134,8 @@ API_OUTPUT = OrderedDict(
                             ('Logo__c', 'https://www.threesixtygiving.org/wp-content/uploads/barrow-cadbury-trust.jpg'),
                             ('Name', 'Barrow Cadbury Trust'),
                             ('Website', None),
-                            ('prefix__c', '360G-barrowcadbury')
+                            ('prefix__c', '360G-barrowcadbury'),
+                            ('Last_published_date__c', '2021-08-16')
                         ]
                     )),
                     ('Date_First_Published__c', '2017-03-23'),

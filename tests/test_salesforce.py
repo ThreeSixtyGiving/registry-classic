@@ -27,7 +27,8 @@ def test_correct_output():
             "name": 'A B Charitable Trust',
             "website": 'http://abcharitabletrust.org.uk/',
             "logo": "",
-            "prefix": '360G-ABCT'
+            "prefix": "360G-ABCT",
+            "last_published": "2021-12-13"
         },
         "distribution": [{
             "downloadURL": 'http://abcharitabletrust.org.uk/data/abct-data-february-2018.xlsx',
