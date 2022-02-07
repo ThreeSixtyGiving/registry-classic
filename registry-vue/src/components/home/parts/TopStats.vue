@@ -1,5 +1,5 @@
 <template>
-  <div class="cards-section">
+  <div class="cards-section" v-if="stats">
     <section class="grid grid--four-columns" :key="`ready-${dataDownloaded}`">
       <div class="base-card base-card--yellow grid__1">
         <div class="base-card__content">
@@ -66,6 +66,8 @@ export default {
         })
         .catch(error => {
           console.error('Error:', error);
+          this.dataDownloaded = true
+          this.stats = null;
         });
     },
   },

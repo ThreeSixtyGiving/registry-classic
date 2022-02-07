@@ -49,6 +49,11 @@ const badges = [
 const today = new Date();
 
 const getBadges = publisher => {
+
+  if (!publisher.quality){
+    return { available: [], unavailable: [] };
+  }
+
   const wonBadges = Object.keys(publisher.quality).filter(key => {
     return publisher.quality[key] === 100 ? key : null;
   });
@@ -59,30 +64,39 @@ const getBadges = publisher => {
 
   badges.forEach((badge)=> {
 
+    if (badge.qualityMetric == 'publishedLastThreeMonths'){
+      let lastLastModifiedDate = new Date(publisher.last_published);
+      let todayLessThreeMonths = new Date(today.getTime() - (2628000000*3));
+
+      if (lastLastModifiedDate.getTime() >= todayLessThreeMonths.getTime()){
+        available.push(badge);
+      } else {
+        unavailable.push(badge);
+      }
+
+      return;
+    }
+
+    if (badge.qualityMetric == 'publishedThisYear'){
+      let lastLastModifiedDate = new Date(publisher.last_published);
+
+      let todayLessAYear = new Date(today.getTime() - (2628000000*12));
+
+      if (lastLastModifiedDate.getTime() >= todayLessAYear.getTime()){
+        available.push(badge);
+      } else {
+        unavailable.push(badge);
+      }
+
+      return;
+    }
+
     if (wonBadges.includes(badge.qualityMetric)){
       available.push(badge);
     } else {
       unavailable.push(badge);
     }
 
-    if (badge.qualityMetric == 'publishedLastThreeMonths'){
-      let lastLastModifiedDate = new Date(publisher.lastLastModified);
-      let todayLessThreeMonths = new Date(today.getTime() - (2628000000*3));
-
-      if (lastLastModifiedDate.getTime() >= todayLessThreeMonths.getTime()){
-        return available.push(badge);
-      }
-    }
-
-    if (badge.qualityMetric == 'publishedThisYear'){
-      let lastLastModifiedDate = new Date(publisher.lastLastModified);
-
-      let todayLessAYear = new Date(today.getTime() - (2628000000*12));
-
-      if (lastLastModifiedDate.getTime() >= todayLessAYear.getTime()){
-        return available.push(badge);
-      }
-    }
   });
 
   return { available: available, unavailable: unavailable }

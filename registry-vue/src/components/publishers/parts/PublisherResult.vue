@@ -9,10 +9,12 @@
 
       <div class="dashboard-publisher-result__right-side">
         <div class="dashboard-publisher-result__date">
-          Last update: <time :datetime="publisher.lastLastModified">{{ new Date(publisher.lastLastModified).toUTCString().substring(4,16) }}</time>
+          Last update: <time :datetime="publisher.last_published">{{ publisher.last_published }}</time>
         </div>
       </div>
     </div>
+
+    <template v-if="publisher.aggregate && publisher.quality">
 
     <span v-for="(badge, index) in badges.available" :key="index" class="dashboard-publisher-result__badge">
       <IconBadge :badge="badge" />
@@ -28,10 +30,15 @@
     <hr class="separator-light">
     </div>
 
+    </template>
 
+    <template v-else>
+      <p>There are currently problems accessing all of this publisher's data.</p>
+    </template>
     <div>
-      <a class="button" :href="$router.resolve({name: 'publisher', params: { id: publisher.prefix, publisher: this.publisher }}).href">See More</a>
+      <a class="button" v-bind:title="`See more information about ${publisher.name}'s data`" :href="$router.resolve({name: 'publisher', params: { id: publisher.prefix, publisher: this.publisher }}).href">See More</a>
     </div>
+
   </div>
 </template>
 
@@ -54,9 +61,20 @@ export default {
     }
   },
   data: function () {
+    let chart = [];
+    let badges = [];
+
+    try {
+     chart = getAwardYearsArray(this.publisher.aggregate.awardYears);
+     badges = getBadges(this.publisher);
+    } catch (error) {
+      console.warn(this.publisher);
+      console.warn(error);
+    }
+
     return {
-      chart: getAwardYearsArray(this.publisher.aggregate.awardYears),
-      badges: getBadges(this.publisher)
+      chart: chart,
+      badges: badges,
     }
   }
 }
