@@ -8,11 +8,11 @@ import PublisherDetailVue from '../components/publishers/PublisherDetail'
 Vue.use(Router)
 
 const routes = [
-  { path: '/', redirect: '/overview'},
-  { path: '/', 
+  { path: '/', redirect: '/alldata'},
+  { path: '/',
     component: HomePageVue,
     children: [
-      { path: '/overview', name: "overview", component: DashboardPageVue },
+      { path: '/alldata', name: "overview", component: DashboardPageVue },
       { path: '/publishers', name: "publishers", component: PublisherPageVue },
       { path: '/publisher/:id', name: "publisher", component: PublisherDetailVue, props: true },
     ]
