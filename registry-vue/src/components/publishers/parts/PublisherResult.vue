@@ -23,7 +23,7 @@
     <hr class="separator-light">
 
     <div>
-      <h5>Total grants awarded</h5>
+      <h5>Total grants published</h5>
       <div>
         <YearsChart :chart="chart" />
       </div>
