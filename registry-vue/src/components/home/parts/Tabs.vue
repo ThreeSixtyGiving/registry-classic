@@ -2,7 +2,7 @@
   <div>
     <div class="tabs" v-if="$router.currentRoute.name !== 'publisher'">
       <span :class="`tab tab${$router.currentRoute.name === 'overview' ? '--active' : '--inactive'}`">
-        <a class="tab__inner" href="/overview">All Data</a>
+        <a class="tab__inner" href="/alldata">All Data</a>
       </span>
 
       <span :class="`tab tab${$router.currentRoute.name === 'publishers' ? '--active' : '--inactive'}`">
