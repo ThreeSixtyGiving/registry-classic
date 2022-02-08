@@ -5,7 +5,7 @@
 
         <div class="footer__row wrapper footer__small-print">
             <div class="footer__column-1">
-                <div class="footer__logo"><img src="/images/360-giving-logo-white.svg" alt="360Giving"></div>
+                <div class="footer__logo"><img src="@/assets/images/360-logos/360-giving-logo-white.svg" alt="360Giving"></div>
             </div>
 
             <div class="footer__column-2 footer__policy-links">
@@ -19,10 +19,10 @@
         <div class="footer__row wrapper footer__small-print">
 
             <div class="footer__column-2">
-                <p>© Copyright 2021 360Giving.<br>Licensed under a <a href="#" target="_blank">Creative Commons Attribution 4.0 International License</a>.</p>
+                <p>© Copyright 2021 360Giving.<br>Licensed under a <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</p>
             </div>
             <div class="footer__column-2 footer__policy-links hide-print">
-                <p><a href="#">Privacy Notice</a> | <a href="#">Terms & Conditions</a> | <a href="#">Cookie Policy</a> | <a href="#">Take Down Policy</a> | <a href="#">License</a></p>
+                <p><a href="https://www.threesixtygiving.org/privacy/">Privacy Notice</a> | <a href="https://www.threesixtygiving.org/terms-conditions/">Terms &amp; Conditions</a> | <a href="https://www.threesixtygiving.org/cookie-policy/">Cookie Policy</a> | <a href="https://www.threesixtygiving.org/take-down-policy/">Take Down Policy</a> | <a href="https://www.threesixtygiving.org/about/360giving-code-conduct/">Code of Conduct</a></p>
             </div>
         </div>
     </footer>
