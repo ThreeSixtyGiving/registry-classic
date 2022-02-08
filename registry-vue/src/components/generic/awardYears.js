@@ -78,6 +78,12 @@ const getAwardYearsArray = awardYears => [
     value: awardYears[2021],
     value_text: numeral(awardYears[2021]).format('( 0a)'),
     detail: `${numeral(awardYears[2021]).format('( 0a)')} grants awarded in 2021`
+  },
+  {
+    label: 2022,
+    value: awardYears[2022],
+    value_text: numeral(awardYears[2022]).format('( 0a)'),
+    detail: `${numeral(awardYears[2022]).format('( 0a)')} grants awarded in 2022`
   }
 ]
 
