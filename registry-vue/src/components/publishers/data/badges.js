@@ -32,7 +32,7 @@ const badges = [
   {
     qualityMetric: 'has50pcExternalOrgId',
     iconName: 'confirmation_number',
-    label: 'Includess over 50% external org IDs'
+    label: 'Includes over 50% external org IDs'
   },
   {
     qualityMetric: 'publishedThisYear',
