@@ -2945,6 +2945,7 @@ a.base-card:hover:before {
   --sidebar-bg-hsl: var(--red-hsl); }
 
 .cookie-consent {
+  display: none;
   padding-top: 0 !important;
   width: 450px;
   height: 325px;
