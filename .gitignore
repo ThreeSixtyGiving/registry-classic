@@ -5,6 +5,7 @@
 .vscode/
 
 get-pip.py
+*.pyc
 
 chromedriver/
 __pycache__/

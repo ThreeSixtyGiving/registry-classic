@@ -1,0 +1,4 @@
+registry/static/vue-build/* binary
+registry/static/vue-build/*/* binary
+registry/templates/vue-build/* binary
+registry/templates/vue-build/*/* binary

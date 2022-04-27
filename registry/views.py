@@ -8,12 +8,9 @@ from raven.contrib.flask import Sentry
 from registry.registry import get_data_sorted_by_prefix, get_schema_org_list, get_raw_data
 from registry.salesforce import get_salesforce_data
 
-app = Flask(
-    __name__,
-    static_url_path='',
-    static_folder='./static',
-    template_folder='./templates',
-)
+
+app = Flask(__name__)
+
 sentry = Sentry(app)
 
 
@@ -26,8 +23,11 @@ def inject_footer_menu():
         )
 
 
-@app.route('/')
-def data_registry():
+def dashboard_view(path):
+    return render_template("vue-build/index.html")
+
+
+def data_registry_view():
     raw_data = get_raw_data()
     data = get_data_sorted_by_prefix(raw_data)
     schema = get_schema_org_list(raw_data)
@@ -38,6 +38,29 @@ def data_registry():
         schema=schema,
         num_of_publishers=len(data)
     )
+
+
+# Temporary mode switcher whilst we have both registry and dashboard applications
+# here. MODE=dashboard | or unset/other value
+if os.environ.get("MODE") == "dashboard":
+    @app.route('/', defaults={'path': ''})
+    @app.route('/<path:path>')
+    def dashboard(path):
+        return dashboard_view(path)
+
+    @app.route('/registry')
+    def data_registry():
+        return data_registry_view()
+
+else:
+    @app.route('/')
+    def data_registry():
+        return data_registry_view()
+
+    @app.route('/dashboard', defaults={'path': ''})
+    @app.route('/dashboard/<path:path>')
+    def dashboard(path):
+        return dashboard_view(path)
 
 
 @app.route('/terms-conditions')
