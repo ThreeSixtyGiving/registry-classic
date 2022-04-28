@@ -3,3 +3,4 @@ pytest
 pytest-flask
 selenium
 flake8
+chromedriver-autoinstaller
