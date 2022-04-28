@@ -44,6 +44,8 @@ API_OUTPUT = OrderedDict(
                             ('Website', 'http://abcharitabletrust.org.uk/'),
                             ('prefix__c', '360G-ABCT'),
                             ('Last_published_date__c', '2021-12-13'),
+                            ('Last_published_date__c', '2021-12-13'),
+                            ('Org_Identifier__c', 'GB-CHC-1000147'),
                         ]
                     )),
                     ('Date_First_Published__c', '2018-06-21'),
