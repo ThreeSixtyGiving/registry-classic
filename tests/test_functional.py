@@ -5,6 +5,10 @@ from flask import url_for
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
+import chromedriver_autoinstaller
+
+chromedriver_autoinstaller.install()
+
 os.environ['FLASK_ENV'] = 'development'
 BROWSER = os.environ.get('BROWSER', 'ChromeHeadless')
 

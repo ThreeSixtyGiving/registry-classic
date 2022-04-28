@@ -4,3 +4,4 @@ pytest-flask==0.15.1
 selenium
 flake8
 black
+chromedriver-autoinstaller
