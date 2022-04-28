@@ -41,6 +41,7 @@ def get_output_dataset(dataset):
             "logo": publisher["logo"] if publisher["logo"] else "",
             "prefix": publisher["prefix"],
             "last_published": publisher["lastpublisheddate"],
+            "org_id": publisher.get("orgIdentifier", ""),
         },
         "distribution": [{
             "downloadURL": dataset["downloadURL"],
@@ -72,8 +73,8 @@ def clean_output(api_output):
 def get_salesforce_data():
     salesforce = get_salesforce_access()
     sf_query = "SELECT Id, Name, License__r.Name, License__r.URL__c, Access_URL__c, Description__c, Download_URL__c," \
-        "Account__r.Id, Account__r.Logo__c, Account__r.Name, Account__r.Website, Account__r.prefix__c," \
-        "Date_First_Published__c, LastModifiedDate, Approved__c, Last_published_date__c from Dataset__c ORDER BY Account__r.Name"  # noqa: E126
+        "Account__r.Id, Account__r.Logo__c, Account__r.Name, Account__r.Website, Account__r.prefix__c, " \
+        "Date_First_Published__c, LastModifiedDate, Approved__c, Account__r.Last_published_date__c, Account__r.Org_Identifier__c from Dataset__c ORDER BY Account__r.Name"  # noqa: E126
 
     output = clean_output(salesforce.query(sf_query))
 

@@ -28,7 +28,8 @@ def test_correct_output():
             "website": 'http://abcharitabletrust.org.uk/',
             "logo": "",
             "prefix": "360G-ABCT",
-            "last_published": "2021-12-13"
+            "last_published": "2021-12-13",
+            "org_id": "GB-CHC-1000147",
         },
         "distribution": [{
             "downloadURL": 'http://abcharitabletrust.org.uk/data/abct-data-february-2018.xlsx',
