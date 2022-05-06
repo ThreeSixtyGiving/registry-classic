@@ -45,3 +45,19 @@ $ pip install pip-tools
 $ pip-compile requirements.in
 $ pip-compile requirements_dev.in
 ```
+
+
+## Styles - 360-ds
+
+The [360Giving design system](https://github.com/ThreeSixtyGiving/360-ds) is used for styling this project.
+
+To compile the theme, check out the submodule then:
+
+```
+cd 360-ds
+npm install
+npm run compile-sass
+cp ./build/360-ds/css/main.css ../registry/static/css/
+```
+
+For more information on the design system see the [360-ds project](https://github.com/ThreeSixtyGiving/360-ds)
