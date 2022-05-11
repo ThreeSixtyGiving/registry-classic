@@ -59,7 +59,7 @@ platformdirs==2.5.2
     # via zeep
 pluggy==0.13.1
     # via pytest
-py==1.8.1
+py==1.10.0
     # via pytest
 pycodestyle==2.5.0
     # via flake8
