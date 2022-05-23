@@ -1,15 +1,23 @@
 <template>
   <div class="cards-section" v-if="stats">
-    <section class="grid grid--four-columns" :key="`ready-${dataDownloaded}`">
-      <div class="base-card base-card--yellow grid__1">
+    <section class="grid grid--five-columns" :key="`ready-${dataDownloaded}`">
+      <div class="base-card base-card--teal grid__1">
         <div class="base-card__content">
           <Spinner v-if="!dataDownloaded" />
-          <h2 v-if="dataDownloaded" class="base-card__title">{{ (stats.grants).toLocaleString() }}</h2>
-          <p class="base-card__text">Grants</p>
+          <h2 v-if="dataDownloaded" class="base-card__title">{{ (stats.publishers).toLocaleString() }}</h2>
+          <p class="base-card__text">Publishers</p>
         </div>
       </div>
 
-      <div class="base-card base-card--orange grid__1">
+     <div class="base-card base-card--black grid__1">
+        <div class="base-card__content">
+          <Spinner v-if="!dataDownloaded" />
+          <h2 v-if="dataDownloaded" class="base-card__title">{{ (stats.funders).toLocaleString() }}</h2>
+          <p class="base-card__text">Funders</p>
+        </div>
+      </div>
+
+     <div class="base-card base-card--orange grid__1">
         <div class="base-card__content">
           <Spinner v-if="!dataDownloaded" />
           <h2 v-if="dataDownloaded" class="base-card__title">{{ (stats.recipients).toLocaleString() }}</h2>
@@ -17,11 +25,11 @@
         </div>
       </div>
 
-      <div class="base-card base-card--teal grid__1">
+      <div class="base-card base-card--yellow grid__1">
         <div class="base-card__content">
           <Spinner v-if="!dataDownloaded" />
-          <h2 v-if="dataDownloaded" class="base-card__title">{{ (stats.publishers).toLocaleString() }}</h2>
-          <p class="base-card__text">Publishers</p>
+          <h2 v-if="dataDownloaded" class="base-card__title">{{ (stats.grants).toLocaleString() }}</h2>
+          <p class="base-card__text">Grants</p>
         </div>
       </div>
 
