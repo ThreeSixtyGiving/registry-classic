@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css?family=Material Icons|Roboto:200,200i,300,300i,400,400i,500,500i,600,600i,700,700i&display=swap");
 @media print {
   *,
   *:before,
@@ -903,7 +904,7 @@ a {
   background-color: transparent !important; }
 
 .cookie-consent {
-  display: none;
+  display: none !important;
   padding-top: 0 !important;
   width: 450px;
   height: 325px;
@@ -3322,11 +3323,18 @@ a.base-card:hover:before {
   .grid--four-columns {
     grid-template-columns: repeat(4, 1fr); } }
 
+@media (min-width: 36em) {
+  .grid--five-columns {
+    grid-template-columns: repeat(5, 1fr); } }
+
 .grid__2 {
   grid-column: auto / span 2; }
 
 .grid__3 {
   grid-column: auto / span 3; }
+
+.grid__5 {
+  grid-column: auto / span 5; }
 
 .grid__all {
   grid-column: 1 / -1; }
