@@ -6,7 +6,7 @@ from flask import Flask, render_template, current_app
 from raven.contrib.flask import Sentry
 
 from registry.registry import get_data_sorted_by_prefix, get_schema_org_list, get_raw_data
-from registry.salesforce import get_salesforce_data
+from registry.salesforce import get_salesforce_data, get_salesforce_publishers
 
 app = Flask(
     __name__,
@@ -49,6 +49,11 @@ def terms_and_conditions():
 def salesforce_data():
     data = get_salesforce_data()
     return current_app.response_class(data, mimetype="application/json")
+
+
+@app.route('/publishers.json')
+def salesforce_publishers():
+    return current_app.response_class(get_salesforce_publishers(), mimetype="application/json")
 
 
 @app.route('/500')

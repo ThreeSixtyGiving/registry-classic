@@ -8,7 +8,8 @@ def get_salesforce_access():
     return Salesforce(
         username=os.environ['SALESFORCE_USERNAME'],
         password=os.environ['SALESFORCE_PASSWORD'],
-        security_token=os.environ['SALESFORCE_SECURITY_TOKEN']
+        security_token=os.environ['SALESFORCE_SECURITY_TOKEN'],
+        domain=os.environ.get("SALESFORCE_DOMAIN"),
     )
 
 
@@ -79,3 +80,29 @@ def get_salesforce_data():
     output = clean_output(salesforce.query(sf_query))
 
     return json.dumps(output, indent=2)
+
+
+def get_salesforce_publishers():
+    salesforce = get_salesforce_access()
+    sf_query = "SELECT Id, Logo__c, Name, Website, prefix__c, "\
+           "Last_published_date__c, Org_Identifier__c, Authorised_Domain__c, Self_registration_enabled__c from Account ORDER BY Name"  # noqa: E126
+
+    sf_data = salesforce.query(sf_query)
+    publishers = {}
+
+    for publisher in sf_data["records"]:
+        publisher = clean_object(clean_object(publisher))
+        publishers[publisher["prefix"]] = {
+            "id": publisher["id"],
+            "name": publisher["name"],
+            "website": publisher.get("website", ""),
+            "logo": publisher.get("logo", ""),
+            "prefix": publisher["prefix"],
+            "org_id": publisher.get("orgIdentifier", ""),
+            "self_publish": {
+                "enabled": publisher.get("selfregistrationenabled", False),
+                "authorised_domains": [publisher["authorisedDomain"]] if publisher.get("authorisedDomain") else [],
+            }
+        }
+
+    return json.dumps(publishers, indent=2)
