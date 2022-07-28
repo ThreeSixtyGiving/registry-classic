@@ -1,6 +1,6 @@
 import numeral from 'numeral';
 
-const YEARS = 12;
+const YEARS = 10;
 
 const earlyYears = (awardData, pre) => {
   return Object.entries(awardData)
@@ -8,7 +8,7 @@ const earlyYears = (awardData, pre) => {
                 .reduce((acc, entry) => acc + entry[1], 0)
 }
 
-const old_data = (awardData, pre) => {
+const oldData = (awardData, pre) => {
   return {
     label: `Older data`,
     value: earlyYears(awardData, pre),
@@ -32,7 +32,7 @@ const getYears = awardData => {
   const steps = Array.from({length: YEARS}, (x, i) => i);
   const previous = steps.map(step => new Date().getFullYear()-step).sort();
   const minYear = Math.min(...previous);
-  const preData = old_data(awardData, minYear);
+  const preData = oldData(awardData, minYear);
   const numeratedYears = getDataForYears(awardData, previous);
   return [preData, ...numeratedYears];
 }
