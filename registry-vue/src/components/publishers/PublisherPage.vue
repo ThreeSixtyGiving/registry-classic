@@ -1,15 +1,13 @@
 <template>
   <main class="layout__content">
     <div class="layout__content-inner">
-      <!-- <DataTable /> Not yet implemented
-      <div class="spacer-2"></div> -->
-      <SortFilter :sortValues="sortValues" :publisherList="publisherList" :key="dataDownloaded" v-on:filterChange="filterChange($event)" />
+      <SortFilter :sortValues="sortValues" :publisherList="filteredPublishers" :key="dataDownloaded" v-on:sortChange="sortChange($event)" v-on:filterChange="filterChange($event)" />
       <div class="spacer-4"></div>
       <div v-if="!dataDownloaded">
         <Spinner :key="dataDownloaded" />
       </div>
       <template v-if="dataDownloaded" id="publisher-list-wrapper">
-        <PublisherResult v-for="publisher in publishers" :key="publisher.prefix" :publisher="publisher" />
+        <PublisherResult v-for="publisher in filteredPublishers" :key="publisher.prefix" :publisher="publisher" />
         <div class="spacer-1"></div>
       </template>
     </div>
@@ -18,7 +16,6 @@
 
 <script>
 import PublisherResult from "./parts/PublisherResult";
-// import DataTable from './parts/DataTable';
 import SortFilter from './parts/SortFilter';
 import Spinner from '../generic/Spinner'
 
@@ -26,7 +23,6 @@ export default {
   name: "PublisherPage",
   components: {
     PublisherResult,
-//    DataTable,
     SortFilter,
     Spinner,
   },
@@ -62,39 +58,36 @@ export default {
           });
 
     },
-    searchFunction(queryObject = null) {
+    searchFunction() {
       this.dataDownloaded = false;
-      const query = queryObject === null ? '' : `&prefix=${queryObject.publisher}`;
-      fetch(`${process.env.VUE_APP_DATASTORE_API}/publishers?format=json${query}`)
+      fetch(`${process.env.VUE_APP_DATASTORE_API}/publishers?format=json`)
         .then((response) => response.json())
         .then((json) => {
-
           this.publishers = json;
-
+          this.filteredPublishers = this.publishers;
           this.sortPublisherAlpa();
-
-          this.publisherList = json.reduce((list, publisher) => {
-            return {...list, [publisher.prefix]: publisher.name}
-          }, this.publisherList);
-         this.dataDownloaded = true
+          this.dataDownloaded = true
         })
         .catch(error => {
           console.error('Error:', error);
         });
     },
-    filterChange(sortChangeEvent) {
-      /* We're only sorting and nothing else so do this without a new fetch */
-      if (sortChangeEvent.changed == "sort" && this.publishers.length > 0){
-        this.sortPublisherAlpa();
-        return;
+    sortChange(sortMode) {
+      this.sortValues.sort = sortMode.changed;
+      this.sortPublisherAlpa();
+    },
+    filterChange(selectedPublishers) {
+      if (selectedPublishers.publisher.length) {
+        this.filteredPublishers = this.publishers.filter(publisher => selectedPublishers.publisher.includes(publisher.prefix));
+      } else {
+        this.filteredPublishers = this.publishers;
       }
-      this.searchFunction(sortChangeEvent);
     }
   },
   data() {
     return {
-      publishers: {},
-      publisherList: {},
+      publishers: [],
+      filteredPublishers: [],
       dataDownloaded: false,
       sortValues: {
         sort: "alphabeticallyAsc",

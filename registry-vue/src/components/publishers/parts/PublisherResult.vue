@@ -65,8 +65,8 @@ export default {
     let badges = [];
 
     try {
-     chart = getAwardYearsArray(this.publisher.aggregate.awardYears);
-     badges = getBadges(this.publisher);
+      chart = getAwardYearsArray(this.publisher.aggregate.awardYears);
+      badges = getBadges(this.publisher);
     } catch (error) {
       console.warn(this.publisher);
       console.warn(error);
