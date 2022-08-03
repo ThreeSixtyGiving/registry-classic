@@ -34,7 +34,7 @@ export default {
       const bandingsLength = this.grantBandings.length;
 
       for (let i = 0; i < bandingsLength; i++) {
-        if (value == 0 || typeof value == "undefined" || value == null) {
+        if (!value) {
           return 0;
         } else if (value < this.grantBandings[i]) {
           return (i / bandingsLength);
