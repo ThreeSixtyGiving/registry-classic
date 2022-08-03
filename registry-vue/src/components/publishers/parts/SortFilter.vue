@@ -3,7 +3,7 @@
     <h4>Sort:</h4>
 
     <div class="sort-filters">
-      <v-select :options="filters[0].options" :reduce="(option) => option.code" :value="sortValues.sort" @input="sortChange" :placeholder="filters[0].label">
+      <v-select :options="filters[0].options" :clearable=false :reduce="(option) => option.code" :value="sortValues.sort" @input="sortChange" :placeholder="filters[0].label">
       </v-select>
       <v-select :options="filters[1].options" label="name" :reduce="(publisher) => publisher.prefix" :value="sortValues.publisher" @input="filterChange" :placeholder="filters[1].label" multiple>
       </v-select>
