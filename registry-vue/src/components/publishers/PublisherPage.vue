@@ -28,7 +28,7 @@ export default {
   },
   methods: {
     sortPublisherAlpa(){
-      this.filteredPublishers.sort((publisherA, publisherB)=> {
+      this.publisherResults.sort((publisherA, publisherB)=> {
             let a = publisherA.name.toLowerCase();
             let b = publisherB.name.toLowerCase();
 
