@@ -1,7 +1,6 @@
 <template>
   <div>
     <h4>Sort:</h4>
-
     <div class="sort-filters">
       <v-select :options="filters[0].options" :clearable=false :reduce="(option) => option.code" :value="sortValues.sort" @input="sortChange" :placeholder="filters[0].label">
       </v-select>
@@ -58,10 +57,16 @@ export default {
     },
     filterChange(changed) {
       this.sortValues.publisher = changed;
+      const query = { ...this.$route.query, publisherParams: this.sortValues.publisher };
+      this.$router.replace({ query });
       this.$emit('filterChange', this.sortValues);
     },
   },
   created: function() {
+    const publisherParams = this.$route.query.publisherParams;
+    if (publisherParams) {
+      this.filterChange(publisherParams);
+    }
   }
 }
 </script>
