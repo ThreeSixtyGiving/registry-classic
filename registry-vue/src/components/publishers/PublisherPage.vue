@@ -1,13 +1,13 @@
 <template>
   <main class="layout__content">
     <div class="layout__content-inner">
-      <SortFilter :sortValues="sortValues" :publisherList="filteredPublishers" :key="dataDownloaded" v-on:sortChange="sortChange($event)" v-on:filterChange="filterChange($event)" />
+      <SortFilter :sortMode="sortMode" :publisherList="publishers" :filteredPublishers="filteredPublishers" :key="dataDownloaded" v-on:sortChange="sortChange($event)" v-on:filterChange="filterChange($event)" />
       <div class="spacer-4"></div>
       <div v-if="!dataDownloaded">
         <Spinner :key="dataDownloaded" />
       </div>
       <template v-if="dataDownloaded" id="publisher-list-wrapper">
-        <PublisherResult v-for="publisher in filteredPublishers" :key="publisher.prefix" :publisher="publisher" />
+        <PublisherResult v-for="publisher in publisherResults" :key="publisher.prefix" :publisher="publisher" />
         <div class="spacer-1"></div>
       </template>
     </div>
@@ -41,14 +41,14 @@ export default {
             }
 
             if (a > b){
-              if (this.sortValues.sort == "alphabeticallyDesc"){
+              if (this.sortMode == "alphabeticallyDesc"){
                 return -1;
               }
               return 1;
             }
 
             if (a < b){
-              if (this.sortValues.sort == "alphabeticallyDesc"){
+              if (this.sortMode == "alphabeticallyDesc"){
                 return 1;
               }
               return -1;
@@ -58,29 +58,16 @@ export default {
           });
 
     },
-    searchFunction() {
-      this.dataDownloaded = false;
-      fetch(`${process.env.VUE_APP_DATASTORE_API}/publishers?format=json`)
-        .then((response) => response.json())
-        .then((json) => {
-          this.publishers = json;
-          this.filteredPublishers = this.publishers;
-          this.sortPublisherAlpa();
-          this.dataDownloaded = true
-        })
-        .catch(error => {
-          console.error('Error:', error);
-        });
-    },
     sortChange(sortMode) {
-      this.sortValues.sort = sortMode.changed;
+      this.sortMode = sortMode;
       this.sortPublisherAlpa();
     },
     filterChange(selectedPublishers) {
-      if (selectedPublishers.publisher.length) {
-        this.filteredPublishers = this.publishers.filter(publisher => selectedPublishers.publisher.includes(publisher.prefix));
+      this.filteredPublishers = selectedPublishers;
+      if (selectedPublishers.length) {
+        this.publisherResults = this.publishers.filter(publisher => selectedPublishers.includes(publisher.prefix));
       } else {
-        this.filteredPublishers = this.publishers;
+        this.publisherResults = this.publishers;
       }
     }
   },
@@ -88,17 +75,28 @@ export default {
     return {
       publishers: [],
       filteredPublishers: [],
+      publisherResults: [],
       dataDownloaded: false,
-      sortValues: {
-        sort: "alphabeticallyAsc",
-        publisher: "",
-        feature: "",
-        file: "",
-      }
-    };
+      sortMode: "alphabeticallyAsc",
+    }
   },
   created() {
-    this.searchFunction();
+    this.dataDownloaded = false;
+    fetch(`${process.env.VUE_APP_DATASTORE_API}/publishers?format=json`)
+      .then((response) => response.json())
+      .then((json) => {
+        this.publishers = json;
+        this.publisherResults = this.publishers;
+        this.sortPublisherAlpa();
+        this.dataDownloaded = true;
+        const publisherParams = this.$route.query.publisherParams;
+        if (publisherParams) {
+          this.filterChange(publisherParams);
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
   },
 };
 </script>

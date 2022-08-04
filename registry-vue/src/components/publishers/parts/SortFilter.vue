@@ -2,9 +2,9 @@
   <div>
     <h4>Sort:</h4>
     <div class="sort-filters">
-      <v-select :options="filters[0].options" :clearable=false :reduce="(option) => option.code" :value="sortValues.sort" @input="sortChange" :placeholder="filters[0].label">
+      <v-select :options="filters[0].options" :clearable=false :reduce="(option) => option.code" :value="sortMode" @input="sortChange" :placeholder="filters[0].label">
       </v-select>
-      <v-select :options="filters[1].options" label="name" :reduce="(publisher) => publisher.prefix" :value="sortValues.publisher" @input="filterChange" :placeholder="filters[1].label" multiple>
+      <v-select :options="filters[1].options" label="name" :reduce="(publisher) => publisher.prefix" :value="filteredPublishers" @input="filterChange" :placeholder="filters[1].label" multiple>
       </v-select>
     </div>
   </div>
@@ -17,7 +17,8 @@ export default {
   name: "SortFilter",
   props: {
     publisherList: {},
-    sortValues: {}
+    sortMode: {},
+    filteredPublishers: {},
   },
   data() {
     return {
@@ -52,21 +53,14 @@ export default {
   },
   methods: {
     sortChange(changed) {
-      this.sortValues.changed = changed;
-      this.$emit('sortChange', this.sortValues);
+      this.sortMode = changed;
+      this.$emit('sortChange', this.sortMode);
     },
     filterChange(changed) {
-      this.sortValues.publisher = changed;
-      const query = { ...this.$route.query, publisherParams: this.sortValues.publisher };
+      const query = { ...this.$route.query, publisherParams: changed };
       this.$router.replace({ query });
-      this.$emit('filterChange', this.sortValues);
+      this.$emit('filterChange', changed);
     },
   },
-  created: function() {
-    const publisherParams = this.$route.query.publisherParams;
-    if (publisherParams) {
-      this.filterChange(publisherParams);
-    }
-  }
 }
 </script>
