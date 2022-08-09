@@ -14,7 +14,7 @@
     <div v-if="$router.currentRoute.name === 'publisher'">
       <a href="/publishers" class="dashboard-page__back-link">
         <MaterialIcon :iconName="'arrow_back'" />
-        Back to Publishers
+        Back to All Publishers
       </a>
     </div>
   </div>
