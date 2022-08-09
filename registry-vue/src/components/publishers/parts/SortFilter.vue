@@ -6,6 +6,7 @@
       </v-select>
       <v-select :options="filters[1].options" label="name" :reduce="(publisher) => publisher.prefix" :value="filteredPublishers" @input="filterChange" :placeholder="filters[1].label" multiple>
       </v-select>
+      <button class="clear-all" @click="clearFilters">Clear all</button>
     </div>
   </div>
 </template>
@@ -61,6 +62,9 @@ export default {
       this.$router.replace({ query });
       this.$emit('filterChange', changed);
     },
+    clearFilters() {
+      this.filterChange([]);
+    }
   },
 }
 </script>
