@@ -89,7 +89,7 @@ export default {
         this.publisherResults = this.publishers;
         this.sortPublisherAlpa();
         this.dataDownloaded = true;
-        const publisherParams = this.$route.query.publisherParams;
+        const publisherParams = this.$route.query.publishers;
         if (publisherParams) {
           this.filterChange(publisherParams);
         }

@@ -58,7 +58,7 @@ export default {
       this.$emit('sortChange', this.sortMode);
     },
     filterChange(changed) {
-      const query = { ...this.$route.query, publisherParams: changed };
+      const query = { ...this.$route.query, publishers: changed };
       this.$router.replace({ query });
       this.$emit('filterChange', changed);
     },
