@@ -28,9 +28,14 @@ This project uses PyScss. To update the compile css file, run:
 pysassc registry/sass/main.scss registry/static/css/theme.css
 ```
 
-To run the tests:
+To run the registry tests:
 ```bash
-python -m pytest
+python -m pytest tests/
+```
+
+To run the dashboard tests:
+```bash
+MODE='dashboard' python -m pytest tests_dashboard/
 ```
 
 In order to run the application see the relevant commands below:
