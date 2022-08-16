@@ -1,15 +1,13 @@
 <template>
   <main class="layout__content">
     <div class="layout__content-inner">
-      <!-- <DataTable /> Not yet implemented
-      <div class="spacer-2"></div> -->
-      <SortFilter :sortValues="sortValues" :publisherList="publisherList" :key="dataDownloaded" v-on:filterChange="filterChange($event)" />
+      <SortFilter :sortMode="sortMode" :publisherList="publishers" :filteredPublishers="filteredPublishers" :key="dataDownloaded" v-on:sortChange="sortChange($event)" v-on:filterChange="filterChange($event)" />
       <div class="spacer-4"></div>
       <div v-if="!dataDownloaded">
         <Spinner :key="dataDownloaded" />
       </div>
       <template v-if="dataDownloaded" id="publisher-list-wrapper">
-        <PublisherResult v-for="publisher in publishers" :key="publisher.prefix" :publisher="publisher" />
+        <PublisherResult v-for="publisher in publisherResults" :key="publisher.prefix" :publisher="publisher" />
         <div class="spacer-1"></div>
       </template>
     </div>
@@ -18,7 +16,6 @@
 
 <script>
 import PublisherResult from "./parts/PublisherResult";
-// import DataTable from './parts/DataTable';
 import SortFilter from './parts/SortFilter';
 import Spinner from '../generic/Spinner'
 
@@ -26,13 +23,12 @@ export default {
   name: "PublisherPage",
   components: {
     PublisherResult,
-//    DataTable,
     SortFilter,
     Spinner,
   },
   methods: {
     sortPublisherAlpa(){
-      this.publishers.sort((publisherA, publisherB)=> {
+      this.publisherResults.sort((publisherA, publisherB)=> {
             let a = publisherA.name.toLowerCase();
             let b = publisherB.name.toLowerCase();
 
@@ -45,14 +41,14 @@ export default {
             }
 
             if (a > b){
-              if (this.sortValues.sort == "alphabeticallyDesc"){
+              if (this.sortMode == "alphabeticallyDesc"){
                 return -1;
               }
               return 1;
             }
 
             if (a < b){
-              if (this.sortValues.sort == "alphabeticallyDesc"){
+              if (this.sortMode == "alphabeticallyDesc"){
                 return 1;
               }
               return -1;
@@ -62,50 +58,45 @@ export default {
           });
 
     },
-    searchFunction(queryObject = null) {
-      this.dataDownloaded = false;
-      const query = queryObject === null ? '' : `&prefix=${queryObject.publisher}`;
-      fetch(`${process.env.VUE_APP_DATASTORE_API}/publishers?format=json${query}`)
-        .then((response) => response.json())
-        .then((json) => {
-
-          this.publishers = json;
-
-          this.sortPublisherAlpa();
-
-          this.publisherList = json.reduce((list, publisher) => {
-            return {...list, [publisher.prefix]: publisher.name}
-          }, this.publisherList);
-         this.dataDownloaded = true
-        })
-        .catch(error => {
-          console.error('Error:', error);
-        });
+    sortChange(sortMode) {
+      this.sortMode = sortMode;
+      this.sortPublisherAlpa();
     },
-    filterChange(sortChangeEvent) {
-      /* We're only sorting and nothing else so do this without a new fetch */
-      if (sortChangeEvent.changed == "sort" && this.publishers.length > 0){
-        this.sortPublisherAlpa();
-        return;
+    filterChange(selectedPublishers) {
+      this.filteredPublishers = selectedPublishers;
+      if (selectedPublishers.length) {
+        this.publisherResults = this.publishers.filter(publisher => selectedPublishers.includes(publisher.prefix));
+      } else {
+        this.publisherResults = this.publishers;
       }
-      this.searchFunction(sortChangeEvent);
     }
   },
   data() {
     return {
-      publishers: {},
-      publisherList: {},
+      publishers: [],
+      filteredPublishers: [],
+      publisherResults: [],
       dataDownloaded: false,
-      sortValues: {
-        sort: "alphabeticallyAsc",
-        publisher: "",
-        feature: "",
-        file: "",
-      }
-    };
+      sortMode: "alphabeticallyAsc",
+    }
   },
   created() {
-    this.searchFunction();
+    this.dataDownloaded = false;
+    fetch(`${process.env.VUE_APP_DATASTORE_API}/publishers?format=json`)
+      .then((response) => response.json())
+      .then((json) => {
+        this.publishers = json;
+        this.publisherResults = this.publishers;
+        this.sortPublisherAlpa();
+        this.dataDownloaded = true;
+        const publisherParams = this.$route.query.publishers;
+        if (publisherParams) {
+          this.filterChange(publisherParams);
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
   },
 };
 </script>

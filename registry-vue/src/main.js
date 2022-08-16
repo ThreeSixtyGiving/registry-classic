@@ -1,8 +1,10 @@
-import Vue from 'vue'
-import App from './App'
-import router from './router'
+import Vue from 'vue';
+import App from './App';
+import router from './router';
 import vueNumeralFilterInstaller from 'vue-numeral-filter';
-import numeral from 'numeral'
+import numeral from 'numeral';
+import vSelect from 'vue-select';
+
 
 numeral.register('locale', 'en-gb-custom', {
   delimiters: {
@@ -29,6 +31,7 @@ numeral.register('locale', 'en-gb-custom', {
 
 Vue.config.productionTip = false
 Vue.use(vueNumeralFilterInstaller, { locale: 'en-gb-custom' });
+Vue.component('v-select', vSelect)
 
 new Vue({
   render: h => h(App),

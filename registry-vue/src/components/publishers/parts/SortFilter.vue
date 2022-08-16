@@ -1,25 +1,25 @@
 <template>
   <div>
     <h4>Sort:</h4>
-
     <div class="sort-filters">
-      <div v-for="(filter, index) in filters" :key="`filter-${index}`" class="sort-filters__select-wrapper">
-        <select v-model="sortValues[filter.id]" @change="filterChange(filter.id)" :class="filter.active ? `sort-filters__filter-active aria-label='${filter.label}'` : ''">
-          <option value="" disabled>{{ filter.label }}</option>
-          <option v-if="!filter.activeDefault" value="">All publishers</option>
-          <option v-for="(option, key, index) in filter.options" :key="`option-${index}`" :value="key || ''" :selected="filter.activeDefault">{{ option }}</option>
-        </select>
-      </div>
+      <v-select :options="filters[0].options" :clearable=false :reduce="(option) => option.code" :value="sortMode" @input="sortChange" :placeholder="filters[0].label">
+      </v-select>
+      <v-select :options="filters[1].options" label="name" :reduce="(publisher) => publisher.prefix" :value="filteredPublishers" @input="filterChange" :placeholder="filters[1].label" multiple>
+      </v-select>
+      <button class="clear-all" @click="clearFilters">Clear all</button>
     </div>
   </div>
 </template>
 
 <script>
+import 'vue-select/dist/vue-select.css';
+
 export default {
   name: "SortFilter",
   props: {
     publisherList: {},
-    sortValues: {}
+    sortMode: {},
+    filteredPublishers: {},
   },
   data() {
     return {
@@ -27,14 +27,12 @@ export default {
         {
           id: 'sort',
           label: "Please select a sorting option",
-          active: true,
           activeDefault: true,
-          options: {alphabeticallyAsc: 'Alphabetically (ascending)', alphabeticallyDesc: 'Alphabetically (descending)',},
+          options: [{code: 'alphabeticallyAsc', label: 'Alphabetically (ascending)'}, { code: 'alphabeticallyDesc', label: 'Alphabetically (descending)'}],
         },
         {
           id: 'publisher',
-          label: "Filter by publisher",
-          active: true,
+          label: "Select publisher(s)",
           options: this.publisherList,
         },/*
         {
@@ -53,10 +51,18 @@ export default {
     }
   },
   methods: {
-    filterChange(changed) {
-      this.sortValues.changed = changed;
-      this.$emit('filterChange', this.sortValues);
+    sortChange(changed) {
+      this.sortMode = changed;
+      this.$emit('sortChange', this.sortMode);
     },
-  }
+    filterChange(changed) {
+      const query = { ...this.$route.query, publishers: changed };
+      this.$router.replace({ query });
+      this.$emit('filterChange', changed);
+    },
+    clearFilters() {
+      this.filterChange([]);
+    }
+  },
 }
 </script>
