@@ -36,7 +36,7 @@ def test_default_titles(browser):
 
 @pytest.mark.usefixtures('live_server')
 def test_filtered_titles(browser):
-    browser.get(url_for('dashboard', _external=True) + 'publishers?publisherParams=360G-BNG&publisherParams=360G-coopgroup')
+    browser.get(url_for('dashboard', _external=True) + 'publishers?publishers=360G-BNG&publishers=360G-coopgroup')
     title = browser.find_elements(By.CLASS_NAME, 'dashboard-publisher-result__title')
     
     assert title[0].get_attribute("innerHTML") == ' Bòrd na Gàidhlig '
