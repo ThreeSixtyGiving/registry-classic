@@ -27,14 +27,12 @@ export default {
         {
           id: 'sort',
           label: "Please select a sorting option",
-          active: true,
           activeDefault: true,
           options: [{code: 'alphabeticallyAsc', label: 'Alphabetically (ascending)'}, { code: 'alphabeticallyDesc', label: 'Alphabetically (descending)'}],
         },
         {
           id: 'publisher',
-          label: "Filter by publisher",
-          active: true,
+          label: "Select publisher(s)",
           options: this.publisherList,
         },/*
         {
