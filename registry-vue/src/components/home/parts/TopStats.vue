@@ -17,6 +17,14 @@
         </div>
       </div>
 
+      <div class="base-card base-card--yellow grid__1">
+        <div class="base-card__content">
+          <Spinner v-if="!dataDownloaded" />
+          <h2 v-if="dataDownloaded" class="base-card__title">{{ (stats.grants).toLocaleString() }}</h2>
+          <p class="base-card__text">Grants</p>
+        </div>
+      </div>
+
      <div class="base-card base-card--orange grid__1">
         <div class="base-card__content">
           <Spinner v-if="!dataDownloaded" />
@@ -30,14 +38,6 @@
           <Spinner v-if="!dataDownloaded" />
           <h2 v-if="dataDownloaded" class="base-card__title">{{ (stats.recipientIndividuals).toLocaleString() }}</h2>
           <p class="base-card__text">Recipient Individuals</p>
-        </div>
-      </div>
-
-      <div class="base-card base-card--yellow grid__1">
-        <div class="base-card__content">
-          <Spinner v-if="!dataDownloaded" />
-          <h2 v-if="dataDownloaded" class="base-card__title">{{ (stats.grants).toLocaleString() }}</h2>
-          <p class="base-card__text">Grants</p>
         </div>
       </div>
 
