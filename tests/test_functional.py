@@ -1,10 +1,16 @@
 import os
 
 import pytest
+import requests
+
 from flask import url_for
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
+
+import chromedriver_autoinstaller
+
+chromedriver_autoinstaller.install()
 
 os.environ['FLASK_ENV'] = 'development'
 BROWSER = os.environ.get('BROWSER', 'ChromeHeadless')
@@ -17,28 +23,16 @@ def browser(request):
         chrome_options.add_argument("--headless")
         chrome_options.add_argument("--no-sandbox")
         chrome_options.add_argument("--disable-dev-shm-usage")
+
+        # uncomment this if "DevToolsActivePort" error
+        chrome_options.add_argument("--remote-debugging-port=9222")
+
         browser = webdriver.Chrome(options=chrome_options)
     else:
         browser = getattr(webdriver, BROWSER)()
     browser.implicitly_wait(3)
     request.addfinalizer(lambda: browser.quit())
     return browser
-
-
-@pytest.mark.usefixtures('live_server')
-def test_nav_menu_home_link(browser):
-    browser.get(url_for('data_registry', _external=True))
-    browser.find_element(By.LINK_TEXT, 'GrantNav').click()
-
-    assert browser.current_url == 'https://grantnav.threesixtygiving.org/'
-
-
-@pytest.mark.usefixtures('live_server')
-def test_nav_menu_standard_link(browser):
-    browser.get(url_for('data_registry', _external=True))
-    browser.find_element(By.LINK_TEXT, 'The Data Standard').click()
-
-    assert browser.current_url.endswith('/support/standard/')
 
 
 @pytest.mark.usefixtures('live_server')
@@ -134,8 +128,14 @@ def test_footer_take_down_policy_link(browser):
 
 
 @pytest.mark.usefixtures('live_server')
-def test_footer_license_link(browser):
+def test_links_respond(browser):
     browser.get(url_for('data_registry', _external=True))
-    link = browser.find_element(By.LINK_TEXT, 'Creative Commons Attribution 4.0 International License')
+    links = browser.find_elements(By.TAG_NAME, 'a')
 
-    assert link.get_attribute("href") == 'https://creativecommons.org/licenses/by/4.0/'
+    # Due to blocking of requests user agent
+    session = requests.Session()
+    session.headers.update({"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36m user agent"})
+
+    for link in links:
+        r = session.head(link.get_attribute("href"))
+        r.raise_for_status()

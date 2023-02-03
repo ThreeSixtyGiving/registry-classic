@@ -36,8 +36,8 @@ RAW_DATA = [
         "description": "Henry Duncan Awards and Partnership Drugs Initiative grants",
         "distribution": [
             {
-                "accessURL": "https://www.corra.scot/open-data/",
-                "downloadURL": "https://www.corra.scot/wp-content/uploads/2018/01/360-Giving-report-as-at-31.12.17-1.xlsx",
+                "accessURL": "https://www.corra.scot/about/open-data/",
+                "downloadURL": "https://www.corra.scot/wp-content/uploads/360-Giving-Report-as-at-30.06.22.xlsx",
                 "title": "Grants awarded since 2015, as at 31 December 2017",
             }
         ],
