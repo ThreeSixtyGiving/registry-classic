@@ -1,6 +1,6 @@
 <template>
   <div class="cards-section" v-if="stats">
-    <section class="grid grid--five-columns" :key="`ready-${dataDownloaded}`">
+    <section class="grid grid--three-columns" :key="`ready-${dataDownloaded}`">
       <div class="base-card base-card--teal grid__1">
         <div class="base-card__content">
           <Spinner v-if="!dataDownloaded" />
@@ -20,8 +20,16 @@
      <div class="base-card base-card--orange grid__1">
         <div class="base-card__content">
           <Spinner v-if="!dataDownloaded" />
-          <h2 v-if="dataDownloaded" class="base-card__title">{{ (stats.recipients).toLocaleString() }}</h2>
-          <p class="base-card__text">Recipients</p>
+          <h2 v-if="dataDownloaded" class="base-card__title">{{ (stats.recipientOrganisations).toLocaleString() }}</h2>
+          <p class="base-card__text">Recipient Organisations</p>
+        </div>
+      </div>
+
+     <div class="base-card base-card--orange grid__1">
+        <div class="base-card__content">
+          <Spinner v-if="!dataDownloaded" />
+          <h2 v-if="dataDownloaded" class="base-card__title">{{ (stats.recipientIndividuals).toLocaleString() }}</h2>
+          <p class="base-card__text">Recipient Individuals</p>
         </div>
       </div>
 
