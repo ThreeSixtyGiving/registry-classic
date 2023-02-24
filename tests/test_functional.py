@@ -41,7 +41,7 @@ def test_nav_menu_standard_link(browser):
     browser.get(url_for('data_registry', _external=True))
     browser.find_element_by_link_text('The Data Standard').click()
 
-    assert browser.current_url.endswith('/support/standard/')
+    assert browser.current_url.endswith('/data-standard/')
 
 
 @pytest.mark.usefixtures('live_server')
