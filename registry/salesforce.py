@@ -77,7 +77,7 @@ def get_salesforce_data():
         "Account__r.Id, Account__r.Logo__c, Account__r.Name, Account__r.Website, Account__r.prefix__c, " \
         "Date_First_Published__c, LastModifiedDate, Approved__c, Account__r.Last_published_date__c, Account__r.Org_Identifier__c from Dataset__c ORDER BY Account__r.Name"  # noqa: E126
 
-    output = clean_output(salesforce.query(sf_query))
+    output = clean_output(salesforce.query_all(sf_query))
 
     return json.dumps(output, indent=2)
 
