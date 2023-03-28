@@ -85,7 +85,7 @@ def get_salesforce_data():
 def get_salesforce_publishers():
     salesforce = get_salesforce_access()
     sf_query = "SELECT Id, Logo__c, Name, Website, prefix__c, "\
-               "Org_Identifier__c, Authorised_Domain__c, Self_registration_enabled__c from Account WHERE prefix__c != null ORDER BY Name " # noqa: E126
+               "Org_Identifier__c, Authorised_Domain__c, Self_registration_enabled__c from Account WHERE prefix__c != null ORDER BY Name "  # noqa: E126
 
     sf_data = salesforce.query_all(sf_query)
     publishers = {}
