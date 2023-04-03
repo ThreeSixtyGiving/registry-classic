@@ -30,14 +30,14 @@ def browser(request):
 def test_default_titles(browser):
     browser.get(url_for('dashboard', _external=True) + 'publishers/')
     title = browser.find_elements(By.CLASS_NAME, 'dashboard-publisher-result__title')
-    assert title[0].get_attribute("innerHTML") == ' A B Charitable Trust '
-    assert title[1].get_attribute("innerHTML") == ' Access to Justice Foundation '
+    assert title[0].get_attribute("innerHTML") == ' 10GM '
+    assert title[1].get_attribute("innerHTML") == ' A B Charitable Trust '
 
 
 @pytest.mark.usefixtures('live_server')
 def test_filtered_titles(browser):
     browser.get(url_for('dashboard', _external=True) + 'publishers?publishers=360G-BNG&publishers=360G-coopgroup')
     title = browser.find_elements(By.CLASS_NAME, 'dashboard-publisher-result__title')
-    
+
     assert title[0].get_attribute("innerHTML") == ' Bòrd na Gàidhlig '
     assert title[1].get_attribute("innerHTML") == ' Co-operative Group '
