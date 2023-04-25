@@ -29,7 +29,16 @@
     <div class="grid__1 align-right">
       <span class="file-summary__label">License</span>
       <span v-if="file.license.indexOf('Creative Commons') === 0" class="file-summary__native-icon">
-        <img src="@/assets/images/icons/cc.svg" style="height: 22px; width: 22px; vertical-align: unset" v-bind:alt="file.license" v-bind:title="file.license">
+        <img src="@/assets/images/icons/cc.svg" class="license license--cc" style="margin-bottom: 10px" v-bind:alt="file.license" v-bind:title="file.license">
+      </span>
+      <span v-else-if="file.license === 'CCO'" class="file-summary__native-icon license license--cc">
+        <img src="@/assets/images/icons/Cc-zero.svg" class="license license--cc" style="margin-bottom: 10px" v-bind:alt="file.license" v-bind:title="file.license">
+      </span>
+      <span v-else-if="file.license === 'Open Data Commons Public Domain Dedication and Licence 1.0'" class="file-summary__native-icon">
+        <img src="@/assets/images/icons/pddl.svg" class="license license--pddl" style="height: 22px; width: 22px; vertical-align: unset" v-bind:alt="file.license" v-bind:title="file.license">
+      </span>
+      <span v-else-if="file.license === 'Open Government Licence 3.0 (United Kingdom)'" class="file-summary__native-icon">
+        <img class="license license--ogl" src="@/assets/images/icons/UKOpenGovernmentLicence.svg" style="margin-bottom: 10px" v-bind:alt="file.license" v-bind:title="file.license">
       </span>
       <span v-else>{{ file.license }}</span>
     </div>
