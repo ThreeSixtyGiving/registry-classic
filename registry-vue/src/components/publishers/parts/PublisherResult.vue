@@ -36,7 +36,7 @@
       <p>There are currently problems accessing all of this publisher's data.</p>
     </template>
     <div>
-      <a class="button" v-bind:title="`See more information about ${publisher.name}'s data`" :href="$router.resolve({name: 'publisher', params: { id: publisher.prefix, publisher: this.publisher }}).href">See More</a>
+      <a class="button" v-bind:title="`See more information about ${publisher.name}'s data`" :href="$router.resolve({name: 'publisher', params: { id: publisher.prefix, publisher: this.publisher }}).href">More about {{ publisher.name }}</a>
     </div>
 
   </div>
