@@ -28,7 +28,7 @@ const getDataForYears = (awardData, years) => {
   })
 }
 
-const getYears = awardData => {
+const getYears = (awardData = []) => {
   const steps = Array.from({length: YEARS}, (x, i) => i);
   const previous = steps.map(step => new Date().getFullYear()-step).sort();
   const minYear = Math.min(...previous);
