@@ -45,7 +45,7 @@
 <script>
 import YearsChart from "../../generic/YearsChart";
 import IconBadge from "./IconBadge";
-import getBadges from '../data/badges';
+import { getBadges } from '../data/badges';
 import getAwardYearsArray from '../../generic/awardYears';
 
 export default {
