@@ -2,7 +2,12 @@
 <div >
   <div class="file-summary grid grid--three-columns">
     <div class="grid__1">
-      {{ file.distribution.title }}
+      <p><a :href="file.distribution.accessURL">{{ file.distribution.title }}</a></p>
+      <p>Grants from {{ dateToMonthYear(file.aggregate.min_award_date) }}
+        <template v-if="file.aggregate.max_award_date !== file.aggregate.min_award_date">
+          to {{ dateToMonthYear(file.aggregate.max_award_date) }}
+        </template>
+      </p>
     </div>
     <div class="grid__1 align-right">
       <template v-if="file.aggregate">
@@ -57,6 +62,14 @@ export default {
   name: 'FileSummary',
   components: {
     MaterialIcon,
+  },
+  methods: {
+    dateToMonthYear(date) {
+      const fullDate = new Date(date)
+      const month = fullDate.toLocaleString('default', { month: 'short' });
+      const year = fullDate.getFullYear();
+      return `${month} ${year}`;
+    }
   },
   props: {
     file: {},
