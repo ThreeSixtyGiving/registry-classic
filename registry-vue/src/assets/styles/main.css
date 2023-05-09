@@ -5036,6 +5036,11 @@ a.base-card:hover:before {
     .sort-filters select.sort-filters__filter-active {
       color: #153634; }
 
+.clear-all {
+  border: none;
+  height: 35px;
+  width: 100px; }
+
 .subscribe-section {
   background-color: hsl(var(--yellow-hsl), 1);
   padding: 24px; }
