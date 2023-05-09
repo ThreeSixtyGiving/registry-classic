@@ -12,8 +12,13 @@
       </div>
 
       <div class="dashboard-publisher-result__right-side">
-        <div class="dashboard-publisher-result__date">
+        <div class="dashboard-publisher-result__date" style="margin-top: -24px;">
           Last update: <time :datetime="publisher.last_published">{{ publisher.last_published }}</time>
+        </div>
+        <div class="registry-card__pub-logo" style="margin-top: 40px;">
+          <a :href="publisher.website" target="_blank">
+            <img :src="publisher.logo" :alt="publisher.name" :title="publisher.name">
+          </a>
         </div>
       </div>
     </div>
@@ -68,7 +73,7 @@ import Spinner from '../generic/Spinner.vue';
 import YearsChart from "../generic/YearsChart";
 import FileSummary from './parts/FileSummary.vue';
 import IconBadge from './parts/IconBadge';
-import getBadges from './data/badges';
+import { getBadges } from './data/badges';
 import getAwardYearsArray from '../generic/awardYears';
 
 export default {
