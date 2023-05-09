@@ -1,7 +1,7 @@
 <template>
   <main class="layout__content">
     <div class="layout__content-inner">
-      <SortFilter :sortMode="sortMode" :publisherList="publishers" :filteredPublishers="filteredPublishers" :key="dataDownloaded" v-on:sortChange="sortChange($event)" v-on:filterChange="filterChange($event)" />
+      <SortFilter :sortMode="sortMode" :publisherList="publishers" :badgesList="badges" :filteredBadges="filteredBadges" :filteredPublishers="filteredPublishers" :key="dataDownloaded" v-on:sortChange="sortChange($event)" v-on:badgeChange="badgeChange($event)" v-on:publisherChange="publisherChange($event)" />
       <div class="spacer-4"></div>
       <div v-if="!dataDownloaded">
         <Spinner :key="dataDownloaded" />
@@ -18,6 +18,7 @@
 import PublisherResult from "./parts/PublisherResult";
 import SortFilter from './parts/SortFilter';
 import Spinner from '../generic/Spinner'
+import { badges } from './data/badges';
 
 export default {
   name: "PublisherPage",
@@ -56,13 +57,25 @@ export default {
 
             return 0;
           });
-
     },
     sortChange(sortMode) {
       this.sortMode = sortMode;
       this.sortPublisherAlpa();
     },
-    filterChange(selectedPublishers) {
+    badgeChange(selectedBadges) {
+      this.filteredBadges = selectedBadges;
+      if (selectedBadges.length) {
+        this.publisherResults = this.publishers.filter(publisher => {
+          if (publisher.quality) {
+            let matchedBadges = selectedBadges.map(badge => publisher.quality[badge] > 0);
+            return matchedBadges.includes(true);
+          }
+        });
+      } else {
+        this.publisherResults = this.publishers;
+      }
+    },
+    publisherChange(selectedPublishers) {
       this.filteredPublishers = selectedPublishers;
       if (selectedPublishers.length) {
         this.publisherResults = this.publishers.filter(publisher => selectedPublishers.includes(publisher.prefix));
@@ -73,7 +86,9 @@ export default {
   },
   data() {
     return {
+      badges,
       publishers: [],
+      filteredBadges: [],
       filteredPublishers: [],
       publisherResults: [],
       dataDownloaded: false,
@@ -91,7 +106,7 @@ export default {
         this.dataDownloaded = true;
         const publisherParams = this.$route.query.publishers;
         if (publisherParams) {
-          this.filterChange(publisherParams);
+          this.publisherChange(publisherParams);
         }
       })
       .catch(error => {
