@@ -62,7 +62,7 @@
       <h4 class="dashboard-publisher-result__title">Datasets</h4>
       <p>{{ publisher.files_description }}</p>
       <hr class="separator-light">
-      <FileSummary v-for="(file, index) in publisher.files" :key="`files-${index}`" :prefix="publisher.prefix" :file="file" />
+      <FileSummary v-for="(file, index) in sortedFiles" :key="`files-${index}`" :prefix="publisher.prefix" :file="file" />
     </div>
   </div>
 </div>
@@ -117,6 +117,11 @@ export default {
           console.error('Error:', error);
         });
     },
+  },
+  computed: {
+    sortedFiles() {
+      return [...this.publisher.files].sort((a, b) => new Date(b.aggregate.max_award_date) - new Date(a.aggregate.max_award_date));
+  }
   },
   created() {
     this.searchFunction();
