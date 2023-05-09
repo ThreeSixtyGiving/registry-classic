@@ -118,4 +118,4 @@ const getBadges = publisher => {
   return { available: available, unavailable: unavailable }
 }
 
-export default getBadges;
+export { badges, getBadges };
