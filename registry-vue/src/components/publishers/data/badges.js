@@ -50,13 +50,23 @@ const today = new Date();
 
 const getBadges = publisher => {
 
+  /* If for some reason we have no quality information about this publisher
+   * avoid error and just return empty arrays
+   */
   if (!publisher.quality){
     return { available: [], unavailable: [] };
   }
 
-  const wonBadges = Object.keys(publisher.quality).filter(key => {
-    return publisher.quality[key] === 100 ? key : null;
-  });
+  let wonBadges = [];
+  let lostBadges = [];
+
+  for (let metric in publisher.quality) {
+    if (publisher.quality[metric] === 100){
+      wonBadges.push(metric);
+    } else {
+      lostBadges.push(metric);
+    }
+  }
 
   let available = [];
   let unavailable = [];
@@ -93,7 +103,8 @@ const getBadges = publisher => {
 
     if (wonBadges.includes(badge.qualityMetric)){
       available.push(badge);
-    } else {
+    }
+    if (lostBadges.includes(badge.qualityMetric)) {
       unavailable.push(badge);
     }
 
