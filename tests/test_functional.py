@@ -137,5 +137,9 @@ def test_links_respond(browser):
     session.headers.update({"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36m user agent"})
 
     for link in links:
+        # twitter blocking requests
+        if "twitter" in link.get_attribute("href"):
+          continue
+
         r = session.head(link.get_attribute("href"))
         r.raise_for_status()
