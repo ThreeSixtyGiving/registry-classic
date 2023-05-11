@@ -105,8 +105,15 @@ export default {
         this.sortPublisherAlpa();
         this.dataDownloaded = true;
         const publisherParams = this.$route.query.publishers;
+        let badgeParams;
+        if (this.$route.query.badges !== undefined) {
+          badgeParams = new Array(this.$route.query.badges);
+        }
         if (publisherParams) {
           this.publisherChange(publisherParams);
+        }
+        if (badgeParams) {
+          this.badgeChange(badgeParams);
         }
       })
       .catch(error => {
