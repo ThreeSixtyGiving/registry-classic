@@ -1,19 +1,66 @@
 <template>
   <footer class="layout__footer">
+        <div class="subscribe-section">
+        <div class="subscribe-section__wrapper">
+            <form action="#" class="subscribe-section__form">
+                <label for="subscribe" class="screen-reader-only">Subscribe</label>
+                <input type="email" id="subscribe" placeholder="Subscribe to our newsletter">
+                <input type="submit" value="Send">
+            </form>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="footer__row wrapper">
+            <div class="footer__column-2 footer__branding">
+                <div class="footer__logo"><img
+                        src="@/assets/images/360-logos/360-giving-logo-white.svg" alt="360Giving">
+                </div>
+                <p class="footer__tagline">Open data for more effective grantmaking</p>
+            </div>
+            <div class="footer__column-1 footer__social">
+                <a href="https://github.com/ThreeSixtyGiving/insights-ng" class="github-icon"><img
+                        src="@/assets/images/github-logo.svg" alt="Check our Github"></a>
+                <a href="https://twitter.com/360Giving/" class="twitter-icon"><img
+                        src="@/assets/images/twitter-logo.svg"
+                        alt="Follow us on Twitter"></a>
+            </div>
+        </div>
 
-    <footer class="footer footer--compact">
-
-        <div class="footer__row wrapper footer__small-print">
-            <div class="footer__column-1">
-                <div class="footer__logo"><img src="@/assets/images/360-logos/360-giving-logo-white.svg" alt="360Giving"></div>
+        <div class="footer__row wrapper">
+            <div class="footer__column-2 footer__section medium-up">
+                <h3 class="footer__heading">Links</h3>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="https://threesixtygiving.org/about">About</a></li>
+                    <li><a href="https://threesixtygiving.org/">360Giving</a></li>
+                </ul>
             </div>
 
-            <div class="footer__column-2 footer__policy-links">
-                <p>
-                    <strong>360 Giving</strong> (Trading as <strong>360Giving</strong>) is a registered charity <a href="https://register-of-charities.charitycommission.gov.uk/charity-details/?regId=1164883&subId=0">1164883</a> and a registered company <a href="https://beta.companieshouse.gov.uk/company/09668396">09668396</a>.
-                    <br>Registered address: 360 Giving, c/o Sayer Vincent Invicta House, 108-114 Golden Lane, London EC1Y 0TL.
+            <div class="footer__column-2 footer__section medium-up">
+                <h3 class="footer__heading">Other Products</h3>
+                <ul>
+                    <li><a href="https://grantnav.threesixtygiving.org/">GrantNav</a></li>
+                    <li><a href="https://insights.threesixtygiving.org/">Insights</a></li>
+                    <li><a href="https://standard.threesixtygiving.org/">Data Standard</a></li>
+                    <li><a href="https://dataquality.threesixtygiving.org/">Data Quality Tool</a></li>
+                </ul>
+            </div>
+
+            <div class="footer__column-3 footer__section">
+                <h3 class="footer__heading">Quality Dashboard</h3>
+                <p>A dashboard showing the data quality of 360Giving data as a whole and for each individual publisher. It provides insights into the key features that make the data useful for analysis to help publishers to identify opportunities for their data to be improved.
                 </p>
             </div>
+
+            <div class="footer__column-3 footer__section">
+                <h3 class="footer__heading">360Giving</h3>
+                <p>We help organisations openly publish grants data, and help people use it to improve charitable
+                    giving.</p>
+
+                <p><a href="https://threesixtygiving.org">Find out more about 360Giving</a>.</p>
+
+            </div>
+
         </div>
 
         <div class="footer__row wrapper footer__small-print">
