@@ -139,7 +139,7 @@ def test_links_respond(browser):
     for link in links:
         # twitter blocking requests
         if "twitter" in link.get_attribute("href"):
-          continue
+            continue
 
         r = session.head(link.get_attribute("href"))
         r.raise_for_status()
