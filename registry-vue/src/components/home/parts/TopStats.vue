@@ -29,7 +29,7 @@
         <div class="base-card__content">
           <Spinner v-if="!dataDownloaded" />
           <h2 v-if="dataDownloaded" class="base-card__title">{{ (stats.recipientOrganisations).toLocaleString() }}</h2>
-          <p class="base-card__text">Recipient Organisations</p>
+          <p class="base-card__text">Recipient Org IDs</p>
         </div>
       </div>
 
