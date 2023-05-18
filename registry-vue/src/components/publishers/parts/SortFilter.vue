@@ -6,8 +6,8 @@
       </v-select>
       <v-select :options="filters[1].options" label="name" :reduce="(publisher) => publisher.prefix" :value="filteredPublishers" @input="publisherChange" :placeholder="filters[1].label" multiple>
       </v-select>
-      <v-select :options="filters[2].options" label="label" :reduce="(badge) => badge.qualityMetric" :value="filteredBadges" @input="badgeChange" :placeholder="filters[2].label" multiple>
-      </v-select>
+<!--      <v-select :options="filters[2].options" label="label" :reduce="(badge) => badge.qualityMetric" :value="filteredBadges" @input="badgeChange" :placeholder="filters[2].label" multiple>
+      </v-select> -->
       <button class="clear-all" @click="clearFilters">Clear all</button>
     </div>
   </div>
