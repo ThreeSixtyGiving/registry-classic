@@ -6,7 +6,7 @@
       <div v-if="!dataDownloaded">
         <Spinner :key="dataDownloaded" />
       </div>
-      <template v-if="dataDownloaded" id="publisher-list-wrapper">
+      <template v-if="dataDownloaded">
         <PublisherResult v-for="publisher in publisherResults" :key="publisher.prefix" :publisher="publisher" />
         <div class="spacer-1"></div>
       </template>
@@ -30,33 +30,33 @@ export default {
   methods: {
     sortPublisherAlpa(){
       this.publisherResults.sort((publisherA, publisherB)=> {
-            let a = publisherA.name.toLowerCase();
-            let b = publisherB.name.toLowerCase();
+        let a = publisherA.name.toLowerCase();
+        let b = publisherB.name.toLowerCase();
 
-            if (a.indexOf("the ") == 0){
-              a = a.substr(4);
-            }
+        if (a.indexOf("the ") == 0){
+          a = a.substr(4);
+        }
 
-            if (b.indexOf("the ") == 0){
-              b = b.substr(4);
-            }
+        if (b.indexOf("the ") == 0){
+          b = b.substr(4);
+        }
 
-            if (a > b){
-              if (this.sortMode == "alphabeticallyDesc"){
-                return -1;
-              }
-              return 1;
-            }
+        if (a > b){
+          if (this.sortMode == "alphabeticallyDesc"){
+            return -1;
+          }
+          return 1;
+        }
 
-            if (a < b){
-              if (this.sortMode == "alphabeticallyDesc"){
-                return 1;
-              }
-              return -1;
-            }
+        if (a < b){
+          if (this.sortMode == "alphabeticallyDesc"){
+            return 1;
+          }
+          return -1;
+        }
 
-            return 0;
-          });
+        return 0;
+      });
     },
     sortChange(sortMode) {
       this.sortMode = sortMode;
@@ -64,10 +64,13 @@ export default {
     },
     badgeChange(selectedBadges) {
       this.filteredBadges = selectedBadges;
+      const selectedBadgesArray = new Array(selectedBadges).flat();
+
       if (selectedBadges.length) {
         this.publisherResults = this.publishers.filter(publisher => {
           if (publisher.quality) {
-            let matchedBadges = selectedBadges.map(badge => publisher.quality[badge] > 0);
+            // return selectedBadgesArray.every(badge => publisher.quality[badge] === 100);
+            let matchedBadges = selectedBadgesArray.map(badge => publisher.quality[badge] === 100);
             return matchedBadges.includes(true);
           }
         });
@@ -105,10 +108,7 @@ export default {
         this.sortPublisherAlpa();
         this.dataDownloaded = true;
         const publisherParams = this.$route.query.publishers;
-        let badgeParams;
-        if (this.$route.query.badges !== undefined) {
-          badgeParams = new Array(this.$route.query.badges);
-        }
+        const badgeParams = this.$route.query.badges;
         if (publisherParams) {
           this.publisherChange(publisherParams);
         }
