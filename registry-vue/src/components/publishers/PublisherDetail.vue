@@ -15,7 +15,7 @@
         <div class="dashboard-publisher-result__date" style="margin-top: -24px;">
           Last update: <time :datetime="publisher.last_published">{{ publisher.last_published }}</time>
         </div>
-        <div class="registry-card__pub-logo" style="margin-top: 40px;">
+        <div v-if="publisher.logo" class="registry-card__pub-logo" style="margin-top: 40px;">
           <a :href="publisher.website" target="_blank">
             <img :src="publisher.logo" :alt="publisher.name" :title="publisher.name">
           </a>
