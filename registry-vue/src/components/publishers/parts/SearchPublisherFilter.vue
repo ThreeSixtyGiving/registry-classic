@@ -2,7 +2,7 @@
   <div class="filter-list filter-list--with-checkboxes">
   <details class="filter-list__accordion" open>
     <summary class="filter-list__label">
-      <div>Publishers <a href="#"> <small>(clear)</small></a></div>
+      <div>Publishers <button v-if="filteredPublishers.length" class="button button--small button--unstyled" @click="clearFilters"> <small>(clear)</small></button></div>
       <svg class="accordion-toggle-icon" width="18" stroke="#153634" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
         <line class="accordion-toggle-icon__horizontal-line" x1="16.4131" y1="8.65356" x2="1.09657" y2="8.65356"  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         <line class="accordion-toggle-icon__vertical-line" x1="8.7561" y1="0.995239" x2="8.7561" y2="16.3118"  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -60,9 +60,12 @@ export default {
     selectionTypeChange(event) {
       if (this.selection !== event.target.value) {
         this.selection = event.target.value
-        const query = { ...this.$route.query, publisherSelection: this.selection };
-        this.$router.replace({ query });
-        this.$emit('updateFilters');
+        this.publisherChange(this.$route.query.publishers);
+      }
+    },
+    clearFilters() {
+      if (this.$route.query.publishers.length) {
+        this.publisherChange([]);
       }
     }
   },
