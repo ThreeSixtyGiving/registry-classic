@@ -5,7 +5,7 @@
       <h2 class="grantnav-search__sidebar--heading">Refine your search</h2>
 
       <div class="grantnav-search__sidebar--filters">
-        <SearchPublisherFilter :publisherList="publishers" :filteredPublishers="filteredPublishers" :key="dataDownloaded" @updateFilters="updateFilters($event)" />
+        <SearchPublisherFilter :publisherList="unsortedPublishers" :filteredPublishers="filteredPublishers" :key="dataDownloaded" @updateFilters="updateFilters($event)" />
         <br>
         <SearchBadgeFilter :badgesList="badges" :filteredBadges="filteredBadges" @updateFilters="updateFilters($event)" />
       </div>
@@ -43,8 +43,9 @@ export default {
     Spinner,
   },
   methods: {
-    sortPublisherAlpha(){
-      this.publisherResults.sort((publisherA, publisherB)=> {
+    sortPublisherAlpha(publisherList){
+
+      publisherList.sort((publisherA, publisherB)=> {
         let a = publisherA.name.toLowerCase();
         let b = publisherB.name.toLowerCase();
 
@@ -75,7 +76,7 @@ export default {
     },
     sortChange(sortMode) {
       this.sortMode = sortMode;
-      this.sortPublisherAlpha();
+      this.sortPublisherAlpha(this.publisherResults);
     },
     badgeChange(selectedBadges, selectionType) {
       const selectedBadgesArray = new Array(selectedBadges).flat();
@@ -137,8 +138,9 @@ export default {
       filteredBadges: [],
       filteredPublishers: [],
       publisherResults: [],
+      unsortedPublishers: [],
       dataDownloaded: false,
-      sortMode: "alphabeticallyAsc",
+      sortMode: this.$route.query.sort || "alphabeticallyAsc",
       publisherUpdated: false,
       badgeUpdated: false,
     }
@@ -151,8 +153,9 @@ export default {
       .then((response) => response.json())
       .then((json) => {
         this.publishers = json;
+        this.unsortedPublishers = [...this.publishers];
         this.publisherResults = this.publishers;
-        this.sortPublisherAlpha();
+        this.sortPublisherAlpha(this.publisherResults);
         this.dataDownloaded = true;
         this.updateFilters({})
       })

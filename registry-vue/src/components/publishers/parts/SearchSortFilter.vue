@@ -28,8 +28,9 @@ export default {
   },
   methods: {
     sortChange(changed) {
-      this.sortMode = changed;
-      this.$emit('sortChange', this.sortMode);
+      const query = { ...this.$route.query, sort: changed };
+      this.$router.replace({ query });
+      this.$emit('sortChange', changed);
     }
   }
 }
