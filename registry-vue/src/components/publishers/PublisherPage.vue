@@ -1,22 +1,35 @@
 <template>
-  <main class="layout__content">
-    <div class="layout__content-inner">
-      <SortFilter :sortMode="sortMode" :publisherList="publishers" :badgesList="badges" :filteredBadges="filteredBadges" :filteredPublishers="filteredPublishers" :key="dataDownloaded" v-on:sortChange="sortChange($event)" v-on:badgeChange="badgeChange($event)" v-on:publisherChange="publisherChange($event)" />
+<main class="layout__content">
+  <div class="grantnav-search__wrapper">
+    <div class="grantnav-search__sidebar">
+      <h2 class="grantnav-search__sidebar--heading">Refine your search</h2>
+
+      <div class="grantnav-search__sidebar--filters">
+        <SearchPublisherFilter :publisherList="publishers" :filteredPublishers="filteredPublishers" :key="dataDownloaded" @updateFilters="updateFilters($event)" />
+        <br>
+        <SearchBadgeFilter :badgesList="badges" :filteredBadges="filteredBadges" @updateFilters="updateFilters($event)" />
+      </div>
+    </div>
+    <div class="grantnav-search__content">
+      <SearchSortFilter :sortMode="sortMode" @sortChange="sortChange($event)" />
       <div class="spacer-4"></div>
       <div v-if="!dataDownloaded">
         <Spinner :key="dataDownloaded" />
       </div>
       <template v-if="dataDownloaded">
         <PublisherResult v-for="publisher in publisherResults" :key="publisher.prefix" :publisher="publisher" />
-        <div class="spacer-1"></div>
-      </template>
+          <div class="spacer-1"></div>
+        </template>
+      </div>
     </div>
   </main>
 </template>
 
 <script>
 import PublisherResult from "./parts/PublisherResult";
-import SortFilter from './parts/SortFilter';
+import SearchPublisherFilter from './parts/SearchPublisherFilter';
+import SearchBadgeFilter from './parts/SearchBadgeFilter';
+import SearchSortFilter from './parts/SearchSortFilter';
 import Spinner from '../generic/Spinner'
 import { badges } from './data/badges';
 
@@ -24,11 +37,13 @@ export default {
   name: "PublisherPage",
   components: {
     PublisherResult,
-    SortFilter,
+    SearchBadgeFilter,
+    SearchPublisherFilter,
+    SearchSortFilter,
     Spinner,
   },
   methods: {
-    sortPublisherAlpa(){
+    sortPublisherAlpha(){
       this.publisherResults.sort((publisherA, publisherB)=> {
         let a = publisherA.name.toLowerCase();
         let b = publisherB.name.toLowerCase();
@@ -60,31 +75,59 @@ export default {
     },
     sortChange(sortMode) {
       this.sortMode = sortMode;
-      this.sortPublisherAlpa();
+      this.sortPublisherAlpha();
     },
-    badgeChange(selectedBadges) {
-      this.filteredBadges = selectedBadges;
+    badgeChange(selectedBadges, selectionType) {
       const selectedBadgesArray = new Array(selectedBadges).flat();
-
+      
       if (selectedBadges.length) {
-        this.publisherResults = this.publishers.filter(publisher => {
+        if (selectionType === 'include') {
+        this.publisherResults = this.publisherResults.filter(publisher => {
           if (publisher.quality) {
-            // return selectedBadgesArray.every(badge => publisher.quality[badge] === 100);
-            let matchedBadges = selectedBadgesArray.map(badge => publisher.quality[badge] === 100);
-            return matchedBadges.includes(true);
+            return selectedBadgesArray.every(badge => publisher.quality[badge] === 100);
           }
         });
       } else {
-        this.publisherResults = this.publishers;
+        this.publisherResults = this.publisherResults.filter(publisher => {
+          if (publisher.quality) {
+            return selectedBadgesArray.every(badge => publisher.quality[badge] !== 100);
+          }
+        });
       }
-    },
-    publisherChange(selectedPublishers) {
-      this.filteredPublishers = selectedPublishers;
-      if (selectedPublishers.length) {
-        this.publisherResults = this.publishers.filter(publisher => selectedPublishers.includes(publisher.prefix));
       } else {
         this.publisherResults = this.publishers;
       }
+    },
+    publisherChange(selectedPublishers, selectionType) {
+      if (selectedPublishers.length) {
+        if (selectionType === 'include') {
+          this.publisherResults = this.publishers.filter(publisher => selectedPublishers.includes(publisher.prefix));
+        } else {
+          this.publisherResults = this.publishers.filter(publisher => !selectedPublishers.includes(publisher.prefix));
+        }
+      } else {
+        this.publisherResults = this.publishers;
+      }
+    },
+    updateFilters () {
+      this.publisherResults = this.publishers
+
+      const publisherParams = this.$route.query.publishers || [];
+      const publisherSelection = this.$route.query.publisherSelection || 'include';
+      const badgeParams = this.$route.query.badges || [];
+      const badgeSelection = this.$route.query.badgeSelection || 'include';
+
+      this.filteredPublishers = publisherParams || null;
+      this.filteredBadges = badgeParams || null;
+      
+      if (publisherParams.length) {
+        this.publisherChange(publisherParams, publisherSelection);
+      } 
+      
+      if (badgeParams.length) {
+        this.badgeChange(badgeParams, badgeSelection);
+      }
+
     }
   },
   data() {
@@ -96,29 +139,26 @@ export default {
       publisherResults: [],
       dataDownloaded: false,
       sortMode: "alphabeticallyAsc",
+      publisherUpdated: false,
+      badgeUpdated: false,
     }
   },
   created() {
     this.dataDownloaded = false;
+    this.badgeUpdated = false;
+    this.publisherUpdated = false;
     fetch(`${process.env.VUE_APP_DATASTORE_API}/publishers?format=json`)
       .then((response) => response.json())
       .then((json) => {
         this.publishers = json;
         this.publisherResults = this.publishers;
-        this.sortPublisherAlpa();
+        this.sortPublisherAlpha();
         this.dataDownloaded = true;
-        const publisherParams = this.$route.query.publishers;
-        const badgeParams = this.$route.query.badges;
-        if (publisherParams) {
-          this.publisherChange(publisherParams);
-        }
-        if (badgeParams) {
-          this.badgeChange(badgeParams);
-        }
+        this.updateFilters({})
       })
       .catch(error => {
         console.error('Error:', error);
       });
-  },
+  }
 };
 </script>
