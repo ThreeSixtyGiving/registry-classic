@@ -1,12 +1,16 @@
 <template>
-  <div :class="$route.name !== 'publishers' ? 'layout layout--single-column' : 'layout'">
+  <div class="layout">
     <Nav />
     <hr class="separator-light">
     <main>
       <div class="layout__content dashboard-page">
         <TopStats />
-        <Tabs />
+        <div style="margin: 0 24px">
+          <Tabs />
+        </div>
+        <div :class="$route.name !== 'publishers' && 'grid grid--one-column'">
           <router-view />
+        </div>
       </div>
     </main>
     <Footer />
