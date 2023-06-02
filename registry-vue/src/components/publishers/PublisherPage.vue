@@ -10,16 +10,18 @@
         <SearchBadgeFilter :badgesList="badges" :filteredBadges="filteredBadges" @updateFilters="updateFilters($event)" />
       </div>
     </div>
-    <div class="grantnav-search__content">
-      <SearchSortFilter :sortMode="sortMode" @sortChange="sortChange($event)" />
-      <div class="spacer-4"></div>
-      <div v-if="!dataDownloaded">
-        <Spinner :key="dataDownloaded" />
-      </div>
-      <template v-if="dataDownloaded">
-        <PublisherResult v-for="publisher in publisherResults" :key="publisher.prefix" :publisher="publisher" />
+    <div class="grid grid--one-column">
+      <div class="sidebar-adjacent-content">
+        <SearchSortFilter :sortMode="sortMode" @sortChange="sortChange($event)" />
+        <div class="spacer-4"></div>
+        <div v-if="!dataDownloaded">
+          <Spinner :key="dataDownloaded" />
+        </div>
+        <template v-if="dataDownloaded">
+          <PublisherResult v-for="publisher in publisherResults" :key="publisher.prefix" :publisher="publisher" />
           <div class="spacer-1"></div>
         </template>
+        </div>
       </div>
     </div>
   </main>
@@ -31,7 +33,7 @@ import SearchPublisherFilter from './parts/SearchPublisherFilter';
 import SearchBadgeFilter from './parts/SearchBadgeFilter';
 import SearchSortFilter from './parts/SearchSortFilter';
 import Spinner from '../generic/Spinner'
-import { badges } from './data/badges';
+import { badges, getBadges } from './data/badges';
 
 export default {
   name: "PublisherPage",
@@ -81,20 +83,21 @@ export default {
     badgeChange(selectedBadges, selectionType) {
       const selectedBadgesArray = new Array(selectedBadges).flat();
       
-      if (selectedBadges.length) {
-        if (selectionType === 'include') {
+      if (selectedBadgesArray.length) {
         this.publisherResults = this.publisherResults.filter(publisher => {
-          if (publisher.quality) {
-            return selectedBadgesArray.every(badge => publisher.quality[badge] === 100);
+          const publisherBadges = getBadges(publisher)
+          const availableBadges = Object.values(publisherBadges.available)
+          
+          if (selectionType === 'include') {
+            return selectedBadgesArray.every(item => {
+              return availableBadges.some(badge => badge.qualityMetric === item)
+            })
+          } else {
+            return selectedBadgesArray.every(item => {
+              return availableBadges.some(badge => badge.qualityMetric !== item)
+            })
           }
         });
-      } else {
-        this.publisherResults = this.publisherResults.filter(publisher => {
-          if (publisher.quality) {
-            return selectedBadgesArray.every(badge => publisher.quality[badge] !== 100);
-          }
-        });
-      }
       } else {
         this.publisherResults = this.publishers;
       }
@@ -141,8 +144,6 @@ export default {
       unsortedPublishers: [],
       dataDownloaded: false,
       sortMode: this.$route.query.sort || "alphabeticallyAsc",
-      publisherUpdated: false,
-      badgeUpdated: false,
     }
   },
   created() {
