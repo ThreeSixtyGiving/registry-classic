@@ -5,7 +5,7 @@
     <main>
       <div class="layout__content dashboard-page">
         <TopStats />
-        <div style="margin: 0 24px">
+        <div class="grid grid--one-column">
           <Tabs />
         </div>
         <div :class="$route.name !== 'publishers' && 'grid grid--one-column'">
