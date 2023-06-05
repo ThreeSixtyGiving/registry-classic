@@ -23,6 +23,11 @@
 
         <div class="search-box-wrapper padding-left:05 padding-right:05 padding-top:05 padding-bottom:05">
           <v-select :options="filter.options" label="label" :reduce="(badge) => badge.qualityMetric" :value="filteredBadges" @input="badgeChange" :placeholder="filter.label" multiple>
+            <template v-slot:option="option">
+              <span :title="option.label">
+                {{ option.label }}
+              </span>
+            </template>
           </v-select>
         </div>
 
