@@ -94,7 +94,7 @@ export default {
             })
           } else {
             return selectedBadgesArray.every(item => {
-              return availableBadges.some(badge => badge.qualityMetric !== item)
+              return availableBadges.every(badge => badge.qualityMetric !== item)
             })
           }
         });
