@@ -5539,3 +5539,11 @@ a.base-card:hover:before {
     display: flex;
     justify-content: center;
     margin-bottom: 48px; }
+
+.sidebar-adjacent-content {
+  margin-left: -176px;
+  margin-right: 176px; }
+  @media (max-width: 1690px) {
+    .sidebar-adjacent-content {
+      margin-left: 0;
+      margin-right: 0; } }
