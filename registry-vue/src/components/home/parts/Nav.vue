@@ -4,13 +4,19 @@
       <nav class="top-bar__menu contextual-menu">
         <ul>
           <li class="contextual-menu__item">
+            <a class="contextual-menu__button" href="https://grantnav.threesixtygiving.org/" title="GrantNav">GrantNav</a>
+          </li>
+          <li class="contextual-menu__item">
             <a class="contextual-menu__button" href="https://insights.threesixtygiving.org/" title="Insights">Insights</a>
           </li>
           <li class="contextual-menu__item">
-            <a class="contextual-menu__button" href="https://threesixtygiving.org/about/" title="About">About</a>
+            <a class="contextual-menu__button" href="https://threesixtygiving.org/about/" title="About 360Giving">About 360Giving</a>
           </li>
           <li class="contextual-menu__item">
-            <a class="contextual-menu__button" href="https://grantnav.threesixtygiving.org/" title="GrantNav">GrantNav</a>
+            <a class="contextual-menu__button" href="https://www.threesixtygiving.org/why-publish/" title="Why Publish">Why Publish?</a>
+          </li>
+          <li class="contextual-menu__item">
+            <a class="contextual-menu__button" href="https://www.threesixtygiving.org/technical-users/" title="Technical Users">Technical Users</a>
           </li>
         </ul>
       </nav>
