@@ -47,7 +47,7 @@ const badges = [
   {
     qualityMetric: 'hasRecipientIndividualsCodelists',
     iconName: 'label',
-    label: 'Includes recipient individual grantPurpose or primaryGrantReason codes'
+    label: 'Includes grants to individuals codes'
   },
 ];
 
