@@ -5540,6 +5540,11 @@ a.base-card:hover:before {
     justify-content: center;
     margin-bottom: 48px; }
 
+@media (min-width: 1690px) {
+  .sidebar-container {
+    max-width: 1690px;
+    margin: 0 auto; } }
+
 .sidebar-adjacent-content {
   margin-left: -176px;
   margin-right: 176px; }
