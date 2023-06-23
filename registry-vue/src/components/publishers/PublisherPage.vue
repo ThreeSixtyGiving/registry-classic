@@ -1,5 +1,5 @@
 <template>
-<main class="layout__content">
+<main class="layout__content sidebar-container">
   <div class="grantnav-search__wrapper">
     <div class="grantnav-search__sidebar">
       <h2 class="grantnav-search__sidebar--heading">Refine your search</h2>
