@@ -37,19 +37,19 @@
     </template>
     </template>
 
-    <hr class="separator-light">
-
-    <div class="spacer-1"></div>
-
-    <div class="dashboard-publisher-result-wrapper__external-buttons align-right">
-      <a :href="`https://grantnav.threesixtygiving.org/search?query=*&default_field=*&sort=awardDate+desc&fundingOrganization=${getFunders(this.publisher.files).join('&fundingOrganization=')}`" target="_blank" class="button">See in GrantNav</a>
-      <a :href="`https://insights.threesixtygiving.org/data?funders=${getFunders(this.publisher.files).join('&funders=')}`" target="_blank" class="button">See in Insights</a>
-    </div>
+    <hr class="separator-light">   
 
     <div class="spacer-3"></div>
 
     <div class="dashboard-publisher-result" v-if="publisher.aggregate">
-      <h4 class="dashboard-publisher-result__title">Total grants published</h4>
+      <div class="grid grid--two-columns">
+        <h4 class="dashboard-publisher-result__title">Total grants published</h4>
+        <div class="dashboard-publisher-result-wrapper__external-buttons align-right">
+          <div class="spacer-2"></div>
+          <a :href="`https://grantnav.threesixtygiving.org/search?query=*&default_field=*&sort=awardDate+desc&fundingOrganization=${getFunders(this.publisher.files).join('&fundingOrganization=')}`" target="_blank" class="button">See in GrantNav</a>
+          <a :href="`https://insights.threesixtygiving.org/data?funders=${getFunders(this.publisher.files).join('&funders=')}`" target="_blank" class="button">See in Insights</a>
+        </div>
+      </div>
       <p>The number of grants published by award year for the past 10 years, with the total grants published that were awarded 11 or more years ago.</p>
       <YearsChart :chart="chart" />
     </div>
@@ -59,7 +59,13 @@
     </div>
 
     <div class="dashboard-publisher-result">
-      <h4 class="dashboard-publisher-result__title">Datasets</h4>
+      <div class="grid grid--two-columns">
+        <h4 class="dashboard-publisher-result__title">Datasets</h4>
+        <div class="dashboard-publisher-result-wrapper__external-buttons align-right">
+          <div class="spacer-2"></div>
+          <a href="https://dataquality.threesixtygiving.org/" target="_blank" class="button">Update your data</a>
+        </div>
+      </div>
       <p>{{ publisher.files_description }}</p>
       <hr class="separator-light">
       <FileSummary v-for="(file, index) in sortedFiles" :key="`files-${index}`" :prefix="publisher.prefix" :file="file" />
