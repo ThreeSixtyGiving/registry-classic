@@ -13,7 +13,9 @@
     <div class="grid grid--one-column">
       <div class="sidebar-adjacent-content">
         <SearchSortFilter :sortMode="sortMode" @sortChange="sortChange($event)" />
-        <div class="spacer-4"></div>
+        <div class="spacer-2"></div>
+        <b v-if="publishers.length !== publisherResults.length">Showing {{ publisherResults.length }} {{ publisherResults.length === 1 ? 'result' : 'results' }}</b>
+        <div class="spacer-2"></div>
         <div v-if="!dataDownloaded">
           <Spinner :key="dataDownloaded" />
         </div>
