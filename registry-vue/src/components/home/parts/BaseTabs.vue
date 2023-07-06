@@ -24,7 +24,7 @@
 import MaterialIcon from '../../generic/MaterialIcon'
 
 export default {
-  name: "Tabs",
+  name: "BaseTabs",
   components: {
     MaterialIcon,
   }

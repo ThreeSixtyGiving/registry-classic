@@ -5,11 +5,11 @@
     </div>
     <div class="spacer-2 clearfix"></div>
     <div v-if="!dataDownloaded">
-      <Spinner :key="dataDownloaded" />
+      <BaseSpinner :key="dataDownloaded" />
     </div>
     <div v-if="dataDownloaded">
       <DashboardCard v-for="(cardData, index) in cards" :key="`card-${index}`" :overviewMode="overviewMode" :cardData="cardData" v-on:showModalEvent="controlModal(true, $event)" />
-      <Modal v-if="modalState" :key="this.modalRef" :cardData="this.cards.find(card => card.modalRef===modalRef)" v-on:hideModalEvent="controlModal(false)" />
+      <BaseModal v-if="modalState" :key="this.modalRef" :cardData="this.cards.find(card => card.modalRef===modalRef)" v-on:hideModalEvent="controlModal(false)" />
     </div>
     <div class="spacer-2 clearfix"></div>
   </div>
@@ -18,8 +18,8 @@
 <script>
 import DashboardCard from "./parts/DashboardCard";
 import RadioButtons from "./parts/RadioButtons";
-import Spinner from '../generic/Spinner.vue';
-import Modal from './parts/Modal';
+import BaseSpinner from '../generic/BaseSpinner.vue';
+import BaseModal from './parts/BaseModal';
 import { getPublisherCards, getGrantsCards } from './data/cards';
 
 export default {
@@ -27,8 +27,8 @@ export default {
   components: {
     DashboardCard,
     RadioButtons,
-    Modal,
-    Spinner,
+    BaseModal,
+    BaseSpinner,
   },
   props: {
     publishers: {},

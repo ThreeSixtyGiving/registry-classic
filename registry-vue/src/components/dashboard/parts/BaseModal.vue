@@ -41,7 +41,7 @@
 import MaterialIcon from '../../generic/MaterialIcon'
 
 export default {
-  name: 'Modal',
+  name: 'BaseModal',
   components: {
     MaterialIcon,
   },
