@@ -1,35 +1,35 @@
 <template>
   <div class="layout">
-    <Nav />
+    <BaseNav />
     <hr class="separator-light">
     <main>
       <div class="layout__content dashboard-page">
         <TopStats />
         <div class="grid grid--one-column">
-          <Tabs />
+          <BaseTabs />
         </div>
         <div :class="$route.name !== 'publishers' && 'grid grid--one-column'">
           <router-view />
         </div>
       </div>
     </main>
-    <Footer />
+    <BaseFooter />
   </div>
 </template>
 
 <script>
-import Nav from "./parts/Nav";
+import BaseNav from "./parts/BaseNav";
 import TopStats from "./parts/TopStats";
-import Footer from "./parts/Footer";
-import Tabs from "./parts/Tabs";
+import BaseFooter from "./parts/BaseFooter";
+import BaseTabs from "./parts/BaseTabs";
 
 export default {
   name: "HomePage",
   components: {
-    Nav,
+    BaseNav,
     TopStats,
-    Footer,
-    Tabs,
+    BaseFooter,
+    BaseTabs,
   },
 };
 </script>

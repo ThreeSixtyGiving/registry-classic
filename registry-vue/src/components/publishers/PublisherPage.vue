@@ -17,7 +17,7 @@
         <b v-if="publishers.length !== publisherResults.length">Showing {{ publisherResults.length }} {{ publisherResults.length === 1 ? 'result' : 'results' }}</b>
         <div class="spacer-2"></div>
         <div v-if="!dataDownloaded">
-          <Spinner :key="dataDownloaded" />
+          <BaseSpinner :key="dataDownloaded" />
         </div>
         <template v-if="dataDownloaded">
           <PublisherResult v-for="publisher in publisherResults" :key="publisher.prefix" :publisher="publisher" />
@@ -34,7 +34,7 @@ import PublisherResult from "./parts/PublisherResult";
 import SearchPublisherFilter from './parts/SearchPublisherFilter';
 import SearchBadgeFilter from './parts/SearchBadgeFilter';
 import SearchSortFilter from './parts/SearchSortFilter';
-import Spinner from '../generic/Spinner'
+import BaseSpinner from '../generic/BaseSpinner'
 import { badges, getBadges } from './data/badges';
 
 export default {
@@ -44,7 +44,7 @@ export default {
     SearchBadgeFilter,
     SearchPublisherFilter,
     SearchSortFilter,
-    Spinner,
+    BaseSpinner,
   },
   methods: {
     sortPublisherAlpha(publisherList){

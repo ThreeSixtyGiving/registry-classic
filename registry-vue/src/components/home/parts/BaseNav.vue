@@ -40,6 +40,6 @@
 
 <script>
 export default {
-  name: "Nav",
+  name: "BaseNav",
 }
 </script>

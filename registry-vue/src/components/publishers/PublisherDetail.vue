@@ -1,7 +1,7 @@
 <template>
 <div>
   <div v-if="!dataDownloaded">
-    <Spinner :key="dataDownloaded" />
+    <BaseSpinner :key="dataDownloaded" />
   </div>
   <div v-if="dataDownloaded" class="dashboard-publisher-result-wrapper">
     <div class="dashboard-publisher-result__head">
@@ -75,7 +75,7 @@
 </template>
 
 <script>
-import Spinner from '../generic/Spinner.vue';
+import BaseSpinner from '../generic/BaseSpinner.vue';
 import YearsChart from "../generic/YearsChart";
 import FileSummary from './parts/FileSummary.vue';
 import IconBadge from './parts/IconBadge';
@@ -88,7 +88,7 @@ export default {
     YearsChart,
     FileSummary,
     IconBadge,
-    Spinner,
+    BaseSpinner,
   },
   props: {
     id: {},

@@ -1,7 +1,7 @@
 <template>
   <div class="cards-section" v-if="stats">
     <section v-if="!dataDownloaded" class="grid grid--one-column">
-      <Spinner />
+      <BaseSpinner />
     </section>
     <section v-else class="grid grid--three-columns" :key="`ready-${dataDownloaded}`">
       <div class="base-card base-card--teal grid__1">
@@ -51,12 +51,12 @@
 </template>
 
 <script>
-import Spinner from '../../generic/Spinner'
+import BaseSpinner from '../../generic/BaseSpinner'
 
 export default {
   name: "TopStats",
   components: {
-    Spinner
+    BaseSpinner
   },
   data() {
     return {
