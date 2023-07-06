@@ -1,5 +1,3 @@
-var path = require('path');
-
 module.exports = {
   outputDir: process.env.NODE_ENV === 'production' ? '../registry/templates/vue-build/' : 'dist',
   /* assetsDir is relative to output dir */
