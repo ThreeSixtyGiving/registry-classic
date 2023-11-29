@@ -37,7 +37,7 @@
     </template>
     </template>
 
-    <hr class="separator-light">   
+    <hr class="separator-light">
 
     <div class="spacer-3"></div>
 
@@ -126,18 +126,20 @@ export default {
     getFunders(files) {
       let funders = [];
       files.map(file => {
-        file.aggregate.funders.map(funder => {
-          if (!funders.includes(funder)) {
-            funders.push(funder);
-          }
-        })
-      })
+        if (file.datagetter_data.valid){
+          file.aggregate.funders.map(funder => {
+            if (!funders.includes(funder)) {
+              funders.push(funder);
+            }
+          });
+        }
+      });
       return funders;
     }
   },
   computed: {
     sortedFiles() {
-      return [...this.publisher.files].sort((a, b) => new Date(b.aggregate.max_award_date) - new Date(a.aggregate.max_award_date));
+      return this.publisher.files.filter((file) => file.datagetter_data.valid).sort((a, b) => new Date(b.aggregate.max_award_date) - new Date(a.aggregate.max_award_date)).concat(this.publisher.files.filter((file) => !file.datagetter_data.valid));
     }
   },
   created() {

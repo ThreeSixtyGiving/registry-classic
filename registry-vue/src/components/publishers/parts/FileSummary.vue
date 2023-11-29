@@ -3,11 +3,13 @@
   <div class="file-summary grid grid--three-columns">
     <div class="grid__1">
       <p><a :href="file.distribution.accessURL">{{ file.distribution.title }}</a></p>
-      <p>Grants from {{ dateToMonthYear(file.aggregate.min_award_date) }}
-        <template v-if="file.aggregate.max_award_date !== file.aggregate.min_award_date">
-          to {{ dateToMonthYear(file.aggregate.max_award_date) }}
-        </template>
-      </p>
+      <template v-if="file.aggregate">
+        <p>Grants from {{ dateToMonthYear(file.aggregate.min_award_date) }}
+          <template v-if="file.aggregate.max_award_date !== file.aggregate.min_award_date">
+            to {{ dateToMonthYear(file.aggregate.max_award_date) }}
+          </template>
+        </p>
+      </template>
     </div>
     <div class="grid__1 align-right">
       <template v-if="file.aggregate">
